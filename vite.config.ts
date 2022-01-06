@@ -9,13 +9,13 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 export default defineConfig({
   resolve: {
     alias: {
-      '@/': `${path.resolve(__dirname, 'src')}/`
+      '~/': `${path.resolve(__dirname, 'src')}/`
     }
   },
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "@/styles/element/index.scss" as *;`
+        additionalData: `@use "~/styles/element/index.scss" as *;`
       }
     }
   },

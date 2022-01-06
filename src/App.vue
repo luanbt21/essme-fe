@@ -9,8 +9,8 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 
-import usFlag from '@/assets/us.svg'
-import vnFlag from '@/assets/vn.svg'
+import usFlag from '~/assets/us.svg'
+import vnFlag from '~/assets/vn.svg'
 
 import vi from 'element-plus/es/locale/lang/vi'
 import en from 'element-plus/es/locale/lang/en'
