@@ -9,8 +9,9 @@ import router from './router'
 import { store, key } from './store'
 
 import App from './App.vue'
+import { __baseURL } from './constant'
 
-axios.defaults.baseURL = 'https://essme.duckdns.org/api/'
+axios.defaults.baseURL = __baseURL
 
 const app = createApp(App)
 // app.use(ElementPlus)
