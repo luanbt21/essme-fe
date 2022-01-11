@@ -3,14 +3,12 @@ import { News } from '~/models/News'
 
 const apiUrl = 'news'
 
-export const getNews = async (size = 6, page = 0, sort = 'name', desc = false): Promise<News[]> => {
+export const getNews = async (size = 6, page = 0): Promise<News[]> => {
   try {
     const res = await axios.get(apiUrl, {
       params: {
         page,
-        size,
-        sort,
-        desc
+        size
       }
     })
     return res.data

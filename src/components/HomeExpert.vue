@@ -3,7 +3,7 @@
     <div class="px-8 py-4 bg-[#D1E0DB] rounded-3xl" style="padding-left: 5%; padding-right: 5%">
       <h1 class="text-center text-4xl mb-10">Experts</h1>
       <el-row :gutter="0">
-        <el-col class="bg-[#D1E0DB]" v-for="Expert in ExpertArr" :key="Expert._id" :span="8" :xs="24" :sm="12" :lg="8">
+        <el-col class="bg-[#D1E0DB]" v-for="expert in ExpertArr" :key="expert._id" :span="8" :xs="24" :sm="12" :lg="8">
           <el-card
             :body-style="{ padding: '0px' }"
             class="mb-10 md:hover:scale-105 hover:duration-500 background-color-radius"
@@ -33,7 +33,7 @@ import { Expert } from '~/models/Expert'
 const ExpertArr = ref<Expert[]>([])
 
 onMounted(async () => {
-  ExpertArr.value = await getExperts(6, 0)
+  ExpertArr.value = await getExperts(5, 0)
 })
 </script>
 
