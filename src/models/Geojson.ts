@@ -1,14 +1,20 @@
 export interface Geojson {
-  type:       string;
-  properties: Properties;
-  geometry:   Geometry;
+  type: 'FeatureCollection'
+  features: Feature[]
+}
+
+export interface Feature {
+  type: 'Feature'
+  geometry: Geometry
+  properties: Properties
 }
 
 export interface Geometry {
-  type:        string;
-  coordinates: number[];
+  type: 'Point'
+  coordinates: [number, number]
 }
 
 export interface Properties {
-  description: string;
+  label: string
+  html: string
 }
