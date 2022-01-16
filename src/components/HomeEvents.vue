@@ -3,7 +3,7 @@
     <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
       <h2 class="text-center text-2xl mb-2">Events</h2>
       <el-row :gutter="30">
-        <el-col v-for="events in newsArr.slice(2, 8)" :key="events._id" :xs="24" :sm="12" :lg="8">
+        <el-col v-for="events in eventsArr.slice(2, 8)" :key="events._id" :xs="24" :sm="12" :lg="8">
           <a :href="events.web" target="_blank">
             <el-card class="h-40 mb-5 md:hover:scale-105 hover:duration-500" :body-style="{ padding: '10px' }">
               <div class="flex flex-row h-full">
@@ -14,7 +14,7 @@
                   <h4 class="line-clamp-2 h-fit min-h-fit">
                     <b>{{ events.event_name }}</b>
                   </h4>
-                  <p class="line-clamp-4 text-sm h-fit mt-5">
+                  <p class="line-clamp-4 text-sm h-fit mt-2">
                     {{ events.time }}
                   </p>
                   <p class="line-clamp-4 text-sm h-fit mb-10">Địa điểm: {{ events.location }}</p>
@@ -38,9 +38,9 @@ import { onMounted, ref } from 'vue'
 import { getEvents } from '~/api/Events'
 import { Events } from '~/models/Events'
 
-const newsArr = ref<Events[]>([])
+const eventsArr = ref<Events[]>([])
 
 onMounted(async () => {
-  newsArr.value = await getEvents(20, 0)
+  eventsArr.value = await getEvents(20, 0)
 })
 </script>
