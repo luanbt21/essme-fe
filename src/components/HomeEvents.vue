@@ -25,7 +25,7 @@
         </el-col>
       </el-row>
       <div class="text-center">
-        <router-link to="/news" custom v-slot="{ navigate, href }">
+        <router-link to="/events" custom v-slot="{ navigate, href }">
           <el-link type="primary" :href="href" @click="navigate">View all events</el-link>
         </router-link>
       </div>
