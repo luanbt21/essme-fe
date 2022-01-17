@@ -3,14 +3,11 @@ import { Expert } from '~/models/Expert'
 
 const apiUrl = 'experts'
 
-export const getExperts = async (size = 6, page = 0, sort = 'name', desc = false): Promise<Expert[]> => {
+export const getExperts = async (limit = 9): Promise<Expert[]> => {
     try {
         const res = await axios.get(apiUrl, {
             params: {
-                page,
-                size,
-                sort,
-                desc
+                limit
             }
         })
         return res.data
