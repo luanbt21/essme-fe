@@ -9,6 +9,7 @@
       :where-suggest="getEvents"
       @search="handleSearch"
     />
+    <Mapbox :data="mapData" />
     <el-container class="container">
       <el-aside width="200px" class="hidden md:block pt-5">
         <h3>By Fields</h3>
@@ -37,10 +38,12 @@
 import Search from '~/components/Search.vue'
 import { searchEvents, getEvents } from '~/api/Events'
 import { computed, onMounted, ref } from 'vue'
-import { Events } from '~/models/Events'
+import { Event } from '~/models/Event'
 import EventItem from '~/components/EventItem.vue'
+import Mapbox from '~/components/Mapbox.vue'
+import { Feature } from '~/models/Geojson'
 
-const eventsData = ref<Events[]>([])
+const eventsData = ref<Event[]>([])
 
 const types = computed(() => {
   const result = [] as string[]
@@ -65,8 +68,22 @@ const events = computed(() => {
   }
 })
 
+const mapData = computed((): Feature[] =>
+  events.value.map(
+    event =>
+      ({
+        type: 'Feature',
+        geometry: event.geojson.geometry,
+        properties: {
+          label: event.event_name,
+          html: `<span>${event.event_name}</span>`
+        }
+      } as Feature)
+  )
+)
+
 onMounted(async () => {
-  eventsData.value = await getEvents()
+  eventsData.value = await getEvents(20)
   // eventsData.value = await searchEvents(route.query.what as string)
 })
 
