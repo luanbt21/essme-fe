@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#C8E3D9] px-2 py-4 rounded-xl">
+  <div class="bg-[#C8E3D9] px-2 py-4 mb-4 rounded-xl">
     <el-row align="bottom" :gutter="30">
       <el-col :xs="24" :md="10">
         <label for="what">
