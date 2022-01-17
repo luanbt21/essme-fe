@@ -21,15 +21,8 @@
       </el-aside>
       <el-main>
         <el-row :gutter="20">
-          <el-col :xs="24" :sm="12">
-            <div v-for="event in events1" :key="event._id">
-              <EventItem :event="event" />
-            </div>
-          </el-col>
-          <el-col :xs="24" :sm="12">
-            <div v-for="event in events2" :key="event._id">
-              <EventItem :event="event" />
-            </div>
+          <el-col v-for="event in events" :key="event._id" :xs="24" :sm="12">
+            <EventItem :event="event" />
           </el-col>
         </el-row>
       </el-main>
@@ -71,9 +64,6 @@ const events = computed(() => {
     })
   }
 })
-
-const events1 = computed(() => events.value.slice(0, events.value.length / 2))
-const events2 = computed(() => events.value.slice(events.value.length / 2))
 
 onMounted(async () => {
   eventsData.value = await getEvents()
