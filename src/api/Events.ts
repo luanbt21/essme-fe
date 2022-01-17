@@ -3,6 +3,20 @@ import { Events } from '~/models/Events'
 
 const apiUrl = 'events'
 
+export const searchEvents = async (what = '', where = ''): Promise<Events[]> => {
+  try {
+    const res = await axios.get(`${apiUrl}/search`, {
+      params: {
+        what,
+        where
+      }
+    })
+    return res.data
+  } catch (error) {
+    throw new Error('Failed to get events')
+  }
+}
+
 export const getEvents = async (size = 6, page = 0): Promise<Events[]> => {
   try {
     const res = await axios.get(apiUrl, {
