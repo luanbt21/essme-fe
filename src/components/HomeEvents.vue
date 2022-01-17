@@ -33,7 +33,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script  setup lang="ts" >
 import { onMounted, ref } from 'vue'
 import { getEvents } from '~/api/Events'
 import { Events } from '~/models/Events'

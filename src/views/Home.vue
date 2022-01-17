@@ -4,7 +4,9 @@
     <HomeNews />
 
     <HomeEventsVue />
-    <ExpertDetail />
+  
+    <br />
+    <HomeExpert />
   </div>
 </template>
 
@@ -12,5 +14,6 @@
 import HomeNews from '~/components/HomeNews.vue'
 import HomeEventsVue from '~/components/HomeEvents.vue'
 
-import ExpertDetail from '~/components/ExpertDetail.vue'
+
+import HomeExpert from '~/components/HomeExpert.vue'
 </script>

@@ -9,7 +9,7 @@
 
     <el-container>
       <el-header :style="{ 'background-color': 'white' }">
-        <el-breadcrumb :separator-icon="ArrowRight" class="mb-3">
+        <el-breadcrumb :separator-icon="ArrowRight" class="mb-6">
           <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
           <el-breadcrumb-item>promotion management</el-breadcrumb-item>
           <el-breadcrumb-item>promotion list</el-breadcrumb-item>
@@ -124,9 +124,11 @@
             <el-card shadow="always" :style="{ 'background-color': '#ECF4F1' }" class="m-5">
               <div class="flex">
                 <div class="basis-3/4">
-                  <div>DINH CHI NGUYEN</div>
-                  <div class="my-5">Professional, Doctor</div>
-                  <div>Harvard University, Cambridge university, 北京大学</div>
+                  <div>a</div>
+                  <div class="my-5">a</div>
+                  <div>
+                    <p>a</p>
+                  </div>
                 </div>
                 <div class="basis-1/4">
                   <img
@@ -143,16 +145,17 @@
   </div>
 </template>
 <script  lang="ts" setup>
-import { onMounted, ref } from 'vue'
-import { getNews } from '~/api/News'
-import { News } from '~/models/News'
 import { Search } from '@element-plus/icons-vue'
 import { ArrowRight } from '@element-plus/icons-vue'
 
-const newsArr = ref<News[]>([])
+import { onMounted, ref } from 'vue'
+import { getExperts } from '~/api/Expert'
+import { Expert } from '~/models/Expert'
+
+const expertArr = ref<Expert[]>([])
 
 onMounted(async () => {
-  newsArr.value = await getNews(6, 0)
+  expertArr.value = await getExperts(6, 0)
 })
 
 const textarea = ref('')
