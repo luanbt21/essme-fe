@@ -34,18 +34,18 @@
                 </div>
                 <div class="p-8">
                   <p class="uppercase tracking-wide text-sm text-indigo-500 font-semibold line-clamp-2">
-                    {{ expert._source.name }}
+                    {{ expert._id }}
                   </p>
                   <!-- mt-1 text-lg leading-tight font-medium text-black line-clamp-2 -->
                   <h2
                     href="#"
                     class="block mt-1 text-lg leading-tight font-medium text-black word-break-keep-all text-left"
                   >
-                    {{ expert._source.title }}
+                    {{ expert._id }}
                   </h2>
-                  <div v-for="(field, index) in expert._source.google_scholar_fields.fields" :key="index" class="flex">
-                    <a class="mt-2 text-gray-500 overflow-hidden"> {{ field }}</a>
-                  </div>
+                  <!-- <div v-for="(field, index) in expert._source.google_scholar_fields.fields" :key="index" class="flex"> -->
+                  <!-- <a class="mt-2 text-gray-500 overflow-hidden"> {{ field }}</a> -->
+                  <!-- </div> -->
                 </div>
               </div>
             </div>
@@ -70,7 +70,7 @@ import { Expert } from '~/models/Expert'
 const expertArr = ref<Expert[]>([])
 
 onMounted(async () => {
-  expertArr.value = await getExperts(8, 0)
+  expertArr.value = await getExperts(8)
 })
 </script>
 
