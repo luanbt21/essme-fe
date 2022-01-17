@@ -1,43 +1,98 @@
 <template>
-  <div class="container m-auto">
-    <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
-      <h2 class="text-center text-2xl mb-2">News</h2>
-      <el-row :gutter="30">
-        <el-col v-for="news in newsArr" :key="news._id" :xs="24" :sm="12" :lg="8">
-          <a :href="news.url" target="_blank">
-            <el-card class="h-36 mb-5 md:hover:scale-105 hover:duration-500" :body-style="{ padding: '10px' }">
-              <h4 class="line-clamp-2 h-fit min-h-[3rem]">
-                {{ news.title }}
-              </h4>
-              <div class="flex flex-row h-full">
-                <img :src="news.img" alt="" class="w-auto h-20 rounded-lg mr-3" />
-                <div>
-                  <p class="line-clamp-4 text-sm h-fit">
-                    {{ news.content }}
-                  </p>
-                </div>
-              </div>
-            </el-card>
-          </a>
-        </el-col>
-      </el-row>
-      <div class="text-center">
-        <router-link to="/news" custom v-slot="{ navigate, href }">
-          <el-link type="primary" :href="href" @click="navigate">View all news</el-link>
-        </router-link>
-      </div>
-    </div>
+  <div class="common-layout">
+    <el-container>
+      <el-header>Header</el-header>
+      <el-main>Main</el-main>
+    </el-container>
+
+    <el-container>
+      <el-header>Header</el-header>
+      <el-main>Main</el-main>
+      <el-footer>Footer</el-footer>
+    </el-container>
+
+    <el-container>
+      <el-aside width="200px">Aside</el-aside>
+      <el-main>Main</el-main>
+    </el-container>
+
+    <el-container>
+      <el-header>Header</el-header>
+      <el-container>
+        <el-aside width="200px">Aside</el-aside>
+        <el-main>Main</el-main>
+      </el-container>
+    </el-container>
+
+    <el-container>
+      <el-header>Header</el-header>
+      <el-container>
+        <el-aside width="200px">Aside</el-aside>
+        <el-container>
+          <el-main>Main</el-main>
+          <el-footer>Footer</el-footer>
+        </el-container>
+      </el-container>
+    </el-container>
+
+    <el-container>
+      <el-aside width="200px">Aside</el-aside>
+      <el-container>
+        <el-header>Header</el-header>
+        <el-main>Main</el-main>
+      </el-container>
+    </el-container>
+
+    <el-container>
+      <el-aside width="200px">Aside</el-aside>
+      <el-container>
+        <el-header>Header</el-header>
+        <el-main>Main</el-main>
+        <el-footer>Footer</el-footer>
+      </el-container>
+    </el-container>
   </div>
 </template>
 
-<script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { getNews } from '~/api/News'
-import { News } from '~/models/News'
+<style lang="scss">
+.common-layout {
+  .el-header,
+  .el-footer {
+    background-color: #b3c0d1;
+    color: var(--el-text-color-primary);
+    text-align: center;
+    line-height: 60px;
+  }
 
-const newsArr = ref<News[]>([])
+  .el-footer {
+    line-height: 60px;
+  }
 
-onMounted(async () => {
-  newsArr.value = await getNews(6, 0)
-})
-</script>
+  .el-aside {
+    background-color: #d3dce6;
+    color: var(--el-text-color-primary);
+    text-align: center;
+    line-height: 200px;
+  }
+
+  .el-main {
+    background-color: #e9eef3;
+    color: var(--el-text-color-primary);
+    text-align: center;
+    line-height: 160px;
+  }
+
+  body > .el-container {
+    margin-bottom: 40px;
+  }
+
+  .el-container:nth-child(5) .el-aside,
+  .el-container:nth-child(6) .el-aside {
+    line-height: 260px;
+  }
+
+  .el-container:nth-child(7) .el-aside {
+    line-height: 320px;
+  }
+}
+</style>

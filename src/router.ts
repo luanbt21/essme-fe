@@ -18,7 +18,12 @@ const router = createRouter({
       name: 'news',
       component: () => import('~/views/News.vue')
     },
-    { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('~/views/NotFound.vue') }
+    { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('~/views/NotFound.vue') },
+    {
+      path: '/expert',
+      name: 'expert',
+      component: () => import('~/views/ExpertPage.vue')
+    }
   ]
 })
 
