@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { Events } from '~/models/Events'
+import { Event } from '~/models/Event'
 
 const apiUrl = 'events'
 
-export const searchEvents = async (what = '', where = ''): Promise<Events[]> => {
+export const searchEvents = async (what = '', where = ''): Promise<Event[]> => {
   try {
     const res = await axios.get(`${apiUrl}/search`, {
       params: {
@@ -17,7 +17,7 @@ export const searchEvents = async (what = '', where = ''): Promise<Events[]> => 
   }
 }
 
-export const getEvents = async (size = 6, page = 0): Promise<Events[]> => {
+export const getEvents = async (size = 6, page = 0): Promise<Event[]> => {
   try {
     const res = await axios.get(apiUrl, {
       params: {
@@ -31,7 +31,7 @@ export const getEvents = async (size = 6, page = 0): Promise<Events[]> => {
   }
 }
 
-export const getEventsById = async (id: string): Promise<Events> => {
+export const getEventsById = async (id: string): Promise<Event> => {
   try {
     const res = await axios.get(`${apiUrl}/${id}`)
     return res.data
@@ -40,7 +40,7 @@ export const getEventsById = async (id: string): Promise<Events> => {
   }
 }
 
-export const createEvents = async (events: Events): Promise<Events> => {
+export const createEvents = async (events: Event): Promise<Event> => {
   try {
     const res = await axios.post(apiUrl, events)
     return res.data
@@ -58,7 +58,7 @@ export const deleteEvents = async (id: string) => {
   }
 }
 
-export const updateEvents = async (id: string, events: Events): Promise<Events> => {
+export const updateEvents = async (id: string, events: Event): Promise<Event> => {
   try {
     const res = await axios.put(`${apiUrl}/${id}`, events)
     return res.data

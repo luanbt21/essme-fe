@@ -30,10 +30,10 @@
 </template>
 
 <script setup lang="ts">
-import { Events } from '~/models/Events'
+import { Event } from '~/models/Event'
 import { Picture } from '@element-plus/icons-vue'
 
 defineProps<{
-  event: Events
+  event: Event
 }>()
 </script>
