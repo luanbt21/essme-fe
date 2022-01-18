@@ -12,7 +12,11 @@
             hide-after="50"
           >
             <template #reference>
-              <el-card :body-style="{ padding: '0px' }" class="mb-10 background-color-radius">
+              <el-card
+                @click="getIdExpert(expert._id)"
+                :body-style="{ padding: '0px' }"
+                class="mb-10 background-color-radius"
+              >
                 <img
                   src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg"
                   class="image rounded-3xl"
@@ -66,12 +70,19 @@
 import { onMounted, ref } from 'vue'
 import { getExperts } from '~/api/Expert'
 import { Expert } from '~/models/Expert'
+import { useStore } from '~/store/index'
 
 const expertArr = ref<Expert[]>([])
 
 onMounted(async () => {
   expertArr.value = await getExperts(8)
 })
+// catch expert_id
+const store = useStore()
+// const id_expert = ref('')
+const getIdExpert = (id: string) => {
+  store.commit('expert_id/setID', id)
+}
 </script>
 
 <style>
