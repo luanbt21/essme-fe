@@ -12,6 +12,8 @@ export interface Auth {
 
   user: object
 
+  token: string
+
 }
 
 
@@ -19,10 +21,16 @@ const state = () => ({
   status: false,
   authIsReady: false,
   token: '',
-  user: {}
+  user: {
+    accessToken: ''
+  }
 })
 
-const getters = {}
+const getters = {
+  getToken: (state: Auth) => {
+    return state.token
+  }
+}
 
 const actions = {
   async signup({ commit }: { commit: Commit }, { email, password }: { email: string, password: string }) {
@@ -51,17 +59,24 @@ const actions = {
     console.log('logout action')
     await signOut(auth)
     commit('setUser', null)
+    commit('setAuthIsReady', false)
+    commit('setTokenID', null)
+
   }
 }
 
 const mutations = {
   setUser(state: Auth, user: object) {
     state.user = user
-    console.log('user state changed:', state)
+    state.token = user.accessToken
+    console.log('user state changed:', state.token)
   },
   setAuthIsReady(state: Auth, authIsReady: boolean) {
     state.authIsReady = authIsReady
-  }
+  },
+  setTokenID(state: Auth, token: string) {
+    state.token = token
+  },
 }
 
 // wait until auth is ready

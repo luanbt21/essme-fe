@@ -8,6 +8,7 @@ const router = createRouter({
       name: 'home',
       component: () => import('~/views/Home.vue')
     },
+
     {
       path: '/questions',
       name: 'questions',
@@ -18,6 +19,17 @@ const router = createRouter({
       name: 'news',
       component: () => import('~/views/News.vue')
     },
+
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('~/components/layouts/SignInForm.vue')
+    },
+    {
+      path: "/register",
+      component: () => import("~/components/layouts/SignUpForm.vue"),
+    },
+
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('~/views/NotFound.vue') }
   ]
 })
