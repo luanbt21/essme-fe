@@ -5,7 +5,7 @@ export interface Event {
     event_name: string;
     location:   string;
     time:       string;
-    type:       string;
+    type:       string[];
     desc:       string;
     geojson:    Geojson;
 }

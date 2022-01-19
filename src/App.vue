@@ -2,7 +2,7 @@
   <el-config-provider :locale="lang">
     <Header @toggle-lang="toggleLang" :flag="flag" />
     <el-date-picker />
-    <router-view />
+    <router-view :key="$route.path" />
   </el-config-provider>
 </template>
 

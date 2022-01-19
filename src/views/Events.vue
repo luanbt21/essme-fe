@@ -46,13 +46,10 @@ import { Feature } from '~/models/Geojson'
 const eventsData = ref<Event[]>([])
 
 const types = computed(() => {
-  const result = [] as string[]
+  const result = new Set<string>()
   for (const event of eventsData.value) {
-    const eventTypes = event.type.split(';')
-    for (let type of eventTypes) {
-      type = type.trim()
-      const index = result.findIndex(item => item === type)
-      if (index === -1) result.push(type)
+    for (const type of event.type) {
+      result.add(type)
     }
   }
   return result
