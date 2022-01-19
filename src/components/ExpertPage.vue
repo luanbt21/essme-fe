@@ -45,7 +45,7 @@
         <el-container>
           <el-main class="rounded-xl m-5">
             <div class="block">
-              <el-carousel :interval="2000" arrow="always" class="h-[500px]">
+              <el-carousel trigger="click" class="h-[500px]">
                 <el-carousel-item>
                   <div class="my-3 ml-10 font-bold text-black text-2xl">INTRODUCTION</div>
                   <div class="ml-[70px] font-bold text-black">
@@ -120,19 +120,19 @@
       <el-header class="rounded-xl m-5 bg-[#D1E0DB]">
         <div class="font-bold text-2xl my-5 ml-6">RELATED EXPERTS</div>
         <el-row :gutter="20" class="m-5">
-          <el-col :span="8" v-for="expert in 3" :key="expert" :xs="24" :sm="12" :lg="8">
+          <el-col :span="8" v-for="expert in expertArr.slice(2, 5)" :key="expert._id" :xs="24" :sm="12" :lg="8">
             <el-card shadow="always" :style="{ 'background-color': '#ECF4F1' }" class="m-5">
               <div class="flex">
                 <div class="basis-3/4">
-                  <div>a</div>
-                  <div class="my-5">a</div>
+                  <div>{{ expert.name }}</div>
+                  <div class="my-5">{{ expert.degree }}</div>
                   <div>
-                    <p>a</p>
+                    <p>{{ expert.company }}</p>
                   </div>
                 </div>
                 <div class="basis-1/4">
                   <img
-                    src="http://celebdonut.com/wp-content/uploads/images/clara-alonso-img-models-digitals-session-_4.jpg"
+                    src="https://img.xcitefun.net/users/2008/05/2997,xcitefun-little-cute-chicken-wallpapers-3.jpg"
                     alt=""
                   />
                 </div>
@@ -155,7 +155,7 @@ import { Expert } from '~/models/Expert'
 const expertArr = ref<Expert[]>([])
 
 onMounted(async () => {
-  expertArr.value = await getExperts(6, 0)
+  expertArr.value = await getExperts(8)
 })
 
 const textarea = ref('')

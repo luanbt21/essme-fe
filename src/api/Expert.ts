@@ -3,17 +3,16 @@ import { Expert } from '~/models/Expert'
 
 const apiUrl = 'experts'
 
-export const getExperts = async (size = 6, page = 0): Promise<Expert[]> => {
+export const getExperts = async (limit = 10): Promise<Expert[]> => {
     try {
         const res = await axios.get(apiUrl, {
             params: {
-                page,
-                size
+                limit
             }
         })
         return res.data
     } catch (error) {
-        throw new Error('Failed to get news')
+        throw new Error('Failed to get Expert')
     }
 }
 
