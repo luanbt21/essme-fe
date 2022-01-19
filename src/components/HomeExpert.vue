@@ -13,15 +13,18 @@
           >
             <template #reference>
               <el-card
+                @click="getIdExpert(expert._id)"
                 :body-style="{ padding: '0px' }"
                 class="mb-10 background-color-radius"
-                @click="getIdExpert(expert._id)"
               >
-                <img
-                  src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg"
-                  class="image rounded-3xl"
-                  style="width: 220px; height: 300px"
-                />
+                <router-link to="/expert" custom v-slot="{ navigate, href }">
+                  <el-link type="primary" :href="href" @click="navigate">
+                    <img
+                      src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg"
+                      class="image rounded-3xl"
+                      style="width: 220px; height: 300px"
+                  /></el-link>
+                </router-link>
               </el-card>
             </template>
 
@@ -81,16 +84,18 @@
 import { onMounted, ref } from 'vue'
 import { getExperts } from '~/api/Expert'
 import { Expert } from '~/models/Expert'
+import { useStore } from '~/store/index'
 
 const expertArr = ref<Expert[]>([])
 
 onMounted(async () => {
   expertArr.value = await getExperts(8)
 })
-
+// catch expert_id
+const store = useStore()
+// const id_expert = ref('')
 const getIdExpert = (id: string) => {
-  console.log(id)
-  // store.commit('expert_id/setID', id)
+  store.commit('expert_id/setID', id)
 }
 </script>
 

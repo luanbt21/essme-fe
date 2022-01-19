@@ -1,5 +1,5 @@
 <template>
-  <div class="common-layout mt-5">
+  <div class="common-layout mt-5 w-[90%] mx-auto">
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
@@ -10,10 +10,9 @@
     <el-container>
       <el-header :style="{ 'background-color': 'white' }">
         <el-breadcrumb :separator-icon="ArrowRight" class="mb-6">
-          <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
-          <el-breadcrumb-item>promotion management</el-breadcrumb-item>
-          <el-breadcrumb-item>promotion list</el-breadcrumb-item>
-          <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
+          <el-breadcrumb-item>Expert</el-breadcrumb-item>
+          <el-breadcrumb-item>{{ expert?.name }}</el-breadcrumb-item>
         </el-breadcrumb>
         <div class="font-bold mb-11">
           <hr class="style-three" :style="{ 'background-color': 'white' }" />
@@ -22,13 +21,21 @@
       <el-container class="flex flex-wrap">
         <el-aside class="rounded-xl w-auto m-5 text-[21px]">
           <img
+            :src="expert?.image ? expert.image : avatar"
+            :alt="expert?.name + ' image'"
+            class="w-[235px] h-72 rounded-xl mx-8 my-5"
+          />
+          <!-- <img
             src="https://pbs.twimg.com/media/CzMC-bfXAAIFIEU.jpg"
             class="w-[235px] h-72 rounded-xl mx-8 my-5"
             alt=""
-          />
-          <div class="text-center my-7"><p>KHANH HUYEN TRINH</p></div>
-          <div class="text-center my-7 mx-7 font-bold">RESEARCH ASSISTANT PROFESSOR OF Computer science</div>
-          <div class="ml-11 mt-16">
+          /> -->
+          <div class="text-center my-7">
+            <p>{{ expert?.name }}</p>
+          </div>
+          <div class="text-center mx-7 font-bold">{{ expert?.degree }}</div>
+          <div class="text-center mx-7 font-bold">{{ expert?.research_area }}</div>
+          <div class="ml-11 mt-12">
             <i class="fas fa-address-card"></i>
             <span class="ml-3">PROFESSOR</span>
           </div>
@@ -38,7 +45,7 @@
           </div>
           <div class="ml-11 mt-3 mb-6">
             <i class="fas fa-envelope"></i>
-            <span class="ml-5">tkh@gmail.com</span>
+            <span class="ml-5">{{ expert?.email }}</span>
           </div>
         </el-aside>
 
@@ -55,11 +62,11 @@
                     </div>
                     <div class="my-3">
                       POSITION:
-                      <span class="font-normal ml-16">Assistant Professor</span>
+                      <span class="font-normal ml-16">{{ expert?.degree }}</span>
                     </div>
                     <div>
                       AFFILIATE:
-                      <span class="font-normal ml-14">New York university</span>
+                      <span class="font-normal ml-14">{{ expert?.company }}</span>
                     </div>
                     <div class="my-3">
                       EXPERTISE:
@@ -93,7 +100,7 @@
                   </div>
                 </el-carousel-item>
                 <el-carousel-item>
-                  <h3>a</h3>
+                  <!-- <MapboxVue /> -->
                 </el-carousel-item>
               </el-carousel>
             </div>
@@ -115,7 +122,7 @@
       </el-container>
     </el-container>
   </div>
-  <div class="common-layout">
+  <div class="common-layout w-[90%] mx-auto">
     <el-container>
       <el-header class="rounded-xl m-5 bg-[#D1E0DB]">
         <div class="font-bold text-2xl my-5 ml-6">RELATED EXPERTS</div>
@@ -148,16 +155,23 @@
 import { Search } from '@element-plus/icons-vue'
 import { ArrowRight } from '@element-plus/icons-vue'
 
-import { onMounted, ref } from 'vue'
-import { getExperts } from '~/api/Expert'
+import { computed, onMounted, ref } from 'vue'
+import { getExperts, getExpertById } from '~/api/Expert'
 import { Expert } from '~/models/Expert'
-
+import { useStore } from '~/store/index'
+// import MapboxVue from '~/component/Mapbox.vue'
+import avatar from '/avatar_expert_detail.png'
 const expertArr = ref<Expert[]>([])
+const expert = ref<Expert>()
 
 onMounted(async () => {
-  expertArr.value = await getExperts(8)
+  ;(expertArr.value = await getExperts(8)), (expert.value = await getExpertById(getId.value))
+  console.log(expert.value)
 })
 
+const store = useStore()
+
+const getId = computed(() => store.state.expert_id.id)
 const textarea = ref('')
 </script>
 
