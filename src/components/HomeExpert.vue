@@ -12,17 +12,35 @@
             hide-after="50"
           >
             <template #reference>
-              <el-card :body-style="{ padding: '0px' }" class="mb-10 background-color-radius">
-                <img
-                  src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg"
-                  class="image rounded-3xl"
-                  style="width: 220px; height: 300px"
-                />
+              <el-card
+                @click="getIdExpert(expert._id)"
+                :body-style="{ padding: '0px' }"
+                class="mb-10 background-color-radius"
+              >
+                <router-link to="/expert" custom v-slot="{ navigate, href }">
+                  <el-link type="primary" :href="href" @click="navigate">
+                    <img
+                      src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg"
+                      class="image rounded-3xl"
+                      style="width: 220px; height: 300px"
+                  /></el-link>
+                </router-link>
               </el-card>
             </template>
 
             <div
-              class="m-[-50px] max-w-md mx-auto bg-white rounded-2xl shadow-md overflow-hidden md:max-w-lg md:hover:scale-105 hover:duration-500 bg-[#ECF4F1]"
+              class="
+                m-[-50px]
+                max-w-md
+                mx-auto
+                bg-white
+                rounded-2xl
+                shadow-md
+                overflow-hidden
+                md:max-w-lg md:hover:scale-105
+                hover:duration-500
+                bg-[#ECF4F1]
+              "
             >
               <div class="md:flex">
                 <div class="md:shrink-0">
@@ -34,18 +52,18 @@
                 </div>
                 <div class="p-8">
                   <p class="uppercase tracking-wide text-sm text-indigo-500 font-semibold line-clamp-2">
-                    {{ expert._source.name }}
+                    {{ expert._id }}
                   </p>
                   <!-- mt-1 text-lg leading-tight font-medium text-black line-clamp-2 -->
                   <h2
                     href="#"
                     class="block mt-1 text-lg leading-tight font-medium text-black word-break-keep-all text-left"
                   >
-                    {{ expert._source.title }}
+                    {{ expert._id }}
                   </h2>
-                  <div v-for="(field, index) in expert._source.google_scholar_fields.fields" :key="index" class="flex">
-                    <a class="mt-2 text-gray-500 overflow-hidden"> {{ field }}</a>
-                  </div>
+                  <!-- <div v-for="(field, index) in expert._source.google_scholar_fields.fields" :key="index" class="flex"> -->
+                  <!-- <a class="mt-2 text-gray-500 overflow-hidden"> {{ field }}</a> -->
+                  <!-- </div> -->
                 </div>
               </div>
             </div>
@@ -66,12 +84,19 @@
 import { onMounted, ref } from 'vue'
 import { getExperts } from '~/api/Expert'
 import { Expert } from '~/models/Expert'
+import { useStore } from '~/store/index'
 
 const expertArr = ref<Expert[]>([])
 
 onMounted(async () => {
-  expertArr.value = await getExperts(8, 0)
+  expertArr.value = await getExperts(8)
 })
+// catch expert_id
+const store = useStore()
+// const id_expert = ref('')
+const getIdExpert = (id: string) => {
+  store.commit('expert_id/setID', id)
+}
 </script>
 
 <style>
