@@ -16,14 +16,14 @@ export const getExperts = async (limit = 10): Promise<Expert[]> => {
     }
 }
 
-// export const getExpertById = async (id: string): Promise<Expert | undefined> => {
-//     try {
-//         const res = await axios.get(`${apiUrl}/${id}`)
-//         return res.data
-//     } catch (error) {
-//         throw new Error('Failed to load experts')
-//     }
-// }
+export const getExpertById = async (id: string): Promise<Expert | undefined> => {
+    try {
+        const res = await axios.get(`${apiUrl}/${id}`)
+        return res.data
+    } catch (error) {
+        throw new Error('Failed to load experts')
+    }
+}
 
 // export const searchExperts = async (what: string): Promise<Expert[]> => {
 //     try {
