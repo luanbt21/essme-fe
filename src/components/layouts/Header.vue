@@ -26,8 +26,6 @@ const logout = () => {
 const props = defineProps({
   flag: String
 })
-
-const isLogin = computed(() => store.state.auth.status)
 </script>
 
 <style scoped>
