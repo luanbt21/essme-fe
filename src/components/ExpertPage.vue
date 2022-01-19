@@ -37,7 +37,7 @@
           <div class="text-center mx-7 font-bold">{{ expert?.research_area }}</div>
           <div class="ml-11 mt-12">
             <i class="fas fa-address-card"></i>
-            <span class="ml-3">PROFESSOR</span>
+            <span class="ml-3">{{ expert?.degree }}</span>
           </div>
           <div class="ml-11 m-6">
             <i class="fas fa-map-marker-alt"></i>
@@ -58,7 +58,7 @@
                   <div class="ml-[70px] font-bold text-black">
                     <div class="mt-4">
                       APPELLATION:
-                      <span class="font-normal ml-5">Research assistant professor Of computer science </span>
+                      <span class="font-normal ml-5">{{ expert?.name }} </span>
                     </div>
                     <div class="my-3">
                       POSITION:
