@@ -1,6 +1,6 @@
 <template>
-  <div class="relative" :class="class">
-    <div id="map" class="w-full h-full"></div>
+  <div class="relative mb-4" :class="class">
+    <div id="map" class="w-full h-full rounded-xl"></div>
     <pre id="coordinate-info"></pre>
   </div>
 </template>
@@ -13,7 +13,7 @@ import { onMounted, watch } from 'vue'
 import { Feature } from '~/models/Geojson'
 
 interface Props {
-  data: Feature
+  data: ComputedRef<Feature[]>
   class?: string
   center?: [number, number]
   zoom?: number

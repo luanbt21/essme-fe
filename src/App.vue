@@ -2,7 +2,7 @@
   <el-config-provider :locale="lang">
     <Header @toggle-lang="toggleLang" :flag="flag" />
     <el-date-picker />
-    <router-view />
+    <router-view :key="$route.path" />
   </el-config-provider>
 </template>
 
@@ -41,8 +41,9 @@ onMounted(() => {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
