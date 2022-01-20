@@ -45,7 +45,7 @@ const router = createRouter({
       name: 'ExpertOrCustomerStatus',
       component: () => import('~/views/ExpertOrCustomerStatus.vue'),
     },
-    ,
+
     {
       path: '/fields',
       name: 'fields',
