@@ -1,12 +1,11 @@
 <template>
   <el-config-provider :locale="lang">
-    <Header @toggle-lang="toggleLang" :flag="flag" />
+    <!-- <Header @toggle-lang="toggleLang" :flag="flag" /> -->
     <!-- <el-date-picker /> -->
-    <router-view :key="$route.path" />
     <!-- <Header @toggle-lang="toggleLang" :flag="flag" />
     <el-date-picker /> -->
-    <!-- <HeaderFragment /> -->
     <HomeHeader />
+    <router-view :key="$route.path" />
     <!-- <router-view /> -->
   </el-config-provider>
 </template>
@@ -19,10 +18,8 @@ import vnFlag from '~/assets/vn.svg'
 
 import vi from 'element-plus/es/locale/lang/vi'
 import en from 'element-plus/es/locale/lang/en'
-import Header from './components/layouts/Header.vue'
-import HeaderFragment from './components/layouts/headerFragment.vue'
 import HomeHeader from './components/layouts/HomeHeader.vue'
-import SignInForm from './components/layouts/SignInForm.vue'
+import Home from './views/Home.vue'
 
 const lang = ref(vi)
 const flag = ref(usFlag)

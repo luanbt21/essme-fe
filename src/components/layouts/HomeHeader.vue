@@ -106,7 +106,7 @@
     </div>
 
     <div class="nav-dropdown nav__bars-noneresponsive item">
-      <button class="nav-dropbtn">News</button>
+      <router-link to="/News"><button class="nav-dropbtn">News</button></router-link> 
     </div>
 
 
@@ -147,14 +147,10 @@ onUpdated(async () => {
   const headers = { 
     "Authorization": `Bearer ${token.value}`,
   };
-  await axios.post("/posts.json", { headers })}
+  await axios.post("/backup/json/", { headers })}
 
 })
-
 console.log(axios.defaults.headers )
-
-
-
 </script>
 
 <style>

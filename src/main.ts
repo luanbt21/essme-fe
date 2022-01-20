@@ -14,7 +14,7 @@ import { __baseURL } from './constant'
 
 
 
-// axios.defaults.baseURL = __baseURL
+axios.defaults.baseURL = __baseURL
 // axios.defaults.headers.common['Authorization'] = 'Bearer' + getToken()
 
 const app = createApp(App);

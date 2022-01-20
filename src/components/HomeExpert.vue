@@ -29,18 +29,7 @@
             </template>
 
             <div
-              class="
-                m-[-50px]
-                max-w-md
-                mx-auto
-                bg-white
-                rounded-2xl
-                shadow-md
-                overflow-hidden
-                md:max-w-lg md:hover:scale-105
-                hover:duration-500
-                bg-[#ECF4F1]
-              "
+              class="m-[-50px] max-w-md mx-auto bg-white rounded-2xl shadow-md overflow-hidden md:max-w-lg md:hover:scale-105 hover:duration-500 bg-[#ECF4F1]"
             >
               <div class="md:flex">
                 <div class="md:shrink-0">
@@ -94,9 +83,7 @@ import { onMounted, ref } from 'vue'
 import { getExperts } from '~/api/Expert'
 import { Expert } from '~/models/Expert'
 import { useStore } from '~/store/index'
-
 const expertArr = ref<Expert[]>([])
-
 onMounted(async () => {
   expertArr.value = await getExperts(8)
 })

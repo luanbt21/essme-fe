@@ -1,11 +1,15 @@
 <template>
-  <div class="container mt-10 mx-auto">
+  <div class="container mt-10 mb-10 mx-auto">
     <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
       <h2 class="text-center text-2xl mb-2">Fields</h2>
       <el-row :gutter="30">
         <el-col v-for="field in field" :key="field._id" :xs="24" :sm="12" :lg="8">
-          <img :src="field.image" alt="" 
-                class="w-80 h-52 cover mb-5 mt-5 ml-auto mr-auto md:hover:scale-105 hover:duration-500 cursor-pointer rounded-2xl" >
+          <router-link to="/fields">
+            <img
+              :src="field.image"
+              alt=""
+              class="w-80 h-52 cover mb-5 mt-5 ml-auto mr-auto md:hover:scale-105 hover:duration-500 cursor-pointer rounded-2xl"
+          /></router-link>
           <h3 class="text-center text-xl hover:text-emerald-600 cursor-pointer">
             {{ field.name }}
           </h3>
@@ -29,7 +33,7 @@ import { onMounted, ref } from 'vue'
 // const newsArr = ref<News[]>([])
 
 interface Field {
-  name: string,
+  name: string
   image: string
 }
 import imgBusiness from '~/assets/field_business.jpg'
@@ -41,7 +45,6 @@ import imgEducation from '~/assets/field_education.jpg'
 import imgBeautySalon from '~/assets/field_beauty-salon.jpg'
 import imgBiology from '~/assets/field_biology.jpg'
 import imgAstronomy from '~/assets/field_astronomy.jpg'
-
 
 const field: Field[] = [
   {
@@ -81,5 +84,4 @@ const field: Field[] = [
     image: imgAstronomy
   }
 ]
-
 </script>

@@ -17,7 +17,7 @@ const router = createRouter({
     {
       path: '/news',
       name: 'news',
-      component: () => import('~/views/News.vue')
+      component: () => import('~/views/NewsPage.vue')
     },
     {
       path: '/expert',
@@ -34,11 +34,22 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('~/components/layouts/SignInForm.vue')
+      component: () => import('~/views/SignInForm.vue')
     },
     {
       path: "/register",
-      component: () => import("~/components/layouts/SignUpForm.vue"),
+      component: () => import("~/views/SignUpForm.vue"),
+    },
+    {
+      path: '/ExpertOrCustomerStatus',
+      name: 'ExpertOrCustomerStatus',
+      component: () => import('~/views/ExpertOrCustomerStatus.vue'),
+    },
+    ,
+    {
+      path: '/fields',
+      name: 'fields',
+      component: () => import('~/views/Fields.vue'),
     },
 
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('~/views/NotFound.vue') }

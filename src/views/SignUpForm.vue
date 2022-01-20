@@ -100,7 +100,7 @@ const handleSubmit = async () => {
       email: email.value,
       password: password.value
     })
-    router.push('/')
+    router.push('/ExpertOrCustomerStatus')
   } catch (err) {
     error.value = 'Tài khoản đã tồn tại'
     alert(err)
