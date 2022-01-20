@@ -6,7 +6,7 @@
       integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
       crossorigin="anonymous"
     />
-
+    <Header />
     <el-container>
       <el-header :style="{ 'background-color': 'white' }">
         <el-breadcrumb :separator-icon="ArrowRight" class="mb-6">
@@ -161,6 +161,7 @@ import { Expert } from '~/models/Expert'
 import { useStore } from '~/store/index'
 // import MapboxVue from '~/component/Mapbox.vue'
 import avatar from '/avatar_expert_detail.png'
+import Header from '~/component/layouts/Header.vue'
 const expertArr = ref<Expert[]>([])
 const expert = ref<Expert>()
 
