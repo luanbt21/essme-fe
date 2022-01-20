@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { computed, createApp } from 'vue'
 import ElementPlus from 'element-plus'
 import axios from 'axios'
 
@@ -12,12 +12,14 @@ import { store, key } from './store'
 import App from './App.vue'
 import { __baseURL } from './constant'
 
-axios.defaults.baseURL = __baseURL
-axios.defaults.headers.common['Authorization'] =
-  'Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjM1MDZmMzc1MjI0N2ZjZjk0Y2JlNWQyZDZiNTlmYThhMmJhYjFlYzIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTHXDom4gQsO5aSIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQVRYQUp4LTgxZzVqa0dMcXQxTWcxYWxWZHBzR0RoWFBMSkpjekZPVFFsWT1zOTYtYyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9uZXdlc3MtZjJmN2EiLCJhdWQiOiJuZXdlc3MtZjJmN2EiLCJhdXRoX3RpbWUiOjE2NDE1NDg5OTIsInVzZXJfaWQiOiI5bWFDbXlDS05KUjdiOURsTGRQNkdoaFhQMXUyIiwic3ViIjoiOW1hQ215Q0tOSlI3YjlEbExkUDZHaGhYUDF1MiIsImlhdCI6MTY0MTU0ODk5MiwiZXhwIjoxNjQxNTUyNTkyLCJlbWFpbCI6Imx1YW4udnkueWJAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZ29vZ2xlLmNvbSI6WyIxMDI4NzI3MDUwODE1Mjg5NjM5MDIiXSwiZW1haWwiOlsibHVhbi52eS55YkBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJnb29nbGUuY29tIn19.LqzgFvWWb07W_VZBStw3gwP_5gWFEEvG99iaFPKCBb68HBPuA2bmTo8QtUtULISzdmzvTpNJTPneDvZLWnPPIqok5TSISZMjrNCzFy8CzigRpKaBHFUA86oIaClRn3xITI5zc5Qbc6jVYl5h0vjClVmPzlOh3Kq2Jfjrf0L7r9Y-RfZ7wBvlWX51xX5SDOO4uzryHhHs8qEunilzuFRNrvGpgtSmvpa-MUwxGS5lnP2fVoLnznnUz84bhFMYEkj_p5wYICz0nvkIotE6RexIJ7vEAP5rS_qZz59gK_zZeqkpyuUhhUnfxMYgMqfE-GFtJmlnyvXoQBWPD7iwZklN1Q'
 
-const app = createApp(App)
+
+axios.defaults.baseURL = __baseURL
+// axios.defaults.headers.common['Authorization'] = 'Bearer' + getToken()
+
+const app = createApp(App);
 // app.use(ElementPlus)
 app.use(store, key)
 app.use(router)
+app.use(store);
 app.mount('#app')

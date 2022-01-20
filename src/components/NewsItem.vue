@@ -12,7 +12,7 @@
               {{ news.content }}
             </p>
             <el-tag type="info" effect="dark">
-              {{news.tag}}
+              {{ news.tag }}
             </el-tag>
           </div>
         </div>

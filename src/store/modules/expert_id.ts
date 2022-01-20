@@ -10,6 +10,7 @@ const state = () => ({
 
 const getters = {
     getID: (state: ID_expert) => {
+        console.log(state.id)
         return state.id
     }
 }
