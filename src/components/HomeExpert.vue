@@ -82,7 +82,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { getExperts } from '~/api/Expert'
+import { getExperts, getExpertById } from '~/api/Expert'
 import { Expert } from '~/models/Expert'
 import { useStore } from '~/store/index'
 
@@ -91,6 +91,7 @@ const expertArr = ref<Expert[]>([])
 onMounted(async () => {
   expertArr.value = await getExperts(8)
 })
+
 // catch expert_id
 const store = useStore()
 // const id_expert = ref('')

@@ -8,7 +8,7 @@
     <br />
     <HomeExpert />
     <br />
-    <MapboxVue />
+    <!-- <MapboxVue /> -->
   </div>
 </template>
 
@@ -17,5 +17,5 @@ import HomeNews from '~/components/HomeNews.vue'
 import HomeEventsVue from '~/components/HomeEvents.vue'
 
 import HomeExpert from '~/components/HomeExpert.vue'
-import MapboxVue from '~/components/Mapbox.vue'
+// import MapboxVue from '~/components/Mapbox.vue'
 </script>

@@ -5,7 +5,6 @@
     <el-button style="padding: 0" @click="$emit('toggle-lang')"><img class="svg" :src="flag" /></el-button>
     <el-button @click="login">Login</el-button>
     <el-button @click="logout">Logout</el-button>
-    {{ isLogin }}
   </div>
 </template>
 

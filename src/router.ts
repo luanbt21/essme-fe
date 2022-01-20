@@ -24,7 +24,7 @@ const router = createRouter({
       path: '/expert',
       name: 'expert',
       component: () => import('~/views/ExpertPage.vue')
-    }
+    },
 
     {
       path: '/events',
