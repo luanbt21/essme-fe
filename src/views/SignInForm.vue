@@ -23,39 +23,11 @@
     </div>
 
     <form @submit.prevent="handleSubmit" class="form relative top-[-40px] rounded-lg" id="form-2">
-      <h3 class="heading">Đăng nhập</h3>
-
-      <div class="spacer"></div>
-
-      <div class="form-group">
-        <label for="email" class="form-label">Email</label>
-        <input
-          id="email"
-          v-model="email"
-          name="email"
-          type="text"
-          placeholder="VD: email@domain.com"
-          class="form-control"
-        />
-        <span class="form-message"></span>
-      </div>
-
-      <div class="form-group">
-        <label for="password" class="form-label">Mật khẩu</label>
-        <input
-          id="password"
-          v-model="password"
-          name="password"
-          type="password"
-          placeholder="Nhập mật khẩu"
-          class="form-control"
-        />
-        <span class="form-message"></span>
-      </div>
-      <div v-if="error" class="text-red-500">{{ error }}</div>
-
-      <button class="form-submit">Đăng nhập</button>
-      <router-link to="/register"><a class="hover:text-emerald-600 relative top-[10px]">Register here</a></router-link>
+      <h3 class="heading relative bottom-[10px]">Sign In</h3>
+      <button class="bg-slate-300 w-[100%] flex items-center justify-center h-[49px] rounded-xl">
+        <img src="../assets/google.png" class="h-[40px]" alt="" />
+        <div class="relative left-[15px]">Sign In With Google</div>
+      </button>
     </form>
 
     <!-- footer nav -->
@@ -70,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeMount, onMounted, ref } from 'vue'
 import { useStore } from '~/store/index'
 // import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -84,10 +56,7 @@ const store = useStore()
 
 const handleSubmit = async () => {
   try {
-    await store.dispatch('auth/login', {
-      email: email.value,
-      password: password.value
-    })
+    await store.dispatch('auth/login')
     router.push('/')
   } catch (err) {
     error.value = 'Bạn đã nhập sai email hoặc mật khẩu!'
