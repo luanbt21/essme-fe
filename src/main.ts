@@ -12,6 +12,7 @@ import { store, key } from './store'
 import App from './App.vue'
 import { __baseURL } from './constant'
 
+import { getAuth } from 'firebase/auth'
 
 
 axios.defaults.baseURL = __baseURL
@@ -23,3 +24,6 @@ app.use(store, key)
 app.use(router)
 app.use(store);
 app.mount('#app')
+
+
+

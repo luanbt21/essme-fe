@@ -78,7 +78,7 @@
 
     <div v-if="isLogin" class="nav-dropdown  nav__bars-noneresponsive item hover:cursor-pointer">
       <div>
-        <img src="src/assets/user.png" 
+        <img src="../../assets/user.png" 
         class="h-[52px] rounded-full mr-[40px] mt-[2px]" 
         alt=""
         >
@@ -91,7 +91,7 @@
     </div>
 
     <div v-if="isLogin" class="nav-dropdown nav__bars-noneresponsive item hover:cursor-pointer" style="width: auto;">
-      <img src="src\assets\notification.png" 
+      <img src="../../assets/notification.png" 
         class="h-[35px]  mr-[40px] ml-[20px] mt-[12px]" 
         alt=""
         >
@@ -126,7 +126,7 @@
         <router-link to="/"><button class="nav-dropbtn">Home</button></router-link>
     </div>
   </div>
-  <img class="nav-img" src="src/assets/carousel.png" alt="" />
+  <img class="nav-img" src="../../assets/carousel.png" alt="" />
 </template>
 
 <script setup lang="ts">
@@ -147,10 +147,21 @@ onUpdated(async () => {
   const headers = { 
     "Authorization": `Bearer ${token.value}`,
   };
-  await axios.post("/backup/json/", { headers })}
+  await axios.post("/news", {
+  stt: "string",
+  img: "string",
+  tag: "string",
+  title: "string",
+  url: "string",
+  content: "string",
+  status: "string"
+  }, {
+    headers
+  })}
 
 })
 console.log(axios.defaults.headers )
+
 </script>
 
 <style>
