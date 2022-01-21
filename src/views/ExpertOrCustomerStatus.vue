@@ -110,8 +110,6 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-// import HeaderVue from './layouts/homeFragment/Header.vue'
-// import FooterVue from '~/components/layouts/Footer.vue'
 let exInfo = ref(true)
 const avatarImage =
   'https://st2.depositphotos.com/2777531/6506/v/450/depositphotos_65061729-stock-illustration-man-avatar-user-picture.jpg'

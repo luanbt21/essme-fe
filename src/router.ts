@@ -9,7 +9,10 @@ const router = createRouter({
       component: () => import('~/views/Home.vue')
     },
 
+<<<<<<< HEAD
     
+=======
+>>>>>>> 26df849fb3ca5c0a44b107005e5590c3c0803836
     {
       path: '/news',
       name: 'news',
