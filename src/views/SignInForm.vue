@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-slate-200 grid place-items-center absolute top-0 left-0 right-0 bottom-0 z-10 flex bg-[url('src/assets/login_background.png')]"
+    class="bg-slate-200 grid place-items-center absolute top-0 left-0 right-0 bottom-0 z-10 flex bg-[url('../assets/login_background.png')]"
   >
     <div class="nav_login">
       <ul class="nav_login-list nav_login-list-one">
@@ -11,13 +11,13 @@
         <li class="nav_login-item hover:cursor-pointer">Expert</li>
         <li class="nav_login-item hover:cursor-pointer">Languages</li>
         <li class="nav_login-item hover:cursor-pointer">
-          <img class="img img__login_icon--small_size" src="src\assets\facebook.png" alt="" />
+          <img class="img img__login_icon--small_size" src="../assets/facebook.png" alt="" />
         </li>
         <li class="nav_login-item hover:cursor-pointer">
-          <img class="img img__login_icon--small_size" src="src\assets\twitter.png" alt="" />
+          <img class="img img__login_icon--small_size" src="../assets/twitter.png" alt="" />
         </li>
         <li class="nav_login-item hover:cursor-pointer">
-          <img class="img img__login_icon--small_size" src="src\assets\instagram.png" alt="" />
+          <img class="img img__login_icon--small_size" src="../assets/instagram.png" alt="" />
         </li>
       </ul>
     </div>
