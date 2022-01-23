@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto">
+  <div class="mx-auto">
     <div v-for="news in newsArr" :key="news._id">
       <NewsItem :news="news" />
     </div>

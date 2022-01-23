@@ -1,5 +1,5 @@
 <template>
-  <div class="container m-auto mt-10">
+  <div class="container m-auto mt-10 mb-10">
     <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
       <h2 class="text-center text-2xl mb-2">Events</h2>
       <el-row :gutter="30">
@@ -34,7 +34,7 @@
   </div>
 </template>
 
-<script  setup lang="ts" >
+<script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { getEvents } from '~/api/Events'
 import { Event } from '~/models/Event'
