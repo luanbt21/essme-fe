@@ -78,7 +78,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, ComputedRef, onMounted, ref } from 'vue'
 import { getExperts, getExpertById } from '~/api/Expert'
 import { Expert } from '~/models/Expert'
 import { useStore } from '~/store/index'
@@ -91,29 +91,34 @@ import expert_id from '~/store/modules/expert_id'
 const expertArr = ref<Expert[]>([])
 const expert = ref<Expert>()
 const route = useRoute()
+let mapData = computed((): Feature[] => {
+  if (expert.value) {
+    return [
+      {
+        type: 'Feature',
+        geometry: expert.value.location.features[0].geometry,
+        properties: {
+          label: expert.value._id,
+          html: `<span>${expert.value.name}</span>`
+        }
+      } as Feature
+    ]
+  } else {
+    return []
+  }
+})
 
 onMounted(async () => {
   const id = route.params.id
   console.log(id)
-  ;(expert.value = await getExpertById(id as string)), (expertArr.value = await getExperts(8))
-  console.log(expert.value)
+  expert.value = await getExpertById(id as string)
+  // expertArr.value = await getExperts(8)
+  // console.log(expert.value)
 })
 const lat = ref<number>(16)
 const lon = ref<number>(50)
-const mapData = computed((): Feature[] =>
-  expertArr.value.map(experts => {
-    return {
-      type: 'Feature',
-      geometry: experts.location.features[0].geometry,
-      properties: {
-        label: experts._id,
-        html: '<span>${experts.name}</span>'
-      }
-    } as Feature
-  })
-)
+
 const textarea = ref('')
 </script>
 
-<style>
-</style>
+<style></style>
