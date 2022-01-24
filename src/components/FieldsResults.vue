@@ -12,13 +12,13 @@
                 alt=""
                 v-if="true"
                 class="w-60 cover mb-5 mt-5 ml-auto mr-auto cursor-pointer rounded-2xl"
-              />
+              >
               <img
                 src="src/assets/avt.jpg"
                 alt=""
-                v-else="No"
+                v-else
                 class="w-60 cover mb-5 mt-5 ml-auto mr-auto cursor-pointer rounded-2xl"
-              />
+              >
             </el-col>
             <el-col :span="10" :gutter="30">
               <el-row class="mt-9 ml-8 text-xl">Name: {{ experts.name }}</el-row>
@@ -44,16 +44,16 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { getExperts } from '~/api/Experts'
-import { Experts } from '~/models/Experts'
+import { getExperts } from '~/api/Expert'
+import { Expert } from '~/models/Expert'
 
-const expertsArr = ref<Experts[]>([])
+const expertsArr = ref<Expert[]>([])
 
 onMounted(async () => {
-  expertsArr.value = await getExperts(20, 0)
+  expertsArr.value = await getExperts(10)
 })
 
 defineProps<{
-  experts: Experts
+  experts: Expert
 }>()
 </script>
