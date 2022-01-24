@@ -100,20 +100,24 @@ onMounted(async () => {
 })
 const lat = ref<number>(16)
 const lon = ref<number>(50)
-const mapData = computed((): Feature[] =>
-  expertArr.value.map(experts => {
-    return {
-      type: 'Feature',
-      geometry: experts.location.features[0].geometry,
-      properties: {
-        label: experts._id,
-        html: '<span>${experts.name}</span>'
-      }
-    } as Feature
-  })
-)
+const mapData = computed((): Feature[] => {
+  if (expert.value) {
+    return [
+      {
+        type: 'Feature',
+        geometry: expert.value.location.features[0].geometry,
+        properties: {
+          label: expert.value._id,
+          html: `<span>${expert.value.name}</span>`
+        }
+      } as Feature
+    ]
+  } else {
+    return []
+  }
+})
+
 const textarea = ref('')
 </script>
 
-<style>
-</style>
+<style></style>
