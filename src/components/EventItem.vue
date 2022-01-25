@@ -10,7 +10,7 @@
           </template>
         </el-image>
         <h3 class="font-medium text-lg">
-          {{ event.event_name }}
+          {{ event.name_event }}
         </h3>
         <!-- <p>
           {{ event.desc }}
