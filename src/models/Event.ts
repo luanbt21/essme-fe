@@ -2,7 +2,7 @@ export interface Event {
     _id:        string;
     img:        string;
     web:        string;
-    event_name: string;
+    name_event: string;
     location:   string;
     time:       string;
     type:       string[];

@@ -27,7 +27,7 @@
                       :lg="8"
                     />
                   </el-row>
-                  <h2 class="font-bold w-64 text-left">{{ events.event_name }}</h2>
+                  <h2 class="font-bold w-64 text-left">{{ events.name_event }}</h2>
                   <a href="#"><p class="text-xl text-left">Time of event</p></a>
                   <a href="#"><p class="text-xl text-left">Location</p></a>
                 </el-col>
@@ -48,7 +48,7 @@ import { Event } from '../models/Event'
 const eventsArr = ref<Event[]>([])
 
 onMounted(async () => {
-  eventsArr.value = await getEvents(6, 0)
+  eventsArr.value = await getEvents(6)
 })
 
 const events: Event[] = []

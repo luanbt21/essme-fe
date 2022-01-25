@@ -24,7 +24,11 @@ const router = createRouter({
       path: '/events',
       name: 'events',
       component: () => import('~/views/Events.vue'),
-      props: true
+      props: route => ({
+        what: route.query.what,
+        where: route.query.where,
+        page: route.query.page ? parseInt(route.query.page as string) : 1
+      })
     },
     {
       path: '/login',
@@ -32,24 +36,37 @@ const router = createRouter({
       component: () => import('~/views/SignInForm.vue')
     },
     {
-      path: "/register",
-      component: () => import("~/views/SignUpForm.vue"),
+      path: '/register',
+      component: () => import('~/views/SignUpForm.vue')
     },
     {
       path: '/ExpertOrCustomerStatus',
       name: 'ExpertOrCustomerStatus',
-      component: () => import('~/views/ExpertOrCustomerStatus.vue'),
+      component: () => import('~/views/ExpertOrCustomerStatus.vue')
     },
 
     {
       path: '/fields',
       name: 'fields',
-      component: () => import('~/views/Fields.vue'),
+      component: () => import('~/views/Fields.vue')
     },
 
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('~/views/NotFound.vue') }
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    }
+    if (from.path === '/events' && to.path === '/events') {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve({ el: '#map', top: 200, behavior: 'smooth' })
+        }, 400)
+      })
+    }
 
-  ]
+    return { top: 0 }
+  }
 })
 
 export default router
