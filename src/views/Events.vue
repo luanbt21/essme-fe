@@ -9,7 +9,7 @@
       :where-suggest="getEvents"
       @search="handleSearch"
     />
-    <Mapbox :data="mapData" :center="mapCenter" />
+    <Mapbox :data="mapData" />
     <el-container class="container">
       <el-aside width="200px" class="hidden md:block pt-5">
         <h3>By Fields</h3>
@@ -23,7 +23,7 @@
       <el-main>
         <el-row :gutter="20">
           <el-col v-for="event in events" :key="event._id" :xs="24" :sm="12">
-            <EventItem :event="event" @click="() => (mapCenter = event.geojson.geometry.coordinates)" />
+            <EventItem :event="event" />
           </el-col>
         </el-row>
       </el-main>
@@ -55,7 +55,6 @@ import { Feature } from '~/models/Geojson'
 const router = useRouter()
 
 const pageSize = 6
-const mapCenter = ref<number[]>()
 
 const props = defineProps<{
   what?: string
