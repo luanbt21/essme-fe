@@ -6,8 +6,8 @@
     <el-date-picker /> -->
     <!-- <ExpertOrCustomerStatus /> -->
     <HomeHeader />
-    <Test />
-    <router-view :key="$route.path" />
+    <!-- <Test /> -->
+    <router-view :key="$route.fullPath" />
     <!-- <router-view /> -->
   </el-config-provider>
 </template>

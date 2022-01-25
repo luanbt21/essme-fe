@@ -3,13 +3,13 @@
     <Search
       label="Search Events?"
       placeholder="Event title"
-      what-field="event_name"
+      what-field="name_event"
       :what-suggest="searchEvents"
       where-field="location"
       :where-suggest="getEvents"
       @search="handleSearch"
     />
-    <Mapbox :data="mapData" />
+    <Mapbox :data="mapData" :center="mapCenter" />
     <el-container class="container">
       <el-aside width="200px" class="hidden md:block pt-5">
         <h3>By Fields</h3>
@@ -23,27 +23,58 @@
       <el-main>
         <el-row :gutter="20">
           <el-col v-for="event in events" :key="event._id" :xs="24" :sm="12">
-            <EventItem :event="event" />
+            <EventItem :event="event" @click="() => (mapCenter = event.geojson.geometry.coordinates)" />
           </el-col>
         </el-row>
       </el-main>
     </el-container>
     <div class="text-center">
-      <el-pagination layout="prev, pager, next" :page-size="20" :total="1000" @current-change="" />
+      <el-pagination
+        layout="prev, pager, next"
+        :page-size="pageSize"
+        :page-count="eventsPage?.totalPages"
+        v-model:current-page="props.page"
+        @current-change="handlePageChange"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import Search from '~/components/Search.vue'
 import { searchEvents, getEvents } from '~/api/Events'
 import { computed, onMounted, ref } from 'vue'
-import { Event } from '~/models/Event'
+import { useRouter } from 'vue-router'
+
+import Search from '~/components/Search.vue'
+import { PageEntity } from '~/models/PageEntity'
+import { Event as EventModel } from '~/models/Event'
 import EventItem from '~/components/EventItem.vue'
 import Mapbox from '~/components/Mapbox.vue'
 import { Feature } from '~/models/Geojson'
 
-const eventsData = ref<Event[]>([])
+const router = useRouter()
+
+const pageSize = 6
+const mapCenter = ref<number[]>()
+
+const props = defineProps<{
+  what?: string
+  where?: string
+  page?: number
+}>()
+
+const eventsPage = ref<PageEntity<EventModel>>()
+
+const handlePageChange = (page: number) => {
+  router.push({
+    name: 'events',
+    query: {
+      page
+    }
+  })
+}
+
+const eventsData = computed(() => (eventsPage.value ? eventsPage.value.content : []))
 
 const types = computed(() => {
   const result = new Set<string>()
@@ -72,19 +103,24 @@ const mapData = computed((): Feature[] =>
         type: 'Feature',
         geometry: event.geojson.geometry,
         properties: {
-          label: event.event_name,
-          html: `<span>${event.event_name}</span>`
+          label: event.name_event,
+          html: `<span>${event.name_event}</span>`
         }
       } as Feature)
   )
 )
 
 onMounted(async () => {
-  eventsData.value = await getEvents(20)
-  // eventsData.value = await searchEvents(route.query.what as string)
+  eventsPage.value = await searchEvents(props.what, props.where, props.page, pageSize)
 })
 
-const handleSearch = async (what: string, where: string) => {
-  eventsData.value = await searchEvents(what, where)
+const handleSearch = (what: string, where: string) => {
+  router.push({
+    name: 'events',
+    query: {
+      what,
+      where
+    }
+  })
 }
 </script>
