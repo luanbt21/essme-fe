@@ -50,7 +50,7 @@ import { Expert } from '~/models/Expert'
 const expertsArr = ref<Expert[]>([])
 
 onMounted(async () => {
-  expertsArr.value = await getExperts(10)
+  expertsArr.value = await getExperts()
 })
 
 defineProps<{
