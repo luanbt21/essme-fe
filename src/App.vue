@@ -4,8 +4,10 @@
     <!-- <el-date-picker /> -->
     <!-- <Header @toggle-lang="toggleLang" :flag="flag" />
     <el-date-picker /> -->
+    <!-- <ExpertOrCustomerStatus /> -->
     <HomeHeader />
-    <router-view :key="$route.path" />
+    <!-- <Test /> -->
+    <router-view :key="$route.fullPath" />
     <!-- <router-view /> -->
   </el-config-provider>
 </template>
@@ -20,6 +22,8 @@ import vi from 'element-plus/es/locale/lang/vi'
 import en from 'element-plus/es/locale/lang/en'
 import HomeHeader from './components/layouts/HomeHeader.vue'
 import Home from './views/Home.vue'
+import Test from './views/Test.vue'
+import ExpertOrCustomerStatus from './views/ExpertOrCustomerStatus.vue'
 
 const lang = ref(vi)
 const flag = ref(usFlag)

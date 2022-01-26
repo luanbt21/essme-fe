@@ -1,22 +1,27 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
-
+import { GoogleAuthProvider } from "firebase/auth";
+import firebase from "firebase/app"
+import * as firebaseui from 'firebaseui'
+import 'firebaseui/dist/firebaseui.css'
 /* code from our Firebase console */
 export const firebaseConfig = {
-    apiKey: "AIzaSyADF7gz1YNmdn24NjAcgDyH4eg6f3VakTM",
-    authDomain: "essme-a1f34.firebaseapp.com",
-    databaseURL: "https://essme-a1f34-default-rtdb.firebaseio.com",
-    projectId: "essme-a1f34",
-    storageBucket: "essme-a1f34.appspot.com",
-    messagingSenderId: "866100688770",
-    appId: "1:866100688770:web:22f3094f13fa05db69819b"
+    apiKey: "AIzaSyA1cT8i9c49-ZqV4Zy_DdpFzGzo5fiqKtY",
+    authDomain: "newess-f2f7a.firebaseapp.com",
+    projectId: "newess-f2f7a",
+    storageBucket: "newess-f2f7a.appspot.com",
+    messagingSenderId: "955088738310",
+    appId: "1:955088738310:web:840385e6042f1fae0a4b87",
+    measurementId: "G-1QXHP5NTWY"
 };
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
-
 // init firebase auth
-const auth = getAuth()
 
-export { auth }
+const provider = new GoogleAuthProvider();
+const auth = getAuth();
+export { auth, provider }
+
+
 

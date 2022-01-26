@@ -15,7 +15,7 @@ import { Feature } from '~/models/Geojson'
 interface Props {
   data: ComputedRef<Feature[]>
   class?: string
-  center?: [number, number]
+  center?: number[]
   zoom?: number
   iconLink?: string
   iconZoom?: number

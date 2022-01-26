@@ -2,7 +2,11 @@ import { auth } from '../../firebase/firebaseConfig'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
 import { Commit } from 'vuex'
 import { store } from '../index'
+import axios from 'axios'
 
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
+const provider = new GoogleAuthProvider();
 // const store = useStore()
 
 export interface Auth {
@@ -10,7 +14,7 @@ export interface Auth {
 
   status: boolean
 
-  user: object
+  user: {}
 
   token: string
 
@@ -44,12 +48,28 @@ const actions = {
     }
   },
 
-  async login({ commit }: { commit: Commit }, { email, password }: { email: string, password: string }) {
+  async login({ commit }: { commit: Commit }) {
     console.log('login action')
 
-    const res = await signInWithEmailAndPassword(auth, email, password)
+    const res = await signInWithPopup(auth, provider)
+      .then((result) => {
+        const token = GoogleAuthProvider.credentialFromResult(result)?.idToken
+        const user = result.user;
+        return { user: user, token: token }
+      }).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log(errorCode)
+        console.log(errorMessage)
+        console.log(email)
+        console.log(credential)
+      });
     if (res) {
-      commit('setUser', res.user)
+      const user = res.user
+      const token = res.token
+      commit('setUser', { user, token })
     } else {
       throw new Error('could not complete login')
     }
@@ -58,7 +78,7 @@ const actions = {
   async logout({ commit }: { commit: Commit }) {
     console.log('logout action')
     await signOut(auth)
-    commit('setUser', null)
+    commit('setUser1', null)
     commit('setAuthIsReady', false)
     commit('setTokenID', null)
 
@@ -66,10 +86,13 @@ const actions = {
 }
 
 const mutations = {
-  setUser(state: Auth, user: object) {
+  setUser(state: Auth, { user, token }: { user: object, token: string }) {
     state.user = user
-    state.token = ''
-    console.log('user state changed:', state.token)
+    state.token = token
+    console.log('user state changed:', state)
+  },
+  setUser1(state: Auth, user: object) {
+    state.user = user
   },
   setAuthIsReady(state: Auth, authIsReady: boolean) {
     state.authIsReady = authIsReady
@@ -82,7 +105,7 @@ const mutations = {
 // wait until auth is ready
 const unsub = onAuthStateChanged(auth, (user) => {
   store.commit('auth/setAuthIsReady', true)
-  store.commit('auth/setUser', user)
+  store.commit('auth/setUser1', user)
   unsub()
 })
 

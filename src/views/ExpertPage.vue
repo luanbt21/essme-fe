@@ -101,7 +101,7 @@
                     </div>
                   </el-carousel-item>
                   <el-carousel-item>
-                    <MapboxVue />
+                    <!-- <MapboxVue /> -->
                   </el-carousel-item>
                 </el-carousel>
               </div>

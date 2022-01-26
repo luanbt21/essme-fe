@@ -3,7 +3,7 @@
     <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
       <h2 class="text-center text-2xl mb-2">Fields</h2>
       <el-row :gutter="30">
-        <el-col v-for="field in field" :key="field._id" :xs="24" :sm="12" :lg="8">
+        <el-col v-for="field in field" key="field" :xs="24" :sm="12" :lg="8">
           <router-link to="/fields">
             <img
               :src="field.image"
