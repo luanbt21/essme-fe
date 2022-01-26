@@ -4,7 +4,7 @@ import { Expert } from '~/models/Expert'
 
 const apiUrl = 'experts'
 
-export const getExperts = async (limit = 10): Promise<Expert[]> => {
+export const getExperts = async (limit = 30): Promise<Expert[]> => {
     try {
         const res = await axios.get(apiUrl, {
             params: {

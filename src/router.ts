@@ -17,7 +17,7 @@ const router = createRouter({
     {
       path: '/expert/:id',
       name: 'expert',
-      component: () => import('~/views/ExpertPage.vue'),
+      component: () => import('~/views/ExpertDedailPage.vue'),
      
    
     },
@@ -49,7 +49,13 @@ const router = createRouter({
       component: () => import('~/views/Fields.vue'),
     },
 
-    { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('~/views/NotFound.vue') }
+    { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('~/views/NotFound.vue') },
+    {
+      path: '/allexperts',
+      name: 'allexperts',
+      component: () => import('~/views/ExpertPage.vue'),
+      props: true
+    }
 
   ]
 })
