@@ -5,10 +5,15 @@
         <div class="font-bold text-2xl my-5 ml-6">RELATED EXPERTS</div>
         <el-row :gutter="20" class="m-5">
           <el-col :span="8" v-for="expert in expertArr.slice(2, 5)" :key="expert._id" :xs="24" :sm="12" :lg="8">
-            <el-card shadow="always" :style="{ 'background-color': '#ECF4F1' }" class="m-5">
-              <router-link v-bind:to="'/expert/' + expert._id" custom v-slot="{ navigate, href }">
-                <el-link type="primary" :href="href" @click="navigate">
-                  <div class="flex">
+            <el-card :style="{ 'background-color': '#ECF4F1' }" class="m-5 md:hover:scale-105 hover:duration-500">
+              <router-link
+                v-bind:to="'/expert/' + expert._id"
+                custom
+                v-slot="{ navigate, href }"
+                :style="{ 'text-decoration': 'none' }"
+              >
+                <a type="primary" :href="href" @click="navigate" text-decoration="none">
+                  <div class="flex no-underline">
                     <div class="basis-3/4 text-black">
                       <div>{{ expert.name }}</div>
                       <div class="my-5">{{ expert.degree }}</div>
@@ -23,7 +28,7 @@
                       />
                     </div>
                   </div>
-                </el-link>
+                </a>
               </router-link>
             </el-card>
           </el-col>
@@ -46,5 +51,8 @@ onMounted(async () => {
 })
 </script>
 
-<style>
+<style scoped>
+router-link a {
+  text-decoration: none;
+}
 </style>

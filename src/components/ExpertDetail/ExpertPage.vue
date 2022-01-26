@@ -19,7 +19,7 @@
             <hr class="style-three" :style="{ 'background-color': 'white' }" />
           </div>
         </el-header>
-        <el-container class="flex flex-wrap">
+        <el-container class="flex flex-wrap justify-center">
           <AsideVue />
           <MainFooterVue />
         </el-container>
@@ -32,24 +32,25 @@
 import { Search } from '@element-plus/icons-vue'
 import { ArrowRight } from '@element-plus/icons-vue'
 import { computed, onMounted, onUpdated, ref } from 'vue'
-import { getExpertById } from '~/api/Expert'
+import { getExpertById, getExperts } from '~/api/Expert'
 import { Expert } from '~/models/Expert'
 
-import MapboxVue from '~/components/Mapbox.vue'
+import Mapbox from '~/components/Mapbox.vue'
 import avatar from '/avatar_expert_detail.png'
 import AsideVue from './Aside.vue'
 import MainFooterVue from './Main&Footer.vue'
 import RelateExpertVue from './RelateExpert.vue'
-
+import { Feature } from '~/models/Geojson'
 import { useRoute } from 'vue-router'
 
+const expertArr = ref<Expert[]>([])
 const expert = ref<Expert>()
 const route = useRoute()
 
 onMounted(async () => {
   const id = route.params.id
 
-  expert.value = await getExpertById(id as string)
+  ;(expert.value = await getExpertById(id as string)), (expertArr.value = await getExperts(8))
 })
 
 const textarea = ref('')
@@ -60,12 +61,7 @@ const textarea = ref('')
   .el-header,
   .el-footer {
     height: auto;
-  }
-
-  .el-carousel__item {
-    font-size: 18px;
-    height: 500px;
-    margin: 0;
+    width: auto;
   }
 }
 </style>

@@ -25,18 +25,7 @@
             </template>
 
             <div
-              class="
-                m-[-50px]
-                max-w-md
-                mx-auto
-                bg-white
-                rounded-2xl
-                shadow-md
-                overflow-hidden
-                md:max-w-lg md:hover:scale-105
-                hover:duration-500
-                bg-[#ECF4F1]
-              "
+              class="m-[-50px] max-w-md mx-auto bg-white rounded-2xl shadow-md overflow-hidden md:max-w-lg md:hover:scale-105 hover:duration-500 bg-[#ECF4F1]"
             >
               <div class="md:flex">
                 <div class="md:shrink-0">
@@ -77,7 +66,7 @@
       </el-row>
 
       <div class="text-center">
-        <router-link to="/experts" custom v-slot="{ navigate, href }">
+        <router-link to="/allexperts" custom v-slot="{ navigate, href }">
           <el-link type="primary" :href="href" @click="navigate">View all Experts</el-link>
         </router-link>
       </div>

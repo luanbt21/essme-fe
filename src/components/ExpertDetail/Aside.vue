@@ -1,5 +1,5 @@
 <template>
-  <el-aside class="rounded-xl w-auto m-5 text-[21px] bg-[#d1e0db]">
+  <el-aside class="rounded-xl m-5 text-[21px] bg-[#d1e0db] h-auto w-full lg:w-[600px]">
     <img
       :src="expert?.image ? expert.image : avatar"
       :alt="expert?.name + ' image'"
@@ -23,7 +23,7 @@
       <i class="fas fa-map-marker-alt"></i>
       <span class="ml-5">Center for Urban Science + Progress, New York University, United States</span>
     </div>
-    <div class="ml-11 mt-3 mb-6">
+    <div class="ml-11 mt-3 mb-6 m-3">
       <i class="fas fa-envelope"></i>
       <span class="ml-5">{{ expert?.email }}</span>
     </div>
@@ -51,4 +51,3 @@ onMounted(async () => {
 
 const textarea = ref('')
 </script>
-
