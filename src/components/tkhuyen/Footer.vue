@@ -1,9 +1,9 @@
 <template>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 <!-- <div class="container mt-10 m-auto"> -->
-    <div class="px-8 py-4 bg-white">
-        <el-row :gutter="30" class="text-center">
-            <el-col :span="6" class="">
+    <div class="px-8 py-4 bg-white flex justify-center">
+        <el-row :gutter="30" class="text-center flex-auto">
+            <el-col :span="6" class="text-center">
                 <el-col class="text-left leading-10 ">
                     <h2 class="font-medium text-2xl">Feature</h2>
                     <a href=""><p class="text-lg leading-10 hover:text-emerald-600">Find an Expert</p></a>
