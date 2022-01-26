@@ -27,7 +27,11 @@
                       :lg="8"
                     />
                   </el-row>
+                  <<<<<<< HEAD
                   <h2 class="font-bold w-64 text-left">{{ events.name_event }}</h2>
+                  =======
+                  <h2 class="font-bold w-64 text-left">{{ events.event_name }}</h2>
+                  >>>>>>> Huong
                   <a href="#"><p class="text-xl text-left">Time of event</p></a>
                   <a href="#"><p class="text-xl text-left">Location</p></a>
                 </el-col>
@@ -43,15 +47,19 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { getEvents } from '~/api/Events'
-import { Event } from '../models/Event'
+import { Events } from '~/models/Events'
 
-const eventsArr = ref<Event[]>([])
+const eventsArr = ref<Events[]>([])
 
 onMounted(async () => {
   eventsArr.value = await getEvents(6)
 })
 
+<<<<<<< HEAD
 const events: Event[] = []
+=======
+const events: Events[] = []
+>>>>>>> Huong
 
 for (let i = 0; i < 3; i++) {
   events.push()

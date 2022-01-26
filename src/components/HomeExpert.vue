@@ -12,12 +12,8 @@
             hide-after="50"
           >
             <template #reference>
-              <el-card
-                @click="getIdExpert(expert._id)"
-                :body-style="{ padding: '0px' }"
-                class="mb-10 background-color-radius"
-              >
-                <router-link to="/expert" custom v-slot="{ navigate, href }">
+              <el-card :body-style="{ padding: '0px' }" class="mb-10 background-color-radius">
+                <router-link v-bind:to="'/expert/' + expert._id" custom v-slot="{ navigate, href }">
                   <el-link type="primary" :href="href" @click="navigate">
                     <img
                       src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg"
@@ -70,7 +66,7 @@
       </el-row>
 
       <div class="text-center">
-        <router-link to="/experts" custom v-slot="{ navigate, href }">
+        <router-link to="/allexperts" custom v-slot="{ navigate, href }">
           <el-link type="primary" :href="href" @click="navigate">View all Experts</el-link>
         </router-link>
       </div>
@@ -82,17 +78,17 @@
 import { onMounted, ref } from 'vue'
 import { getExperts, getExpertById } from '~/api/Expert'
 import { Expert } from '~/models/Expert'
-import { useStore } from '~/store/index'
+// import { useStore } from '~/store/index'
 const expertArr = ref<Expert[]>([])
 onMounted(async () => {
   expertArr.value = await getExperts(8)
 })
 
 // catch expert_id
-const store = useStore()
-const getIdExpert = (id: string) => {
-  store.commit('expert_id/setID', id)
-}
+// const store = useStore()
+// const getIdExpert = (id: string) => {
+//   store.commit('expert_id/setID', id)
+// }
 </script>
 
 <style>

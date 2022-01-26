@@ -1,16 +1,16 @@
 <template>
   <div class="container mt-10 mx-auto">
     <h2 class="text-2xl mb-2">Results</h2>
+
     <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
       <el-scrollbar height="820px">
         <el-card class="h-fit" :body-style="{ padding: '10px' }">
           <el-row :xs="24" :sm="12" :lg="8" v-for="experts in expertsArr" :key="experts._id">
             <el-col :span="5">
-              <!-- sửa yes thành true -->
               <img
                 :src="experts.image"
                 alt=""
-                v-if="true"
+                v-if="Yes"
                 class="w-60 cover mb-5 mt-5 ml-auto mr-auto cursor-pointer rounded-2xl"
               />
               <img

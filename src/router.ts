@@ -15,9 +15,11 @@ const router = createRouter({
       component: () => import('~/views/NewsPage.vue')
     },
     {
-      path: '/expert',
+      path: '/expert/:id',
       name: 'expert',
-      component: () => import('~/views/ExpertPage.vue')
+      component: () => import('~/views/ExpertDedailPage.vue'),
+     
+   
     },
 
     {
@@ -51,6 +53,13 @@ const router = createRouter({
       component: () => import('~/views/Fields.vue')
     },
 
+    {
+      path: '/allexperts',
+      name: 'allexperts',
+      component: () => import('~/views/ExpertPage.vue'),
+      props: true
+
+    },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('~/views/NotFound.vue') }
   ],
   scrollBehavior(to, from, savedPosition) {
@@ -63,10 +72,13 @@ const router = createRouter({
           resolve({ el: '#map', top: 200, behavior: 'smooth' })
         }, 400)
       })
-    }
+
+    
+    
 
     return { top: 0 }
   }
-})
+}}
+)
 
 export default router

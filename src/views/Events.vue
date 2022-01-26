@@ -1,41 +1,45 @@
 <template>
-  <div class="container px-5 py-6 mx-auto">
-    <Search
-      label="Search Events?"
-      placeholder="Event title"
-      what-field="name_event"
-      :what-suggest="searchEvents"
-      where-field="location"
-      :where-suggest="getEvents"
-      @search="handleSearch"
-    />
-    <Mapbox :data="mapData" :center="mapCenter" />
-    <el-container class="container">
-      <el-aside width="200px" class="hidden md:block pt-5">
-        <h3>By Fields</h3>
-        <!-- <el-input type="text" placeholder="Fields Search" /> -->
-        <el-checkbox-group v-model="typesSelect">
-          <div v-for="(type, index) in types" :key="index">
-            <el-checkbox :label="type" style="white-space: pre-wrap" />
-          </div>
-        </el-checkbox-group>
-      </el-aside>
-      <el-main>
-        <el-row :gutter="20">
-          <el-col v-for="event in events" :key="event._id" :xs="24" :sm="12">
-            <EventItem :event="event" @click="() => (mapCenter = event.geojson.geometry.coordinates)" />
-          </el-col>
-        </el-row>
-      </el-main>
-    </el-container>
-    <div class="text-center">
-      <el-pagination
-        layout="prev, pager, next"
-        :page-size="pageSize"
-        :page-count="eventsPage?.totalPages"
-        v-model:current-page="props.page"
-        @current-change="handlePageChange"
+  <div
+    class="container mx-auto relative w-[97%] min-w-[800px] z-1 mt-[-100px] bg-white rounded-[40px] p-[50px] flex flex-col justify-center"
+  >
+    <div class="w-[90%] mx-auto">
+      <Search
+        label="Search Events?"
+        placeholder="Event title"
+        what-field="name_event"
+        :what-suggest="searchEvents"
+        where-field="location"
+        :where-suggest="getEvents"
+        @search="handleSearch"
       />
+      <Mapbox :data="mapData" :center="mapCenter" />
+      <el-container class="container">
+        <el-aside width="200px" class="hidden md:block pt-5">
+          <h3>By Fields</h3>
+          <!-- <el-input type="text" placeholder="Fields Search" /> -->
+          <el-checkbox-group v-model="typesSelect">
+            <div v-for="(type, index) in types" :key="index">
+              <el-checkbox :label="type" style="white-space: pre-wrap" />
+            </div>
+          </el-checkbox-group>
+        </el-aside>
+        <el-main>
+          <el-row :gutter="20">
+            <el-col v-for="event in events" :key="event._id" :xs="24" :sm="12">
+              <EventItem :event="event" @click="() => (mapCenter = event.geojson.geometry.coordinates)" />
+            </el-col>
+          </el-row>
+        </el-main>
+      </el-container>
+      <div class="text-center">
+        <el-pagination
+          layout="prev, pager, next"
+          :page-size="pageSize"
+          :page-count="eventsPage?.totalPages"
+          v-model:current-page="props.page"
+          @current-change="handlePageChange"
+        />
+      </div>
     </div>
   </div>
 </template>
