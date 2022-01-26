@@ -13,6 +13,11 @@
           </h3>
         </el-col>
       </el-row>
+      <!-- <div class="text-center">
+        <router-link to="/news" custom v-slot="{ navigate, href }">
+          <el-link type="primary" :href="href" @click="navigate">View all news</el-link>
+        </router-link>
+      </div> -->
     </div>
   </div>
 </template>
