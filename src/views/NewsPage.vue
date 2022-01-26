@@ -3,9 +3,13 @@
     <!-- <NewsItem /> -->
     <News />
   </div>
+  <div class="relative w-full min-w-[800px] mt-20">
+    <FooterVue />
+  </div>
 </template>
 
 <script setup lang="ts">
 import News from '~/components/News.vue'
 import NewsItem from '~/components/NewsItem.vue'
+import FooterVue from '~/components/tkhuyen/Footer.vue'
 </script>

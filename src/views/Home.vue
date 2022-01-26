@@ -11,6 +11,9 @@
 
     <br />
   </div>
+  <div class="relative w-full min-w-[800px] mt-20">
+    <FooterVue />
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -26,4 +29,5 @@ import HomeFields from '~/components/HomeFields.vue'
 import FieldsResults from '~/components/FieldsResults.vue'
 import ExpertPage from './ExpertDedailPage.vue'
 import NewsItem from '~/components/NewsItem.vue'
+import FooterVue from '~/components/tkhuyen/Footer.vue'
 </script>

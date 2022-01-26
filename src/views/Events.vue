@@ -42,6 +42,9 @@
       </div>
     </div>
   </div>
+  <div class="relative w-full min-w-[800px] mt-20">
+    <FooterVue />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -55,6 +58,7 @@ import { Event as EventModel } from '~/models/Event'
 import EventItem from '~/components/EventItem.vue'
 import Mapbox from '~/components/Mapbox.vue'
 import { Feature } from '~/models/Geojson'
+import FooterVue from '~/components/tkhuyen/Footer.vue'
 
 const router = useRouter()
 
