@@ -50,7 +50,11 @@ const router = createRouter({
       name: 'fields',
       component: () => import('~/views/Fields.vue')
     },
-
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('~/views/Admin.vue')
+    },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('~/views/NotFound.vue') }
   ],
   scrollBehavior(to, from, savedPosition) {
