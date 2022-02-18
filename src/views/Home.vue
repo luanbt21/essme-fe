@@ -11,6 +11,7 @@
     <!-- <MapboxVue /> -->
     <!-- <FieldsResults /> -->
   </div>
+  <Footer />
 </template>
 
 <script lang="ts" setup>
@@ -25,4 +26,5 @@ import HomeHeader from '~/components/layouts/HomeHeader.vue'
 import FieldsResults from '~/components/FieldsResults.vue'
 import ExpertPage from './ExpertPage.vue'
 import NewsItem from '~/components/NewsItem.vue'
+import FooterVue from '~/components/tkhuyen/Footer.vue'
 </script>
