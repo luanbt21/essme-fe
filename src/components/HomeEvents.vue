@@ -36,12 +36,13 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { getEvents } from '~/api/Events'
+import { getHomepage } from '~/api/Homepage'
+import { Homepage } from '~/models/Homepage'
 import { Event } from '~/models/Event'
-
 const eventsArr = ref<Event[]>([])
-
+const homepage = ref<Homepage>()
 onMounted(async () => {
-  eventsArr.value = await getEvents(20)
+  homepage.value = await getHomepage()
+  eventsArr.value = homepage.value.top_events
 })
 </script>

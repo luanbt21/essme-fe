@@ -4,7 +4,7 @@
       <el-carousel trigger="click" height="420px" width="auto" :autoplay="false">
         <el-carousel-item>
           <div class="my-3 ml-10 font-bold text-black text-2xl">INTRODUCTION</div>
-          <div class="ml-[70px] font-bold text-black lg:w-[700px]">
+          <div class="ml-[70px] font-bold text-black lg:w-[600px]">
             <div class="mt-4">
               APPELLATION:
               <span class="font-normal ml-5">{{ expert?.name }} </span>
@@ -24,7 +24,7 @@
           </div>
           <div class="my-3 ml-10 font-bold text-black text-2xl">SOCIAL MEDIA</div>
           <div class="ml-[70px] text-black text-lg">
-            <div class="flex my-3 mt-5">
+            <div class="flex my-3 mt-5 w-96">
               <div class="mr-3 text-2xl"><i class="fas fa-globe-asia"></i></div>
               <span>{{ expert?.link_profile }}</span>
             </div>
@@ -51,7 +51,7 @@
             :data="mapData"
             :zoom="8"
             class="w-full h-full"
-            :icon-link="'https://cdn-icons.flaticon.com/png/512/2276/premium/2276400.png?token=exp=1643040350~hmac=e049045f4c99a013b73f7b76a5c3a1c8'"
+            :icon-link="'http://pluspng.com/img-png/user-png-icon-download-icons-logos-emojis-users-2240.png'"
             :icon-zoom="0.08"
           />
           <input type="number" v-model="lat" />

@@ -52,13 +52,10 @@ const router = createRouter({
       name: 'fields',
       component: () => import('~/views/Fields.vue')
     },
-
     {
-      path: '/allexperts',
-      name: 'allexperts',
-      component: () => import('~/views/ExpertPage.vue'),
-      props: true
-
+      path: '/admin',
+      name: 'admin',
+      component: () => import('~/views/Admin.vue')
     },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('~/views/NotFound.vue') }
   ],
