@@ -21,11 +21,11 @@
     </div>
     <div class="ml-11 m-6">
       <i class="fas fa-map-marker-alt"></i>
-      <span class="ml-5">Center for Urban Science + Progress, New York University, United States</span>
+      <span class="ml-5">{{ expert?.address ? expert.address : 'Ha Noi' }}</span>
     </div>
     <div class="ml-11 mt-3 mb-6 m-3">
       <i class="fas fa-envelope"></i>
-      <span class="ml-5">{{ expert?.email }}</span>
+      <span class="ml-5 text-lg">{{ expert?.email }}</span>
     </div>
   </el-aside>
 </template>

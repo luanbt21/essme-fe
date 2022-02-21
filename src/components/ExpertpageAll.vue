@@ -11,7 +11,7 @@
       <div class="w-[79%] bg-[#D1E0DB] rounded-[15px]">
         <div class="font-bold text-center p-5 text-2xl">Leading Experts</div>
         <el-scrollbar height="480px">
-          <el-col :span="12" v-for="expert in expertArr.slice(2, 8)" :key="expert._id" height="639px">
+          <el-col :span="12" v-for="expert in expertArr" :key="expert._id" height="639px">
             <el-card
               :style="{ 'background-color': ' #FFFFFF' }"
               class="m-5 md:hover:scale-105 hover:duration-500 rounded-[15px]"
@@ -47,6 +47,16 @@
 
       <div class="bg-[#D1E0DB] rounded-[15px] mx-2 w-[19%]">
         <div class="font-bold text-center p-5 text-2xl">City/Province</div>
+        <el-scrollbar height="490px">
+          <div v-for="address in expertArr" :key="address._id">
+            <el-card
+              :style="{ 'background-color': ' #FFFFFF' }"
+              class="m-5 md:hover:scale-105 hover:duration-500 rounded-[15px] text-center"
+            >
+              <div class="">{{ address.address }}</div>
+            </el-card>
+          </div>
+        </el-scrollbar>
       </div>
     </el-row>
   </div>
@@ -74,7 +84,7 @@ import HomeEventsVue from './HomeEvents.vue'
 const expertArr = ref<Expert[]>([])
 
 onMounted(async () => {
-  expertArr.value = await getExperts(8)
+  expertArr.value = await getExperts()
 })
 </script>
 

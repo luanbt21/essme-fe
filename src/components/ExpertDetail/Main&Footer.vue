@@ -19,10 +19,7 @@
             </div>
             <div class="my-3">
               EXPERTISE:
-              <span class="font-normal ml-12"
-                >Research assistant professor Of computer science Research assistant professor Of computer science
-                Research assistant professor Of computer science</span
-              >
+              <span class="font-normal ml-12">Computer sciences Information Technology</span>
             </div>
           </div>
           <div class="my-3 ml-10 font-bold text-black text-2xl">SOCIAL MEDIA</div>

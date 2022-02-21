@@ -3,12 +3,12 @@ import { Experts } from '~/models/Experts'
 
 const apiUrl = 'experts'
 
-export const getExperts = async (size = 20, page = 0): Promise<Experts[]> => {
+export const getExperts = async ( page = 0): Promise<Experts[]> => {
   try {
     const res = await axios.get(apiUrl, {
       params: {
         page,
-        size
+        
       }
     })
     return res.data
