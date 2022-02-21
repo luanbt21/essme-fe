@@ -28,6 +28,13 @@
         <img src="../assets/google.png" class="h-[40px]" alt="" />
         <div class="relative left-[15px]">Sign In With Google</div>
       </button>
+      <a
+        class="relative top-[10px] text-sky-400/50 hover:text-sky-400"
+        href="https://accounts.google.com/signup/v2/webcreateaccount?hl=vi&flowName=GlifWebSignIn&flowEntry=SignUp"
+        target="_blank"
+      >
+        Sign Up With Google
+      </a>
     </form>
 
     <!-- footer nav -->
