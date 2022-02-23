@@ -18,7 +18,7 @@ const router = createRouter({
 
     {
       path: '/news',
-      alias: '/news',
+      alias: '/news/:id',
       name: 'news',
       component: () => import('~/views/NewsPage.vue'),
       props: route => ({
@@ -27,6 +27,12 @@ const router = createRouter({
         page: route.query.page ? parseInt(route.query.page as string) : 1
       })
     },
+
+    // {
+    //   path: '/news/:id',
+    //   name: 'news',
+    //   component: () => import('~/views/NewsPage.vue'),
+    // },
 
     {
       path: '/events',

@@ -106,7 +106,7 @@
     </div>
 
     <div class="nav-dropdown nav__bars-noneresponsive item">
-      <router-link to="/news/"><button class="nav-dropbtn">News</button></router-link> 
+      <router-link to="/news"><button class="nav-dropbtn">News</button></router-link> 
     </div>
 
 
