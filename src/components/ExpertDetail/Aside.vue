@@ -25,27 +25,27 @@
     </div>
     <div class="ml-11 mt-3 mb-6 m-3">
       <i class="fas fa-envelope"></i>
-      <span class="ml-5 text-lg">{{ expert?.email }}</span>
+      <span class="ml-2 text-base">{{ expert?.email }}</span>
     </div>
   </el-aside>
 </template>
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue'
-import { getExperts, getExpertById } from '~/api/Expert'
-import { Expert } from '~/models/Expert'
+import { getExperts, getExpertsById } from '~/api/Experts'
+import { Experts } from '~/models/Experts'
 import { useStore } from '~/store/index'
 
 import avatar from '/avatar_expert_detail.png'
 
 import { useRoute } from 'vue-router'
 
-const expert = ref<Expert>()
+const expert = ref<Experts>()
 const route = useRoute()
 
 onMounted(async () => {
   const id = route.params.id
   // console.log(id)
-  expert.value = await getExpertById(id as string)
+  expert.value = await getExpertsById(id as string)
   // console.log(expert.value)
 })
 

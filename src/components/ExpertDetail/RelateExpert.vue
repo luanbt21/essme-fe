@@ -40,11 +40,11 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, onUpdated, ref } from 'vue'
-import { getExperts, getExpertById } from '~/api/Expert'
-import { Expert } from '~/models/Expert'
+import { getExperts, getExpertsById } from '~/api/Experts'
+import { Experts } from '~/models/Experts'
 import { useStore } from '~/store/index'
 
-const expertArr = ref<Expert[]>([])
+const expertArr = ref<Experts[]>([])
 
 onMounted(async () => {
   expertArr.value = await getExperts(8)

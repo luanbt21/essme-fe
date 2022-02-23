@@ -32,8 +32,8 @@
 import { Search } from '@element-plus/icons-vue'
 import { ArrowRight } from '@element-plus/icons-vue'
 import { computed, onMounted, onUpdated, ref } from 'vue'
-import { getExpertById, getExperts } from '~/api/Expert'
-import { Expert } from '~/models/Expert'
+import { getExpertsById, getExperts } from '~/api/Experts'
+import { Experts } from '~/models/Experts'
 
 import Mapbox from '~/components/Mapbox.vue'
 import avatar from '/avatar_expert_detail.png'
@@ -43,14 +43,14 @@ import RelateExpertVue from './RelateExpert.vue'
 import { Feature } from '~/models/Geojson'
 import { useRoute } from 'vue-router'
 
-const expertArr = ref<Expert[]>([])
-const expert = ref<Expert>()
+const expertArr = ref<Experts[]>([])
+const expert = ref<Experts>()
 const route = useRoute()
 
 onMounted(async () => {
   const id = route.params.id
 
-  ;(expert.value = await getExpertById(id as string)), (expertArr.value = await getExperts(8))
+  ;(expert.value = await getExpertsById(id as string)), (expertArr.value = await getExperts(8))
 })
 
 const textarea = ref('')
