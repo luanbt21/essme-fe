@@ -3,7 +3,7 @@
     <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
       <h2 class="text-center text-2xl mb-2">Events</h2>
       <el-row :gutter="30">
-        <el-col v-for="events in eventsArr.slice(2, 8)" :key="events._id" :xs="24" :sm="12" :lg="8">
+        <el-col v-for="events in eventsArr" :key="events._id" :xs="24" :sm="12" :lg="8">
           <a :href="events.web" target="_blank">
             <el-card class="h-40 mb-5 md:hover:scale-105 hover:duration-500" :body-style="{ padding: '10px' }">
               <div class="flex flex-row h-full">

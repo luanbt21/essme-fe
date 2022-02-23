@@ -62,7 +62,7 @@
                   >
                     Trình độ: {{ expert.degree }}
                   </h2>
-                  <!-- v-for="(field, index) in expert._source.google_scholar_fields.fields" :key="index" -->
+                  <!-- v-for="(field, index) in expert._source.google_scholar_fields.fields":key="index" -->
                   <div class="flex">
                     <a class="mt-2 text-gray-500 overflow-hidden">Lĩnh vực: {{ expert.research_area }}</a>
                   </div>
