@@ -28,8 +28,8 @@
         layout="prev, pager, next"
         :page-size="pageSize"
         :page-count="newsPage?.totalPages"
-        v-model:current-page="props.page"
         @current-change="handlePageChange"
+        :current-page="props.page"
       />
     </div>
   </div>
@@ -56,7 +56,6 @@ const newsPage = ref<PageEntity<NewsModel>>()
 
 onMounted(async () => {
   newsPage.value = await searchNewss(props.what, props.where, props.page, pageSize)
-  console.log(newsPage.value)
 })
 
 const handlePageChange = (page: number) => {

@@ -10,7 +10,7 @@ export const searchNewss = async (what?: string, where?: string, page = 1, size 
       params: {
         what,
         where,
-        page,
+        page: page - 1,
         size
       }
     })

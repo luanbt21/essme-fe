@@ -34,7 +34,7 @@
           layout="prev, pager, next"
           :page-size="pageSize"
           :page-count="eventsPage?.totalPages"
-          v-model:current-page="props.page"
+          :current-page="props.page"
           @current-change="handlePageChange"
         />
       </div>

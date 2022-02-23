@@ -17,7 +17,7 @@ const router = createRouter({
     },
 
     {
-      path: '/news/:id',
+      path: '/news',
       alias: '/news',
       name: 'news',
       component: () => import('~/views/NewsPage.vue'),

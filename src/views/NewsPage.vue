@@ -36,7 +36,7 @@
         </el-main>
       </el-container>
     </div>
-    <News />
+    <News :what="props.what" :where="props.where" :page="props.page" />
   </div>
 </template>
 
@@ -47,6 +47,13 @@ import { useRoute } from 'vue-router'
 import { News as NewsModel } from '~/models/News'
 import { getNewsById } from '~/api/News'
 const route = useRoute()
+
+const props = defineProps<{
+  what?: string
+  where?: string
+  page?: number
+}>()
+
 const newsById = ref<NewsModel>()
 onMounted(async () => {
   newsById.value = await getNewsById(route.params.id)
