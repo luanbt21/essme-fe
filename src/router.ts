@@ -9,15 +9,23 @@ const router = createRouter({
       component: () => import('~/views/Home.vue')
     },
 
-    {
-      path: '/news',
-      name: 'news',
-      component: () => import('~/views/NewsPage.vue')
-    },
+
     {
       path: '/expert',
       name: 'expert',
       component: () => import('~/views/ExpertPage.vue')
+    },
+
+    {
+      path: '/news/:id',
+      alias: '/news',
+      name: 'news',
+      component: () => import('~/views/NewsPage.vue'),
+      props: route => ({
+        what: route.query.what,
+        where: route.query.where,
+        page: route.query.page ? parseInt(route.query.page as string) : 1
+      })
     },
 
     {

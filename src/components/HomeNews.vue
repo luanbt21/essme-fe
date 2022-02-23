@@ -4,7 +4,7 @@
       <h2 class="text-center text-2xl mb-2">News</h2>
       <el-row :gutter="30">
         <el-col v-for="news in newsArr" :key="news._id" :xs="24" :sm="12" :lg="8">
-          <a :href="news.url" target="_blank">
+          <router-link :to="`/news/${news._id}`">
             <el-card class="h-36 mb-5 md:hover:scale-105 hover:duration-500" :body-style="{ padding: '10px' }">
               <h4 class="line-clamp-2 h-fit min-h-[3rem]">
                 {{ news.title }}
@@ -18,7 +18,7 @@
                 </div>
               </div>
             </el-card>
-          </a>
+          </router-link>
         </el-col>
       </el-row>
       <div class="text-center">
