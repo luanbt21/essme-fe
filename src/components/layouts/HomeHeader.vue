@@ -111,7 +111,7 @@
 
 
     <div class="nav-dropdown nav__bars-noneresponsive item">
-      <button class="nav-dropbtn">Events</button>
+      <router-link to="/events"><button class="nav-dropbtn">Events</button></router-link> 
     </div>
 
     <div class="nav-dropdown nav__bars-noneresponsive item">
