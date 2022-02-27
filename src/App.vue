@@ -3,7 +3,7 @@
     <HomeHeader />
     <router-view :key="$route.fullPath" />
   </el-config-provider>
-  <Testhomepageapi />
+  <!-- <Testhomepageapi /> -->
 </template>
 
 <script setup lang="ts">
