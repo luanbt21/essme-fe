@@ -10,7 +10,7 @@ export const searchEvents = async (what?: string, where?: string, page = 1, size
       params: {
         what,
         where,
-        page,
+        page: page - 1,
         size
       }
     })
