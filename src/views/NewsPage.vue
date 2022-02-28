@@ -38,6 +38,9 @@
     </div>
     <News :what="props.what" :where="props.where" :page="props.page" />
   </div>
+  <div class="relative w-full min-w-[800px] mt-20">
+    <FooterVue />
+  </div>
 </template>
 
 <script setup lang="ts">

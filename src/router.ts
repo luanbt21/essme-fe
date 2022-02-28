@@ -11,9 +11,15 @@ const router = createRouter({
 
 
     {
-      path: '/expert',
+      path: '/expert/:id',
       name: 'expert',
-      component: () => import('~/views/ExpertPage.vue')
+      component: () => import('~/views/ExpertDedailPage.vue'),
+      props: route => ({
+        what: route.query.what,
+        where: route.query.where,
+        page: route.query.page ? parseInt(route.query.page as string) : 1
+      })
+   
     },
 
     {
@@ -64,6 +70,13 @@ const router = createRouter({
       name: 'fields',
       component: () => import('~/views/Fields.vue')
     },
+
+    {
+      path: '/allexperts',
+      name: 'allexperts',
+      component: () => import('~/views/ExpertPage.vue'),
+      props: true
+    },
     {
       path: '/admin',
       name: 'admin',
@@ -81,10 +94,29 @@ const router = createRouter({
           resolve({ el: '#map', top: 200, behavior: 'smooth' })
         }, 400)
       })
-    }
+
+    
+    
 
     return { top: 0 }
   }
-})
+  // scrollBehavior(to, from, savedPosition) {
+  //   if (savedPosition) {
+  //     return savedPosition
+  //   }
+  //   if (from.path === '/expert/:id' && to.path === '/expert/:id') {
+  //     return new Promise((resolve, reject) => {
+  //       setTimeout(() => {
+  //         resolve({ el: '#map', top: 200, behavior: 'smooth' })
+  //       }, 400)
+  //     })
+
+    
+    
+
+  //   return { top: 0 }
+  // }
+}}
+)
 
 export default router

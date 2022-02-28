@@ -20,12 +20,8 @@
             hide-after="50"
           >
             <template #reference>
-              <el-card
-                @click="getIdExpert(expert._id)"
-                :body-style="{ padding: '0px' }"
-                class="elcard mb-10 background-color-radius"
-              >
-                <router-link to="/expert" custom v-slot="{ navigate, href }">
+              <el-card :body-style="{ padding: '0px' }" class="mb-10 background-color-radius">
+                <router-link v-bind:to="'/expert/' + expert._id" custom v-slot="{ navigate, href }">
                   <el-link type="primary" :href="href" @click="navigate">
                     <img
                       src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg"
@@ -91,8 +87,8 @@ import { onMounted, ref } from 'vue'
 import { useStore } from '~/store/index'
 import { getHomepage } from '~/api/Homepage'
 import { Homepage } from '~/models/Homepage'
-import { Expert } from '~/models/Expert'
-const expertArr = ref<Expert[]>([])
+import { Experts } from '~/models/Experts'
+const expertArr = ref<Experts[]>([])
 const homepage = ref<Homepage>()
 onMounted(async () => {
   homepage.value = await getHomepage()

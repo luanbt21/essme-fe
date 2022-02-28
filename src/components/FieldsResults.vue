@@ -1,12 +1,12 @@
 <template>
   <div class="container mt-10 mx-auto">
     <h2 class="text-2xl mb-2">Results</h2>
+
     <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
       <el-scrollbar height="820px">
         <el-card class="h-fit" :body-style="{ padding: '10px' }">
           <el-row :xs="24" :sm="12" :lg="8" v-for="experts in expertsArr" :key="experts._id">
             <el-col :span="5">
-              <!-- sửa yes thành true -->
               <img
                 :src="experts.image"
                 alt=""
@@ -16,7 +16,7 @@
               <img
                 src="src/assets/avt.jpg"
                 alt=""
-                v-else="No"
+                v-else
                 class="w-60 cover mb-5 mt-5 ml-auto mr-auto cursor-pointer rounded-2xl"
               />
             </el-col>
@@ -44,16 +44,16 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { getExperts } from '~/api/Experts'
-import { Experts } from '~/models/Experts'
+import { getExperts } from '~/api/Expert'
+import { Expert } from '~/models/Expert'
 
-const expertsArr = ref<Experts[]>([])
+const expertsArr = ref<Expert[]>([])
 
 onMounted(async () => {
-  expertsArr.value = await getExperts(20, 0)
+  expertsArr.value = await getExperts()
 })
 
 defineProps<{
-  experts: Experts
+  experts: Expert
 }>()
 </script>

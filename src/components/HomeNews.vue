@@ -34,6 +34,7 @@
 import { onMounted, ref } from 'vue'
 import { getNews } from '~/api/News'
 import { News } from '~/models/News'
+import NewsItem from './NewsItem.vue'
 
 const newsArr = ref<News[]>([])
 
