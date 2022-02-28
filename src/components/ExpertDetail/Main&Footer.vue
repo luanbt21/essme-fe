@@ -5,31 +5,30 @@
         <el-carousel-item>
           <div class="my-3 ml-10 font-bold text-black text-2xl">INTRODUCTION</div>
           <div class="ml-[70px] font-bold text-black lg:w-[700px]">
-            <div class="mt-4">
-              APPELLATION:
-              <span class="font-normal ml-5">{{ expert?.name }} </span>
+            <div class="flex my-5">
+              <div class="">APPELLATION:</div>
+              <div class="ml-[22px] font-normal">{{ expert?.name }}</div>
             </div>
-            <div class="my-3">
-              POSITION:
-              <span class="font-normal ml-16">{{ expert?.degree }}</span>
+            <div class="flex">
+              <div class="w-28">POSITION:</div>
+              <div class="ml-5 font-normal">{{ expert?.degree }}</div>
             </div>
-            <div>
-              AFFILIATE:
-              <span class="font-normal ml-14">{{ expert?.company }}</span>
+            <div class="flex my-5">
+              <div class="w-28">AFFILIATE:</div>
+              <div class="ml-5 font-normal">{{ expert?.company }}</div>
             </div>
-            <div class="my-3">
-              EXPERTISE:
-              <span class="font-normal ml-12"
-                >Research assistant professor Of computer science Research assistant professor Of computer science
-                Research assistant professor Of computer science</span
-              >
+            <div class="flex">
+              <div class="">EXPERTISE:</div>
+              <div class="ml-[47px] font-normal">
+                {{ expert?.research_area }}
+              </div>
             </div>
           </div>
           <div class="my-3 ml-10 font-bold text-black text-2xl">SOCIAL MEDIA</div>
-          <div class="ml-[70px] text-black text-lg">
-            <div class="flex my-3 mt-5">
+          <div class="ml-[70px] text-black text-lg w-[200px] h-auto">
+            <div class="flex my-3 mt-5 w-[200px]">
               <div class="mr-3 text-2xl"><i class="fas fa-globe-asia"></i></div>
-              <span>{{ expert?.link_profile }}</span>
+              <div class="">{{ expert?.link_profile }}</div>
             </div>
             <!-- <div class="flex my-3">
               <i class="fab fa-facebook"></i>
@@ -80,8 +79,8 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue'
-import { getExperts, getExpertById } from '~/api/Expert'
-import { Expert } from '~/models/Expert'
+import { getExperts, getExpertsById } from '~/api/Experts'
+import { Experts } from '~/models/Experts'
 import { useStore } from '~/store/index'
 import Mapbox from '~/components/Mapbox.vue'
 import avatar from '/avatar_expert_detail.png'
@@ -89,14 +88,14 @@ import { useRoute } from 'vue-router'
 import { Feature } from '~/models/Geojson'
 import expert_id from '~/store/modules/expert_id'
 
-const expertArr = ref<Expert[]>([])
-const expert = ref<Expert>()
+const expertArr = ref<Experts[]>([])
+const expert = ref<Experts>()
 const route = useRoute()
 
 onMounted(async () => {
   const id = route.params.id
   console.log(id)
-  ;(expert.value = await getExpertById(id as string)), (expertArr.value = await getExperts(8))
+  ;(expert.value = await getExpertsById(id as string)), (expertArr.value = await getExperts(8))
   console.log(expert.value)
 })
 const lat = ref<number>(105)

@@ -25,7 +25,7 @@
                       :lg="8"
                     />
                   </el-row>
-                  <h2 class="font-bold w-64 text-left truncate">{{ events.event_name }}</h2>
+                  <!-- <h2 class="font-bold w-64 text-left truncate">{{ events.event_name }}</h2> -->
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"

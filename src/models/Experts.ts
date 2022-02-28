@@ -5,7 +5,7 @@ export interface Experts {
     _id:           string;
     image:         string;
     other_link:    string;
-    address:       string;
+    address:       any;
     gender:        number;
     degree:        string;
     birth:         string;

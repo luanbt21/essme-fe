@@ -1,9 +1,9 @@
 <template>
   <div class="mt-5 w-[95%] mx-auto justify-center">
-    <SearchVue />
+    <!-- <SearchVue /> -->
   </div>
   <div class="mt-5 w-[95%] mx-auto justify-center">
-    <MapboxVue />
+    <!-- <MapboxVue /> -->
   </div>
 
   <div class="mt-5 ml-11 w-[95%] m-auto flex justify-center">

@@ -10,15 +10,15 @@
               <img
                 :src="experts.image"
                 alt=""
-                v-if="Yes"
+                v-if="true"
                 class="w-60 cover mb-5 mt-5 ml-auto mr-auto cursor-pointer rounded-2xl"
-              >
+              />
               <img
                 src="src/assets/avt.jpg"
                 alt=""
                 v-else
                 class="w-60 cover mb-5 mt-5 ml-auto mr-auto cursor-pointer rounded-2xl"
-              >
+              />
             </el-col>
             <el-col :span="10" :gutter="30">
               <el-row class="mt-9 ml-8 text-xl">Name: {{ experts.name }}</el-row>

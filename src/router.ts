@@ -18,7 +18,11 @@ const router = createRouter({
       path: '/expert/:id',
       name: 'expert',
       component: () => import('~/views/ExpertDedailPage.vue'),
-     
+      props: route => ({
+        what: route.query.what,
+        where: route.query.where,
+        page: route.query.page ? parseInt(route.query.page as string) : 1
+      })
    
     },
 
@@ -62,11 +66,27 @@ const router = createRouter({
     },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('~/views/NotFound.vue') }
   ],
+  // scrollBehavior(to, from, savedPosition) {
+  //   if (savedPosition) {
+  //     return savedPosition
+  //   }
+  //   if (from.path === '/events' && to.path === '/events') {
+  //     return new Promise((resolve, reject) => {
+  //       setTimeout(() => {
+  //         resolve({ el: '#map', top: 200, behavior: 'smooth' })
+  //       }, 400)
+  //     })
+
+    
+    
+
+  //   return { top: 0 }
+  // }
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
     }
-    if (from.path === '/events' && to.path === '/events') {
+    if (from.path === '/expert/:id' && to.path === '/expert/:id') {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve({ el: '#map', top: 200, behavior: 'smooth' })
