@@ -4,7 +4,21 @@
       <h2 class="text-center text-2xl mb-2">News</h2>
       <el-row :gutter="30">
         <el-col v-for="news in newsArr" :key="news._id" :xs="24" :sm="12" :lg="8">
-          <NewsItem :news="news" />
+          <router-link :to="`/news/${news._id}`">
+            <el-card class="h-36 mb-5 md:hover:scale-105 hover:duration-500" :body-style="{ padding: '10px' }">
+              <h4 class="line-clamp-2 h-fit min-h-[3rem]">
+                {{ news.title }}
+              </h4>
+              <div class="flex flex-row h-full">
+                <img :src="news.img" alt="" class="w-auto h-20 rounded-lg mr-3" />
+                <div>
+                  <p class="line-clamp-4 text-sm h-fit">
+                    {{ news.content }}
+                  </p>
+                </div>
+              </div>
+            </el-card>
+          </router-link>
         </el-col>
       </el-row>
       <div class="text-center">

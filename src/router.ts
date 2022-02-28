@@ -9,11 +9,7 @@ const router = createRouter({
       component: () => import('~/views/Home.vue')
     },
 
-    {
-      path: '/news',
-      name: 'news',
-      component: () => import('~/views/NewsPage.vue')
-    },
+
     {
       path: '/expert/:id',
       name: 'expert',
@@ -25,6 +21,24 @@ const router = createRouter({
       })
    
     },
+
+    {
+      path: '/news',
+      alias: '/news/:id',
+      name: 'news',
+      component: () => import('~/views/NewsPage.vue'),
+      props: route => ({
+        what: route.query.what,
+        where: route.query.where,
+        page: route.query.page ? parseInt(route.query.page as string) : 1
+      })
+    },
+
+    // {
+    //   path: '/news/:id',
+    //   name: 'news',
+    //   component: () => import('~/views/NewsPage.vue'),
+    // },
 
     {
       path: '/events',
@@ -62,7 +76,11 @@ const router = createRouter({
       name: 'allexperts',
       component: () => import('~/views/ExpertPage.vue'),
       props: true
-
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('~/views/Admin.vue')
     },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('~/views/NotFound.vue') }
   ],

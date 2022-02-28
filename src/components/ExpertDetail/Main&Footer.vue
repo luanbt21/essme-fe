@@ -25,8 +25,8 @@
             </div>
           </div>
           <div class="my-3 ml-10 font-bold text-black text-2xl">SOCIAL MEDIA</div>
-          <div class="ml-[70px] text-black text-lg w-[200px] h-auto">
-            <div class="flex my-3 mt-5 w-[200px]">
+          <div class="ml-[70px] text-black text-lg h-auto">
+            <div class="flex my-3 mt-5">
               <div class="mr-3 text-2xl"><i class="fas fa-globe-asia"></i></div>
               <div class="">{{ expert?.link_profile }}</div>
             </div>

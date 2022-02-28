@@ -106,12 +106,12 @@
     </div>
 
     <div class="nav-dropdown nav__bars-noneresponsive item">
-      <router-link to="/News"><button class="nav-dropbtn">News</button></router-link> 
+      <router-link to="/news"><button class="nav-dropbtn">News</button></router-link> 
     </div>
 
 
     <div class="nav-dropdown nav__bars-noneresponsive item">
-      <button class="nav-dropbtn">Events</button>
+      <router-link to="/events"><button class="nav-dropbtn">Events</button></router-link> 
     </div>
 
     <div class="nav-dropdown nav__bars-noneresponsive item">
