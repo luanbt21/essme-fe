@@ -9,16 +9,6 @@
       />
 
       <el-container class="h-auto">
-        <el-header :style="{ 'background-color': 'white' }" class="h-auto">
-          <el-breadcrumb :separator-icon="ArrowRight" class="mb-6">
-            <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
-
-            <el-breadcrumb-item>{{ expert?.name }}</el-breadcrumb-item>
-          </el-breadcrumb>
-          <div class="font-bold mb-11">
-            <hr class="style-three" :style="{ 'background-color': 'white' }" />
-          </div>
-        </el-header>
         <el-container class="flex flex-wrap justify-center">
           <AsideVue />
           <MainFooterVue />
