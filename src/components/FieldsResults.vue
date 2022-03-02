@@ -69,7 +69,7 @@
         </el-select>
       </div>
     </div>
-    
+
   </div>
 </template>
 
@@ -91,8 +91,5 @@ onMounted(async () => {
 defineProps<{
   experts: Expert
 }>()
-
 const input = ref('')
-
-
 </script>
