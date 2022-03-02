@@ -6,7 +6,7 @@
         <el-card class="h-fit" :body-style="{ padding: '10px' }">
           <el-row :xs="24" :sm="12" :lg="8" v-for="experts in expertsArr" :key="experts._id">
             <el-col :span="5">
-              <img :src="experts.img" alt="" v-if="null" class="w-60 cover mb-5 mt-5 ml-auto mr-auto cursor-pointer rounded-2xl">
+              <img :src="experts.image" alt="" v-if="null" class="w-60 cover mb-5 mt-5 ml-auto mr-auto cursor-pointer rounded-2xl">
               <img src="src/assets/avt.jpg" alt="" v-else class="w-60 cover mb-5 mt-5 ml-auto mr-auto cursor-pointer rounded-2xl">
             </el-col>
             <el-col :span="10" :gutter="30">
@@ -29,7 +29,7 @@
       </el-scrollbar>
       <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
         Fields
-        <el-select v-model="value" class="m-2" placeholder="Select" size="large">
+        <el-select  class="m-2" placeholder="Select" size="large">
           <el-option
             v-for="fields in fieldsArr" 
             :key="fields.name"
@@ -40,14 +40,14 @@
         </el-select>
         Company
           <el-select class="m-2" size="large"
-            v-model="value"
+           
             multiple
             filterable
             remote
             reserve-keyword
             placeholder="Please enter a location"
-            :remote-method="remoteMethod"
-            :loading="loading"
+            
+            
           >
             <el-option
               v-for="experts in expertsArr" 
@@ -58,7 +58,7 @@
             </el-option>
           </el-select>
           Degree
-          <el-select v-model="value" class="m-2" placeholder="Select" size="large">
+          <el-select  class="m-2" placeholder="Select" size="large">
           <el-option
             v-for="experts in expertsArr" 
             :key="experts._id"
