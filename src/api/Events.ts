@@ -4,14 +4,11 @@ import { PageEntity } from '~/models/PageEntity'
 
 const apiUrl = 'events'
 
-export const searchEvents = async (what?: string, where?: string, page = 1, size = 20): Promise<PageEntity<Event>> => {
+export const searchEvents = async (limit = 20 ): Promise<PageEntity<Event>> => {
   try {
     const res = await axios.get(`${apiUrl}/search`, {
       params: {
-        what,
-        where,
-        page: page - 1,
-        size
+        limit
       }
     })
     return res.data
