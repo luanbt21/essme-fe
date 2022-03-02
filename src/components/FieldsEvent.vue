@@ -2,7 +2,7 @@
   <div class="container mt-10 m-auto">
     <h2 class="text-2xl mb-2">Events</h2>
     <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
-      <el-carousel trigger="click" type="card" :autoplay="false">
+      <el-carousel interval="4000" trigger="click" type="card" :autoplay="false">
         <el-carousel-item
           class="text-center opacity-100" v-for="events in eventsArr" :key="events._id" :xs="24" :sm="12" :lg="8"
         >
@@ -15,7 +15,7 @@
                   <el-row>
                     <img
                       :src="events.img" alt=""
-                      class="w-72 h-40 pb-3 cursor-pointer rounded-2xl" :xs="24" :sm="12" :lg="8"
+                      class="w-72 h-40 pb-3 cursor-pointer" :xs="24" :sm="12" :lg="8"
                     />
                   </el-row>
                   <h2 class="font-bold w-64 text-left truncate">{{ events.event_name }}</h2>
