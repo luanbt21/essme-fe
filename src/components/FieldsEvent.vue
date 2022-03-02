@@ -46,7 +46,7 @@ import { Event } from '~/models/Event'
 const eventsArr = ref<Event[]>([])
 
 onMounted(async () => {
-  eventsArr.value = await getEvents(6)
+  eventsArr.value = await getEvents(10)
 })
 
 const events: Event[] = []
