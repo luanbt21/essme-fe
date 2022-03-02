@@ -1,13 +1,12 @@
 <template>
   <div class="relative w-[97%] min-w-[800px] z-1 mt-[-100px] bg-slate-200 rounded-[40px] p-[50px] flex flex-col">
-    <Search />
-    <Mapbox />
-    <FieldsResults />
-    <FieldsEvent />
-
-    <HomeNews class="mt-10"/>
+    <!-- <Search />
+    <Mapbox /> -->
+    <!-- <FieldsResults />
+    <FieldsEvent /> -->
+    <HomeNews />
   </div>
-  <div class="relative w-full min-w-[800px] mt-20" >
+  <div class="relative w-full min-w-[800px] mt-20">
     <Footer />
   </div>
 </template>
