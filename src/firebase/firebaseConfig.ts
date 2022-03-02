@@ -2,8 +2,8 @@ import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 import { GoogleAuthProvider } from "firebase/auth";
 import firebase from "firebase/app"
-import * as firebaseui from 'firebaseui'
-import 'firebaseui/dist/firebaseui.css'
+
+
 /* code from our Firebase console */
 export const firebaseConfig = {
     apiKey: "AIzaSyA1cT8i9c49-ZqV4Zy_DdpFzGzo5fiqKtY",

@@ -5,8 +5,11 @@
       <el-row :gutter="30">
         <el-col :xs="24" :sm="12" :lg="8" v-for="fields in fieldsArr" :key="fields.name">
           <router-link to="/fields">
-            <img :src="fields.image" alt=""
-              class="w-80 h-52 cover mb-5 mt-5 ml-auto mr-auto md:hover:scale-105 hover:duration-500 cursor-pointer rounded-2xl"/>
+            <img
+              :src="'https://blogs.3ds.com/delmia/wp-content/uploads/sites/24/2020/10/Industry-Trends-in-High-Technology-Manufacturing-Operations-VT-Experience-banner-002.jpg'"
+              alt=""
+              class="w-80 h-52 cover mb-5 mt-5 ml-auto mr-auto md:hover:scale-105 hover:duration-500 cursor-pointer rounded-2xl"
+            />
           </router-link>
           <h3 class="text-center text-xl hover:text-emerald-600 cursor-pointer">
             {{ fields.name }}
@@ -32,5 +35,4 @@ const fieldsArr = ref<Fields[]>([])
 onMounted(async () => {
   fieldsArr.value = await getFields()
 })
-
 </script>

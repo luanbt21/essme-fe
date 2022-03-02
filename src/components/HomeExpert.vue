@@ -3,7 +3,15 @@
     <div class="px-8 py-4 bg-[#D1E0DB] rounded-lg" style="padding-left: 5%; padding-right: 5%">
       <h1 class="text-center text-4xl mb-10">Experts</h1>
       <el-row :gutter="0">
-        <el-col class="bg-[#D1E0DB]" v-for="expert in expertArr" :key="expert._id" :xs="12" :sm="12" :md="8" :lg="6">
+        <el-col
+          class="bg-[#D1E0DB] col"
+          v-for="expert in expertArr"
+          :key="expert._id"
+          :xs="12"
+          :sm="12"
+          :md="8"
+          :lg="6"
+        >
           <el-popover
             style="border-radius: 10px"
             trigger="hover"
@@ -12,12 +20,8 @@
             hide-after="50"
           >
             <template #reference>
-              <el-card
-                @click="getIdExpert(expert._id)"
-                :body-style="{ padding: '0px' }"
-                class="mb-10 background-color-radius"
-              >
-                <router-link to="/expert" custom v-slot="{ navigate, href }">
+              <el-card :body-style="{ padding: '0px' }" class="mb-10 background-color-radius">
+                <router-link v-bind:to="'/expert/' + expert._id" custom v-slot="{ navigate, href }">
                   <el-link type="primary" :href="href" @click="navigate">
                     <img
                       src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg"
@@ -80,12 +84,16 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { getExperts } from '~/api/Expert'
-import { Expert } from '~/models/Expert'
 import { useStore } from '~/store/index'
-const expertArr = ref<Expert[]>([])
+import { getHomepage } from '~/api/Homepage'
+import { Homepage } from '~/models/Homepage'
+import { Experts } from '~/models/Experts'
+const expertArr = ref<Experts[]>([])
+const homepage = ref<Homepage>()
 onMounted(async () => {
-  expertArr.value = await getExperts(8)
+  homepage.value = await getHomepage()
+  expertArr.value = homepage.value.top_experts
+  console.log(window.innerWidth)
 })
 // catch expert_id
 const store = useStore()
@@ -108,5 +116,20 @@ const getIdExpert = (id: string) => {
   border-radius: 20px;
   width: 220px;
   margin: 0 auto 40px auto;
+}
+.col:last-child {
+  display: none;
+}
+
+@media screen and (max-width: 1198.5px) {
+  .col:last-child {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 990px) {
+  .col:last-child {
+    display: none;
+  }
 }
 </style>

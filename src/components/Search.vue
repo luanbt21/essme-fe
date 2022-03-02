@@ -62,7 +62,8 @@ const whereData = ref([])
 
 const whatSearch = async (queryString: string, cb: (arg: any) => void) => {
   if (queryString !== '') {
-    whatData.value = await props.whatSuggest(queryString)
+    const data = await props.whatSuggest(queryString)
+    whatData.value = data.content
   }
   cb(
     whatData.value.map(item => ({
@@ -73,7 +74,8 @@ const whatSearch = async (queryString: string, cb: (arg: any) => void) => {
 
 const whereSearch = async (queryString: string, cb: (arg: any) => void) => {
   if (queryString !== '') {
-    whereData.value = await props.whereSuggest(queryString)
+    const data = await props.whereSuggest(queryString)
+    whereData.value = data.content
   }
   cb(
     whereData.value.map(item => ({
