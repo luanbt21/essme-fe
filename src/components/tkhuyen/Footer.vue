@@ -1,8 +1,8 @@
 <template>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
-  <div class="w-full bg-slate-200 m-auto">
-  <div class="px-8 py-4 bg-slate-200 flex justify-center w-full mx-auto">
-    <div class="w-[80%] m-auto">
+  <div class="container mt-16 m-auto">
+  <div class="px-8 py-4 bg-white flex justify-center w-full mx-auto">
+    <div class="w-[80%] ml-12">
       <el-row :gutter="80" class="text-center flex-auto">
         <el-col :span="6" class="text-center">
           <el-col class="text-left leading-10">
