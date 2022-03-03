@@ -28,45 +28,7 @@
         </el-card>
       </el-scrollbar>
       <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
-        Fields
-        <el-select v-model="value" class="m-2" placeholder="Select" size="large">
-          <el-option
-            v-for="fields in fieldsArr" 
-            :key="fields.name"
-            :label="fields.name"
-            :value="fields.name"
-          >
-          </el-option>
-        </el-select>
-        Company
-          <el-select class="m-2" size="large"
-            v-model="value"
-            multiple
-            filterable
-            remote
-            reserve-keyword
-            placeholder="Please enter a location"
-            :remote-method="remoteMethod"
-            :loading="loading"
-          >
-            <el-option
-              v-for="experts in expertsArr" 
-              :key="experts._id"
-              :label="experts.company"
-              :value="experts.company" 
-            >
-            </el-option>
-          </el-select>
-          Degree
-          <el-select v-model="value" class="m-2" placeholder="Select" size="large">
-          <el-option
-            v-for="experts in expertsArr" 
-            :key="experts._id"
-            :label="experts.degree"
-            :value="experts.degree"
-          >
-          </el-option>
-        </el-select>
+        <img src="./src/assets/avt.jpg" alt="">
       </div>
     </div>
     
@@ -77,22 +39,14 @@
 import { onMounted, ref } from 'vue'
 import { getExperts } from '~/api/Expert'
 import { Expert } from '~/models/Expert'
-import { getFields } from '~/api/Fields'
-import { Fields } from '~/models/Fields'
 
 const expertsArr = ref<Expert[]>([])
-const fieldsArr = ref<Fields[]>([])
 
 onMounted(async () => {
   expertsArr.value = await getExperts()
-  fieldsArr.value = await getFields()
 })
 
 defineProps<{
   experts: Expert
 }>()
-
-const input = ref('')
-
-
 </script>

@@ -14,6 +14,7 @@
   <div class="relative w-full min-w-[800px] mt-20">
     <FooterVue />
   </div>
+  <Footer />
 </template>
 
 <script lang="ts" setup>
