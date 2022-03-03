@@ -1,17 +1,14 @@
 import axios from 'axios'
 import { Event } from '~/models/Event'
-import { PageEntity } from '~/models/PageEntity'
 
 const apiUrl = 'events'
 
-export const searchEvents = async (what?: string, where?: string, page = 1, size = 20): Promise<PageEntity<Event>> => {
+export const searchEvents = async (what = '', where = ''): Promise<Event[]> => {
   try {
     const res = await axios.get(`${apiUrl}/search`, {
       params: {
         what,
-        where,
-        page: page - 1,
-        size
+        where
       }
     })
     return res.data
@@ -20,11 +17,12 @@ export const searchEvents = async (what?: string, where?: string, page = 1, size
   }
 }
 
-export const getEvents = async (limit = 20): Promise<Event[]> => {
+export const getEvents = async (size = 6, page = 0): Promise<Event[]> => {
   try {
     const res = await axios.get(apiUrl, {
       params: {
-        limit
+        page,
+        size
       }
     })
     return res.data

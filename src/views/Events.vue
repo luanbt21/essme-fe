@@ -1,91 +1,49 @@
 <template>
-  <div class="relative w-[97%] min-w-[800px] z-1 mt-[-100px] bg-slate-200 rounded-[40px] p-[50px] flex flex-col">
-    <div class="container px-5 py-6 mx-auto">
-      <Search
-        label="Search Events?"
-        placeholder="Event title"
-        what-field="name_event"
-        :what-suggest="searchEvents"
-        where-field="location"
-        :where-suggest="getEvents"
-        @search="handleSearch"
-      />
-      <h2 class="text-center" v-if="eventsData.length === 0">No Result</h2>
-      <template v-else>
-        <Mapbox :data="mapData" :center="mapCenter" />
-        <el-container class="container">
-          <el-aside width="200px" class="hidden md:block pt-5">
-            <h3>By Fields</h3>
-            <!-- <el-input type="text" placeholder="Fields Search" /> -->
-            <el-checkbox-group v-model="typesSelect">
-              <div v-for="(type, index) in types" :key="index">
-                <el-checkbox :label="type" style="white-space: pre-wrap" />
-              </div>
-            </el-checkbox-group>
-          </el-aside>
-          <el-main>
-            <el-row :gutter="20">
-              <el-col v-for="event in events" :key="event._id" :xs="24" :sm="12">
-                <EventItem :event="event" @click="() => (mapCenter = event.geojson.geometry.coordinates)" />
-              </el-col>
-            </el-row>
-          </el-main>
-        </el-container>
-        <div class="grid justify-items-center text-center">
-          <el-pagination
-            layout="prev, pager, next"
-            :page-size="pageSize"
-            :page-count="eventsPage?.totalPages"
-            :current-page="props.page"
-            @current-change="handlePageChange"
-          />
-        </div>
-      </template>
+  <div class="container px-5 py-6 mx-auto">
+    <Search
+      label="Search Events?"
+      placeholder="Event title"
+      what-field="event_name"
+      :what-suggest="searchEvents"
+      where-field="location"
+      :where-suggest="getEvents"
+      @search="handleSearch"
+    />
+    <Mapbox :data="mapData" />
+    <el-container class="container">
+      <el-aside width="200px" class="hidden md:block pt-5">
+        <h3>By Fields</h3>
+        <!-- <el-input type="text" placeholder="Fields Search" /> -->
+        <el-checkbox-group v-model="typesSelect">
+          <div v-for="(type, index) in types" :key="index">
+            <el-checkbox :label="type" style="white-space: pre-wrap" />
+          </div>
+        </el-checkbox-group>
+      </el-aside>
+      <el-main>
+        <el-row :gutter="20">
+          <el-col v-for="event in events" :key="event._id" :xs="24" :sm="12">
+            <EventItem :event="event" />
+          </el-col>
+        </el-row>
+      </el-main>
+    </el-container>
+    <div class="text-center">
+      <el-pagination layout="prev, pager, next" :page-size="20" :total="1000" @current-change="" />
     </div>
-  </div>
-  <div class="relative w-full min-w-[800px] mt-20">
-    <FooterVue />
   </div>
 </template>
 
 <script setup lang="ts">
+import Search from '~/components/Search.vue'
 import { searchEvents, getEvents } from '~/api/Events'
 import { computed, onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
-
-import Search from '~/components/Search.vue'
-import { PageEntity } from '~/models/PageEntity'
-import { Event as EventModel } from '~/models/Event'
+import { Event } from '~/models/Event'
 import EventItem from '~/components/EventItem.vue'
 import Mapbox from '~/components/Mapbox.vue'
 import { Feature } from '~/models/Geojson'
-import FooterVue from '~/components/tkhuyen/Footer.vue'
 
-const router = useRouter()
-
-const pageSize = 6
-const mapCenter = ref<number[]>()
-
-const props = defineProps<{
-  what?: string
-  where?: string
-  page?: number
-}>()
-
-const eventsPage = ref<PageEntity<EventModel>>()
-
-const handlePageChange = (page: number) => {
-  router.push({
-    name: 'events',
-    query: {
-      what: props.what,
-      where: props.where,
-      page
-    }
-  })
-}
-
-const eventsData = computed(() => (eventsPage.value ? eventsPage.value.content : []))
+const eventsData = ref<Event[]>([])
 
 const types = computed(() => {
   const result = new Set<string>()
@@ -114,25 +72,19 @@ const mapData = computed((): Feature[] =>
         type: 'Feature',
         geometry: event.geojson.geometry,
         properties: {
-          label: event.name_event,
-          html: `<span>${event.name_event}</span>`
+          label: event.event_name,
+          html: `<span>${event.event_name}</span>`
         }
       } as Feature)
   )
 )
 
 onMounted(async () => {
-  eventsPage.value = await searchEvents(props.what, props.where, props.page, pageSize)
+  eventsData.value = await getEvents(20)
+  // eventsData.value = await searchEvents(route.query.what as string)
 })
 
-const handleSearch = (what: string, where: string) => {
-  router.push({
-    name: 'events',
-    query: {
-      what,
-      where,
-      page: 1
-    }
-  })
+const handleSearch = async (what: string, where: string) => {
+  eventsData.value = await searchEvents(what, where)
 }
 </script>

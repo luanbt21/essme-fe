@@ -1,9 +1,15 @@
 <template>
   <el-config-provider :locale="lang">
+    <!-- <Header @toggle-lang="toggleLang" :flag="flag" /> -->
+    <!-- <el-date-picker /> -->
+    <!-- <Header @toggle-lang="toggleLang" :flag="flag" />
+    <el-date-picker /> -->
+    <!-- <ExpertOrCustomerStatus /> -->
     <HomeHeader />
-    <router-view :key="$route.fullPath" />
+    <Test />
+    <router-view :key="$route.path" />
+    <!-- <router-view /> -->
   </el-config-provider>
-  <!-- <Testhomepageapi /> -->
 </template>
 
 <script setup lang="ts">
@@ -17,9 +23,7 @@ import en from 'element-plus/es/locale/lang/en'
 import HomeHeader from './components/layouts/HomeHeader.vue'
 import Home from './views/Home.vue'
 import Test from './views/Test.vue'
-
 import ExpertOrCustomerStatus from './views/ExpertOrCustomerStatus.vue'
-import Testhomepageapi from './views/testhomepageapi.vue'
 
 const lang = ref(vi)
 const flag = ref(usFlag)

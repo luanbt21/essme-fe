@@ -1,24 +1,7 @@
 import axios from 'axios'
 import { News } from '~/models/News'
-import { PageEntity } from '~/models/PageEntity'
 
 const apiUrl = 'news'
-
-export const searchNewss = async (what?: string, where?: string, page = 1, size = 20): Promise<PageEntity<News>> => {
-  try {
-    const res = await axios.get(`${apiUrl}/search`, {
-      params: {
-        what,
-        where,
-        page: page - 1,
-        size
-      }
-    })
-    return res.data
-  } catch (error) {
-    throw new Error('Failed to get events')
-  }
-}
 
 export const getNews = async (size = 6, page = 0): Promise<News[]> => {
   try {
@@ -34,7 +17,7 @@ export const getNews = async (size = 6, page = 0): Promise<News[]> => {
   }
 }
 
-export const getNewsById = async (id: any): Promise<News> => {
+export const getNewsById = async (id: string): Promise<News> => {
   try {
     const res = await axios.get(`${apiUrl}/${id}`)
     return res.data

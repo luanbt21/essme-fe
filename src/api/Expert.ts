@@ -1,10 +1,9 @@
 import axios from 'axios'
-import internal from 'stream'
 import { Expert } from '~/models/Expert'
 
 const apiUrl = 'experts'
 
-export const getExperts = async (limit = 30): Promise<Expert[]> => {
+export const getExperts = async (limit = 10): Promise<Expert[]> => {
     try {
         const res = await axios.get(apiUrl, {
             params: {
@@ -17,7 +16,7 @@ export const getExperts = async (limit = 30): Promise<Expert[]> => {
     }
 }
 
-export const getExpertById = async (id:string): Promise<Expert> => {
+export const getExpertById = async (id: string): Promise<Expert | undefined> => {
     try {
         const res = await axios.get(`${apiUrl}/${id}`)
         return res.data

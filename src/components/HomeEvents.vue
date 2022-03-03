@@ -12,7 +12,7 @@
                 </div>
                 <div class="pb-9">
                   <h4 class="line-clamp-2 h-fit min-h-fit">
-                    <b>{{ events.name_event }}</b>
+                    <b>{{ events.event_name }}</b>
                   </h4>
 
                   <p class="line-clamp-4 text-sm h-fit mt-2">
@@ -42,6 +42,6 @@ import { Event } from '~/models/Event'
 const eventsArr = ref<Event[]>([])
 
 onMounted(async () => {
-  eventsArr.value = await getEvents(20)
+  eventsArr.value = await getEvents(20, 0)
 })
 </script>

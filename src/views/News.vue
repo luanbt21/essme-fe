@@ -7,9 +7,6 @@
       <el-pagination layout="prev, pager, next" :page-size="20" :total="1000" @current-change="handleCurrentChange" />
     </div>
   </div>
-  <div class="relative w-full min-w-[800px] mt-20">
-    <FooterVue />
-  </div>
 </template>
 
 <script setup lang="ts">
@@ -17,7 +14,7 @@ import { onMounted, ref } from 'vue'
 import { getNews } from '~/api/News'
 import NewsItem from '~/components/NewsItem.vue'
 import { News } from '~/models/News'
-import FooterVue from '~/components/tkhuyen/Footer.vue'
+
 const newsArr = ref<News[]>([])
 const page = ref(1)
 

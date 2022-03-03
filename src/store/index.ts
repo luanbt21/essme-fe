@@ -1,15 +1,13 @@
 import { InjectionKey } from 'vue'
 import { createStore, Store, useStore as baseUseStore } from 'vuex'
-
-import expert_id, { ID_expert } from './modules/expert_id'
 import auth, { Auth } from './modules/auth'
+import expert_id, { ID_expert } from './modules/expert_id'
 
 const strict = process.env.NODE_ENV !== 'production'
 
 export interface State {
-
-  expert_id: ID_expert,
-  auth:Auth
+  auth: Auth,
+  expert_id: ID_expert
 
 }
 
@@ -17,9 +15,8 @@ export const key: InjectionKey<Store<State>> = Symbol()
 
 export const store = createStore({
   modules: {
- 
-    expert_id,
-    auth
+    auth,
+    expert_id
   },
   strict
 })
