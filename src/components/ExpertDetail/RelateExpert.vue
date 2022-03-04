@@ -4,7 +4,7 @@
       <el-header class="rounded-xl m-5 bg-[#D1E0DB] h-auto">
         <div class="font-bold text-2xl my-5 ml-6">RELATED EXPERTS</div>
         <el-row :gutter="20" class="m-5">
-          <el-col :span="8" v-for="expert in expertArr.slice(2, 5)" :key="expert._id" :xs="24" :sm="12" :lg="8">
+          <el-col :span="8" v-for="expert in types" :key="expert._id" :xs="24" :sm="12" :lg="8">
             <el-card :style="{ 'background-color': '#ECF4F1' }" class="m-5 md:hover:scale-105 hover:duration-500">
               <router-link
                 v-bind:to="'/expert/' + expert._id"
@@ -40,14 +40,26 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, onUpdated, ref } from 'vue'
-import { getExperts, getExpertById } from '~/api/Expert'
-import { Expert } from '~/models/Expert'
+import { getExperts, getExpertstop, getExpertsById } from '~/api/Experts'
+import { Experts } from '~/models/Experts'
 import { useStore } from '~/store/index'
-
-const expertArr = ref<Expert[]>([])
-
+import { useRoute } from 'vue-router'
+const expertRelate = ref<Experts[]>([])
+const expert = ref<Experts>()
+const route = useRoute()
+const types = computed(() => {
+  const result = new Set()
+  for (const experts of expertRelate.value) {
+    if (experts.degree === expert.value?.degree) {
+      result.add(experts)
+    }
+  }
+  return result
+})
 onMounted(async () => {
-  expertArr.value = await getExperts(8)
+  const id = route.params.id
+  ;(expert.value = await getExpertsById(id as string)), (expertRelate.value = await getExpertstop(3))
+  console.log(types.value)
 })
 </script>
 

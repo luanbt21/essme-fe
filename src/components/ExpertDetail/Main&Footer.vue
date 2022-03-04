@@ -6,7 +6,7 @@
           <div class="my-3 ml-10 font-bold text-black text-2xl">INTRODUCTION</div>
           <div class="ml-[70px] font-bold text-black lg:w-[700px]">
             <div class="flex my-5">
-              <div class="">APPELLATION:</div>
+              <div>APPELLATION:</div>
               <div class="ml-[22px] font-normal">{{ expert?.name }}</div>
             </div>
             <div class="flex">
@@ -53,8 +53,8 @@
             :data="mapData"
             :zoom="8"
             class="w-full h-full"
-            :icon-link="'https://cdn-icons.flaticon.com/png/512/2276/premium/2276400.png?token=exp=1643040350~hmac=e049045f4c99a013b73f7b76a5c3a1c8'"
-            :icon-zoom="0.08"
+            :icon-link="'https://cdn-icons.flaticon.com/png/512/1144/premium/1144709.png?token=exp=1646134277~hmac=6be4f93d8f1de692441e2a33dff90441'"
+            :icon-zoom="0.05"
           />
           <input type="number" v-model="lat" />
           <input type="number" v-model="lon" />
@@ -71,14 +71,32 @@
         placeholder="Enter your requirement"
       />
       <div class="flex justify-center m-5 bg-[#d1e0db]">
-        <el-button class="w-24">Send</el-button>
+        <el-button class="w-24" type="text" @click="centerDialogVisible = true">Send</el-button>
+        <el-dialog v-if="!isLogin" v-model="centerDialogVisible" title="Warning" width="30%" center>
+          <span>Bạn chưa đăng nhập</span>
+          <template #footer>
+            <span class="dialog-footer">
+              <el-button @click="centerDialogVisible = false">Cancel</el-button>
+              <router-link to="/login"><button class="nav-dropbtn">Login</button></router-link>
+            </span>
+          </template>
+        </el-dialog>
+        <el-dialog v-if="isLogin" v-model="centerDialogVisible" title="Warning" width="30%" center>
+          <span>Bạn đã đăng nhập thành công</span>
+          <template #footer>
+            <span class="dialog-footer">
+              <el-button @click="centerDialogVisible = false" class="nav-dropbtn">Cancel</el-button>
+              <router-link to="/login"><button class="nav-dropbtn">Login</button></router-link>
+            </span>
+          </template>
+        </el-dialog>
       </div>
     </el-footer>
   </el-container>
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onUpdated, ref } from 'vue'
 import { getExperts, getExpertsById } from '~/api/Experts'
 import { Experts } from '~/models/Experts'
 import { useStore } from '~/store/index'
@@ -88,16 +106,48 @@ import { useRoute } from 'vue-router'
 import { Feature } from '~/models/Geojson'
 import expert_id from '~/store/modules/expert_id'
 
+import axios from 'axios'
+import { __baseURL } from '~/constant'
+const store = useStore()
+const handleClick = () => {
+  store.dispatch('auth/logout')
+}
+const isLogin = computed(() => store.state.auth.user)
 const expertArr = ref<Experts[]>([])
 const expert = ref<Experts>()
 const route = useRoute()
-
+const centerDialogVisible = ref(false)
+onUpdated(async () => {
+  if (isLogin.value) {
+    const token = computed(() => store.state.auth.token)
+    console.log(token.value)
+    const headers = {
+      Authorization: `Bearer ${token.value}`
+    }
+    await axios.post(
+      '/news',
+      {
+        stt: 'string',
+        img: 'string',
+        tag: 'string',
+        title: 'string',
+        url: 'string',
+        content: 'string',
+        status: 'string'
+      },
+      {
+        headers
+      }
+    )
+  }
+})
 onMounted(async () => {
   const id = route.params.id
-  console.log(id)
+  // console.log(id)
   ;(expert.value = await getExpertsById(id as string)), (expertArr.value = await getExperts(8))
-  console.log(expert.value)
+  // console.log(expert.value)
 })
+
 const lat = ref<number>(105)
 const lon = ref<number>(21)
 const mapData = computed((): Feature[] => {
@@ -108,7 +158,7 @@ const mapData = computed((): Feature[] => {
         geometry: expert.value.location.features[0].geometry,
         properties: {
           label: expert.value.name,
-          html: `<span>${expert.value.link_profile}</span>`
+          html: `<span> Lĩnh vực: ${expert.value.research_area}</span>`
         }
       } as Feature
     ]
@@ -125,5 +175,8 @@ const textarea = ref('')
 .el-footer {
   height: auto;
   width: auto;
+}
+.dialog-footer button:first-child {
+  margin-right: 10px;
 }
 </style>
