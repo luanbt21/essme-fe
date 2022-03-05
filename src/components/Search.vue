@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#C8E3D9] px-[] px-2 py-4 mb-4 rounded-xl flex justify-center px-[50px]">
+  <div class="bg-[#C8E3D9] py-4 mb-4 rounded-xl flex justify-center px-[50px]">
     <el-row align="bottom" :gutter="30" class="flex-1">
       <el-col :xs="24" :md="10" class="flex-auto w-64">
         <label for="what">
@@ -77,9 +77,15 @@ const whereSearch = async (queryString: string, cb: (arg: any) => void) => {
     const data = await props.whereSuggest(queryString)
     whereData.value = data.content
   }
+
+  const allWhere = whereData.value.map(item => item[props.whereField])
+  console.log(whereData.value)
+  console.log(allWhere)
+  const uniqueWhere = new Set(allWhere)
+
   cb(
-    whereData.value.map(item => ({
-      value: item[props.whereField]
+    [...uniqueWhere].map(item => ({
+      value: item
     }))
   )
 }
