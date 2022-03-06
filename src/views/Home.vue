@@ -7,6 +7,7 @@
     <HomeNews />
     <HomeEventsVue />
 
+    <HomeFQAs />
     <br />
 
     <br />
@@ -17,6 +18,7 @@
 </template>
 
 <script lang="ts" setup>
+import HomeFQAs from '~/components/HomeFQAs.vue'
 import HomeNews from '~/components/HomeNews.vue'
 import HomeEventsVue from '~/components/HomeEvents.vue'
 import DemoVue from '~/components/ExpertDetail/Demo.vue'
