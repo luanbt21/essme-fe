@@ -9,7 +9,6 @@ const router = createRouter({
       component: () => import('~/views/Home.vue')
     },
 
-
     {
       path: '/expert/:id',
       name: 'expert',
@@ -19,9 +18,7 @@ const router = createRouter({
         where: route.query.where,
         page: route.query.page ? parseInt(route.query.page as string) : 1
       })
-
     },
-
     {
       path: '/news',
       alias: '/news/:id',
@@ -48,6 +45,14 @@ const router = createRouter({
         what: route.query.what,
         where: route.query.where,
         page: route.query.page ? parseInt(route.query.page as string) : 1
+      })
+    },
+    {
+      path: '/events/:id',
+      name: 'eventDetail',
+      component: () => import('~/views/EventDetail.vue'),
+      props: route => ({
+        id: route.params.id
       })
     },
     {
@@ -109,10 +114,6 @@ const router = createRouter({
           resolve({ el: '#map', top: 200, behavior: 'smooth' })
         }, 400)
       })
-
-
-
-
       return { top: 0 }
     }
     // scrollBehavior(to, from, savedPosition) {
@@ -126,13 +127,9 @@ const router = createRouter({
     //       }, 400)
     //     })
 
-
-
-
     //   return { top: 0 }
     // }
   }
-}
-)
+})
 
 export default router

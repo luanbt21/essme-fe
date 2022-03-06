@@ -26,7 +26,7 @@
           <el-main>
             <el-row :gutter="20">
               <el-col v-for="event in events" :key="event._id" :xs="24" :sm="12">
-                <EventItem :event="event" @click="() => (mapCenter = event.geojson.geometry.coordinates)" />
+                <EventItem :event="event" @locating="() => (mapCenter = event.geojson.geometry.coordinates)" />
               </el-col>
             </el-row>
           </el-main>
