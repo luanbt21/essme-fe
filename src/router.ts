@@ -19,7 +19,7 @@ const router = createRouter({
         where: route.query.where,
         page: route.query.page ? parseInt(route.query.page as string) : 1
       })
-   
+
     },
 
     {
@@ -82,6 +82,21 @@ const router = createRouter({
       name: 'admin',
       component: () => import('~/views/Admin.vue')
     },
+    {
+      path: '/questionSheet',
+      name: 'questionSheet',
+      component: () => import('~/views/QuestionSheet.vue'),
+    },
+    {
+      path: '/FQAs',
+      name: 'FQAs',
+      component: () => import('~/views/FQAs.vue'),
+    },
+    {
+      path: '/FQAs/:id',
+      name: 'FQAanswer',
+      component: () => import('~/views/FQAanswer.vue'),
+    },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('~/views/NotFound.vue') }
   ],
   scrollBehavior(to, from, savedPosition) {
@@ -95,28 +110,29 @@ const router = createRouter({
         }, 400)
       })
 
-    
-    
 
-    return { top: 0 }
+
+
+      return { top: 0 }
+    }
+    // scrollBehavior(to, from, savedPosition) {
+    //   if (savedPosition) {
+    //     return savedPosition
+    //   }
+    //   if (from.path === '/expert/:id' && to.path === '/expert/:id') {
+    //     return new Promise((resolve, reject) => {
+    //       setTimeout(() => {
+    //         resolve({ el: '#map', top: 200, behavior: 'smooth' })
+    //       }, 400)
+    //     })
+
+
+
+
+    //   return { top: 0 }
+    // }
   }
-  // scrollBehavior(to, from, savedPosition) {
-  //   if (savedPosition) {
-  //     return savedPosition
-  //   }
-  //   if (from.path === '/expert/:id' && to.path === '/expert/:id') {
-  //     return new Promise((resolve, reject) => {
-  //       setTimeout(() => {
-  //         resolve({ el: '#map', top: 200, behavior: 'smooth' })
-  //       }, 400)
-  //     })
-
-    
-    
-
-  //   return { top: 0 }
-  // }
-}}
+}
 )
 
 export default router
