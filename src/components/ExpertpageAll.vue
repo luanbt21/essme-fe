@@ -27,7 +27,7 @@
       </div>
 
       <div class="bg-[#D1E0DB] rounded-[15px] mx-2 w-[19%]">
-        <div class="font-bold text-center p-5 text-2xl">City/Province</div>
+        <div class="font-bold text-center p-5 text-2xl">City/Provincee</div>
         <el-scrollbar height="490px">
           <!-- <div v-for="(address, index) in types" :key="index">
             <el-card
