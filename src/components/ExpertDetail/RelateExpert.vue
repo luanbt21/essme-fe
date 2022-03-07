@@ -50,15 +50,14 @@ const route = useRoute()
 const types = computed(() => {
   const result = new Set()
   for (const experts of expertRelate.value) {
-    if (experts.degree === expert.value?.degree) {
-      result.add(experts)
+    if (experts.research_area === expert.value?.research_area) {
+      return experts
     }
   }
-  return result
 })
 onMounted(async () => {
   const id = route.params.id
-  ;(expert.value = await getExpertsById(id as string)), (expertRelate.value = await getExpertstop(3))
+  ;(expert.value = await getExpertsById(id as string)), (expertRelate.value = await getExperts(20))
   console.log(types.value)
 })
 </script>

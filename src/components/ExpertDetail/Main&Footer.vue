@@ -1,41 +1,39 @@
 <template>
   <el-container class="w-[890px] h-auto">
     <el-main class="rounded-xl m-5 bg-[#d1e0db] h-auto">
-      <el-carousel trigger="click" height="420px" width="auto" :autoplay="false">
-        <el-carousel-item>
-          <div class="my-3 ml-10 font-bold text-black text-2xl">INTRODUCTION</div>
-          <div class="ml-[70px] font-bold text-black lg:w-[700px]">
-            <div class="flex my-5">
-              <div>APPELLATION:</div>
-              <div class="ml-[22px] font-normal">{{ expert?.name }}</div>
-            </div>
-            <div class="flex">
-              <div class="w-28">POSITION:</div>
-              <div class="ml-5 font-normal">{{ expert?.degree }}</div>
-            </div>
-            <div class="flex my-5">
-              <div class="w-28">AFFILIATE:</div>
-              <div class="ml-5 font-normal">{{ expert?.company }}</div>
-            </div>
-            <div class="flex">
-              <div class="">EXPERTISE:</div>
-              <div class="ml-[47px] font-normal">
-                {{ expert?.research_area }}
-              </div>
-            </div>
+      <div class="my-3 ml-10 font-bold text-black text-2xl">INTRODUCTION</div>
+      <div class="ml-[70px] font-bold text-black lg:w-[700px]">
+        <div class="flex my-5">
+          <div>APPELLATION:</div>
+          <div class="ml-[22px] font-normal">{{ expert?.name }}</div>
+        </div>
+        <div class="flex">
+          <div class="w-28">POSITION:</div>
+          <div class="ml-5 font-normal">{{ expert?.degree }}</div>
+        </div>
+        <div class="flex my-5">
+          <div class="w-28">AFFILIATE:</div>
+          <div class="ml-5 font-normal">{{ expert?.company }}</div>
+        </div>
+        <div class="flex">
+          <div class="">EXPERTISE:</div>
+          <div class="ml-[47px] font-normal">
+            {{ expert?.research_area }}
           </div>
-          <div class="my-3 ml-10 font-bold text-black text-2xl">SOCIAL MEDIA</div>
-          <div class="ml-[70px] text-black text-lg h-auto">
-            <div class="flex my-3 mt-5">
-              <div class="mr-3 text-2xl"><i class="fas fa-globe-asia"></i></div>
-              <div class="">{{ expert?.link_profile }}</div>
-            </div>
-            <!-- <div class="flex my-3">
+        </div>
+      </div>
+      <div class="my-3 ml-10 font-bold text-black text-2xl">SOCIAL MEDIA</div>
+      <div class="ml-[70px] text-black text-lg h-auto">
+        <div class="flex my-3 mt-5">
+          <div class="mr-3 text-2xl"><i class="fas fa-globe-asia"></i></div>
+          <div class="">{{ expert?.link_profile }}</div>
+        </div>
+        <!-- <div class="flex my-3">
               <i class="fab fa-facebook"></i>
               <div class="mr-3 text-2xl"></div>
               <span>https://www.facebook.com/</span>
             </div> -->
-            <!-- <div class="flex my-3">
+        <!-- <div class="flex my-3">
               <i class="fab fa-twitter"></i>
               <div class="mr-3 text-2xl"></div>
               https://twitter.com/
@@ -45,21 +43,7 @@
               <div class="mr-3 text-2xl"></div>
               https://www.linkedin.com/
             </div> -->
-          </div>
-        </el-carousel-item>
-        <el-carousel-item>
-          <Mapbox
-            :center="[lat,lon] as [number,number]"
-            :data="mapData"
-            :zoom="8"
-            class="w-full h-full"
-            :icon-link="'https://cdn-icons.flaticon.com/png/512/1144/premium/1144709.png?token=exp=1646134277~hmac=6be4f93d8f1de692441e2a33dff90441'"
-            :icon-zoom="0.05"
-          />
-          <input type="number" v-model="lat" />
-          <input type="number" v-model="lon" />
-        </el-carousel-item>
-      </el-carousel>
+      </div>
     </el-main>
     <el-footer class="rounded-xl my-5 mx-5 font-semibold bg-[#d1e0db] h-auto">
       <div class="text-2xl my-5">ORDER EXPERT</div>

@@ -19,10 +19,10 @@ export const getExpertstop = async (size = 6, page = 0): Promise<Experts[]> => {
 }
 export const getExperts = async (size = 6, page = 0): Promise<Experts[]>  => {
   try {
-    const res = await axios.get(`${apiUrl}/page`, {
+    const res = await axios.get(`${apiUrl}/top`, {
       params: {
         page,
-        size,
+        size
         
       }
     })
@@ -31,12 +31,13 @@ export const getExperts = async (size = 6, page = 0): Promise<Experts[]>  => {
     throw new Error('Failed to get experts')
   }
 }
-export const searchExperts = async (what?: string, where?: string, page = 1, size = 20): Promise<PageEntity<Experts>> => {
+export const searchExperts = async (what?: string, where?: string,radius=5, page = 1, size = 20): Promise<PageEntity<Experts>> => {
   try {
     const res = await axios.get(`${apiUrl}/search`, {
       params: {
         what,
         where,
+       
         page:page-1,
         size
       }
