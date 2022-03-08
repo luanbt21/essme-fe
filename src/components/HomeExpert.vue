@@ -74,7 +74,7 @@
       </el-row>
 
       <div class="text-center">
-        <router-link to="/experts" custom v-slot="{ navigate, href }">
+        <router-link to="/allexperts" custom v-slot="{ navigate, href }">
           <el-link type="primary" :href="href" @click="navigate">View all Experts</el-link>
         </router-link>
       </div>
@@ -93,7 +93,7 @@ const homepage = ref<Homepage>()
 onMounted(async () => {
   homepage.value = await getHomepage()
   expertArr.value = homepage.value.top_experts
-  console.log(window.innerWidth)
+  console.log(expertArr.value)
 })
 // catch expert_id
 const store = useStore()

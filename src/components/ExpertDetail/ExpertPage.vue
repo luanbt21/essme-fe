@@ -1,6 +1,6 @@
 <template>
   <div class="relative w-[97%] min-w-[800px] z-1 mt-[-100px] bg-white rounded-[40px] p-[50px] flex flex-col">
-    <div class="common-layout mt-5 w-[90%] mx-auto">
+    <div class="common-layout mt-5 w-[95%] mx-auto" id="top">
       <link
         rel="stylesheet"
         href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
@@ -8,17 +8,12 @@
         crossorigin="anonymous"
       />
 
+      <!-- <input type="number" v-model="lat" />
+      <input type="number" v-model="lon" /> -->
+      <div class="h-[500px]">
+        <Mapbox :center="mapCenter" :data="mapData" :icon-zoom="0.05" />
+      </div>
       <el-container class="h-auto">
-        <el-header :style="{ 'background-color': 'white' }" class="h-auto">
-          <el-breadcrumb :separator-icon="ArrowRight" class="mb-6">
-            <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
-
-            <el-breadcrumb-item>{{ expert?.name }}</el-breadcrumb-item>
-          </el-breadcrumb>
-          <div class="font-bold mb-11">
-            <hr class="style-three" :style="{ 'background-color': 'white' }" />
-          </div>
-        </el-header>
         <el-container class="flex flex-wrap justify-center">
           <AsideVue />
           <MainFooterVue />
@@ -42,6 +37,7 @@ import MainFooterVue from './Main&Footer.vue'
 import RelateExpertVue from './RelateExpert.vue'
 import { Feature } from '~/models/Geojson'
 import { useRoute } from 'vue-router'
+import expert_id from '~/store/modules/expert_id'
 
 const expertArr = ref<Expert[]>([])
 const expert = ref<Expert>()
@@ -50,7 +46,26 @@ const route = useRoute()
 onMounted(async () => {
   const id = route.params.id
 
-  ;(expert.value = await getExpertById(id as string)), (expertArr.value = await getExperts(8))
+  expert.value = await getExpertById(id as string)
+})
+const mapCenter = expert.value?.location.features[0].geometry.coordinates
+const lat = ref<number>(105)
+const lon = ref<number>(21)
+const mapData = computed((): Feature[] => {
+  if (expert.value) {
+    return [
+      {
+        type: 'Feature',
+        geometry: expert.value.location.features[0].geometry,
+        properties: {
+          label: expert.value.name,
+          html: `<span> Lĩnh vực: ${expert.value.research_area}</span>`
+        }
+      } as Feature
+    ]
+  } else {
+    return []
+  }
 })
 
 const textarea = ref('')
