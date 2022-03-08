@@ -3,14 +3,15 @@
     <el-container>
       <el-header class="rounded-xl m-5 bg-[#D1E0DB] h-auto">
         <div class="font-bold text-2xl my-5 ml-6">RELATED EXPERTS</div>
-        <!-- <el-scrollbar height="395px" width="auto" v-if="types.length !== 0">
+        <el-scrollbar height="395px" width="auto" v-if="types.length !== 0">
           <el-row :gutter="20" class="m-5">
             <el-col :span="8" v-for="expert in types" :key="expert._id" :xs="24" :sm="12" :lg="8">
               <ItemRelateVue :expert="expert" />
             </el-col>
           </el-row>
-        </el-scrollbar> -->
-        <el-row :gutter="20" class="m-5" v-if="(seeMore = true)">
+          <button @click="seeMore = !seeMore">See more</button>
+        </el-scrollbar>
+        <!-- <el-row :gutter="20" class="m-5" v-if="(seeMore = true)">
           <el-col :span="8" v-for="expert in types.slice(0, 3)" :key="expert._id" :xs="24" :sm="12" :lg="8">
             <ItemRelateVue :expert="expert" />
           </el-col>
@@ -19,10 +20,9 @@
           <el-col :span="8" v-for="expert in types" :key="expert._id" :xs="24" :sm="12" :lg="8">
             <ItemRelateVue :expert="expert" />
           </el-col>
-        </el-row>
-        <button @click="seeMore = !seeMore">See more</button>
+        </el-row> -->
 
-        <!-- <div v-else class="m-5 text-center">no result</div> -->
+        <div v-if="types.length === 0" class="m-5 text-center">no result</div>
       </el-header>
     </el-container>
   </div>

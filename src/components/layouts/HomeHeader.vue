@@ -185,7 +185,7 @@ console.log(axios.defaults.headers )
   /* background-color: #d4d7de; */
   /* width: 90%; */
   /* height: 70px; */
-  z-index: 1;
+  z-index: 1000;
   top: 0.3cm;
   margin: 0 auto; /* Căn giữa block element */
   width: 95%;

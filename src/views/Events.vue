@@ -7,7 +7,7 @@
         what-field="name_event"
         :what-suggest="searchEvents"
         where-field="location"
-        :where-suggest="getEvents"
+        :where-suggest="whereSuggest"
         @search="handleSearch"
       />
       <h2 class="text-center" v-if="eventsData.length === 0">No Result</h2>
@@ -26,7 +26,7 @@
           <el-main>
             <el-row :gutter="20">
               <el-col v-for="event in events" :key="event._id" :xs="24" :sm="12">
-                <EventItem :event="event" @click="() => (mapCenter = event.geojson.geometry.coordinates)" />
+                <EventItem :event="event" @locating="() => (mapCenter = event.geojson.geometry.coordinates)" />
               </el-col>
             </el-row>
           </el-main>
@@ -66,13 +66,20 @@ const router = useRouter()
 const pageSize = 6
 const mapCenter = ref<number[]>()
 
-const props = defineProps<{
+interface Props {
   what?: string
   where?: string
   page?: number
-}>()
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  page: 1
+})
 
 const eventsPage = ref<PageEntity<EventModel>>()
+const whereSuggest = (queryString: string) => {
+  return searchEvents('', queryString)
+}
 
 const handlePageChange = (page: number) => {
   router.push({
