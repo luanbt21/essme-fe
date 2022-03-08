@@ -1,6 +1,6 @@
 <template>
   <div class="relative w-[97%] min-w-[800px] z-1 mt-[-100px] bg-white rounded-[40px] p-[50px] flex flex-col">
-    <div class="common-layout mt-5 w-[90%] mx-auto" id="top">
+    <div class="common-layout mt-5 w-[95%] mx-auto" id="top">
       <link
         rel="stylesheet"
         href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
