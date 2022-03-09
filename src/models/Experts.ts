@@ -11,7 +11,7 @@ export interface Experts {
     birth:         string;
     phone:         string;
     name:          string;
-    research_area: string;
+    research_area: any;
     company:       string;
     location:      Location;
     email:         string;

@@ -42,10 +42,16 @@ const route = useRoute()
 const types = computed(() => {
   const result = new Array()
   for (const experts of expertRelate.value) {
-    if (experts.research_area === expert.value?.research_area) {
-      result.push(experts)
+    for (var i = 0; i < expert.value?.research_area.length; i++) {
+      for (var j = 0; j < experts.research_area.length; j++) {
+        if (expert.value?.research_area[i] === experts.research_area[j]) {
+          result.push(experts)
+          console.log(expert.value?.research_area[i])
+        }
+      }
     }
   }
+  // console.log(result)
   return result
 })
 const expertlength = computed(() => {
