@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-slate-200 grid place-items-center absolute top-0 left-0 right-0 bottom-0 z-10 flex bg-[url('../assets/login_background.png')]"
+    class="bg-slate-200 grid place-items-center absolute top-0 left-0 right-0 bottom-0 z-[1001] flex bg-[url('src/assets/login_background.png')]"
   >
     <div class="nav_login">
       <ul class="nav_login-list nav_login-list-one">
