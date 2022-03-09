@@ -18,7 +18,9 @@
         <div class="flex">
           <div class="">EXPERTISE:</div>
           <div class="ml-[47px] font-normal">
-            {{ expert?.research_area }}
+            <span v-for="(number, index) of expert?.research_area" :key="index">
+              {{ index < expert?.research_area.length - 1 && expert?.research_area.length > 1 ? number + ',' : number }}
+            </span>
           </div>
         </div>
       </div>

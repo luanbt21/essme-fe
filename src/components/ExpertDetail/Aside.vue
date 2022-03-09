@@ -14,7 +14,9 @@
       <p>{{ expert?.name }}</p>
     </div>
     <div class="text-center mx-7 font-bold">{{ expert?.degree }}</div>
-    <div class="text-center mx-7 font-bold">{{ expert?.research_area }}</div>
+    <div class="text-center mx-7 font-bold" v-for="(number, index) of expert?.research_area" :key="index">
+      {{ index === 0 && expert?.research_area.length === 2 ? number + ',' : number }}
+    </div>
     <div class="ml-11 mt-12">
       <i class="fas fa-address-card"></i>
       <span class="ml-3">{{ expert?.degree }}</span>
