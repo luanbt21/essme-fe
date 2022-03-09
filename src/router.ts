@@ -111,8 +111,15 @@ const router = createRouter({
       name: 'ExpertOrCustomerStatus',
       component: () => import('~/views/ExpertOrCustomerStatus.vue'),
     },
+    {
+      path: '/OrderExpert',
+      name: 'ExpertOrder',
+      component: () => import('~/views/ExpertOrder.vue'),
+    },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('~/views/NotFound.vue') }
   ],
+
+
   // scrollBehavior(to, from, savedPosition) {
   //   if (savedPosition) {
   //     return savedPosition
@@ -124,8 +131,8 @@ const router = createRouter({
   //       }, 400)
   //     })
 
-    
-    
+
+
 
   //   return { top: 0 }
   // }
@@ -134,24 +141,24 @@ const router = createRouter({
     if (savedPosition) {
       return savedPosition
     }
-  else {
-    {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve({ el: '#map', top: 200, behavior: 'smooth' })
-        }, 400)
-      })
+    else {
+      {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve({ el: '#map', top: 200, behavior: 'smooth' })
+          }, 400)
+        })
 
-    
-    
 
-    return { top: 0 }
-  }
 
-}
-  
 
-    
+        return { top: 0 }
+      }
+
+    }
+
+
+
   }
 }
 )

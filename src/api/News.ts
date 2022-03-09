@@ -34,6 +34,19 @@ export const getNews = async (size = 6, page = 0): Promise<News[]> => {
   }
 }
 
+export const getNewsHome = async (limit = 9): Promise<News[]> => {
+  try {
+    const res = await axios.get(apiUrl, {
+      params: {
+        limit
+      }
+    })
+    return res.data
+  } catch (error) {
+    throw new Error('Failed to get news')
+  }
+}
+
 export const getNewsById = async (id: any): Promise<News> => {
   try {
     const res = await axios.get(`${apiUrl}/${id}`)

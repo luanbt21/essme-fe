@@ -180,7 +180,6 @@ onMounted(async () => {
   // expertsPage.value = await searchExperts(props.what, props.where, props.page, pageSize)
   expertsPage.value = await searchExperts(props.what, props.where, props.page, pageSize)
   expertsTop.value = await getExpertstop(20, 1)
-  console.log(experts.value)
 })
 const handleSearch = (what: string, where: string) => {
   router.push({
