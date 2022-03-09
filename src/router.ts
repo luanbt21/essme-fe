@@ -106,6 +106,11 @@ const router = createRouter({
       name: 'FQAanswer',
       component: () => import('~/views/FQAanswer.vue'),
     },
+    {
+      path: '/ExpertOrCustomerStatus',
+      name: 'ExpertOrCustomerStatus',
+      component: () => import('~/views/ExpertOrCustomerStatus.vue'),
+    },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('~/views/NotFound.vue') }
   ],
   // scrollBehavior(to, from, savedPosition) {
