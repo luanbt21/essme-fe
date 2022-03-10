@@ -19,52 +19,63 @@
       <div class="expertInfoForm">
         <div class="infor_necessary">
           <div class="infor_necessary-left">
-            <img :src="avatarImage" alt="" class="info_avatar" />
-            <!-- <img class="info_avatar" src="src\assets\avatar.jpg" alt="" /> -->
-            <button class="btn_upload-photo">Upload Photo</button>
+            <img v-if="changeimg" :src="avatarImage" alt="" class="info_avatar" />
+            <img v-else :src="aavatarImage" alt="" class="info_avatar" />
           </div>
           <div class="infor_necessary-right">
             <div class="row-input">
-              <label class="label-form" for="">Name:</label>
-              <input type="text" name="name" id="" placeholder="TRINH KHANH HUYEN" />
+              <label class="label-form" for="">Full name:</label>
+              <input type="text" v-model="fullname" id="" placeholder="TRINH KHANH HUYEN" />
             </div>
             <div class="row-input">
               <label class="label-form" for="">Gender:</label>
-              <input type="text" name="gender" id="" placeholder="Female" />
+              <el-select style="width: 100%" v-model="gender" placeholder="Select" size="large">
+                <el-option v-for="gender in GenderArr" :value="gender"> </el-option>
+              </el-select>
             </div>
             <div class="row-input">
               <label class="label-form" for="">Birth:</label>
-              <input type="text" name="birth" id="" placeholder="28/08/2001" />
+              <input type="text" v-model="birth" id="" placeholder="28/08/2001" />
             </div>
             <div class="row-input">
               <label class="label-form" for="">Phone:</label>
-              <input type="text" name="phone" id="" placeholder="0987 332 991" />
+              <input type="text" v-model="phone" id="" placeholder="0987 332 991" />
             </div>
             <div class="row-input">
               <label class="label-form" for="">Address:</label>
-              <input type="text" name="address" id="" placeholder="NEU, 207 Giai Phong, Hai Ba Trung, Ha Hoi" />
+              <input type="text" v-model="address" id="" placeholder="NEU, 207 Giai Phong, Hai Ba Trung, Ha Hoi" />
             </div>
             <div class="row-input">
               <label class="label-form" for="">Email:</label>
-              <input type="text" name="email" id="" placeholder="tkhuyen@gmail.com" />
+              <input type="text" v-model="email" id="" placeholder="tkhuyen@gmail.com" />
             </div>
             <div class="row-input">
               <label class="label-form" for="">Interest:</label>
-              <input type="text" name="interest" id="" />
+              <input type="text" v-model="interest" id="" />
+            </div>
+            <div class="row-input">
+              <label class="label-form" for="">Link avatar:</label>
+              <input @change="changeImgAvatar()" type="text" v-model="linkAvatar" id="" />
             </div>
           </div>
         </div>
         <div v-if="exInfo" class="field-info">
-          <div class="row-input">
-            <label class="label-form" for="">Address:</label>
-            <input type="text" name="address" id="" placeholder="NEU, 207 Giai Phong, Hai Ba Trung, Ha Hoi" />
+          <div class="row-input mb-[10px]">
+            <label class="label-form" for="">Research area:</label>
+            <el-select style="width: 100%" v-model="ResearchArea" placeholder="Select" size="large">
+              <el-option v-for="fields in fieldsArr" :key="fields.name" :label="fields.name" :value="fields.name">
+              </el-option>
+            </el-select>
+            <!-- <input type="text" name="address" id="" placeholder="NEU, 207 Giai Phong, Hai Ba Trung, Ha Hoi" /> -->
           </div>
-          <div class="row-input">
-            <label class="label-form" for="">Email:</label>
-            <input type="text" name="email" id="" placeholder="tkhuyen@gmail.com" />
+          <div class="row-input mb-[10px]">
+            <label class="label-form" for="">Degree:</label>
+            <el-select style="width: 100%" v-model="Degree" placeholder="Select" size="large">
+              <el-option v-for="degree in DegreeArr" :value="degree"> </el-option>
+            </el-select>
           </div>
-          <div class="row-input">
-            <label class="label-form" for="">Interest:</label>
+          <div class="row-input mb-[10px]">
+            <label class="label-form" for="">Company:</label>
             <input type="text" name="interest" id="" />
           </div>
           <textarea class="textarea-infoProject" placeholder="Your Projects..." id="" name="" rows="6"></textarea>
@@ -109,17 +120,54 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, onMounted, onUpdated, ref } from 'vue'
+import { getFields } from '~/api/Fields'
+import { Fields } from '~/models/Fields'
 let exInfo = ref(true)
-const avatarImage =
+
+let fullname = ref('')
+let gender = ref('')
+let birth = ref('')
+let phone = ref('')
+let address = ref('')
+let email = ref('')
+let interest = ref('')
+let linkAvatar = ref('')
+
+const ResearchArea = ref([])
+const Degree = ref([])
+
+// let linkAvatar = ref('')
+// let linkAvatar = ref('')
+// let linkAvatar = ref('')
+// let linkAvatar = ref('')
+
+let avatarImage =
   'https://st2.depositphotos.com/2777531/6506/v/450/depositphotos_65061729-stock-illustration-man-avatar-user-picture.jpg'
+
+let aavatarImage = computed(() => {
+  return linkAvatar.value
+})
+let changeimg = ref(true)
+const changeImgAvatar = () => {
+  changeimg.value = false
+  avatarImage = linkAvatar.value
+}
+
+const DegreeArr = ref<String[]>([])
+const GenderArr = ref<String[]>([])
+const fieldsArr = ref<Fields[]>([])
+onMounted(async () => {
+  fieldsArr.value = await getFields()
+  DegreeArr.value = ['PGS', 'TS', 'ThS', 'Cử nhân']
+  GenderArr.value = ['Male', 'Female', 'Other']
+})
 </script>
 <style lang="scss">
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  // font-family: ;
 }
 :root {
   --main-color: #b9cec7;
@@ -191,7 +239,7 @@ const avatarImage =
   display: flex;
   background-color: var(--main-color);
   border-radius: 10px;
-  min-height: 300px;
+  min-height: 500px;
   padding: 50px;
 }
 
@@ -241,7 +289,7 @@ const avatarImage =
 }
 .label-form {
   margin-top: 4px;
-  min-width: 96px;
+  min-width: 115px;
   text-align: left;
 }
 .Info-block3-bottom-part input,
@@ -252,7 +300,7 @@ const avatarImage =
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 7px;
-  height: 30px;
+  height: 40px;
   flex: 1;
   padding-left: 5px;
 }
@@ -300,7 +348,7 @@ const avatarImage =
 }
 .Info-block3-bottom-part {
   display: flex;
-  height: 80px;
+  height: 100px;
   justify-content: flex-start;
 }
 .Infor-block3-column {

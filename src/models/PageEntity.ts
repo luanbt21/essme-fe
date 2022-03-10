@@ -10,6 +10,7 @@ export interface PageEntity<T> {
   last:             boolean;
   numberOfElements: number;
   empty:            boolean;
+  name:             string;
 }
 
 export interface Pageable {

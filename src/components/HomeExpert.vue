@@ -26,7 +26,7 @@
                     <img
                       src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg"
                       class="image rounded-3xl"
-                      style="width: 220px; height: 300px"
+                      style="width: 220px; height: 300px; border-radius: 10px"
                   /></el-link>
                 </router-link>
               </el-card>
@@ -64,7 +64,20 @@
                   </h2>
                   <!-- v-for="(field, index) in expert._source.google_scholar_fields.fields" :key="index" -->
                   <div class="flex">
-                    <a class="mt-2 text-gray-500 overflow-hidden">Lĩnh vực: {{ expert.research_area }}</a>
+                    <div class="w-20">Lĩnh vực:</div>
+                    <span>
+                      <a
+                        class="mt-2 text-gray-500 overflow-hidden"
+                        v-for="(number, index) of expert?.research_area"
+                        :key="index"
+                      >
+                        {{
+                          index < expert?.research_area.length - 1 && expert?.research_area.length > 1
+                            ? number + ','
+                            : number
+                        }}
+                      </a>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -74,7 +87,7 @@
       </el-row>
 
       <div class="text-center">
-        <router-link to="/experts" custom v-slot="{ navigate, href }">
+        <router-link to="/allexperts" custom v-slot="{ navigate, href }">
           <el-link type="primary" :href="href" @click="navigate">View all Experts</el-link>
         </router-link>
       </div>
@@ -93,7 +106,7 @@ const homepage = ref<Homepage>()
 onMounted(async () => {
   homepage.value = await getHomepage()
   expertArr.value = homepage.value.top_experts
-  console.log(window.innerWidth)
+  console.log(expertArr.value)
 })
 // catch expert_id
 const store = useStore()
