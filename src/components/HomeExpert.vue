@@ -26,7 +26,7 @@
                     <img
                       src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg"
                       class="image rounded-3xl"
-                      style="width: 220px; height: 300px"
+                      style="width: 220px; height: 300px; border-radius: 10px"
                   /></el-link>
                 </router-link>
               </el-card>
