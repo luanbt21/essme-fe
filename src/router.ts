@@ -44,7 +44,8 @@ const router = createRouter({
       props: route => ({
         what: route.query.what,
         where: route.query.where,
-        page: route.query.page ? parseInt(route.query.page as string) : 1
+        page: route.query.page ? parseInt(route.query.page as string) : 1,
+        types: route.query.types
       })
     },
     {
@@ -90,17 +91,17 @@ const router = createRouter({
     {
       path: '/questionSheet',
       name: 'questionSheet',
-      component: () => import('~/views/QuestionSheet.vue'),
+      component: () => import('~/views/QuestionSheet.vue')
     },
     {
       path: '/FQAs',
       name: 'FQAs',
-      component: () => import('~/views/FQAs.vue'),
+      component: () => import('~/views/FQAs.vue')
     },
     {
       path: '/FQAs/:id',
       name: 'FQAanswer',
-      component: () => import('~/views/FQAanswer.vue'),
+      component: () => import('~/views/FQAanswer.vue')
     },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('~/views/NotFound.vue') }
   ],

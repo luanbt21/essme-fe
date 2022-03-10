@@ -39,6 +39,7 @@ declare module 'vue' {
     ElTag: typeof import('element-plus/es')['ElTag']
     ElUpload: typeof import('element-plus/es')['ElUpload']
     EventItem: typeof import('./src/components/EventItem.vue')['default']
+    EventPageBody: typeof import('./src/components/EventPageBody.vue')['default']
     ExpertPage: typeof import('./src/components/ExpertDetail/ExpertPage.vue')['default']
     ExpertpageAll: typeof import('./src/components/ExpertpageAll.vue')['default']
     FieldsEvent: typeof import('./src/components/FieldsEvent.vue')['default']
