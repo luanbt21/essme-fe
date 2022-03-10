@@ -27,6 +27,7 @@ declare module 'vue' {
     ElRow: typeof import('element-plus/es')['ElRow']
     ElTag: typeof import('element-plus/es')['ElTag']
     EventItem: typeof import('./src/components/EventItem.vue')['default']
+    EventPageBody: typeof import('./src/components/EventPageBody.vue')['default']
     ExpertItemOrderPage: typeof import('./src/components/ExpertDetail/expertItemOrderPage.vue')['default']
     ExpertPage: typeof import('./src/components/ExpertDetail/ExpertPage.vue')['default']
     ExpertpageAll: typeof import('./src/components/ExpertpageAll.vue')['default']

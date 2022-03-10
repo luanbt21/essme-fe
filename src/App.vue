@@ -1,7 +1,7 @@
 <template>
   <el-config-provider :locale="lang">
     <HomeHeader />
-    <router-view :key="$route.fullPath" />
+    <router-view  />
   </el-config-provider>
   <!-- <Testhomepageapi /> -->
 </template>
