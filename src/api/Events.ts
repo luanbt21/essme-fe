@@ -4,11 +4,35 @@ import { PageEntity } from '~/models/PageEntity'
 
 const apiUrl = 'events'
 
-export const searchEvents = async (limit = 20 ): Promise<PageEntity<Event>> => {
+export interface TypeCount {
+  _id: string
+  quantity: number
+}
+
+export const getEventTypes = async (): Promise<TypeCount[]> => {
+  try {
+    const res = await axios.get(`${apiUrl}/type`)
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}
+
+export const searchEvents = async (
+  what?: string,
+  where?: string,
+  types?: string,
+  page = 1,
+  size = 6
+): Promise<PageEntity<Event>> => {
   try {
     const res = await axios.get(`${apiUrl}/search`, {
       params: {
-        limit
+        what,
+        where,
+        types,
+        page: page - 1,
+        size
       }
     })
     return res.data

@@ -51,7 +51,14 @@
 
           <li class="nav_bar_res_li nav_bar_res_li-hover"><a href="" class="nav_respon--link">Expert</a></li>
           <ul>
-            <li class="nav_bar_res_li nav_bar_res_li-hover"><a class="sub_nav_res-list" href="">FQAs</a></li>
+            <li class="nav_bar_res_li nav_bar_res_li-hover">
+              <router-link to="/FQAs">
+              <div>
+              <a class="sub_nav_res-list" href="">FQAs</a>
+            </div>
+            </router-link>
+            </li>
+            
             <li class="nav_bar_res_li nav_bar_res_li-hover"><a class="sub_nav_res-list" href="">Order Expert</a></li>
             <li class="nav_bar_res_li nav_bar_res_li-hover"><a class="sub_nav_res-list" href="">Expert Info</a></li>
           </ul>
@@ -84,9 +91,15 @@
         >
       </div>
       <div class="nav-dropdown-content border-radius-up border-radius-down">
-        <a class="border-radius-up">Profile Settings</a>
-        <a>History</a>
-        <a @click="handleClick" class="border-radius-down">Log out</a>
+        <router-link class="mb-[-15px]" to="/ExpertOrCustomerStatus">
+          <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>Profile Settings</p></div>
+        </router-link>
+        <router-link class="mb-[-15px]" to="/FQAs">
+          <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>History</p></div>
+        </router-link>
+        <router-link class="mb-[-15px]" to="/FQAs">
+          <div @click="handleClick" class="border-radius-up hover:cursor-pointer leading-loose ml-[3px] mb-[15px]"><p>Log out</p></div>
+        </router-link>
       </div>
     </div>
 
@@ -99,9 +112,13 @@
 
     <div class="nav-dropdown nav__bars-noneresponsive item">
       <button class="nav-dropbtn">Languages</button>
-      <div class="nav-dropdown-content border-radius-up border-radius-down">
-        <a class="border-radius-up">English</a>
-        <a class="border-radius-down">Tiếng Việt</a>
+      <div class="hover:cursor-pointer nav-dropdown-content border-radius-up border-radius-down">
+        <router-link class="mb-[-15px]" to="/FQAs">
+          <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>English</p></div>
+        </router-link>
+        <router-link class="mb-[-15px]" to="/FQAs">
+          <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px] mb-[15px]"><p>Tiếng Việt</p></div>
+        </router-link>
       </div>
     </div>
 
@@ -114,12 +131,18 @@
       <router-link to="/events"><button class="nav-dropbtn">Events</button></router-link> 
     </div>
 
-    <div class="nav-dropdown nav__bars-noneresponsive item">
+    <div  class="nav-dropdown nav__bars-noneresponsive item">
       <button class="nav-dropbtn">Expert</button>
       <div class="nav-dropdown-content border-radius-up border-radius-down">
-        <a class="border-radius-up">FQAs</a>
-        <a>Order Expert</a>
-        <a class="border-radius-down">Expert Info</a>
+        <router-link class="mb-[-15px]" to="/FQAs">
+        <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>FQAs</p></div>
+        </router-link>
+        <router-link class="mb-[-15px]" to="/OrderExpert">
+        <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>Order Expert</p></div>
+        </router-link>
+        <router-link class="mb-[-15px]" to="/allexperts">
+        <div class="border-radius-up hover:cursor-pointer  leading-loose ml-[3px] mb-[15px]"><p>Expert Info</p></div>
+        </router-link>
       </div>
     </div>
     <div class="nav-dropdown nav__bars-noneresponsive item">
@@ -131,7 +154,7 @@
 
 <script setup lang="ts">
 import { useStore } from '~/store/index'
-import { computed, onUpdated } from 'vue'
+import { computed, onMounted, onUpdated } from 'vue'
 import axios from 'axios'
 import { __baseURL } from '~/constant'
 const store = useStore()
@@ -148,7 +171,6 @@ onUpdated(async () => {
     "Authorization": `Bearer ${token.value}`,
   };
   await axios.post("/news", {
-  stt: "string",
   img: "string",
   tag: "string",
   title: "string",
@@ -185,7 +207,7 @@ console.log(axios.defaults.headers )
   /* background-color: #d4d7de; */
   /* width: 90%; */
   /* height: 70px; */
-  z-index: 1;
+  z-index: 1000;
   top: 0.3cm;
   margin: 0 auto; /* Căn giữa block element */
   width: 95%;
@@ -256,7 +278,7 @@ console.log(axios.defaults.headers )
 
 /* / * Thay đổi định dạng của liên kết thả xuống khi di chuột qua * / */
 .nav-dropdown-content a:hover {
-  background-color: var(--btncolor);
+  /* background-color: var(--btncolor); */
   color: white;
 }
 

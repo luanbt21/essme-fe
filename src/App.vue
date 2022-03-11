@@ -1,7 +1,7 @@
 <template>
   <el-config-provider :locale="lang">
     <HomeHeader />
-    <router-view :key="$route.fullPath" />
+    <router-view  />
   </el-config-provider>
   <!-- <Testhomepageapi /> -->
 </template>
@@ -46,7 +46,6 @@ onMounted(() => {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 #app {
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;

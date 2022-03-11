@@ -85,21 +85,18 @@ const restore = async () => {
   }
 }
 
-const deleteBackup = async (filename: string): Promise<boolean> => {
+const deleteBackup = async (filename: string) => {
   try {
     const status: boolean = await Backup.deleteBackup(filename)
     listBackup()
     if (status) {
       ElMessage.success({ showClose: true, message: `Backup deleted: ${filename}`, center: true })
-      return true
     } else {
       ElMessage.error({ message: 'Could not delete backup', center: true })
-      return false
     }
   } catch (error) {
     const err = <Error>error
     ElMessage.error({ message: err.message, center: true })
-    return false
   }
 }
 

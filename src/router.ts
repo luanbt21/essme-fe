@@ -9,7 +9,6 @@ const router = createRouter({
       component: () => import('~/views/Home.vue')
     },
 
-
     {
       path: '/expert/:id',
       name: 'expert',
@@ -19,9 +18,7 @@ const router = createRouter({
         where: route.query.where,
         page: route.query.page ? parseInt(route.query.page as string) : 1
       })
-   
     },
-
     {
       path: '/news',
       alias: '/news/:id',
@@ -47,7 +44,16 @@ const router = createRouter({
       props: route => ({
         what: route.query.what,
         where: route.query.where,
-        page: route.query.page ? parseInt(route.query.page as string) : 1
+        page: route.query.page ? parseInt(route.query.page as string) : 1,
+        types: route.query.types
+      })
+    },
+    {
+      path: '/events/:id',
+      name: 'eventDetail',
+      component: () => import('~/views/EventDetail.vue'),
+      props: route => ({
+        id: route.params.id
       })
     },
     {
@@ -75,48 +81,86 @@ const router = createRouter({
       path: '/allexperts',
       name: 'allexperts',
       component: () => import('~/views/ExpertPage.vue'),
-      props: true
+      props: route => ({
+        what: route.query.what,
+        where: route.query.where,
+        page: route.query.page ? parseInt(route.query.page as string) : 1
+      })
     },
     {
       path: '/admin',
       name: 'admin',
       component: () => import('~/views/Admin.vue')
     },
+    {
+      path: '/questionSheet',
+      name: 'questionSheet',
+      component: () => import('~/views/QuestionSheet.vue')
+    },
+    {
+      path: '/FQAs',
+      name: 'FQAs',
+      component: () => import('~/views/FQAs.vue')
+    },
+    {
+      path: '/FQAs/:id',
+      name: 'FQAanswer',
+      component: () => import('~/views/FQAanswer.vue')
+    },
+    {
+      path: '/ExpertOrCustomerStatus',
+      name: 'ExpertOrCustomerStatus',
+      component: () => import('~/views/ExpertOrCustomerStatus.vue'),
+    },
+    {
+      path: '/OrderExpert',
+      name: 'ExpertOrder',
+      component: () => import('~/views/ExpertOrder.vue'),
+    },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('~/views/NotFound.vue') }
   ],
-  scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition
-    }
-    if (from.path === '/events' && to.path === '/events') {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve({ el: '#map', top: 200, behavior: 'smooth' })
-        }, 400)
-      })
 
-    
-    
 
-    return { top: 0 }
-  }
   // scrollBehavior(to, from, savedPosition) {
   //   if (savedPosition) {
   //     return savedPosition
   //   }
-  //   if (from.path === '/expert/:id' && to.path === '/expert/:id') {
+  //   if (from.path === '/events' && to.path === '/events') {
   //     return new Promise((resolve, reject) => {
   //       setTimeout(() => {
   //         resolve({ el: '#map', top: 200, behavior: 'smooth' })
   //       }, 400)
   //     })
 
-    
-    
+
+
 
   //   return { top: 0 }
   // }
-}}
-)
 
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    }
+    else {
+      {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve({ el: '#map', top: 200, behavior: 'smooth' })
+          }, 400)
+        })
+
+
+
+
+        return { top: 0 }
+      }
+
+    }
+
+
+
+  }
+}
+)
 export default router
