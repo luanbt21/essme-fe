@@ -12,9 +12,9 @@
       />
     </div>
     <!-- <DemoVue /> -->
-    <HomeEventsVue />
     <HomeExpert />
     <HomeFields />
+    <HomeEventsVue />
     <HomeNews />
     <HomeFQAs />
     <br />
