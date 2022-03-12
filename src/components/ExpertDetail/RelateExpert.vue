@@ -46,7 +46,6 @@ const types = computed(() => {
       for (var j = 0; j < experts.research_area.length; j++) {
         if (expert.value?.research_area[i] === experts.research_area[j]) {
           result.push(experts)
-          console.log(expert.value?.research_area[i])
         }
       }
     }

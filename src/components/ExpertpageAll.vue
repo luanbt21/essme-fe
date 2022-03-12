@@ -13,7 +13,7 @@
 
   <div class="mt-5 w-[95%] mx-auto justify-center"></div>
   <div>
-    <!-- <Mapbox :data="mapData" /> -->
+    <Mapbox :data="mapData" />
   </div>
   <div class="mt-5 ml-11 w-[95%] flex justify-center">
     <el-row :gutter="20" class="flex" viewClass="yf-content" wrapClass="yf-container">
