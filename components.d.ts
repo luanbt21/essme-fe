@@ -31,6 +31,7 @@ declare module 'vue' {
     EventItem: typeof import('./src/components/EventItem.vue')['default']
     FieldsEvent: typeof import('./src/components/FieldsEvent.vue')['default']
     FieldsResults: typeof import('./src/components/FieldsResults.vue')['default']
+    Footer: typeof import('./src/components/tkhuyen/Footer.vue')['default']
     HomeEvents: typeof import('./src/components/HomeEvents.vue')['default']
     HomeExpert: typeof import('./src/components/HomeExpert.vue')['default']
     HomeFields: typeof import('./src/components/HomeFields.vue')['default']
