@@ -6,8 +6,7 @@
         <el-col :xs="24" :sm="12" :lg="8" v-for="fields in fieldsArr" :key="fields.name">
           <router-link to="/fields">
             <img
-              :src="fields.image"
-              alt=""
+              :src="fields.image" alt="
               class="w-80 h-52 cover mb-5 mt-5 ml-auto mr-auto md:hover:scale-105 hover:duration-500 cursor-pointer rounded-2xl"
             />
           </router-link>
