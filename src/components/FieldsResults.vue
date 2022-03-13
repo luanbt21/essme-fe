@@ -7,7 +7,7 @@
           <el-row :xs="24" :sm="12" :lg="8" v-for="experts in expertsArr" :key="experts._id">
             <el-col :span="5">
               <img :src="experts.img" alt="" v-if="null" class="w-60 cover mb-5 mt-5 ml-auto mr-auto cursor-pointer rounded-2xl">
-              <img src="src/assets/avt.jpg" alt="" v-else class="w-60 cover mb-5 mt-5 ml-auto mr-auto cursor-pointer rounded-2xl">
+              <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.yan.vn%2Ffacebook-cap-nhat-avatar-doi-voi-tai-khoan-khong-su-dung-anh-dai-dien-258357.html&psig=AOvVaw0hLRVOh01DT-DTPtucrqvS&ust=1647231925385000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNCMsqCfwvYCFQAAAAAdAAAAABAI" alt="" v-else class="w-60 cover mb-5 mt-5 ml-auto mr-auto cursor-pointer rounded-2xl">
             </el-col>
             <el-col :span="10" :gutter="30">
               <el-row class="mt-9 ml-8 text-xl">Name: {{ experts.name }}</el-row>
