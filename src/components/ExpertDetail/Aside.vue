@@ -1,7 +1,7 @@
 <template>
   <el-aside class="rounded-xl m-5 text-[21px] bg-[#d1e0db] h-auto w-full lg:w-[600px]">
     <img
-      :src="expert?.img ? expert.img : avatar"
+      :src="expert?.image ? expert.image : avatar"
       :alt="expert?.name + ' image'"
       class="w-[235px] h-72 rounded-xl mx-8 my-5"
     />
