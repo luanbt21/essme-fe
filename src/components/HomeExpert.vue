@@ -24,18 +24,10 @@
                 <router-link v-bind:to="'/expert/' + expert._id" custom v-slot="{ navigate, href }">
                   <el-link type="primary" :href="href" @click="navigate">
                     <img
-                      v-if="expert.img != null"
-                      :src="expert.img"
-                      class="image rounded-3xl"
-                      style="width: 220px; height: 300px; border-radius: 10px"
-                    />
-                    <img
-                      v-else
                       src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg"
                       class="image rounded-3xl"
                       style="width: 220px; height: 300px; border-radius: 10px"
-                    />
-                  </el-link>
+                  /></el-link>
                 </router-link>
               </el-card>
             </template>
@@ -46,10 +38,10 @@
               <div class="md:flex">
                 <div class="md:shrink-0">
                   <img
-                    v-if="expert.img"
+                    v-if="expert.image"
                     class="h-48 w-full object-cover md:h-full md:w-48"
                     alt="avatar"
-                    :src="expert.img"
+                    :src="expert.image"
                   />
 
                   <img
