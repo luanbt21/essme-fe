@@ -3,7 +3,7 @@
 export interface Experts {
     score: number;
     _id: string;
-    image: string;
+    img: string;
     other_link: string;
     address: any;
     gender: number;

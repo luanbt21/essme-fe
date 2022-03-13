@@ -4,7 +4,13 @@
   >
     <div class="md:flex">
       <div class="md:shrink-0">
-        <img v-if="expert.image" class="h-48 w-full object-cover md:h-full md:w-48" alt="avatar" :src="expert.image" />
+        <img
+          v-if="expert.img"
+          style="height: 300px"
+          class="h-48 w-full object-cover md:h-full md:w-48"
+          alt="avatar"
+          :src="expert.img"
+        />
 
         <img
           v-else
