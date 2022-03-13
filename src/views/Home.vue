@@ -14,8 +14,9 @@
     <!-- <DemoVue /> -->
     <HomeExpert />
     <HomeFields />
-    <HomeEventsVue />
     <HomeNews />
+    <HomeEventsVue />
+
     <HomeFQAs />
     <br />
 
