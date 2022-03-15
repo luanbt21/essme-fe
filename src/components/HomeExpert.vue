@@ -41,6 +41,7 @@
                     v-if="expert.img"
                     class="h-48 w-full object-cover md:h-full md:w-48"
                     alt="avatar"
+                    style="height: 200px"
                     :src="expert.img"
                   />
 
@@ -66,7 +67,8 @@
                   <div class="flex">
                     <div class="w-20">Lĩnh vực:</div>
                     <span>
-                      <a
+                      <span
+                        style="display: block; margin-right: -5px"
                         class="mt-2 text-gray-500 overflow-hidden"
                         v-for="(number, index) of expert?.research_area"
                         :key="index"
@@ -76,7 +78,7 @@
                             ? number + ','
                             : number
                         }}
-                      </a>
+                      </span>
                     </span>
                   </div>
                 </div>
@@ -106,7 +108,7 @@ const homepage = ref<Homepage>()
 onMounted(async () => {
   homepage.value = await getHomepage()
   expertArr.value = homepage.value.top_experts
-  console.log(expertArr.value)
+  // console.log(expertArr.value)
 })
 // catch expert_id
 const store = useStore()

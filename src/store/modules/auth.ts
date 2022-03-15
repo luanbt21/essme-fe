@@ -23,6 +23,8 @@ export interface Auth {
 
   userid: string
 
+  image: string
+
 }
 
 
@@ -34,6 +36,7 @@ const state = () => ({
     accessToken: ''
   },
   userid: '',
+  image: ''
 })
 
 const getters = {
@@ -61,6 +64,7 @@ const actions = {
       .then((result) => {
         // const token = GoogleAuthProvider.credentialFromResult(result)?.idToken
         const user = result.user;
+
         return { user: user }
       }).catch((error) => {
         const errorCode = error.code;
@@ -76,9 +80,12 @@ const actions = {
       const user = res.user
       const token = await res.user.getIdToken(true)
       const userid = user.uid
-      console.log(user)
-      console.log(user.uid)
-      commit('setUser', { user, token, userid })
+      let image = user.photoURL
+      // console.log(user)
+      // console.log(user.uid)
+      commit('setUser', { user, token, userid, image })
+      axios.defaults.headers.common['Authorization'] = 'Bearer' + token
+
     } else {
       throw new Error('could not complete login')
     }
@@ -95,17 +102,24 @@ const actions = {
 }
 
 const mutations = {
-  setUser(state: Auth, { user, token, userid }: { user: object, token: string, userid: string }) {
+  setUser(state: Auth, { user, token, userid, image }: { user: object, token: string, userid: string, image: string }) {
     state.user = user
     state.token = token
     state.userid = userid
+    state.image = image
     // console.log('user state changed:', state)
   },
   setUser1(state: Auth, user: object) {
     state.user = user
   },
-  setAuthIsReady(state: Auth, authIsReady: boolean) {
+  setAuthIsReady(state: Auth, { authIsReady, user, token, image, userid }: {
+    authIsReady: boolean, user: Object, token: string, image: string, userid: string
+  }) {
     state.authIsReady = authIsReady
+    state.user = user
+    state.token = token
+    state.image = image
+    state.userid = userid
   },
   setTokenID(state: Auth, token: string) {
     state.token = token
@@ -113,9 +127,16 @@ const mutations = {
 }
 
 // wait until auth is ready
-const unsub = onAuthStateChanged(auth, (user) => {
-  store.commit('auth/setAuthIsReady', true)
-  store.commit('auth/setUser1', user)
+const unsub = onAuthStateChanged(auth, async (user) => {
+  let authState = true
+  let token = await user?.getIdToken(true)
+  let image = user?.photoURL
+  let userid = user?.uid
+  store.commit('auth/setAuthIsReady', { authState, user, token, image, userid })
+  // console.log(token);
+
+  // axios.defaults.headers.common['Authorization'] = 'Bearer' + token
+
   unsub()
 })
 

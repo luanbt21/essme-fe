@@ -39,6 +39,6 @@ import { Question } from '~/models/question'
 const questionArr = ref<Question[]>([])
 onMounted(async () => {
   questionArr.value = await getQuestion(3)
-  console.log(questionArr.value)
+  // console.log(questionArr.value)
 })
 </script>

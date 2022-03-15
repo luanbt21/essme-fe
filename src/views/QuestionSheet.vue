@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="relative w-[97%] min-w-[800px] z-1 mt-[-100px] bg-slate-200 rounded-[40px] p-[50px] flex flex-col">
     <div>
       <div class="text-2xl mb-[40px]">Ask a public question</div>
@@ -6,11 +6,11 @@
     <div class="bg-purple">
       <el-row>
         <el-col :span="17"
-          ><div style="border-radius: 15px" class="grid-content bg-indigo-200 p-[20px]">
+          ><div style="border-radius: 15px" class="grid-content bg-[#b9cec7] p-[20px]">
             <div>
               <label class="text-xl font-bold" for="field">Fields</label>
               <p>Choose the field which you want to ask about</p>
-              <el-select style="width: 100%" v-model="value" placeholder="Select" size="large">
+              <el-select style="width: 100%" v-model="field" placeholder="Select" size="large">
                 <el-option v-for="fields in fieldsArr" :key="fields.name" :label="fields.name" :value="fields.name">
                 </el-option>
               </el-select>
@@ -18,7 +18,7 @@
             <div class="mt-[25px]">
               <label class="text-xl font-bold mb-[100px]" for="field">Your Question</label>
               <el-input
-                v-model="textarea2"
+                v-model="contentQuestion"
                 :autosize="{ minRows: 4, maxRows: 8 }"
                 type="textarea"
                 placeholder="Please input"
@@ -28,14 +28,20 @@
         ></el-col>
         <el-col :span="7">
           <div class="flex flex-col p-[20px]">
-            <div class="mb-[10px]">
-              <el-button class="w-[100%]" type="primary">Find question</el-button>
+            <div class="mb-[10px] text-black">
+              <el-button color="#b9cec7" class="w-[100%] text-black" type="primary"
+                ><span class="text-black">Find question</span></el-button
+              >
             </div>
             <div class="mb-[10px]">
-              <el-button class="w-[100%]" type="primary">Find expert</el-button>
+              <el-button color="#b9cec7" class="w-[100%]" type="primary"
+                ><span class="text-black">Find expert</span></el-button
+              >
             </div>
             <div class="mb-[10px]">
-              <el-button class="w-[100%]" type="primary">News</el-button>
+              <el-button color="#b9cec7" class="w-[100%]" type="primary"
+                ><span class="text-black">News</span></el-button
+              >
             </div>
           </div>
         </el-col>
@@ -66,12 +72,45 @@ import { getFields } from '~/api/Fields'
 import { Question } from '~/models/Question'
 import { getQuestion } from '~/api/Question'
 import FQAitem from '~/components/FQAitem.vue'
+import axios from 'axios'
+import { useStore } from '~/store/index'
+const store = useStore()
+
+const handlePost = async () => {
+  const headers = {
+    Authorization: `Bearer ${store.state.auth.token}`
+  }
+//   try {
+//     if (exInfo.value) {
+//       await axios.post(
+//         '/experts',
+//         {
+//           Description: string,
+//           Customer_id: string,
+//           Admin_id: string,
+//           answers: [],
+//           Title: string,
+//           Topic: [string],
+//           vote: 0,
+//           uid: string
+//         },
+//         {
+//           headers
+//         }
+//       )
+//     } else {
+//     }
+//   } catch (error) {
+//     failLog.value = true
+//   }
+// }
+
 const FQAs = ref<Question[]>([])
 const fieldsArr = ref<Fields[]>([])
 onMounted(async () => {
   fieldsArr.value = await getFields()
   FQAs.value = await getQuestion(30)
 })
-const textarea2 = ref('')
-const value = ref([])
-</script>
+const contentQuestion = ref('')
+const field = ref('')
+</script> -->
