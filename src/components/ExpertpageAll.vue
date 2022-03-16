@@ -142,7 +142,7 @@ const typesSelect = ref('')
 
 const experts = computed(() => {
   if (typesSelect.value === '') {
-    return expertsTopData.value
+    return expertsData.value
   } else {
     return expertsData.value.filter(expert => {
       return expert.address.includes(typesSelect.value)
@@ -177,22 +177,19 @@ const mapData = computed(
   // )
 )
 onMounted(async () => {
-  // expertsPage.value = await searchExperts(props.what, props.where, props.page, pageSize)
   expertsPage.value = await searchExperts(props.what, props.where, props.page, pageSize)
   expertsTop.value = await getExpertstop(20, 1)
-  console.log(experts.value)
 })
-const handleSearch = (what: string, where: string) => {
-  router.push({
-    name: 'allexperts',
-    query: {
-      what,
-      where,
-
-      page: 1
-    }
-  })
-}
+  const handleSearch = (what: string, where: string) => {
+    router.push({
+      name: 'allexperts',
+      query: {
+        what,
+        where,
+        page: 1
+      }
+    })
+  }
 </script>
 
 <style scoped>
