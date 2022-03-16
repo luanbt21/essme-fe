@@ -12,7 +12,6 @@
               <p>Choose the field which you want to ask about</p>
 
               <el-select-v2
-                @change="clog()"
                 v-model="field"
                 filterable
                 :options="
@@ -79,18 +78,21 @@
       </el-row>
     </div>
     <div class="mt-[10px]">
-      <el-button @click="handlePost()" color="#626aef" size="large" style="color: white">Post your question</el-button>
+      <el-button @click="handlePost(), (centerDialogVisible = true)" color="#626aef" size="large" style="color: white"
+        >Post your question</el-button
+      >
     </div>
 
     <!-- thông báo save thành công -->
     <el-dialog v-model="centerDialogVisible" title="Warning" width="30%" center>
       <span v-if="failLog">Fail to update your profile!</span>
+      <span v-if="!isLogin">Sign in to post question!</span>
       <span v-else>Update your profile successfully!</span>
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="centerDialogVisible = false">Return</el-button>
           <router-link to="/">
-            <el-button type="primary" @click="handlePost(), (centerDialogVisible = true)">Back to Homepage</el-button>
+            <el-button type="primary">Back to Homepage</el-button>
           </router-link>
         </span>
       </template>
@@ -165,9 +167,4 @@ onMounted(async () => {
 const contentQuestion = ref('')
 const field = ref<String[]>([])
 const title = ref('')
-
-// hamf test
-const clog = () => {
-  console.log(field.value)
-}
 </script>
