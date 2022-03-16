@@ -4,7 +4,7 @@
     <Mapbox />
     <FieldsResults />
     <FieldsEvent />
-    <HomeNews />
+    <HomeNews class="mt-10" />
   </div>
   <div class="relative w-full min-w-[800px] mt-20">
     <Footer />

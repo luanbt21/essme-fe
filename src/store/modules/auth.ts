@@ -3,8 +3,11 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, on
 import { Commit } from 'vuex'
 import { store } from '../index'
 import axios from 'axios'
+import * as firebase from 'firebase/app';
 
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { accessToken } from 'mapbox-gl'
+import { stat } from 'fs'
 
 const provider = new GoogleAuthProvider();
 // const store = useStore()
@@ -18,6 +21,8 @@ export interface Auth {
 
   token: string
 
+  userid: string
+
 }
 
 
@@ -27,7 +32,8 @@ const state = () => ({
   token: '',
   user: {
     accessToken: ''
-  }
+  },
+  userid: '',
 })
 
 const getters = {
@@ -53,9 +59,9 @@ const actions = {
 
     const res = await signInWithPopup(auth, provider)
       .then((result) => {
-        const token = GoogleAuthProvider.credentialFromResult(result)?.idToken
+        // const token = GoogleAuthProvider.credentialFromResult(result)?.idToken
         const user = result.user;
-        return { user: user, token: token }
+        return { user: user }
       }).catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -68,8 +74,11 @@ const actions = {
       });
     if (res) {
       const user = res.user
-      const token = res.token
-      commit('setUser', { user, token })
+      const token = await res.user.getIdToken(true)
+      const userid = user.uid
+      console.log(user)
+      console.log(user.uid)
+      commit('setUser', { user, token, userid })
     } else {
       throw new Error('could not complete login')
     }
@@ -86,10 +95,11 @@ const actions = {
 }
 
 const mutations = {
-  setUser(state: Auth, { user, token }: { user: object, token: string }) {
+  setUser(state: Auth, { user, token, userid }: { user: object, token: string, userid: string }) {
     state.user = user
     state.token = token
-    console.log('user state changed:', state)
+    state.userid = userid
+    // console.log('user state changed:', state)
   },
   setUser1(state: Auth, user: object) {
     state.user = user

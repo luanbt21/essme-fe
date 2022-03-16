@@ -32,13 +32,13 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { getNews } from '~/api/News'
+import { getNewsHome } from '~/api/News'
 import { News } from '~/models/News'
 import NewsItem from './NewsItem.vue'
 
 const newsArr = ref<News[]>([])
 
 onMounted(async () => {
-  newsArr.value = await getNews(6, 0)
+  newsArr.value = await getNewsHome(9)
 })
 </script>
