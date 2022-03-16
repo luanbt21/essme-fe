@@ -125,16 +125,16 @@
         </router-link>
       </div>
     </div>
-
-    <div class="nav-dropdown nav__bars-noneresponsive item">
-      <router-link to="/news"><button class="nav-dropbtn">News</button></router-link> 
-    </div>
-
-
-    <div class="nav-dropdown nav__bars-noneresponsive item">
-      <router-link to="/events"><button class="nav-dropbtn">Events</button></router-link> 
-    </div>
-
+    <router-link to="/news">
+        <div class="nav-dropdown nav__bars-noneresponsive item">
+          <button class="nav-dropbtn">News</button>
+        </div>
+    </router-link>
+    <router-link to="/events">
+        <div class="nav-dropdown nav__bars-noneresponsive item">
+          <button class="nav-dropbtn">Events</button>
+        </div>
+    </router-link>
     <div  class="nav-dropdown nav__bars-noneresponsive item">
       <button class="nav-dropbtn">Expert</button>
       <div class="nav-dropdown-content border-radius-up border-radius-down">
@@ -149,9 +149,12 @@
         </router-link>
       </div>
     </div>
-    <div class="nav-dropdown nav__bars-noneresponsive item">
-        <router-link to="/"><button class="nav-dropbtn">Home</button></router-link>
-    </div>
+
+    <router-link to="/">
+      <div class="nav-dropdown nav__bars-noneresponsive item">
+        <button class="nav-dropbtn">Home</button>
+      </div>
+    </router-link>
   </div>
   <img class="nav-img" src="../../assets/carousel.png" alt="" />
 </template>
