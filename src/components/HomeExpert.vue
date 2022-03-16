@@ -18,6 +18,7 @@
             width="500px"
             placement="bottom-start"
             hide-after="50"
+            effect="dark"
           >
             <template #reference>
               <el-card :body-style="{ padding: '0px' }" class="mb-10 background-color-radius">

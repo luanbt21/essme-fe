@@ -2,9 +2,9 @@
   <div class="container m-auto min-w-[500px]">
     <div class="px-8 py-4 bg-[#D1E0DB] rounded-lg" style="padding-left: 5%; padding-right: 5%">
       <h1 class="text-center text-2xl mb-10">Experts</h1>
-      <el-row class="row-bg">
+      <el-row class="row-bg mb-10">
         <el-col
-          class="grid grid-content"
+          class="grid grid-content mb-10"
           v-for="expert in expertArr"
           :key="expert._id"
           :xs="12"
@@ -13,12 +13,12 @@
           :lg="6"
         >
           <div class="grid justify-evenly">
-            <el-popover trigger="hover" width="500px" placement="bottom-start" hide-after="50">
+            <el-popover placement="bottom-start" :width="500" trigger="hover" effect="#ECF4F1">
               <template #reference>
                 <div>
                   <router-link v-bind:to="'/expert/' + expert._id" custom v-slot="{ navigate, href }">
                     <el-link type="primary" :href="href" @click="navigate">
-                      <div class="h-[300px] w-[210px] mb-10">
+                      <div class="h-[300px] w-[210px]">
                         <img
                           :src="expert.img"
                           class="w-[210px] h-[300px] object-cover rounded-3xl"
@@ -30,9 +30,7 @@
                 </div>
               </template>
 
-              <div
-                class="m-[-50px] max-w-md mx-auto bg-white rounded-2xl shadow-md overflow-hidden md:max-w-lg md:hover:scale-105 hover:duration-500 bg-[#ECF4F1]"
-              >
+              <div class="max-w-md mx-auto rounded-xl shadow-md overflow-hidden md:max-w-lg">
                 <div class="md:flex">
                   <div class="md:shrink-0">
                     <img
@@ -63,7 +61,7 @@
                     </h2>
                     <!-- v-for="(field, index) in expert._source.google_scholar_fields.fields" :key="index" -->
                     <div class="flex">
-                      <div class="w-20">Lĩnh vực:</div>
+                      <div class="w-20 mt-[8px]">Lĩnh vực:</div>
                       <span>
                         <span
                           style="display: block; margin-right: -5px"
@@ -93,6 +91,10 @@
         </router-link>
       </div>
     </div>
+
+    <el-tooltip class="box-item" effect="#ECF4F1" content="Top Left prompts info" placement="top-start">
+      <el-button>top-start</el-button>
+    </el-tooltip>
   </div>
 </template>
 
@@ -120,18 +122,6 @@ const getIdExpert = (id: string) => {
 .word-break-keep-all {
   word-break: keep-all;
 }
-.img-w-h {
-  width: 220px;
-  height: 300px;
-}
-.background-color-radius {
-  background-color: #d1e0db;
-  border: none;
-  border-radius: 20px;
-  width: 220px;
-  margin: 0 auto 40px auto;
-}
-
 .el-col:last-child {
   display: none;
 }
