@@ -30,7 +30,7 @@
             <div class="row-input">
               <label class="label-form" for="">Gender:</label>
               <el-select style="width: 100%" v-model="gender" placeholder="Select" size="large">
-                <el-option v-for="gender in GenderArr" :value="gender"> </el-option>
+                <el-option v-for="gender in GenderArr" :label="gender.label" :value="gender.value"> </el-option>
               </el-select>
             </div>
             <div class="row-input">
@@ -53,13 +53,18 @@
               <label class="label-form" for="">Interest:</label>
               <input type="text" v-model="interest" id="" />
             </div>
+
             <div class="row-input">
               <label class="label-form" for="">Link avatar:</label>
               <input @change="changeImgAvatar()" type="text" v-model="linkAvatar" id="" />
             </div>
           </div>
         </div>
-        <div v-if="exInfo" class="field-info">
+        <div v-if="exInfo" class="field-info mb-[10px]">
+          <div class="row-input mb-[10px]">
+            <label class="label-form" for="">Link Profile:</label>
+            <input type="text" v-model="LinkProfile" id="" />
+          </div>
           <div class="row-input mb-[10px]">
             <label class="label-form" for="">Research area:</label>
             <el-select style="width: 100%" v-model="ResearchArea" placeholder="Select" size="large">
@@ -76,54 +81,44 @@
           </div>
           <div class="row-input mb-[10px]">
             <label class="label-form" for="">Company:</label>
-            <input type="text" name="interest" id="" />
-          </div>
-          <textarea class="textarea-infoProject" placeholder="Your Projects..." id="" name="" rows="6"></textarea>
-        </div>
-        <!-- block 3 -->
-        <div class="Info-block3">
-          <textarea
-            class="textarea-infoProject Info-block3-txtarea"
-            placeholder="Bio"
-            id=""
-            name=""
-            rows="6"
-          ></textarea>
-          <div class="Info-block3-bottom-part">
-            <div class="Infor-block3-column">
-              <div class="row-input">
-                <label class="label-form" for="">Website:</label>
-                <input type="text" name="" id="" placeholder="your link" />
-              </div>
-              <div class="row-input">
-                <label class="label-form" for="">Facebook:</label>
-                <input type="text" name="" id="" placeholder="your link" />
-              </div>
-            </div>
-            <div class="Infor-block3-column-2"></div>
-            <div class="Infor-block3-column">
-              <div class="row-input">
-                <label class="label-form" for="">Twitter:</label>
-                <input type="text" name="" id="" placeholder="your link" />
-              </div>
-              <div class="row-input">
-                <label class="label-form" for="">Linkedin:</label>
-                <input type="text" name="" id="" placeholder="your link" />
-              </div>
-            </div>
+            <input type="text" v-model="Company" name="interest" id="" />
           </div>
         </div>
-        <button class="btn-save">Save</button>
+
+        <el-button
+          size="large"
+          class="w-[200px] text-lg"
+          color="#b9cec7"
+          @click="handlePost(), (centerDialogVisible = true)"
+          type="primary"
+          ><span class="text-lg">Save</span></el-button
+        >
       </div>
       <!-- customerInfo -->
     </div>
+    <!-- thông báo save thành công -->
+    <el-dialog v-model="centerDialogVisible" title="Warning" width="30%" center>
+      <span v-if="failLog">Fail to update your profile!</span>
+      <span v-else>Update your profile successfully!</span>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="centerDialogVisible = false">Return</el-button>
+          <router-link to="/">
+            <el-button type="primary" @click="centerDialogVisible = false">Back to Homepage</el-button>
+          </router-link>
+        </span>
+      </template>
+    </el-dialog>
   </div>
 </template>
 <script setup lang="ts">
 import { computed, onMounted, onUpdated, ref } from 'vue'
 import { getFields } from '~/api/Fields'
 import { Fields } from '~/models/Fields'
+import { useStore } from '~/store/index'
+import axios from 'axios'
 let exInfo = ref(true)
+let centerDialogVisible = ref(false)
 
 let fullname = ref('')
 let gender = ref('')
@@ -137,10 +132,47 @@ let linkAvatar = ref('')
 const ResearchArea = ref([])
 const Degree = ref([])
 
+let Company = ref('')
+let LinkProfile = ref('')
 // let linkAvatar = ref('')
 // let linkAvatar = ref('')
-// let linkAvatar = ref('')
-// let linkAvatar = ref('')
+const store = useStore()
+const failLog = ref(false)
+const handlePost = async () => {
+  const headers = {
+    Authorization: `Bearer ${store.state.auth.token}`
+  }
+  try {
+    if (exInfo.value) {
+      await axios.post(
+        '/experts',
+        {
+          score: 0,
+          img: linkAvatar.value,
+          other_link: '',
+          address: [address.value],
+          gender: gender.value,
+          degree: Degree.value,
+          birth: birth.value,
+          phone: phone.value,
+          name: fullname.value,
+          research_area: [ResearchArea.value],
+          company: Company.value,
+          location: {},
+          email: email.value,
+          link_profile: LinkProfile.value,
+          uid: store.state.auth.userid
+        },
+        {
+          headers
+        }
+      )
+    } else {
+    }
+  } catch (error) {
+    failLog.value = true
+  }
+}
 
 let avatarImage =
   'https://st2.depositphotos.com/2777531/6506/v/450/depositphotos_65061729-stock-illustration-man-avatar-user-picture.jpg'
@@ -155,12 +187,24 @@ const changeImgAvatar = () => {
 }
 
 const DegreeArr = ref<String[]>([])
-const GenderArr = ref<String[]>([])
 const fieldsArr = ref<Fields[]>([])
+const GenderArr = [
+  {
+    value: '0',
+    label: 'Male'
+  },
+  {
+    value: '1',
+    label: 'Female'
+  },
+  {
+    value: '2',
+    label: 'Other'
+  }
+]
 onMounted(async () => {
   fieldsArr.value = await getFields()
   DegreeArr.value = ['PGS', 'TS', 'ThS', 'Cử nhân']
-  GenderArr.value = ['Male', 'Female', 'Other']
 })
 </script>
 <style lang="scss">

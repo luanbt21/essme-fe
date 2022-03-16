@@ -85,7 +85,11 @@
 
     <div v-if="isLogin" class="nav-dropdown  nav__bars-noneresponsive item hover:cursor-pointer">
       <div>
-        <img src="../../assets/user.png" 
+        <img v-if="store.state.auth.image==''" src="../../assets/user.png" 
+        class="h-[52px] rounded-full mr-[40px] mt-[2px]" 
+        alt=""
+        >
+        <img :src="store.state.auth.image" 
         class="h-[52px] rounded-full mr-[40px] mt-[2px]" 
         alt=""
         >
@@ -162,11 +166,12 @@ const handleClick = () => {
   store.dispatch('auth/logout')
 }
 const isLogin = computed(() => store.state.auth.user)
+const photoURL = computed(()=>{store.state.auth.image})
 
 
 onUpdated(async () => {
-  if(isLogin.value){  const token = computed(() => store.state.auth.token)
-  console.log(token.value)
+  if(isLogin.value){  const token = computed(() => store.state.auth.token )
+  // console.log(token.value)
   const headers = { 
     "Authorization": `Bearer ${token.value}`,
   };
@@ -182,7 +187,7 @@ onUpdated(async () => {
   })}
 
 })
-console.log(axios.defaults.headers )
+// console.log(axios.defaults.headers )
 
 </script>
 
