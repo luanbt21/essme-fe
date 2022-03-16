@@ -20,9 +20,9 @@
       <div class="w-[79%] bg-[#D1E0DB] rounded-[15px]">
         <div class="font-bold text-center p-5 text-2xl">Leading Experts</div>
         <div class="h-[500px]">
-          <el-scrollbar responsive height="580px">
+          <el-scrollbar responsive height="580px" :key="$route.fullPath">
             <el-col :span="12" height="239px" v-for="expert in experts" :key="expert._id">
-              <ExpertsItem :key="$route.fullPath" :expert="expert" />
+              <ExpertsItem :expert="expert" />
             </el-col>
           </el-scrollbar>
         </div>
@@ -66,7 +66,7 @@
     </el-row>
   </div>
 
-  <div class="mt-5 w-[95%] mx-auto justify-center">
+  <!-- <div class="mt-5 w-[95%] mx-auto justify-center">
     <HomeFieldsVue />
   </div>
   <div class="mt-5 w-[95%] mx-auto justify-center">
@@ -74,13 +74,13 @@
   </div>
   <div class="mt-5 w-[95%] mx-auto justify-center">
     <HomeEventsVue />
-  </div>
+  </div> -->
 </template>
 
 <script lang="ts" setup>
-import HomeNewsVue from './HomeNews.vue'
-import HomeEventsVue from './HomeEvents.vue'
-import HomeFieldsVue from './HomeFields.vue'
+// import HomeNewsVue from './HomeNews.vue'
+// import HomeEventsVue from './HomeEvents.vue'
+// import HomeFieldsVue from './HomeFields.vue'
 import { searchExperts, getExperts, getExpertstop } from '~/api/Experts'
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -170,23 +170,21 @@ const mapData = computed(
   //     } as Feature)
   // )
 )
+const handleSearch = (what: string, where: string) => {
+  router.push({
+    name: 'allexperts',
+    query: {
+      what,
+      where
+    }
+  })
+}
 onMounted(async () => {
   // expertsPage.value = await searchExperts(props.what, props.where, props.page, pageSize)
   expertsPage.value = await searchExperts(props.what, props.where, props.page, pageSize)
   expertsTop.value = await getExpertstop(20, 1)
   console.log(experts.value)
 })
-const handleSearch = (what: string, where: string) => {
-  router.push({
-    name: 'allexperts',
-    query: {
-      what,
-      where,
-
-      page: 1
-    }
-  })
-}
 </script>
 
 <style scoped>
