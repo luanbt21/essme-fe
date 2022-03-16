@@ -13,17 +13,19 @@
 
   <div class="mt-5 w-[95%] mx-auto justify-center"></div>
   <div>
-    <!-- <Mapbox :data="mapData" /> -->
+    <Mapbox :data="mapData" />
   </div>
   <div class="mt-5 ml-11 w-[95%] flex justify-center">
     <el-row :gutter="20" class="flex" viewClass="yf-content" wrapClass="yf-container">
       <div class="w-[79%] bg-[#D1E0DB] rounded-[15px]">
         <div class="font-bold text-center p-5 text-2xl">Leading Experts</div>
-        <el-scrollbar responsive height="580px">
-          <el-col :span="12" height="239px" v-for="expert in experts" :key="expert._id">
-            <ExpertsItem :expert="expert" />
-          </el-col>
-        </el-scrollbar>
+        <div class="h-[500px]">
+          <el-scrollbar responsive height="580px" :key="$route.fullPath">
+            <el-col :span="12" height="239px" v-for="expert in experts" :key="expert._id">
+              <ExpertsItem :expert="expert" />
+            </el-col>
+          </el-scrollbar>
+        </div>
       </div>
 
       <div class="bg-[#D1E0DB] rounded-[15px] mx-2 w-[19%]">
@@ -39,11 +41,17 @@
               </button>
             </el-card>
           </div> -->
-          <div class="flex justify-center">
-            <div style="white-space: pre-wrap">
-              <el-radio-group v-model="typesSelect" size="large" class="w-[100px]" style="white-space: pre-wrap">
-                <div v-for="(type, index) in types" :key="index" class="w-[100px]">
-                  <el-radio-button :label="type" class="w-60 m-2" v-on:change="callFunction($event)"> </el-radio-button>
+          <div class="ml-5">
+            <div style="">
+              <el-radio-group v-model="typesSelect" size="large" class="" style="white-space: pre-wrap">
+                <div class="w-[50px]">
+                  <div v-for="(type, index) in types" :key="index" class="">
+                    <div class="w-[50px]">
+                      <el-radio-button :label="type" class="w-10 m-2" stacked v-on:change="callFunction($event)">
+                      </el-radio-button>
+                    </div>
+                    <br />
+                  </div>
                 </div>
               </el-radio-group>
             </div>
@@ -58,7 +66,7 @@
     </el-row>
   </div>
 
-  <div class="mt-5 w-[95%] mx-auto justify-center">
+  <!-- <div class="mt-5 w-[95%] mx-auto justify-center">
     <HomeFieldsVue />
   </div>
   <div class="mt-5 w-[95%] mx-auto justify-center">
@@ -66,27 +74,13 @@
   </div>
   <div class="mt-5 w-[95%] mx-auto justify-center">
     <HomeEventsVue />
-  </div>
+  </div> -->
 </template>
 
 <script lang="ts" setup>
-// import { computed, onMounted, onUpdated, ref } from 'vue'
-// import { getExperts, getExpertById, searchExperts } from '~/api/Experts'
-// import { Experts } from '~/models/Experts'
-// import { useStore } from '~/store/index'
-// import SearchVue from './Search.vue'
-// import MapboxVue from './Mapbox.vue'
-// import HomeFieldsVue from './HomeFields.vue'
 // import HomeNewsVue from './HomeNews.vue'
 // import HomeEventsVue from './HomeEvents.vue'
-// const expertArr = ref<Experts[]>([])
-// onMounted(async () => {
-//   expertArr.value = await getExperts(8)
-//   console.log(expertArr.value)
-// })
-import HomeNewsVue from './HomeNews.vue'
-import HomeEventsVue from './HomeEvents.vue'
-import HomeFieldsVue from './HomeFields.vue'
+// import HomeFieldsVue from './HomeFields.vue'
 import { searchExperts, getExperts, getExpertstop } from '~/api/Experts'
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -176,22 +170,21 @@ const mapData = computed(
   //     } as Feature)
   // )
 )
-onMounted(async () => {
-  // expertsPage.value = await searchExperts(props.what, props.where, props.page, pageSize)
-  expertsPage.value = await searchExperts(props.what, props.where, props.page, pageSize)
-  expertsTop.value = await getExpertstop(20, 1)
-})
 const handleSearch = (what: string, where: string) => {
   router.push({
     name: 'allexperts',
     query: {
       what,
-      where,
-
-      page: 1
+      where
     }
   })
 }
+onMounted(async () => {
+  // expertsPage.value = await searchExperts(props.what, props.where, props.page, pageSize)
+  expertsPage.value = await searchExperts(props.what, props.where, props.page, pageSize)
+  expertsTop.value = await getExpertstop(20, 1)
+  console.log(experts.value)
+})
 </script>
 
 <style scoped>

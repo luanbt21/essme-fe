@@ -46,15 +46,17 @@ export const getExperts1 = async (limit = 100, sortBy = "research_area",asc=true
     throw new Error('Failed to get experts')
   }
 }
-export const searchExperts = async (what?: string, where?: string,radius=5, page = 1, size = 20): Promise<PageEntity<Experts>> => {
+export const searchExperts = async (what?: string, where?: string,radius=5, page = 1, size = 20 ,asc=true): Promise<PageEntity<Experts>> => {
   try {
     const res = await axios.get(`${apiUrl}/search`, {
       params: {
         what,
         where,
-       
+       radius,
+      
         page:page-1,
-        size
+        size,
+        asc
       }
     })
     return res.data
