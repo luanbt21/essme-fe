@@ -167,6 +167,15 @@ const handlePost = async () => {
           headers
         }
       )
+      await axios.put(
+        `/users/${store.state.auth.userid}`,
+        {
+          role: 'EXPERT'
+        },
+        {
+          headers
+        }
+      )
     } else {
     }
   } catch (error) {

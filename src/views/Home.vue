@@ -12,7 +12,8 @@
       />
     </div>
     <!-- <DemoVue /> -->
-    <HomeExpert />
+    <HomeExpertnew />
+
     <HomeFields />
     <HomeNews />
     <HomeEventsVue />
@@ -35,6 +36,7 @@ import HomeExpert from '~/components/HomeExpert.vue'
 import HomeFields from '~/components/HomeFields.vue'
 import FooterVue from '~/components/tkhuyen/Footer.vue'
 import Search from '~/components/Search.vue'
+import HomeExpertnew from '~/components/HomeExpertnew.vue'
 import { onMounted, ref } from 'vue'
 import { searchExperts, getExperts } from '~/api/Experts'
 import { useRouter } from 'vue-router'

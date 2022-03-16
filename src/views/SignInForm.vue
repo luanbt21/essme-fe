@@ -71,7 +71,7 @@ const handleSubmit = async () => {
     if (userSignIn.role == null) {
       router.push('/ExpertOrCustomerStatus')
     } else if (userSignIn.role == 'EXPERT') {
-      router.push('/ExpertOrCustomerStatus')
+      router.push('/')
     } else {
     }
   } catch (err) {
