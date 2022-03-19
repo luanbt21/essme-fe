@@ -10,7 +10,6 @@
 <script lang="ts" setup>
 import ExpertpageAllVue from '~/components/ExpertpageAll.vue'
 import FooterVue from '~/components/tkhuyen/Footer.vue'
-
 const props = defineProps<{
   what?: string
   where?: string

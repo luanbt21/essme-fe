@@ -16,7 +16,7 @@
             </div>
           </div>
           <div class="basis-1/4">
-            <img :src="expert.image ? expert.image : avarta" alt="" />
+            <img :src="expert.img ? expert.img : avarta" alt="" />
           </div>
         </div>
       </a>
@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import { Experts } from '~/models/Experts'
-import avarta from '~/assets/avt.jpg'
+import avarta from '~/assets/anhexpert.jpg'
 
 defineProps<{
   expert: Experts

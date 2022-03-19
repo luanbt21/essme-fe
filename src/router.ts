@@ -42,7 +42,8 @@ const router = createRouter({
       props: route => ({
         what: route.query.what,
         where: route.query.where,
-        page: route.query.page ? parseInt(route.query.page as string) : 1
+        page: route.query.page ? parseInt(route.query.page as string) : 1,
+        types: route.query.types
       })
     },
     {
@@ -102,20 +103,32 @@ const router = createRouter({
     {
       path: '/questionSheet',
       name: 'questionSheet',
-      component: () => import('~/views/QuestionSheet.vue'),
+      component: () => import('~/views/QuestionSheet.vue')
     },
     {
       path: '/FQAs',
       name: 'FQAs',
-      component: () => import('~/views/FQAs.vue'),
+      component: () => import('~/views/FQAs.vue')
     },
     {
       path: '/FQAs/:id',
       name: 'FQAanswer',
-      component: () => import('~/views/FQAanswer.vue'),
+      component: () => import('~/views/FQAanswer.vue')
+    },
+    {
+      path: '/ExpertOrCustomerStatus',
+      name: 'ExpertOrCustomerStatus',
+      component: () => import('~/views/ExpertOrCustomerStatus.vue'),
+    },
+    {
+      path: '/OrderExpert',
+      name: 'ExpertOrder',
+      component: () => import('~/views/ExpertOrder.vue'),
     },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('~/views/NotFound.vue') }
   ],
+
+
   // scrollBehavior(to, from, savedPosition) {
   //   if (savedPosition) {
   //     return savedPosition
@@ -127,8 +140,8 @@ const router = createRouter({
   //       }, 400)
   //     })
 
-    
-    
+
+
 
   //   return { top: 0 }
   // }
@@ -137,24 +150,24 @@ const router = createRouter({
     if (savedPosition) {
       return savedPosition
     }
-  else {
-    {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve({ el: '#map', top: 200, behavior: 'smooth' })
-        }, 400)
-      })
+    else {
+      {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve({ el: '#map', top: 200, behavior: 'smooth' })
+          }, 400)
+        })
 
-    
-    
 
-    return { top: 0 }
-  }
 
-}
-  
 
-    
+        return { top: 0 }
+      }
+
+    }
+
+
+
   }
 }
 )

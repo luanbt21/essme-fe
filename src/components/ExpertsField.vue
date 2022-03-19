@@ -22,7 +22,7 @@
         <div class="font-bold text-center p-5 text-2xl">Experts</div>
         <div v-if="experts.length === 0">No result</div>
         <div v-else class="h-[500px]">
-          <el-scrollbar height="480px" :key="$route.fullPath">
+          <el-scrollbar height="480px">
             <el-col :span="12" height="239px" v-for="expert in experts" :key="expert._id">
               <ExpertsItem :expert="expert" />
             </el-col>

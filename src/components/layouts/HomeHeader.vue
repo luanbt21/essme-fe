@@ -51,7 +51,14 @@
 
           <li class="nav_bar_res_li nav_bar_res_li-hover"><a href="" class="nav_respon--link">Expert</a></li>
           <ul>
-            <li class="nav_bar_res_li nav_bar_res_li-hover"><a class="sub_nav_res-list" href="">FQAs</a></li>
+            <li class="nav_bar_res_li nav_bar_res_li-hover">
+              <router-link to="/FQAs">
+              <div>
+              <a class="sub_nav_res-list" href="">FQAs</a>
+            </div>
+            </router-link>
+            </li>
+            
             <li class="nav_bar_res_li nav_bar_res_li-hover"><a class="sub_nav_res-list" href="">Order Expert</a></li>
             <li class="nav_bar_res_li nav_bar_res_li-hover"><a class="sub_nav_res-list" href="">Expert Info</a></li>
           </ul>
@@ -78,15 +85,25 @@
 
     <div v-if="isLogin" class="nav-dropdown  nav__bars-noneresponsive item hover:cursor-pointer">
       <div>
-        <img src="../../assets/user.png" 
+        <img v-if="store.state.auth.image==''" src="../../assets/user.png" 
+        class="h-[52px] rounded-full mr-[40px] mt-[2px]" 
+        alt=""
+        >
+        <img :src="store.state.auth.image" 
         class="h-[52px] rounded-full mr-[40px] mt-[2px]" 
         alt=""
         >
       </div>
       <div class="nav-dropdown-content border-radius-up border-radius-down">
-        <a class="border-radius-up">Profile Settings</a>
-        <a>History</a>
-        <a @click="handleClick" class="border-radius-down">Log out</a>
+        <router-link class="mb-[-15px]" to="/ExpertOrCustomerStatus">
+          <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>Profile Settings</p></div>
+        </router-link>
+        <router-link class="mb-[-15px]" to="/FQAs">
+          <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>History</p></div>
+        </router-link>
+        <router-link class="mb-[-15px]" to="/FQAs">
+          <div @click="handleClick" class="border-radius-up hover:cursor-pointer leading-loose ml-[3px] mb-[15px]"><p>Log out</p></div>
+        </router-link>
       </div>
     </div>
 
@@ -99,39 +116,52 @@
 
     <div class="nav-dropdown nav__bars-noneresponsive item">
       <button class="nav-dropbtn">Languages</button>
-      <div class="nav-dropdown-content border-radius-up border-radius-down">
-        <a class="border-radius-up">English</a>
-        <a class="border-radius-down">Tiếng Việt</a>
+      <div class="hover:cursor-pointer nav-dropdown-content border-radius-up border-radius-down">
+        <router-link class="mb-[-15px]" to="/FQAs">
+          <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>English</p></div>
+        </router-link>
+        <router-link class="mb-[-15px]" to="/FQAs">
+          <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px] mb-[15px]"><p>Tiếng Việt</p></div>
+        </router-link>
       </div>
     </div>
-
-    <div class="nav-dropdown nav__bars-noneresponsive item">
-      <router-link to="/news"><button class="nav-dropbtn">News</button></router-link> 
-    </div>
-
-
-    <div class="nav-dropdown nav__bars-noneresponsive item">
-      <router-link to="/events"><button class="nav-dropbtn">Events</button></router-link> 
-    </div>
-
-    <div class="nav-dropdown nav__bars-noneresponsive item">
+    <router-link to="/news">
+        <div class="nav-dropdown nav__bars-noneresponsive item">
+          <button class="nav-dropbtn">News</button>
+        </div>
+    </router-link>
+    <router-link to="/events">
+        <div class="nav-dropdown nav__bars-noneresponsive item">
+          <button class="nav-dropbtn">Events</button>
+        </div>
+    </router-link>
+    <div  class="nav-dropdown nav__bars-noneresponsive item">
       <button class="nav-dropbtn">Expert</button>
       <div class="nav-dropdown-content border-radius-up border-radius-down">
-        <a class="border-radius-up">FQAs</a>
-        <a>Order Expert</a>
-        <a class="border-radius-down">Expert Info</a>
+        <router-link class="mb-[-15px]" to="/FQAs">
+        <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>FQAs</p></div>
+        </router-link>
+        <router-link class="mb-[-15px]" to="/OrderExpert">
+        <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>Order Expert</p></div>
+        </router-link>
+        <router-link class="mb-[-15px]" to="/allexperts">
+        <div class="border-radius-up hover:cursor-pointer  leading-loose ml-[3px] mb-[15px]"><p>Expert Info</p></div>
+        </router-link>
       </div>
     </div>
-    <div class="nav-dropdown nav__bars-noneresponsive item">
-        <router-link to="/"><button class="nav-dropbtn">Home</button></router-link>
-    </div>
+
+    <router-link to="/">
+      <div class="nav-dropdown nav__bars-noneresponsive item">
+        <button class="nav-dropbtn">Home</button>
+      </div>
+    </router-link>
   </div>
   <img class="nav-img" src="../../assets/carousel.png" alt="" />
 </template>
 
 <script setup lang="ts">
 import { useStore } from '~/store/index'
-import { computed, onUpdated } from 'vue'
+import { computed, onMounted, onUpdated } from 'vue'
 import axios from 'axios'
 import { __baseURL } from '~/constant'
 const store = useStore()
@@ -139,16 +169,16 @@ const handleClick = () => {
   store.dispatch('auth/logout')
 }
 const isLogin = computed(() => store.state.auth.user)
+const photoURL = computed(()=>{store.state.auth.image})
 
 
 onUpdated(async () => {
-  if(isLogin.value){  const token = computed(() => store.state.auth.token)
-  console.log(token.value)
+  if(isLogin.value){  const token = computed(() => store.state.auth.token )
+  // console.log(token.value)
   const headers = { 
     "Authorization": `Bearer ${token.value}`,
   };
   await axios.post("/news", {
-  stt: "string",
   img: "string",
   tag: "string",
   title: "string",
@@ -160,7 +190,7 @@ onUpdated(async () => {
   })}
 
 })
-console.log(axios.defaults.headers )
+// console.log(axios.defaults.headers )
 
 </script>
 
@@ -256,7 +286,7 @@ console.log(axios.defaults.headers )
 
 /* / * Thay đổi định dạng của liên kết thả xuống khi di chuột qua * / */
 .nav-dropdown-content a:hover {
-  background-color: var(--btncolor);
+  /* background-color: var(--btncolor); */
   color: white;
 }
 

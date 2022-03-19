@@ -18,15 +18,16 @@
             width="500px"
             placement="bottom-start"
             hide-after="50"
+            effect="dark"
           >
             <template #reference>
               <el-card :body-style="{ padding: '0px' }" class="mb-10 background-color-radius">
                 <router-link v-bind:to="'/expert/' + expert._id" custom v-slot="{ navigate, href }">
                   <el-link type="primary" :href="href" @click="navigate">
                     <img
-                      src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg"
+                      :src="expert.img"
                       class="image rounded-3xl"
-                      style="width: 220px; height: 300px"
+                      style="width: 220px; height: 300px; border-radius: 10px"
                   /></el-link>
                 </router-link>
               </el-card>
@@ -38,10 +39,11 @@
               <div class="md:flex">
                 <div class="md:shrink-0">
                   <img
-                    v-if="expert.image"
+                    v-if="expert.img"
                     class="h-48 w-full object-cover md:h-full md:w-48"
                     alt="avatar"
-                    :src="expert.image"
+                    style="height: 200px"
+                    :src="expert.img"
                   />
 
                   <img
@@ -66,7 +68,8 @@
                   <div class="flex">
                     <div class="w-20">Lĩnh vực:</div>
                     <span>
-                      <a
+                      <span
+                        style="display: block; margin-right: -5px"
                         class="mt-2 text-gray-500 overflow-hidden"
                         v-for="(number, index) of expert?.research_area"
                         :key="index"
@@ -76,7 +79,7 @@
                             ? number + ','
                             : number
                         }}
-                      </a>
+                      </span>
                     </span>
                   </div>
                 </div>
@@ -106,7 +109,7 @@ const homepage = ref<Homepage>()
 onMounted(async () => {
   homepage.value = await getHomepage()
   expertArr.value = homepage.value.top_experts
-  console.log(expertArr.value)
+  // console.log(expertArr.value)
 })
 // catch expert_id
 const store = useStore()

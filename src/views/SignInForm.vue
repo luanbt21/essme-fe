@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-slate-200 grid place-items-center absolute top-0 left-0 right-0 bottom-0 z-10 flex bg-[url('../assets/login_background.png')]"
+    class="bg-slate-200 grid place-items-center absolute top-0 left-0 right-0 bottom-0 z-[1001] flex bg-[url('src/assets/login_background.png')]"
   >
     <div class="nav_login">
       <ul class="nav_login-list nav_login-list-one">
@@ -54,6 +54,8 @@ import { useStore } from '~/store/index'
 // import firebase from 'firebase/app'
 import 'firebase/auth'
 import { useRouter } from 'vue-router' // import router
+import { getUserById } from '~/api/User'
+import { User } from 'firebase/auth'
 
 const email = ref('')
 const password = ref('')
@@ -64,9 +66,16 @@ const store = useStore()
 const handleSubmit = async () => {
   try {
     await store.dispatch('auth/login')
-    router.push('/')
+    const userSignIn = await getUserById(store.state.auth.userid)
+
+    if (userSignIn.role == null) {
+      router.push('/ExpertOrCustomerStatus')
+    } else if (userSignIn.role == 'EXPERT') {
+      router.push('/')
+    } else {
+    }
   } catch (err) {
-    error.value = 'Bạn đã nhập sai email hoặc mật khẩu!'
+    error.value = 'oop! có lỗi xảy ra'
   }
 }
 </script>
