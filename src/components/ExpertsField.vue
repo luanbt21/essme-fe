@@ -13,16 +13,16 @@
 
   <div class="mt-5 w-[100%] m-auto justify-center"></div>
   <div>
-    <Mapbox :data="mapData" />
+    <Mapbox :key="$route.fullPath" :data="mapData" />
   </div>
 
   <div class="mt-5 ml-11 w-[1300px] flex justify-center">
-    <el-row :gutter="20" class="flex" viewClass="yf-content">
+    <el-row :key="$route.fullPath" :gutter="20" class="flex" viewClass="yf-content">
       <div class="w-[900px] bg-[#D1E0DB] rounded-[15px]">
         <div class="font-bold text-center p-5 text-2xl">Experts</div>
         <div v-if="experts.length === 0">No result</div>
         <div v-else class="h-[500px]">
-          <el-scrollbar height="480px">
+          <el-scrollbar height="480px" :key="$route.fullPath">
             <el-col :span="12" height="239px" v-for="expert in experts" :key="expert._id">
               <ExpertsItem :expert="expert" />
             </el-col>
@@ -87,7 +87,6 @@
     <HomeEventsVue />
   </div> -->
 </template>
-
 <script lang="ts" setup>
 // import HomeNewsVue from './HomeNews.vue'
 // import HomeEventsVue from './HomeEvents.vue'
@@ -95,16 +94,13 @@
 import { searchExperts, getExperts, getExpertstop, FieldsType, fieldsExperts } from '~/api/Experts'
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-
 import Search from '~/components/Search.vue'
 import { PageEntity } from '~/models/PageEntity'
 import { Experts as ExpertModel } from '~/models/Experts'
-
 import Mapbox from '~/components/Mapbox.vue'
 import { Feature } from '~/models/Geojson'
 import FooterVue from '~/components/tkhuyen/Footer.vue'
 import ExpertsItem from '~/components/ExpertsItem.vue'
-
 const router = useRouter()
 const pageSize = 10
 const mapCenter = ref<number[]>()
@@ -127,12 +123,10 @@ const handlePageChange = (page: number) => {
     query: {
       what: props.what,
       where: props.where,
-
       page
     }
   })
 }
-
 const types = computed(() => {
   const result = new Set<string>()
   for (const expert of expertsData.value) {
@@ -144,13 +138,10 @@ const types = computed(() => {
 })
 const expertsTopData = computed(() => (expertsTop.value ? expertsTop.value : []))
 const expertsData = computed(() => (expertsPage.value ? expertsPage.value.content : []))
-
 const typesSelect = ref('')
-
 const experts = computed(() => {
   return expertsData.value
 })
-
 const mapData = computed(
   (): Feature[] =>
     experts.value.map(
@@ -164,7 +155,6 @@ const mapData = computed(
           }
         } as Feature)
     )
-
   // experts.value.map(
   //   expert =>
   //     ({
@@ -177,6 +167,16 @@ const mapData = computed(
   //     } as Feature)
   // )
 )
+const handleFieldChange = () => {
+  router.push({
+    name: 'expertfields',
+    query: {
+      what: typesSelect.value.toString(),
+      // where: props.where,
+      page: 1
+    }
+  })
+}
 onMounted(async () => {
   expertsPage.value = await searchExperts(props.what, props.where, props.page, pageSize)
   expertsTop.value = await getExpertstop(20, 1)
@@ -192,18 +192,7 @@ const handleSearch = (what: string, where: string) => {
     }
   })
 }
-const handleFieldChange = () => {
-  router.push({
-    name: 'expertfields',
-    query: {
-      what: typesSelect.value.toString(),
-      where: props.where,
-      page: 1
-    }
-  })
-}
 </script>
-
 <style scoped>
 .demo-button-style {
   margin-top: 24px;
