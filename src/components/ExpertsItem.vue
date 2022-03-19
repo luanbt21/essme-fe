@@ -27,7 +27,6 @@
 <script setup lang="ts">
 import { Experts } from '~/models/Experts'
 import avarta from '~/assets/anhexpert.jpg'
-
 defineProps<{
   expert: Experts
 }>()

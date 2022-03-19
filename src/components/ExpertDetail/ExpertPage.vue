@@ -11,15 +11,15 @@
       <!-- <input type="number" v-model="lat" />
       <input type="number" v-model="lon" /> -->
       <div class="h-[500px]">
-        <Mapbox :center="mapCenter" :data="mapData" :icon-zoom="0.05" />
+        <Mapbox :key="$route.fullPath" :center="mapCenter" :data="mapData" :icon-zoom="0.05" />
       </div>
       <el-container class="h-auto">
         <el-container class="flex flex-wrap justify-center">
-          <AsideVue />
-          <MainFooterVue />
+          <AsideVue :key="$route.fullPath" />
+          <MainFooterVue :key="$route.fullPath" />
         </el-container>
       </el-container>
-      <RelateExpertVue />
+      <RelateExpertVue :key="$route.fullPath" />
     </div>
   </div>
 </template>

@@ -1,15 +1,13 @@
 <template>
   <el-aside class="rounded-xl m-5 text-[21px] bg-[#d1e0db] h-auto w-full lg:w-[600px]">
     <img
-      :src="expert?.img ? expert.img : avatar"
+      v-if="expert?.img != ''"
+      :src="expert?.img"
       :alt="expert?.name + ' image'"
       class="w-[235px] h-72 rounded-xl mx-8 my-5"
     />
-    <!-- <img
-            src="https://pbs.twimg.com/media/CzMC-bfXAAIFIEU.jpg"
-            class="w-[235px] h-72 rounded-xl mx-8 my-5"
-            alt=""
-          /> -->
+    <img v-else :src="require('@/assets/someImg.jpg')" class="w-[235px] h-72 rounded-xl mx-8 my-5" />
+
     <div class="text-center my-7">
       <p>{{ expert?.name }}</p>
     </div>
@@ -38,8 +36,7 @@ import { computed, onMounted, ref } from 'vue'
 import { getExperts, getExpertsById } from '~/api/Experts'
 import { Experts } from '~/models/Experts'
 import { useStore } from '~/store/index'
-
-import avatar from '/avatar_expert_detail.png'
+import avatar from '~/assets/anhexpert.jpg'
 
 import { useRoute } from 'vue-router'
 
