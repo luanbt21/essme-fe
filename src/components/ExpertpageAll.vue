@@ -56,7 +56,7 @@
     </el-row>
   </div>
 
-  <div class="mt-5 w-[95%] mx-auto justify-center">
+  <!-- <div class="mt-5 w-[95%] mx-auto justify-center">
     <HomeFieldsVue />
   </div>
   <div class="mt-5 w-[95%] mx-auto justify-center">
@@ -64,7 +64,7 @@
   </div>
   <div class="mt-5 w-[95%] mx-auto justify-center">
     <HomeEventsVue />
-  </div>
+  </div> -->
 </template>
 
 <script lang="ts" setup>
@@ -74,13 +74,16 @@ import HomeFieldsVue from './HomeFields.vue'
 import { searchExperts, getExperts, getExpertstop, FieldsType, fieldsExperts } from '~/api/Experts'
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+
 import Search from '~/components/Search.vue'
 import { PageEntity } from '~/models/PageEntity'
 import { Experts as ExpertModel } from '~/models/Experts'
+
 import Mapbox from '~/components/Mapbox.vue'
 import { Feature } from '~/models/Geojson'
 import FooterVue from '~/components/tkhuyen/Footer.vue'
 import ExpertsItem from '~/components/ExpertsItem.vue'
+
 const router = useRouter()
 const pageSize = 10
 const mapCenter = ref<number[]>()
@@ -103,10 +106,12 @@ const handlePageChange = (page: number) => {
     query: {
       what: props.what,
       where: props.where,
+
       page
     }
   })
 }
+
 const types = computed(() => {
   const result = new Set<string>()
   for (const expert of expertsData.value) {
@@ -118,10 +123,13 @@ const types = computed(() => {
 })
 const expertsTopData = computed(() => (expertsTop.value ? expertsTop.value : []))
 const expertsData = computed(() => (expertsPage.value ? expertsPage.value.content : []))
+
 const typesSelect = ref('')
+
 const experts = computed(() => {
   return expertsTopData.value
 })
+
 const mapData = computed(
   (): Feature[] =>
     experts.value.map(
@@ -135,6 +143,7 @@ const mapData = computed(
           }
         } as Feature)
     )
+
   // experts.value.map(
   //   expert =>
   //     ({

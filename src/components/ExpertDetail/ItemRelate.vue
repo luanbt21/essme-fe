@@ -1,5 +1,9 @@
 <template>
-  <el-card :style="{ 'background-color': '#ECF4F1' }" class="m-5 md:hover:scale-105 hover:duration-500">
+  <el-card
+    :style="{ 'background-color': '#ECF4F1' }"
+    class="m-5 md:hover:scale-105 hover:duration-500"
+    :key="$route.fullPath"
+  >
     <router-link
       v-bind:to="'/expert/' + expert._id"
       custom
@@ -16,10 +20,7 @@
             </div>
           </div>
           <div class="basis-1/4">
-            <img
-              src="https://img.xcitefun.net/users/2008/05/2997,xcitefun-little-cute-chicken-wallpapers-3.jpg"
-              alt=""
-            />
+            <img :src="expert.img ? expert.img : avarta" alt="" />
           </div>
         </div>
       </a>
@@ -29,6 +30,7 @@
 
 <script setup lang="ts">
 import { Experts } from '~/models/Experts'
+import avarta from '~/assets/anhexpert.jpg'
 defineProps<{
   expert: Experts
 }>()
