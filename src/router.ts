@@ -12,13 +12,11 @@ const router = createRouter({
     {
       path: '/expert/:id',
       name: 'expert',
-      component: () => import('~/views/ExpertDedailPage.vue'),
-      props: route => ({
-        what: route.query.what,
-        where: route.query.where,
-        page: route.query.page ? parseInt(route.query.page as string) : 1
-      })
+      component: () => import('~/views/ExpertDedailPage.vue')
+
+     
     },
+ 
     {
       path: '/news',
       alias: '/news/:id',
@@ -80,6 +78,16 @@ const router = createRouter({
       path: '/allexperts',
       name: 'allexperts',
       component: () => import('~/views/ExpertPage.vue'),
+      props: route => ({
+        what: route.query.what,
+        where: route.query.where,
+        page: route.query.page ? parseInt(route.query.page as string) : 1
+      })
+    },
+    {
+      path: '/expertfields',
+      name: 'expertfields',
+      component: () => import('~/views/ExpertsField.vue'),
       props: route => ({
         what: route.query.what,
         where: route.query.where,

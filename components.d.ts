@@ -42,6 +42,7 @@ declare module 'vue' {
     EventItem: typeof import('./src/components/EventItem.vue')['default']
     ExpertPage: typeof import('./src/components/ExpertDetail/ExpertPage.vue')['default']
     ExpertpageAll: typeof import('./src/components/ExpertpageAll.vue')['default']
+    ExpertsField: typeof import('./src/components/ExpertsField.vue')['default']
     ExpertsItem: typeof import('./src/components/ExpertsItem.vue')['default']
     FieldsEvent: typeof import('./src/components/FieldsEvent.vue')['default']
     FieldsResults: typeof import('./src/components/FieldsResults.vue')['default']

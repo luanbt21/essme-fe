@@ -16,10 +16,7 @@
             </div>
           </div>
           <div class="basis-1/4">
-            <img
-              src="https://img.xcitefun.net/users/2008/05/2997,xcitefun-little-cute-chicken-wallpapers-3.jpg"
-              alt=""
-            />
+            <img :src="expert.image ? expert.image : avarta" alt="" />
           </div>
         </div>
       </a>
@@ -29,6 +26,7 @@
 
 <script setup lang="ts">
 import { Experts } from '~/models/Experts'
+import avarta from '~/assets/avt.jpg'
 
 defineProps<{
   expert: Experts
