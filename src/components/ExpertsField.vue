@@ -1,15 +1,28 @@
 <template>
-  <div class="mt-5 w-[100%] mx-auto justify-center"></div>
+  <div class="mt-5 w-[95%] mx-auto justify-center">
+    <Search
+      label="Search Events?"
+      placeholder="Expert title"
+      what-field="name"
+      :what-suggest="searchExperts"
+      where-field="location"
+      :where-suggest="getExperts"
+      @search="handleSearch"
+    />
+  </div>
+
+  <div class="mt-5 w-[100%] m-auto justify-center"></div>
   <div>
     <Mapbox :data="mapData" />
   </div>
+
   <div class="mt-5 ml-11 w-[1300px] flex justify-center">
-    <el-row :gutter="20" class="flex" viewClass="yf-content" wrapClass="yf-container">
+    <el-row :gutter="20" class="flex" viewClass="yf-content">
       <div class="w-[900px] bg-[#D1E0DB] rounded-[15px]">
-        <div class="font-bold text-center p-5 text-2xl">Leading Experts</div>
+        <div class="font-bold text-center p-5 text-2xl">Experts</div>
         <div v-if="experts.length === 0">No result</div>
         <div v-else class="h-[500px]">
-          <el-scrollbar responsive height="480px" :key="$route.fullPath">
+          <el-scrollbar height="480px">
             <el-col :span="12" height="239px" v-for="expert in experts" :key="expert._id">
               <ExpertsItem :expert="expert" />
             </el-col>
@@ -17,7 +30,7 @@
         </div>
       </div>
 
-      <div class="bg-[#D1E0DB] rounded-[15px] mx-2 w-[350px]">
+      <div class="bg-[#D1E0DB] rounded-[15px] mx-2 w-[330px]">
         <div class="font-bold text-center p-5 mb-5 text-2xl">Fields</div>
         <el-scrollbar height="460px">
           <!-- <div v-for="(address, index) in types" :key="index">
@@ -55,8 +68,16 @@
       </div>
     </el-row>
   </div>
-
-  <div class="mt-5 w-[95%] mx-auto justify-center">
+  <div class="text-center">
+    <el-pagination
+      layout="prev, pager, next"
+      :page-size="pageSize"
+      :page-count="expertsPage?.totalPages"
+      v-model:current-page="props.page"
+      @current-change="handlePageChange"
+    />
+  </div>
+  <!-- <div class="mt-5 w-[95%] mx-auto justify-center">
     <HomeFieldsVue />
   </div>
   <div class="mt-5 w-[95%] mx-auto justify-center">
@@ -64,23 +85,26 @@
   </div>
   <div class="mt-5 w-[95%] mx-auto justify-center">
     <HomeEventsVue />
-  </div>
+  </div> -->
 </template>
 
 <script lang="ts" setup>
-import HomeNewsVue from './HomeNews.vue'
-import HomeEventsVue from './HomeEvents.vue'
-import HomeFieldsVue from './HomeFields.vue'
+// import HomeNewsVue from './HomeNews.vue'
+// import HomeEventsVue from './HomeEvents.vue'
+// import HomeFieldsVue from './HomeFields.vue'
 import { searchExperts, getExperts, getExpertstop, FieldsType, fieldsExperts } from '~/api/Experts'
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+
 import Search from '~/components/Search.vue'
 import { PageEntity } from '~/models/PageEntity'
 import { Experts as ExpertModel } from '~/models/Experts'
+
 import Mapbox from '~/components/Mapbox.vue'
 import { Feature } from '~/models/Geojson'
 import FooterVue from '~/components/tkhuyen/Footer.vue'
 import ExpertsItem from '~/components/ExpertsItem.vue'
+
 const router = useRouter()
 const pageSize = 10
 const mapCenter = ref<number[]>()
@@ -99,14 +123,16 @@ const callFunction = (e: any) => {
 }
 const handlePageChange = (page: number) => {
   router.push({
-    name: 'allexperts',
+    name: 'expertfields',
     query: {
       what: props.what,
       where: props.where,
+
       page
     }
   })
 }
+
 const types = computed(() => {
   const result = new Set<string>()
   for (const expert of expertsData.value) {
@@ -118,10 +144,13 @@ const types = computed(() => {
 })
 const expertsTopData = computed(() => (expertsTop.value ? expertsTop.value : []))
 const expertsData = computed(() => (expertsPage.value ? expertsPage.value.content : []))
+
 const typesSelect = ref('')
+
 const experts = computed(() => {
-  return expertsTopData.value
+  return expertsData.value
 })
+
 const mapData = computed(
   (): Feature[] =>
     experts.value.map(
@@ -135,6 +164,7 @@ const mapData = computed(
           }
         } as Feature)
     )
+
   // experts.value.map(
   //   expert =>
   //     ({
@@ -154,7 +184,7 @@ onMounted(async () => {
 })
 const handleSearch = (what: string, where: string) => {
   router.push({
-    name: 'allexperts',
+    name: 'expertfields',
     query: {
       what,
       where,

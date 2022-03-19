@@ -28,7 +28,10 @@
       <div class="ml-[70px] text-black text-lg h-auto">
         <div class="flex my-3 mt-5">
           <div class="mr-3 text-2xl"><i class="fas fa-globe-asia"></i></div>
-          <div class="">{{ expert?.link_profile }}</div>
+
+          <div class="">
+            <a :href="expert?.link_profile">{{ expert?.link_profile }}</a>
+          </div>
         </div>
         <!-- <div class="flex my-3">
               <i class="fab fa-facebook"></i>
