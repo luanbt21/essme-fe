@@ -31,6 +31,22 @@ export const getExperts = async (size = 10, page = 0): Promise<Experts[]>  => {
     throw new Error('Failed to get experts')
   }
 }
+
+export const getExpertsByField = async (field: string, limit = 20, skip: 0): Promise<Experts[]>  => {
+  try {
+    const res = await axios.get(`${apiUrl}/suggest`, {
+      params: {
+        field,
+        limit,
+        skip
+        
+      }
+    })
+    return res.data
+  } catch (error) {
+    throw new Error('Failed to get experts')
+  }
+}
 export const getExperts1 = async (limit = 100, sortBy = "research_area",asc=true): Promise<Experts[]>  => {
   try {
     const res = await axios.get(apiUrl, {
