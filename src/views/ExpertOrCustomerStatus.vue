@@ -17,7 +17,7 @@
       </div>
       <!-- expertInfoForm -->
       <div class="expertInfoForm">
-        <div class="infor_necessary">
+        <div class="infor_necessary mb-[10px]">
           <div class="infor_necessary-left">
             <img v-if="changeimg" :src="avatarImage" alt="" class="info_avatar" />
             <img v-else :src="aavatarImage" alt="" class="info_avatar" />
@@ -177,6 +177,36 @@ const handlePost = async () => {
         }
       )
     } else {
+      await axios.post(
+        '/customers',
+        {
+          uid: store.state.auth.userid,
+          gender: gender.value,
+          birth: birth.value,
+          phone: phone.value,
+          address: [address.value],
+          email: email.value,
+          image: linkAvatar.value,
+          interest: interest.value,
+          website: '',
+          facebook: '',
+          linkedIn: 'string',
+          desc: Company.value,
+          role: 'CUSTOMER'
+        },
+        {
+          headers
+        }
+      )
+      await axios.put(
+        `/users/${store.state.auth.userid}`,
+        {
+          role: 'CUSTOMER'
+        },
+        {
+          headers
+        }
+      )
     }
   } catch (error) {
     failLog.value = true
