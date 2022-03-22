@@ -13,10 +13,8 @@ const router = createRouter({
       path: '/expert/:id',
       name: 'expert',
       component: () => import('~/views/ExpertDedailPage.vue')
-
-     
     },
- 
+
     {
       path: '/news',
       alias: '/news/:id',
@@ -42,7 +40,9 @@ const router = createRouter({
       props: route => ({
         what: route.query.what,
         where: route.query.where,
-        page: route.query.page ? parseInt(route.query.page as string) : 1
+        page: route.query.page ? parseInt(route.query.page as string) : 1,
+        types: route.query.types,
+        tags: route.query.tags
       })
     },
     {
@@ -102,17 +102,17 @@ const router = createRouter({
     {
       path: '/questionSheet',
       name: 'questionSheet',
-      component: () => import('~/views/QuestionSheet.vue'),
+      component: () => import('~/views/QuestionSheet.vue')
     },
     {
       path: '/FQAs',
       name: 'FQAs',
-      component: () => import('~/views/FQAs.vue'),
+      component: () => import('~/views/FQAs.vue')
     },
     {
       path: '/FQAs/:id',
       name: 'FQAanswer',
-      component: () => import('~/views/FQAanswer.vue'),
+      component: () => import('~/views/FQAanswer.vue')
     },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('~/views/NotFound.vue') }
   ],
@@ -127,35 +127,23 @@ const router = createRouter({
   //       }, 400)
   //     })
 
-    
-    
-
   //   return { top: 0 }
   // }
 
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
+    } else {
+      {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve({ el: '#map', top: 200, behavior: 'smooth' })
+          }, 400)
+        })
+
+        return { top: 0 }
+      }
     }
-  else {
-    {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve({ el: '#map', top: 200, behavior: 'smooth' })
-        }, 400)
-      })
-
-    
-    
-
-    return { top: 0 }
   }
-
-}
-  
-
-    
-  }
-}
-)
+})
 export default router

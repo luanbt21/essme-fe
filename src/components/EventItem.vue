@@ -22,7 +22,7 @@
       <address class="text-[14px] text-[#999]">
         {{ event.location }}
       </address>
-      <el-tag v-for="type in event.type" :key="type">
+      <el-tag v-for="type in event.type_vn" :key="type">
         {{ type }}
       </el-tag>
       <div class="float-right">

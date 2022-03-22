@@ -15,7 +15,7 @@
         <h1 class="font-medium text-3xl mb-2">
           {{ event.name_event }}
         </h1>
-        <el-tag class="mx-4" size="large" v-for="type in event.type" :key="type">
+        <el-tag class="mx-4" size="large" v-for="type in event.type_vn" :key="type">
           {{ type }}
         </el-tag>
       </div>
