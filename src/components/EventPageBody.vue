@@ -35,6 +35,7 @@ interface Props {
   what?: string
   where?: string
   types?: string
+  tags?: string
   page?: number
 }
 const props = defineProps<Props>()
@@ -52,6 +53,7 @@ const handlePageChange = (page: number) => {
       what: props.what,
       where: props.where,
       types: props.types?.toString(),
+      tags: props.tags?.toString(),
       page
     }
   })
@@ -74,6 +76,6 @@ const mapData = computed((): Feature[] =>
 )
 
 onMounted(async () => {
-  eventsPage.value = await searchEvents(props.what, props.where, props.types, props.page)
+  eventsPage.value = await searchEvents(props.what, props.where, props.types, props.tags, props.page)
 })
 </script>

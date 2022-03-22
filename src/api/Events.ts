@@ -18,10 +18,20 @@ export const getEventTypes = async (): Promise<TypeCount[]> => {
   }
 }
 
+export const getEventTags = async (): Promise<TypeCount[]> => {
+  try {
+    const res = await axios.get(`${apiUrl}/tag`)
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}
+
 export const searchEvents = async (
   what?: string,
   where?: string,
   types?: string,
+  tags?: string,
   page = 1,
   size = 6
 ): Promise<PageEntity<Event>> => {
@@ -31,6 +41,7 @@ export const searchEvents = async (
         what,
         where,
         types,
+        tags,
         page: page - 1,
         size
       }

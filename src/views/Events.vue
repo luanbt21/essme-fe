@@ -12,10 +12,18 @@
       />
       <el-container class="container">
         <el-aside width="200px" class="hidden md:block pt-5">
-          <div>
-            By Fields
+          <div class="text-center">
             <el-button @click="filter">Filter</el-button>
           </div>
+          <div>By Tags</div>
+          <el-checkbox-group v-model="tagsSelect">
+            <div v-for="t in allTags" :key="t._id">
+              <el-checkbox :label="t._id" style="white-space: pre-wrap">
+                {{ `${t._id} (${t.quantity})` }}
+              </el-checkbox>
+            </div>
+          </el-checkbox-group>
+          <div>By Types</div>
           <el-checkbox-group v-model="typesSelect">
             <div v-for="t in allTypes" :key="t._id">
               <el-checkbox :label="t._id" style="white-space: pre-wrap">
@@ -34,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { searchEvents, getEventTypes, TypeCount } from '~/api/Events'
+import { searchEvents, getEventTypes, TypeCount, getEventTags } from '~/api/Events'
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -49,6 +57,7 @@ interface Props {
   what?: string
   where?: string
   types?: string
+  tags?: string
   page?: number
 }
 const props = defineProps<Props>()
@@ -60,6 +69,9 @@ const whereSuggest = (queryString: string) => {
 const allTypes = ref<TypeCount[]>([])
 const typesSelect = ref<string[]>([])
 
+const allTags = ref<TypeCount[]>([])
+const tagsSelect = ref<string[]>([])
+
 const filter = () => {
   router.push({
     name: 'events',
@@ -67,6 +79,7 @@ const filter = () => {
       // what: props.what,
       // where: props.where,
       types: typesSelect.value.toString(),
+      tags: tagsSelect.value.toString(),
       page: 1
     }
   })
@@ -74,6 +87,7 @@ const filter = () => {
 
 onMounted(async () => {
   allTypes.value = await getEventTypes()
+  allTags.value = await getEventTags()
 })
 
 const handleSearch = (what: string, where: string) => {
@@ -83,6 +97,7 @@ const handleSearch = (what: string, where: string) => {
       what,
       where,
       types: typesSelect.value.toString(),
+      tags: tagsSelect.value.toString(),
       page: 1
     }
   })
