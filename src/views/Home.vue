@@ -58,11 +58,10 @@ onMounted(async () => {
 })
 const handleSearch = (what: string, where: string) => {
   router.push({
-    name: 'allexperts',
+    name: 'expertfields',
     query: {
       what,
       where,
-
       page: 1
     }
   })
