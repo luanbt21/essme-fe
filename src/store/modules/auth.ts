@@ -25,6 +25,8 @@ export interface Auth {
 
   image: string
 
+  displayName: string
+
 }
 
 
@@ -36,7 +38,8 @@ const state = () => ({
     accessToken: ''
   },
   userid: '',
-  image: ''
+  image: '',
+  displayName: '',
 })
 
 const getters = {
@@ -81,9 +84,10 @@ const actions = {
       const token = await res.user.getIdToken(true)
       const userid = user.uid
       let image = user.photoURL
+      const displayName = user.displayName
       // console.log(user)
       // console.log(user.uid)
-      commit('setUser', { user, token, userid, image })
+      commit('setUser', { user, token, userid, image, displayName })
       axios.defaults.headers.common['Authorization'] = 'Bearer' + token
 
     } else {
@@ -102,24 +106,26 @@ const actions = {
 }
 
 const mutations = {
-  setUser(state: Auth, { user, token, userid, image }: { user: object, token: string, userid: string, image: string }) {
+  setUser(state: Auth, { user, token, userid, image, displayName }: { user: object, token: string, userid: string, image: string, displayName: string }) {
     state.user = user
     state.token = token
     state.userid = userid
     state.image = image
+    state.displayName = displayName
     // console.log('user state changed:', state)
   },
   setUser1(state: Auth, user: object) {
     state.user = user
   },
-  setAuthIsReady(state: Auth, { authIsReady, user, token, image, userid }: {
-    authIsReady: boolean, user: Object, token: string, image: string, userid: string
+  setAuthIsReady(state: Auth, { authIsReady, user, token, image, userid, displayName }: {
+    authIsReady: boolean, user: Object, token: string, image: string, userid: string, displayName: string
   }) {
     state.authIsReady = authIsReady
     state.user = user
     state.token = token
     state.image = image
     state.userid = userid
+    state.displayName = displayName
   },
   setTokenID(state: Auth, token: string) {
     state.token = token
@@ -132,7 +138,8 @@ const unsub = onAuthStateChanged(auth, async (user) => {
   let token = await user?.getIdToken(true)
   let image = user?.photoURL
   let userid = user?.uid
-  store.commit('auth/setAuthIsReady', { authState, user, token, image, userid })
+  const displayName = user?.displayName
+  store.commit('auth/setAuthIsReady', { authState, user, token, image, userid, displayName })
   // console.log(token);
 
   // axios.defaults.headers.common['Authorization'] = 'Bearer' + token

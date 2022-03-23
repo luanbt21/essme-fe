@@ -123,32 +123,53 @@ import { getQuestion } from '~/api/Question'
 import FQAitem from '~/components/FQAitem.vue'
 import axios from 'axios'
 import { useStore } from '~/store/index'
+import { useRouter } from 'vue-router' // import router
+import { User } from '~/models/User'
+import { getCustomerbyUid } from '~/api/Customer'
+import { Customer } from '~/models/Customer'
+import { Experts } from '~/models/Experts'
+import { getExpertByUid } from '~/api/Experts'
+
+const router = useRouter()
+
 let centerDialogVisible = ref(false)
 const failLog = ref(false)
+
 const store = useStore()
 const isLogin = computed(() => store.state.auth.user)
+
+const question = ref<Question>()
+
 const handlePost = async () => {
   const headers = {
     Authorization: `Bearer ${store.state.auth.token}`
   }
   try {
     if (isLogin.value) {
-      await axios.post(
-        '/questions',
-        {
-          Description: contentQuestion.value,
-          Customer_id: '',
-          Admin_id: '',
-          answers: [],
-          Title: title.value,
-          Topic: field.value,
-          vote: 0,
-          uid: store.state.auth.userid
-        },
-        {
-          headers
-        }
-      )
+      await axios
+        .post(
+          '/questions',
+          {
+            Description: contentQuestion.value,
+            Customer_id: customerID.value,
+            Admin_id: '',
+            answers: [],
+            Title: title.value,
+            Topic: field.value,
+            vote: 0,
+            uid: store.state.auth.userid
+          },
+          {
+            headers
+          }
+        )
+        .then(data => {
+          question.value = data.data
+          router.push(`/FQAs/${question.value?._id}`)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     } else {
     }
   } catch (error) {
@@ -158,12 +179,20 @@ const handlePost = async () => {
 
 const FQAs = ref<Question[]>([])
 const fieldsArr = ref<Fields[]>([])
-// const options = ref<String[]>([])
+const customerEx = ref<Customer>()
+const customerCu = ref<Experts>()
+const customerID = ref(`${store.state.auth.userid}`)
 
 onMounted(async () => {
   fieldsArr.value = await getFields()
-
   FQAs.value = await getQuestion(30)
+  try {
+    customerEx.value = await getCustomerbyUid(store.state.auth.userid)
+    customerID.value = customerEx.value._id
+  } catch (e) {
+    customerCu.value = await getExpertByUid(store.state.auth.userid)
+    customerID.value = customerCu.value._id
+  }
 })
 
 const contentQuestion = ref('')

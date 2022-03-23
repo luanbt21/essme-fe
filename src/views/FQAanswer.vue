@@ -40,7 +40,7 @@ import { User } from '~/models/User'
 import { getUserById } from '~/api/User'
 const route = useRoute()
 const id = route.params.id
-console.log(id)
+
 const question = ref<Question>()
 const user = ref<User>()
 const answer = ref<Answer[]>([])
