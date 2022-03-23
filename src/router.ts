@@ -23,7 +23,8 @@ const router = createRouter({
       props: route => ({
         what: route.query.what,
         where: route.query.where,
-        page: route.query.page ? parseInt(route.query.page as string) : 1
+        page: route.query.page ? parseInt(route.query.page as string) : 1,
+        tag: route.query.tag?.toString()
       })
     },
 
