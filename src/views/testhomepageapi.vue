@@ -21,7 +21,7 @@ const footer = ref<Footer>()
 
 onMounted(async () => {
   homepage.value = await getHomepage()
-  expertArr.value = homepage.value.top_experts
+  // expertArr.value = homepage.value.top_experts
   fieldArr.value = homepage.value.fields
   footer.value = homepage.value.Footer
   eventArr.value = homepage.value.top_events

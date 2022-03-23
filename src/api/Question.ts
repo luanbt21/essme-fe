@@ -26,3 +26,12 @@ export const getQuestionById = async (id: string): Promise<Question> => {
         throw new Error('Failed to get Question')
     }
 }
+
+export const getQuestionByCustomerID = async (customerID: string): Promise<Question[]> => {
+    try {
+        const res = await axios.get(`${apiUrl}/byCustomerId/${customerID}`)
+        return res.data
+    } catch (error) {
+        throw new Error('Failed to get Question')
+    }
+}
