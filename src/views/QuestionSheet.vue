@@ -1,7 +1,9 @@
 <template>
   <div class="relative w-[97%] min-w-[800px] z-1 mt-[-100px] bg-slate-200 rounded-[40px] p-[50px] flex flex-col">
-    <div>
-      <div class="text-2xl mb-[40px]">Ask a public question</div>
+    <div class="text-center">
+      <button class="text-center w-96 h-14 text-2xl mb-[40px] bg-[#b9cec7] rounded-lg shadow-md">
+        Ask a public question
+      </button>
     </div>
     <div class="bg-purple">
       <el-row>
@@ -78,7 +80,7 @@
       </el-row>
     </div>
     <div class="mt-[10px]">
-      <el-button @click="handlePost(), (centerDialogVisible = true)" color="#626aef" size="large" style="color: white"
+      <el-button @click="handlePost(), (centerDialogVisible = true)" color="#b9cec7" size="large" class="text-stone-800"
         >Post your question</el-button
       >
     </div>

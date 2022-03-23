@@ -91,10 +91,6 @@
         </router-link>
       </div>
     </div>
-
-    <el-tooltip class="box-item" effect="#ECF4F1" content="Top Left prompts info" placement="top-start">
-      <el-button>top-start</el-button>
-    </el-tooltip>
   </div>
 </template>
 
