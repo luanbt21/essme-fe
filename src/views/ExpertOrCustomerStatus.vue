@@ -136,9 +136,9 @@ let LinkProfile = ref('')
 const store = useStore()
 const failLog = ref(false)
 const handlePost = async () => {
-  console.log(store.state.auth.token)
-  console.log(birth.value)
-  console.log(exInfo.value)
+  // console.log(store.state.auth.token)
+  // console.log(birth.value)
+  // console.log(exInfo.value)
 
   const headers = {
     Authorization: `Bearer ${store.state.auth.token}`

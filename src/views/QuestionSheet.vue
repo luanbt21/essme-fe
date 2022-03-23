@@ -87,9 +87,9 @@
 
     <!-- thông báo save thành công -->
     <el-dialog v-model="centerDialogVisible" title="Warning" width="30%" center>
-      <span v-if="failLog">Fail to update your profile!</span>
       <span v-if="!isLogin">Sign in to post question!</span>
-      <span v-else>Update your profile successfully!</span>
+      <span v-if="shoeLog">Update your profile successfully!</span>
+      <span v-else>Fail to update your profile!</span>
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="centerDialogVisible = false">Return</el-button>
@@ -104,9 +104,9 @@
     <div class="mt-[50px] mb-[20px] w-fit border-solid border-2 border-sky-300 px-8 py-2 rounded-3xl shadow-lg">
       <div class="text-xl text-black">Recent questions related to your field</div>
     </div>
-    <div v-for="FQA in FQAs" :key="FQA._id">
+    <!-- <div v-for="FQA in FQAs" :key="FQA._id">
       <FQAitem :question="FQA" />
-    </div>
+    </div> -->
   </div>
   <div class="relative w-full min-w-[800px] mt-20">
     <FooterVue />
@@ -115,7 +115,7 @@
 
 <script lang="ts" setup>
 import FooterVue from '~/components/tkhuyen/Footer.vue'
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onUpdated, ref } from 'vue'
 import { Fields } from '~/models/Fields'
 import { getFields } from '~/api/Fields'
 import { Question } from '~/models/Question'
@@ -137,15 +137,20 @@ const failLog = ref(false)
 
 const store = useStore()
 const isLogin = computed(() => store.state.auth.user)
-
+const shoeLog = ref(false)
 const question = ref<Question>()
 
 const handlePost = async () => {
+  customerCu.value = await getCustomerbyUid(store.state.auth.userid)
+  customerID.value = customerCu.value._id
+
   const headers = {
     Authorization: `Bearer ${store.state.auth.token}`
   }
   try {
-    if (isLogin.value) {
+    if (customerID.value == '') {
+      failLog.value = true
+    } else if (isLogin.value) {
       await axios
         .post(
           '/questions',
@@ -166,6 +171,7 @@ const handlePost = async () => {
         .then(data => {
           question.value = data.data
           router.push(`/FQAs/${question.value?._id}`)
+          shoeLog.value = true
         })
         .catch(error => {
           console.log(error)
@@ -179,21 +185,23 @@ const handlePost = async () => {
 
 const FQAs = ref<Question[]>([])
 const fieldsArr = ref<Fields[]>([])
-const customerEx = ref<Customer>()
-const customerCu = ref<Experts>()
+const customerCu = ref<Customer>()
+
 const customerID = ref(`${store.state.auth.userid}`)
+let userid = store.state.auth.userid
 
 onMounted(async () => {
-  fieldsArr.value = await getFields()
-  FQAs.value = await getQuestion(30)
   try {
-    customerEx.value = await getCustomerbyUid(store.state.auth.userid)
-    customerID.value = customerEx.value._id
+    fieldsArr.value = await getFields()
+    FQAs.value = await getQuestion(30)
   } catch (e) {
-    customerCu.value = await getExpertByUid(store.state.auth.userid)
-    customerID.value = customerCu.value._id
+    // customerEx.value = await getExpertByUid(store.state.auth.userid)
+    // customerID.value = customerEx.value._id
+    console.log(e)
   }
 })
+
+onUpdated(async () => {})
 
 const contentQuestion = ref('')
 const field = ref<String[]>([])

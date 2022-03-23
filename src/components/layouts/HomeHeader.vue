@@ -110,7 +110,7 @@
     
     
 
-    <div v-if="isLogin" class="z-[1100] hover:cursor-pointer" >
+    <div v-if="isLogin" class="z-[10000] hover:cursor-pointer" >
         <el-badge @click="showNotification= !showNotification"  is-dot class="item mt-3">
         <img src="../../assets/notification.png" 
           class="h-[35px] " 
@@ -161,7 +161,7 @@
       </div>
     </router-link>
 
-    <div class="absolute right-0 -z-50">
+    <div class="absolute right-0 -z-[100]">
       <el-affix class="w-[350px]"  v-if="showNotification" :offset="72">
         <el-scrollbar height="400px" class="rounded-lg drop-shadow-lg">
           <div
@@ -170,10 +170,8 @@
           >
             <span class="">Welcome <b>{{store.state.auth.displayName}}</b> </span>
           </div>
-          <QuestionNotifi />    
-          <div v-for="item in 20"  :key="item" class="scrollbar-demo-item">
-            <QuestionNotifi />
-          </div>
+          <QuestionNotifi />  
+          <AnswerNotifi />  
         </el-scrollbar>
       </el-affix>
     </div>
@@ -189,6 +187,7 @@ import { computed, onMounted, onUpdated, ref } from 'vue'
 import axios from 'axios'
 import { __baseURL } from '~/constant'
 import QuestionNotifi from './QuestionNotifi.vue';
+import AnswerNotifi from './AnswerNotifi.vue';
 
 
 const showNotification = ref(false)
