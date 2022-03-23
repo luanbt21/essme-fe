@@ -36,7 +36,7 @@
         </el-main>
       </el-container>
     </div>
-    <News :what="props.what" :where="props.where" :page="props.page" />
+    <News :key="route.fullPath" v-bind="props" />
   </div>
   <div class="relative w-full min-w-[800px] mt-20">
     <FooterVue />
@@ -55,6 +55,7 @@ const props = defineProps<{
   what?: string
   where?: string
   page?: number
+  tag?: string
 }>()
 
 const newsById = ref<NewsModel>()
