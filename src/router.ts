@@ -75,6 +75,15 @@ const router = createRouter({
     },
 
     {
+      path: '/fields/:name',
+      name: 'fieldname',
+      component: () => import('~/views/Fields.vue'),
+      props: route => ({
+        name: route.params.name
+      })
+    },
+
+    {
       path: '/allexperts',
       name: 'allexperts',
       component: () => import('~/views/ExpertPage.vue'),
