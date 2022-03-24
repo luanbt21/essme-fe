@@ -21,3 +21,4 @@ export interface Answer {
     updated_at: string;
     uid: string;
 }
+

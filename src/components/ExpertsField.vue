@@ -66,17 +66,20 @@
           </el-checkbox-group> -->
         </el-scrollbar>
       </div>
+      <div class="w-[68%]">
+        <div class="text-center">
+          <el-pagination
+            layout="prev, pager, next"
+            :page-size="pageSize"
+            :page-count="expertsPage?.totalPages"
+            v-model:current-page="props.page"
+            @current-change="handlePageChange"
+          />
+        </div>
+      </div>
     </el-row>
   </div>
-  <div class="text-center">
-    <el-pagination
-      layout="prev, pager, next"
-      :page-size="pageSize"
-      :page-count="expertsPage?.totalPages"
-      v-model:current-page="props.page"
-      @current-change="handlePageChange"
-    />
-  </div>
+
   <!-- <div class="mt-5 w-[95%] mx-auto justify-center">
     <HomeFieldsVue />
   </div>

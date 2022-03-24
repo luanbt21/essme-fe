@@ -8,6 +8,15 @@ export interface FieldsType {
   quantity: number
 }
 
+export const getExpertByUid = async (uid: string): Promise<Experts> => {
+  try {
+    const res = await axios.get(`${apiUrl}/uid/${uid}`)
+    return res.data
+  } catch (error) {
+    throw new Error('Failed to get Expert')
+  }
+}
+
 export const getExpertstop = async (size = 6, page = 0): Promise<Experts[]> => {
   try {
     const res = await axios.get(`${apiUrl}/top`, {
@@ -69,12 +78,12 @@ export const searchExperts = async (
   }
 }
 export const fieldsExperts = async (): Promise<FieldsType[]> => {
-    try {
-        const res = await axios.get(`${apiUrl}/field`)
-        return res.data
-    } catch (error) {
-        throw new Error()
-    }
+  try {
+    const res = await axios.get(`${apiUrl}/field`)
+    return res.data
+  } catch (error) {
+    throw new Error()
+  }
 }
 export const getExpertsById = async (id: string): Promise<Experts> => {
   try {
@@ -84,10 +93,10 @@ export const getExpertsById = async (id: string): Promise<Experts> => {
     throw new Error('Failed to get experts')
   }
 }
-export const getRelatedExperts = async (id: string, limit=10,skip=0): Promise<Experts[]> => {
+export const getRelatedExperts = async (id: string, limit = 10, skip = 0): Promise<Experts[]> => {
   try {
-    const res = await axios.get(`${apiUrl}/${id}/related`,{
-      params:{
+    const res = await axios.get(`${apiUrl}/${id}/related`, {
+      params: {
         limit,
         skip
       }

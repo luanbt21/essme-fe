@@ -83,18 +83,18 @@
     <router-link to="/login"><button class="nav-dropbtn">Login</button></router-link>
     </div>
 
-    <div v-if="isLogin" class="nav-dropdown  nav__bars-noneresponsive item hover:cursor-pointer">
+    <div v-if="isLogin" class="nav-dropdown  nav__bars-noneresponsive item hover:cursor-pointer ">
       <div>
         <img v-if="store.state.auth.image==''" src="../../assets/user.png" 
-        class="h-[52px] rounded-full mr-[40px] mt-[2px]" 
+        class="h-[52px] rounded-full mr-[40px] mt-[2px] ml-4" 
         alt=""
         >
         <img :src="store.state.auth.image" 
-        class="h-[52px] rounded-full mr-[40px] mt-[2px]" 
+        class="h-[52px] rounded-full mr-[40px] mt-[2px] ml-4" 
         alt=""
         >
       </div>
-      <div class="nav-dropdown-content border-radius-up border-radius-down">
+      <div class="nav-dropdown-content border-radius-up border-radius-down ">
         <router-link class="mb-[-15px]" to="/ExpertOrCustomerStatus">
           <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>Profile Settings</p></div>
         </router-link>
@@ -107,11 +107,16 @@
       </div>
     </div>
 
-    <div v-if="isLogin" class="nav-dropdown nav__bars-noneresponsive item hover:cursor-pointer" style="width: auto;">
-      <img src="../../assets/notification.png" 
-        class="h-[35px]  mr-[40px] ml-[20px] mt-[12px]" 
-        alt=""
-        >
+    
+    
+
+    <div v-if="isLogin" class="z-[10000] hover:cursor-pointer" >
+        <el-badge @click="showNotification= !showNotification"  is-dot class="item mt-3">
+        <img src="../../assets/notification.png" 
+          class="h-[35px] " 
+          alt=""
+          >
+        </el-badge>
     </div>
 
     <div class="nav-dropdown nav__bars-noneresponsive item">
@@ -155,15 +160,38 @@
         <button class="nav-dropbtn">Home</button>
       </div>
     </router-link>
+
+    <div class="absolute right-0 -z-[100]">
+      <el-affix class="w-[350px]"  v-if="showNotification" :offset="72">
+        <el-scrollbar height="400px" class="rounded-lg drop-shadow-lg">
+          <div
+            class="demo-shadow p-2 hover:text-white hover:drop-shadow-lg grid items-center justify-items-center"
+            :style="{ boxShadow: `var(--el-box-shadow-base')` }"
+          >
+            <span class="">Welcome <b>{{store.state.auth.displayName}}</b> </span>
+          </div>
+          <QuestionNotifi />  
+          <AnswerNotifi />  
+        </el-scrollbar>
+      </el-affix>
+    </div>
   </div>
   <img class="nav-img" src="../../assets/carousel.png" alt="" />
+
+
 </template>
 
 <script setup lang="ts">
 import { useStore } from '~/store/index'
-import { computed, onMounted, onUpdated } from 'vue'
+import { computed, onMounted, onUpdated, ref } from 'vue'
 import axios from 'axios'
 import { __baseURL } from '~/constant'
+import QuestionNotifi from './QuestionNotifi.vue';
+import AnswerNotifi from './AnswerNotifi.vue';
+
+
+const showNotification = ref(false)
+
 const store = useStore()
 const handleClick = () => {
   store.dispatch('auth/logout')
@@ -199,6 +227,13 @@ onUpdated(async () => {
   margin: 0;
   padding: 0;
   font-family: Roboto;
+}
+.el-affix{
+  margin-right: 100px;
+}
+.is-dot{
+  margin-right: 7px;
+  margin-top: 5px;
 }
 :root {
   --maincolor: #b9cec7;
