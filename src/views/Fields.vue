@@ -16,9 +16,7 @@
           <div v-if="experts.length === 0">No result</div>
           <div v-else class="h-[820px]">
             <el-scrollbar height="820px" :key="$route.fullPath">
-              <el-col :span="24" v-for="expert in experts" :key="expert._id">
-                <FieldsResults :expert="expert" />
-              </el-col>
+              <FieldsResults v-for="expert in experts" :key="expert._id" :expert="expert" />
             </el-scrollbar>
           </div>
         </el-col>
