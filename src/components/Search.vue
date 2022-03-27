@@ -30,9 +30,9 @@
         </el-autocomplete>
       </el-col>
       <el-col :xs="24" :md="4" class="flex-initial w-64">
-        <el-button type="success" size="large" color="#3754" @click="emit('search', what, where)"
-          ><el-icon><SearchIcon /></el-icon> Search</el-button
-        >
+        <el-button type="success" size="large" color="#3754" @click="emit('search', what, where)">
+          <el-icon><SearchIcon /></el-icon> Search
+        </el-button>
       </el-col>
     </el-row>
   </div>
