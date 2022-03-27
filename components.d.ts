@@ -17,11 +17,32 @@ declare module 'vue' {
     ElCol: typeof import('element-plus/es')['ElCol']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
     ElIcon: typeof import('element-plus/es')['ElIcon']
+<<<<<<< HEAD
     ElPagination: typeof import('element-plus/es')['ElPagination']
     ElRadioButton: typeof import('element-plus/es')['ElRadioButton']
     ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
+=======
+    ElInput: typeof import('element-plus/es')['ElInput']
+    ElLink: typeof import('element-plus/es')['ElLink']
+    ElMain: typeof import('element-plus/es')['ElMain']
+    ElOption: typeof import('element-plus/es')['ElOption']
+
+    ElPagination: typeof import('element-plus/es')['ElPagination']
+    ElPopconfirm: typeof import('element-plus/es')['ElPopconfirm']
+
+    ElPopover: typeof import('element-plus/es')['ElPopover']
+    ElRow: typeof import('element-plus/es')['ElRow']
+    ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
+    ElSelect: typeof import('element-plus/es')['ElSelect']
+
+    ElSelectV2: typeof import('element-plus/es')['ElSelectV2']
+
+    ElTag: typeof import('element-plus/es')['ElTag']
+    ElTooltip: typeof import('element-plus/es')['ElTooltip']
+    ElUpload: typeof import('element-plus/es')['ElUpload']
+>>>>>>> da7847257d8134edb0a8c4d9145c758c413cf8e8
     EventItem: typeof import('./src/components/EventItem.vue')['default']
     EventPageBody: typeof import('./src/components/EventPageBody.vue')['default']
     ExpertItemOrderPage: typeof import('./src/components/ExpertDetail/expertItemOrderPage.vue')['default']

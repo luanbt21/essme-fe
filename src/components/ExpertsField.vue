@@ -3,7 +3,7 @@
     <Search
       label="Search Events?"
       placeholder="Expert title"
-      what-field="name"
+      what-field="fielditem"
       :what-suggest="searchExperts"
       where-field="location"
       :where-suggest="getExperts"
@@ -16,23 +16,23 @@
     <Mapbox :key="$route.fullPath" :data="mapData" />
   </div>
 
-  <div class="mt-5 ml-11 w-[1300px] flex justify-center">
+  <div class="mt-5 ml-11 w-[1400px] flex justify-center">
     <el-row :key="$route.fullPath" :gutter="20" class="flex" viewClass="yf-content">
-      <div class="w-[900px] bg-[#D1E0DB] rounded-[15px]">
+      <div class="w-[1000px] bg-[#D1E0DB] rounded-[15px]">
         <div class="font-bold text-center p-5 text-2xl">Experts</div>
         <div v-if="experts.length === 0">No result</div>
         <div v-else class="h-[500px]">
-          <el-scrollbar height="480px" :key="$route.fullPath">
-            <el-col :span="12" height="239px" v-for="expert in experts" :key="expert._id">
-              <ExpertsItem :expert="expert" />
+          <el-scrollbar height="480px" :key="$route.fullPath" style="max-width: 1000px">
+            <el-col :span="12" height="239px" v-for="expert in experts" :key="expert._id" style="max-width: 500px">
+              <ExpertsItem :expert="expert" class="max-w-[500px]" />
             </el-col>
           </el-scrollbar>
         </div>
       </div>
 
-      <div class="bg-[#D1E0DB] rounded-[15px] mx-2 w-[330px]">
+      <div class="bg-[#D1E0DB] rounded-[15px] mx-2 w-[320px]">
         <div class="font-bold text-center p-5 mb-5 text-2xl">Fields</div>
-        <el-scrollbar height="460px">
+        <el-scrollbar height="460px " width="280px">
           <!-- <div v-for="(address, index) in types" :key="index">
             <el-card
               :style="{ 'background-color': ' #FFFFFF' }"
@@ -45,16 +45,22 @@
           </div> -->
           <div class="ml-5">
             <div>
-              <el-radio-group v-model="typesSelect" size="large" class="">
-                <div class="w-[50px]">
-                  <div v-for="type in expertfield" :key="type._id" class="">
-                    <div class="w-[100px] flex flex-wrap">
-                      <el-radio-button :label="type._id" class="w-10 m-2" @change="handleFieldChange">
-                        {{ `${type._id} (${type.quantity})` }}
-                      </el-radio-button>
-                    </div>
-                    <br />
+              <el-radio-group v-model="typesSelect" size="large" class="rounded-sm">
+                <div>
+                  <div v-for="type in expertfield" :key="type._id" class="rounded-sm">
+                    <el-radio-button
+                      :label="type._id"
+                      class="w-[200px] m-2 flex flex-wrap flex-row"
+                      @change="handleFieldChange"
+                    >
+                      <div class="w-[220px] h-[20px]" :title="`${type._id} (${type.quantity})`">
+                        <div class="truncate h-[20px] text-left">
+                          {{ `${type._id} (${type.quantity})` }}
+                        </div>
+                      </div>
+                    </el-radio-button>
                   </div>
+                  <br />
                 </div>
               </el-radio-group>
             </div>
@@ -115,10 +121,18 @@ const props = defineProps<{
   where?: string
   page?: number
 }>()
-let id = ''
-const callFunction = (e: any) => {
-  id = e.target.value
-  console.log(id)
+// let id = ''
+// const callFunction = (e: any) => {
+//   id = e.target.value
+//   console.log(id)
+// }
+const expertsTopData = computed(() => (expertsTop.value ? expertsTop.value : []))
+const expertsData = computed(() => (expertsPage.value ? expertsPage.value.content : []))
+for (let item of expertsData.value) {
+  for (let i of item.research_area) {
+    var fielditem = ''
+    fielditem === i
+  }
 }
 const handlePageChange = (page: number) => {
   router.push({
@@ -139,8 +153,7 @@ const types = computed(() => {
   }
   return result
 })
-const expertsTopData = computed(() => (expertsTop.value ? expertsTop.value : []))
-const expertsData = computed(() => (expertsPage.value ? expertsPage.value.content : []))
+
 const typesSelect = ref('')
 const experts = computed(() => {
   return expertsData.value
@@ -199,5 +212,9 @@ const handleSearch = (what: string, where: string) => {
 <style scoped>
 .demo-button-style {
   margin-top: 24px;
+}
+div.text1 {
+  width: 20px;
+  word-wrap: break-word;
 }
 </style>

@@ -122,7 +122,7 @@
     <div class="nav-dropdown nav__bars-noneresponsive item">
       <button class="nav-dropbtn">Languages</button>
       <div class="hover:cursor-pointer nav-dropdown-content border-radius-up border-radius-down">
-        <router-link class="mb-[-15px]" to="/FQAs">
+        <router-link class="mb-[-15px]" to="/expertfields">
           <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>English</p></div>
         </router-link>
         <router-link class="mb-[-15px]" to="/FQAs">
