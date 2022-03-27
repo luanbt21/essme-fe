@@ -6,8 +6,8 @@
       >
     </div>
 
-    <Search />
-    <!--  -->
+    <!-- <Search /> -->
+
     <el-container class="container">
       <el-aside width="200px" class="hidden md:block pt-5">
         <h3>By Fields</h3>

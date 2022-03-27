@@ -13,12 +13,11 @@
     </div>
     <!-- <DemoVue /> -->
     <HomeExpertnew />
-
     <HomeFields />
+    <HomeFQAs />
     <HomeNews />
     <HomeEventsVue />
 
-    <HomeFQAs />
     <br />
 
     <br />
@@ -32,7 +31,6 @@
 import HomeFQAs from '~/components/HomeFQAs.vue'
 import HomeNews from '~/components/HomeNews.vue'
 import HomeEventsVue from '~/components/HomeEvents.vue'
-import HomeExpert from '~/components/HomeExpert.vue'
 import HomeFields from '~/components/HomeFields.vue'
 import FooterVue from '~/components/tkhuyen/Footer.vue'
 import Search from '~/components/Search.vue'

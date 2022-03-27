@@ -9,11 +9,12 @@
       <el-aside width="200px" class="hidden md:block pt-5">
         <h3>By Fields</h3>
         <!-- <el-input type="text" placeholder="Fields Search" /> -->
-        <el-checkbox-group v-model="typesSelect" :max="1">
-          <div v-for="(type, index) in types" :key="index">
-            <el-checkbox class="z-[0]" :label="type" style="white-space: pre-wrap" />
+        <el-checkbox-group v-model="tagSelect" :max="1">
+          <div v-for="t in tags" :key="t">
+            <el-checkbox class="z-[0]" :label="t" style="white-space: pre-wrap" />
           </div>
         </el-checkbox-group>
+        <el-button @click="filter"> Filter </el-button>
       </el-aside>
       <el-main
         ><el-row :gutter="20">
@@ -37,7 +38,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
-import { getNews, searchNewss } from '~/api/News'
+import { searchNewss, getNewsTags } from '~/api/News'
 import NewsItem from '~/components/NewsItem.vue'
 import { News as NewsModel } from '~/models/News'
 import { PageEntity } from '~/models/PageEntity'
@@ -50,40 +51,39 @@ const props = defineProps<{
   what?: string
   where?: string
   page?: number
+  tag?: string
 }>()
 
 const newsPage = ref<PageEntity<NewsModel>>()
 
-onMounted(async () => {
-  newsPage.value = await searchNewss(props.what, props.where, props.page, pageSize)
-})
+const newss = computed(() => (newsPage.value ? newsPage.value.content : []))
+
+const tags = ref<string[]>([])
+
+const tagSelect = ref<string[]>([])
 
 const handlePageChange = (page: number) => {
   router.push({
     name: 'news',
     query: {
-      page
+      page,
+      tag: props.tag
     }
   })
 }
 
-const newssData = computed(() => (newsPage.value ? newsPage.value.content : []))
+const filter = () => {
+  router.push({
+    name: 'news',
+    query: {
+      page: 1,
+      tag: tagSelect.value
+    }
+  })
+}
 
-const types = computed(() => {
-  const result = new Set<string>()
-  for (const news of newssData.value) {
-    result.add(news.tag)
-  }
-  return result
-})
-
-const typesSelect = ref<string[]>([])
-const newss = computed(() => {
-  if (typesSelect.value.length === 0) return newssData.value
-  else {
-    return newssData.value.filter(news => {
-      return typesSelect.value.every(type => news.tag.includes(type))
-    })
-  }
+onMounted(async () => {
+  tags.value = await getNewsTags()
+  newsPage.value = await searchNewss(props.what, props.where, props.page, pageSize, props.tag)
 })
 </script>
