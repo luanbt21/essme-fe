@@ -32,10 +32,15 @@ declare module 'vue' {
     ElMain: typeof import('element-plus/es')['ElMain']
     ElOption: typeof import('element-plus/es')['ElOption']
 
+    ElPagination: typeof import('element-plus/es')['ElPagination']
+    ElPopconfirm: typeof import('element-plus/es')['ElPopconfirm']
+
     ElPopover: typeof import('element-plus/es')['ElPopover']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSelect: typeof import('element-plus/es')['ElSelect']
+
+    ElSelectV2: typeof import('element-plus/es')['ElSelectV2']
 
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
@@ -49,6 +54,7 @@ declare module 'vue' {
     ExpertsItem: typeof import('./src/components/ExpertsItem.vue')['default']
     FieldsEvent: typeof import('./src/components/FieldsEvent.vue')['default']
     FieldsResults: typeof import('./src/components/FieldsResults.vue')['default']
+    FilterField: typeof import('./src/components/ExpertDetail/FilterField.vue')['default']
     Footer: typeof import('./src/components/tkhuyen/Footer.vue')['default']
     FQAitem: typeof import('./src/components/FQAitem.vue')['default']
     Header: typeof import('./src/components/layouts/Header.vue')['default']

@@ -8,7 +8,7 @@
     >
       <a type="primary" :href="href" @click="navigate" text-decoration="none">
         <div class="flex no-underline">
-          <div class="basis-3/4 text-black">
+          <div class="basis-3/4 text-black h-[150px] w-[350px]">
             <div>{{ expert.name }}</div>
             <div class="my-5">{{ expert.degree }}</div>
             <div>
@@ -16,7 +16,11 @@
             </div>
           </div>
           <div class="basis-1/4">
-            <img :src="expert.img ? expert.img : avarta" alt="" />
+            <img
+              :src="expert.img == '' || expert.img == null ? avarta : expert.img"
+              alt=""
+              class="h-[140px] w-[100px]"
+            />
           </div>
         </div>
       </a>
