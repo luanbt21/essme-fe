@@ -1,95 +1,69 @@
-  <template>
-  <div class="container mt-10 mx-auto">
-    <h2 class="text-2xl mb-2">Results</h2>
+<template>
+  <div class="container mx-auto">
     <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
-      <el-scrollbar height="820px">
-        <el-card class="h-fit" :body-style="{ padding: '10px' }">
-          <el-row :xs="24" :sm="12" :lg="8" v-for="experts in expertsArr" :key="experts._id">
-            <el-col :span="5">
-              <img :src="experts.img" alt="" v-if="null" class="w-60 cover mb-5 mt-5 ml-auto mr-auto cursor-pointer rounded-2xl">
-              <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.yan.vn%2Ffacebook-cap-nhat-avatar-doi-voi-tai-khoan-khong-su-dung-anh-dai-dien-258357.html&psig=AOvVaw0hLRVOh01DT-DTPtucrqvS&ust=1647231925385000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNCMsqCfwvYCFQAAAAAdAAAAABAI" alt="" v-else class="w-60 cover mb-5 mt-5 ml-auto mr-auto cursor-pointer rounded-2xl">
+      <router-link
+        v-bind:to="'/expert/' + expert._id"
+        custom
+        v-slot="{ navigate, href }"
+        :style="{ 'text-decoration': 'none' }"
+      >
+        <el-card
+          :xs="24"
+          :sm="12"
+          :lg="8"
+          v-for="expert in expertsArr"
+          :key="expert._id"
+          :style="{ 'background-color': ' #FFFFFF' }"
+          class="m-5 md:hover:scale-105 hover:duration-500 rounded-[15px]"
+        >
+          <a type="primary" :href="href" @click="navigate" text-decoration="none">
+            <el-col :span="9" class="text-center">
+              <img
+                :src="expert?.img"
+                :alt="expert?.name + ' image'"
+                class="inline-block w-60 h-60 mb-5 mt-5 cursor-pointer rounded-2xl"
+              />
             </el-col>
-            <el-col :span="10" :gutter="30">
-              <el-row class="mt-9 ml-8 text-xl">Name: {{ experts.name }}</el-row>
-              <el-row class="mt-9 ml-8 text-xl">Degree: {{ experts.degree }}</el-row>
-              <el-row class="mt-9 ml-8 text-xl">Company: {{ experts.company }}</el-row>
-              <el-row class="mt-9 ml-8 text-xl">Field: {{ experts.research_area }}</el-row>
-            </el-col>
-            <a :href="experts.link_profile">
-              <button
-                
-                class="h-fit mt-28 ml-96 bg-[#42a1be] text-white leading-10 cursor-pointer text-right px-9 py-1 rounded-lg text-xl"
+            <el-col :span="15" :gutter="30">
+              <el-row class="mt-6 ml-8 text-xl">Họ tên: {{ expert?.name }}</el-row>
+              <el-row class="mt-6 ml-8 text-xl">Trình độ: {{ expert?.degree }}</el-row>
+              <el-row class="mt-6 ml-8 text-xl">Công ty: {{ expert?.company }}</el-row>
+              <el-row class="mt-6 ml-8 text-xl"
+                >Lĩnh vực:
+                <span v-for="(number, index) of expert?.research_area" :key="index">
+                  {{ index === 0 && expert?.research_area.length === 2 ? number + ',' : number }}
+                </span></el-row
               >
-                Detail
-              </button>
-            </a>
-            <div class="w-full h-[1px] mt-4 bg-black opacity-60"></div>
-          </el-row>
-        </el-card>
-      </el-scrollbar>
-      <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
-        Fields
-        <el-select v-model="value" class="m-2" placeholder="Select" size="large">
-          <el-option
-            v-for="fields in fieldsArr" 
-            :key="fields.name"
-            :label="fields.name"
-            :value="fields.name"
-          >
-          </el-option>
-        </el-select>
-        Company
-          <el-select class="m-2" size="large"
-            v-model="value"
-            multiple
-            filterable
-            remote
-            reserve-keyword
-            placeholder="Please enter a location"
-            :remote-method="remoteMethod"
-            :loading="loading"
-          >
-            <el-option
-              v-for="experts in expertsArr" 
-              :key="experts._id"
-              :label="experts.company"
-              :value="experts.company" 
-            >
-            </el-option>
-          </el-select>
-          Degree
-          <el-select v-model="value" class="m-2" placeholder="Select" size="large">
-          <el-option
-            v-for="experts in expertsArr" 
-            :key="experts._id"
-            :label="experts.degree"
-            :value="experts.degree"
-          >
-          </el-option>
-        </el-select>
-      </div>
+            </el-col>
+          </a>
+        </el-card></router-link
+      >
     </div>
-
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { getExperts } from '~/api/Expert'
-import { Expert } from '~/models/Expert'
+import { Experts } from '~/models/Experts'
 import { getFields } from '~/api/Fields'
 import { Fields } from '~/models/Fields'
+import { getHomepage } from '~/api/Homepage'
+import { Homepage } from '~/models/Homepage'
 
 const expertsArr = ref<Expert[]>([])
 const fieldsArr = ref<Fields[]>([])
+const homepage = ref<Homepage>()
 
 onMounted(async () => {
   expertsArr.value = await getExperts()
   fieldsArr.value = await getFields()
+  homepage.value = await getHomepage()
+  expertArr.value = homepage.value.top_experts
 })
 
 defineProps<{
-  experts: Expert
+  expert: Experts
 }>()
 const input = ref('')
 </script>

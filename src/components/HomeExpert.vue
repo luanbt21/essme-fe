@@ -22,7 +22,7 @@
           >
             <template #reference>
               <el-card :body-style="{ padding: '0px' }" class="mb-10 background-color-radius">
-                <router-link v-bind:to="'/expert/' + expert._id" custom v-slot="{ navigate, href }">
+                <router-link v-bind:to="'/experts/' + experts._id" custom v-slot="{ navigate, href }">
                   <el-link type="primary" :href="href" @click="navigate">
                     <img
                       :src="expert.img"

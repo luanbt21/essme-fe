@@ -17,7 +17,7 @@
       </div>
       <!-- expertInfoForm -->
       <div class="expertInfoForm">
-        <div class="infor_necessary">
+        <div class="infor_necessary mb-[10px]">
           <div class="infor_necessary-left">
             <img v-if="changeimg" :src="avatarImage" alt="" class="info_avatar" />
             <img v-else :src="aavatarImage" alt="" class="info_avatar" />
@@ -27,16 +27,23 @@
               <label class="label-form" for="">Full name:</label>
               <input type="text" v-model="fullname" id="" placeholder="TRINH KHANH HUYEN" />
             </div>
-            <div class="row-input">
-              <label class="label-form" for="">Gender:</label>
-              <el-select style="width: 100%" v-model="gender" placeholder="Select" size="large">
-                <el-option v-for="gender in GenderArr" :label="gender.label" :value="gender.value"> </el-option>
-              </el-select>
-            </div>
-            <div class="row-input">
-              <label class="label-form" for="">Birth:</label>
-              <input type="text" v-model="birth" id="" placeholder="28/08/2001" />
-            </div>
+            <el-row :gutter="100">
+              <el-col :span="12">
+                <div class="row-input">
+                  <label class="label-form" for="">Gender:</label>
+                  <el-select class="w-full" v-model="gender" placeholder="Select" size="large">
+                    <el-option v-for="gender in GenderArr" :label="gender.label" :value="gender.value"> </el-option>
+                  </el-select>
+                </div>
+              </el-col>
+              <el-col :span="12">
+                <div class="row-input">
+                  <label class="mr-2" for="">Birth:</label>
+                  <el-date-picker class="!w-full" format="DD/MM/YYYY" v-model="birth" id="" placeholder="28/08/2001" />
+                  <!-- <input type="text" v-model="birth" id="" placeholder="28/08/2001" /> -->
+                </div>
+              </el-col>
+            </el-row>
             <div class="row-input">
               <label class="label-form" for="">Phone:</label>
               <input type="text" v-model="phone" id="" placeholder="0987 332 991" />
@@ -119,7 +126,6 @@ import { useStore } from '~/store/index'
 import axios from 'axios'
 let exInfo = ref(true)
 let centerDialogVisible = ref(false)
-
 let fullname = ref('')
 let gender = ref('')
 let birth = ref('')
@@ -128,10 +134,8 @@ let address = ref('')
 let email = ref('')
 let interest = ref('')
 let linkAvatar = ref('')
-
 const ResearchArea = ref([])
 const Degree = ref([])
-
 let Company = ref('')
 let LinkProfile = ref('')
 // let linkAvatar = ref('')
@@ -139,6 +143,10 @@ let LinkProfile = ref('')
 const store = useStore()
 const failLog = ref(false)
 const handlePost = async () => {
+  // console.log(store.state.auth.token)
+  // console.log(birth.value)
+  // console.log(exInfo.value)
+
   const headers = {
     Authorization: `Bearer ${store.state.auth.token}`
   }
@@ -177,15 +185,44 @@ const handlePost = async () => {
         }
       )
     } else {
+      await axios.post(
+        '/customers',
+        {
+          uid: store.state.auth.userid,
+          gender: gender.value,
+          birth: birth.value,
+          phone: phone.value,
+          address: address.value,
+          email: email.value,
+          image: linkAvatar.value,
+          interest: interest.value,
+          website: '',
+          facebook: '',
+          linkedIn: 'string',
+          desc: Company.value,
+          role: 'CUSTOMER'
+        },
+        {
+          headers
+        }
+      )
+      await axios.put(
+        `/users/${store.state.auth.userid}`,
+        {
+          role: 'CUSTOMER'
+        },
+        {
+          headers
+        }
+      )
     }
   } catch (error) {
     failLog.value = true
+    console.log(error)
   }
 }
-
 let avatarImage =
   'https://st2.depositphotos.com/2777531/6506/v/450/depositphotos_65061729-stock-illustration-man-avatar-user-picture.jpg'
-
 let aavatarImage = computed(() => {
   return linkAvatar.value
 })
@@ -194,7 +231,6 @@ const changeImgAvatar = () => {
   changeimg.value = false
   avatarImage = linkAvatar.value
 }
-
 const DegreeArr = ref<String[]>([])
 const fieldsArr = ref<Fields[]>([])
 const GenderArr = [
@@ -214,6 +250,7 @@ const GenderArr = [
 onMounted(async () => {
   fieldsArr.value = await getFields()
   DegreeArr.value = ['PGS', 'TS', 'ThS', 'Cử nhân']
+  // console.log(store.state.auth.token)
 })
 </script>
 <style lang="scss">
@@ -244,7 +281,6 @@ onMounted(async () => {
   margin-top: -50px;
   padding: 100px;
   text-align: center;
-
   //
   // position: relative;
   // top: 482px;
@@ -269,7 +305,6 @@ onMounted(async () => {
   // align-items: center;
   // align-self: center;
 }
-
 .check-box-form {
   font-family: var(--font);
   font-size: 20px;
@@ -286,7 +321,6 @@ onMounted(async () => {
   justify-content: space-evenly;
   align-items: center;
 }
-
 // expertInfoForm
 .infor_necessary {
   display: flex;
@@ -295,7 +329,6 @@ onMounted(async () => {
   min-height: 500px;
   padding: 50px;
 }
-
 .infor_necessary-left {
   flex: 2;
   display: flex;
@@ -339,9 +372,10 @@ onMounted(async () => {
 .row-input {
   // background-color: red;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .label-form {
-  margin-top: 4px;
   min-width: 115px;
   text-align: left;
 }

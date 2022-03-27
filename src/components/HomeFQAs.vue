@@ -1,5 +1,5 @@
 <template>
-  <div class="container m-auto min-w-[500px]">
+  <div class="container m-auto min-w-[500px] mb-11">
     <div class="px-8 py-4 bg-[#D1E0DB] rounded-lg">
       <h1 class="text-center text-2xl mb-10">FQAs</h1>
       <div
@@ -35,7 +35,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { getQuestion } from '~/api/Question'
-import { Question } from '~/models/question'
+import { Question } from '~/models/Question'
 const questionArr = ref<Question[]>([])
 onMounted(async () => {
   questionArr.value = await getQuestion(3)
