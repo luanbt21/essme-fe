@@ -24,15 +24,16 @@ declare module 'vue' {
     ElFooter: typeof import('element-plus/es')['ElFooter']
     ElHeader: typeof import('element-plus/es')['ElHeader']
     ElIcon: typeof import('element-plus/es')['ElIcon']
-    ElInput: typeof import('element-plus/es')['ElInput']
-    ElLink: typeof import('element-plus/es')['ElLink']
-    ElMain: typeof import('element-plus/es')['ElMain']
-    ElPagination: typeof import('element-plus/es')['ElPagination']
-    ElPopover: typeof import('element-plus/es')['ElPopover']
-    ElRadioButton: typeof import('element-plus/es')['ElRadioButton']
-    ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
-    ElRow: typeof import('element-plus/es')['ElRow']
-    ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
+
+   
+    ElSelect: typeof import('element-plus/es')['ElSelect']
+
+    ElSelectV2: typeof import('element-plus/es')['ElSelectV2']
+
+    ElTag: typeof import('element-plus/es')['ElTag']
+    ElTooltip: typeof import('element-plus/es')['ElTooltip']
+    ElUpload: typeof import('element-plus/es')['ElUpload']
+
     EventItem: typeof import('./src/components/EventItem.vue')['default']
     EventPageBody: typeof import('./src/components/EventPageBody.vue')['default']
     ExpertItemOrderPage: typeof import('./src/components/ExpertDetail/expertItemOrderPage.vue')['default']
