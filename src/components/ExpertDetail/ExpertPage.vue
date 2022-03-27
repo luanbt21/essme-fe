@@ -13,6 +13,9 @@
       <div class="h-[500px]">
         <Mapbox :key="$route.fullPath" :center="mapCenter" :data="mapData" :icon-zoom="0.05" />
       </div>
+      <div>
+        <FilterFieldVue />
+      </div>
       <el-container class="h-auto">
         <el-container class="flex flex-wrap justify-center">
           <AsideVue :key="$route.fullPath" />
@@ -38,7 +41,7 @@ import RelateExpertVue from './RelateExpert.vue'
 import { Feature } from '~/models/Geojson'
 import { useRoute } from 'vue-router'
 import expert_id from '~/store/modules/expert_id'
-
+import FilterFieldVue from './FilterField.vue'
 const expertArr = ref<Expert[]>([])
 const expert = ref<Expert>()
 const route = useRoute()
