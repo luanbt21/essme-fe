@@ -120,6 +120,11 @@ const router = createRouter({
       component: () => import('~/views/FQAs.vue')
     },
     {
+      path: '/OrderExpert',
+      name: 'OrderExpert',
+      component: () => import('~/views/ExpertOrder.vue')
+    },
+    {
       path: '/FQAs/:id',
       name: 'FQAanswer',
       component: () => import('~/views/FQAanswer.vue')
