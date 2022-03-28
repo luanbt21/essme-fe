@@ -18,7 +18,7 @@
 
             <div>
               <label class="text-xl font-bold" for="field">Related Experts</label>
-              <el-carousel :interval="4000" type="card" height="200px">
+              <el-carousel :interval="1000" type="card" height="200px" :autoplay="true">
                 <el-carousel-item v-if="typesSelect" v-for="expert in expertFilter" :key="expert._id">
                   <ExpertItemOrderPage :expert="expert" />
                   <!-- <ExpertsItem :expert="expert" /> -->
