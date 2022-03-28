@@ -67,7 +67,7 @@ const handlePageChange = (page: number) => {
     name: 'news',
     query: {
       page,
-      tag: tagSelect.value
+      tag: props.tag
     }
   })
 }

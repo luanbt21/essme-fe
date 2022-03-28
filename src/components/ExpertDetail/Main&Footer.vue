@@ -52,16 +52,43 @@
     </el-main>
     <el-footer class="rounded-xl my-5 mx-5 font-semibold bg-[#d1e0db] h-auto">
       <div class="text-2xl my-5">ORDER EXPERT</div>
-      <el-input
-        class="w-auto text-xl"
-        v-model="textarea"
-        :rows="7"
-        type="textarea"
-        placeholder="Enter your requirement"
-      />
+      <div class="mt-[25px]">
+        <div class="mb-[10px] text-xl">
+          <label class="font-bold mb-[100px]" for="title">Title</label>
+        </div>
+
+        <el-input v-model="title" :autosize="{ minRows: 2, maxRows: 5 }" type="textarea" placeholder="Please input">
+        </el-input>
+      </div>
+
+      <div class="mt-[25px]">
+        <div class="mb-[10px]">
+          <label class="text-xl font-bold mb-[100px]" for="title">Your requirement</label>
+        </div>
+        <el-input
+          class="w-auto text-xl"
+          v-model="textcontent"
+          :rows="7"
+          type="textarea"
+          placeholder="Enter your requirement"
+        />
+      </div>
       <div class="flex justify-center m-5 bg-[#d1e0db]">
-        <el-button class="w-24" type="text" @click="centerDialogVisible = true">Send</el-button>
-        <el-dialog v-if="!isLogin" v-model="centerDialogVisible" title="Warning" width="30%" center>
+        <el-button class="w-24" type="text" @click="handlePost(), (centerDialogVisible = true)">Send</el-button>
+        <el-dialog v-model="centerDialogVisible" title="Warning" width="30%" center>
+          <span v-if="failLog">Fail to update your profile!</span>
+          <span v-if="!isLogin">Sign in to post question!</span>
+          <span v-else>Update your profile successfully!</span>
+          <template #footer>
+            <span class="dialog-footer">
+              <el-button @click="centerDialogVisible = false">Return</el-button>
+              <router-link to="/">
+                <el-button type="primary">Back to Homepage</el-button>
+              </router-link>
+            </span>
+          </template>
+        </el-dialog>
+        <!-- <el-dialog v-if="!isLogin" v-model="centerDialogVisible" title="Warning" width="30%" center>
           <span>Bạn chưa đăng nhập</span>
           <template #footer>
             <span class="dialog-footer">
@@ -78,7 +105,7 @@
               <router-link to="/login"><button class="nav-dropbtn">Login</button></router-link>
             </span>
           </template>
-        </el-dialog>
+        </el-dialog> -->
       </div>
     </el-footer>
   </el-container>
@@ -97,6 +124,8 @@ import expert_id from '~/store/modules/expert_id'
 
 import axios from 'axios'
 import { __baseURL } from '~/constant'
+
+const failLog = ref(false)
 const store = useStore()
 const handleClick = () => {
   store.dispatch('auth/logout')
@@ -106,6 +135,36 @@ const expertArr = ref<Experts[]>([])
 const expert = ref<Experts>()
 const route = useRoute()
 const centerDialogVisible = ref(false)
+const textcontent = ref('')
+const handlePost = async () => {
+  const headers = {
+    Authorization: `Bearer ${store.state.auth.token}`
+  }
+  try {
+    if (isLogin.value) {
+      await axios.post(
+        '/requests/direct',
+        {
+          last_updated_at: '',
+          topic: [],
+          title: title.value,
+          content: textcontent.value,
+          responses: [],
+          expert_id: expert.value,
+          customer_id: '',
+
+          status: ''
+        },
+        {
+          headers
+        }
+      )
+    } else {
+    }
+  } catch (error) {
+    failLog.value = true
+  }
+}
 onUpdated(async () => {
   if (isLogin.value) {
     const token = computed(() => store.state.auth.token)
@@ -156,7 +215,7 @@ const mapData = computed((): Feature[] => {
   }
 })
 
-const textarea = ref('')
+const title = ref('')
 </script>
 
 <style>
