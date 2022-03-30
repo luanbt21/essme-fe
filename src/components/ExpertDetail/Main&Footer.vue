@@ -67,7 +67,7 @@
         </div>
         <el-input
           class="w-auto text-xl"
-          v-model="textcontent"
+          v-model="content"
           :rows="7"
           type="textarea"
           placeholder="Enter your requirement"
@@ -75,38 +75,21 @@
       </div>
       <div class="flex justify-center m-5 bg-[#d1e0db]">
         <el-button class="w-24" type="text" @click="handlePost(), (centerDialogVisible = true)">Send</el-button>
-        <el-dialog v-model="centerDialogVisible" title="Warning" width="30%" center>
-          <span v-if="failLog">Fail to update your profile!</span>
-          <span v-if="!isLogin">Sign in to post question!</span>
-          <span v-else>Update your profile successfully!</span>
-          <template #footer>
-            <span class="dialog-footer">
-              <el-button @click="centerDialogVisible = false">Return</el-button>
-              <router-link to="/">
-                <el-button type="primary">Back to Homepage</el-button>
-              </router-link>
-            </span>
-          </template>
-        </el-dialog>
-        <!-- <el-dialog v-if="!isLogin" v-model="centerDialogVisible" title="Warning" width="30%" center>
-          <span>Bạn chưa đăng nhập</span>
-          <template #footer>
-            <span class="dialog-footer">
-              <el-button @click="centerDialogVisible = false">Cancel</el-button>
-              <router-link to="/login"><button class="nav-dropbtn">Login</button></router-link>
-            </span>
-          </template>
-        </el-dialog>
-        <el-dialog v-if="isLogin" v-model="centerDialogVisible" title="Warning" width="30%" center>
-          <span>Bạn đã đăng nhập thành công</span>
-          <template #footer>
-            <span class="dialog-footer">
-              <el-button @click="centerDialogVisible = false" class="nav-dropbtn">Cancel</el-button>
-              <router-link to="/login"><button class="nav-dropbtn">Login</button></router-link>
-            </span>
-          </template>
-        </el-dialog> -->
       </div>
+      <!-- thông báo save thành công -->
+      <el-dialog v-model="centerDialogVisible" title="Warning" width="30%" center>
+        <span v-if="!isLogin">Sign in to post answer!</span><br />
+        <span v-if="shoeLog">Post your answer successfully!</span>
+        <span v-else>Fail to Post your answer! <br />Maybe you have not updated your profile</span>
+        <template #footer>
+          <span class="dialog-footer">
+            <el-button @click="centerDialogVisible = false">Return</el-button>
+            <router-link :to="`/requests`">
+              <el-button type="primary">Back to Homepage</el-button>
+            </router-link>
+          </span>
+        </template>
+      </el-dialog>
     </el-footer>
   </el-container>
 </template>
@@ -124,6 +107,8 @@ import expert_id from '~/store/modules/expert_id'
 
 import axios from 'axios'
 import { __baseURL } from '~/constant'
+import { Customer } from '~/models/Customer'
+import { getCustomerbyUid } from '~/api/Customer'
 
 const failLog = ref(false)
 const store = useStore()
@@ -135,65 +120,55 @@ const expertArr = ref<Experts[]>([])
 const expert = ref<Experts>()
 const route = useRoute()
 const centerDialogVisible = ref(false)
-const textcontent = ref('')
+const content = ref('')
+const customer = ref<Customer>()
+const shoeLog = ref(false)
 const handlePost = async () => {
+  customer.value = await getCustomerbyUid(store.state.auth.userid)
+
   const headers = {
     Authorization: `Bearer ${store.state.auth.token}`
   }
   try {
-    if (isLogin.value) {
-      await axios.post(
-        '/requests/direct',
-        {
-          last_updated_at: '',
-          topic: [],
-          title: title.value,
-          content: textcontent.value,
-          responses: [],
-          expert_id: expert.value,
-          customer_id: '',
-
-          status: ''
-        },
-        {
-          headers
-        }
-      )
+    console.log(customer.value._id)
+    if (customer.value._id == '') {
+      failLog.value = true
+    } else if (isLogin.value) {
+      await axios
+        .post(
+          `/requests/direct`,
+          {
+            last_updated_at: '2022-03-30T20:18:45.760Z',
+            topic: expert.value?.research_area,
+            title: title.value,
+            content: content.value,
+            responses: [],
+            expert_id: route.params.id,
+            customer_id: customer.value._id,
+            status: 'ACCEPTED'
+          },
+          {
+            headers
+          }
+        )
+        .then(data => {
+          shoeLog.value = true
+          window.location.reload()
+        })
+        .catch(error => {
+          console.log(error)
+        })
     } else {
     }
   } catch (error) {
     failLog.value = true
   }
 }
-onUpdated(async () => {
-  if (isLogin.value) {
-    const token = computed(() => store.state.auth.token)
-    console.log(token.value)
-    const headers = {
-      Authorization: `Bearer ${token.value}`
-    }
-    await axios.post(
-      '/news',
-      {
-        stt: 'string',
-        img: 'string',
-        tag: 'string',
-        title: 'string',
-        url: 'string',
-        content: 'string',
-        status: 'string'
-      },
-      {
-        headers
-      }
-    )
-  }
-})
+
+const idCustomer = ref('')
 onMounted(async () => {
   const id = route.params.id
-  // console.log(id)
   ;(expert.value = await getExpertsById(id as string)), (expertArr.value = await getExperts(8))
-  // console.log(expert.value)
 })
 
 const lat = ref<number>(105)

@@ -72,6 +72,7 @@ declare module 'vue' {
     NewsItem: typeof import('./src/components/NewsItem.vue')['default']
     QuestionNotifi: typeof import('./src/components/layouts/QuestionNotifi.vue')['default']
     RelateExpert: typeof import('./src/components/ExpertDetail/RelateExpert.vue')['default']
+    ResponseItem: typeof import('./src/components/orderExpert/responseItem.vue')['default']
     Search: typeof import('./src/components/Search.vue')['default']
   }
 }

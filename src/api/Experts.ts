@@ -30,7 +30,7 @@ export const getExpertstop = async (size = 6, page = 0): Promise<Experts[]> => {
     throw new Error('Failed to get experts')
   }
 }
-export const getExperts = async (size = 10, page = 0): Promise<Experts[]> => {
+export const getExperts = async (size = 50, page = 0): Promise<Experts[]> => {
   try {
     const res = await axios.get(`${apiUrl}/top`, {
       params: {

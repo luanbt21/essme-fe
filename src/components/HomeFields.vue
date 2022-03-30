@@ -27,6 +27,7 @@
 import { onMounted, ref } from 'vue'
 import { getFields } from '~/api/Fields'
 import { Fields } from '~/models/Fields'
+import router from '~/router'
 
 const fieldsArr = ref<Fields[]>([])
 
