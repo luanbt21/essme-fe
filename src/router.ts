@@ -125,6 +125,11 @@ const router = createRouter({
       component: () => import('~/views/ExpertOrder.vue')
     },
     {
+      path: '/requests/:id',
+      name: 'OrderExpertRequests',
+      component: () => import('~/views/ExpertOrderRequest.vue')
+    },
+    {
       path: '/FQAs/:id',
       name: 'FQAanswer',
       component: () => import('~/views/FQAanswer.vue')

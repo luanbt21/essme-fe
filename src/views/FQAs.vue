@@ -19,9 +19,9 @@
         </el-checkbox-group>
       </el-aside>
       <el-main>
-        <el-col v-for="FQA in FQAsFilter" :key="FQA._id">
-          <FQAitem :question="FQA" />
-        </el-col>
+        <el-row v-for="FQA in FQAsFilter" :key="FQA._id">
+          <el-col :span="24"><FQAitem :question="FQA" /></el-col>
+        </el-row>
       </el-main>
     </el-container>
 
@@ -59,6 +59,6 @@ const FQAsFilter = computed(() => {
   }
 })
 onMounted(async () => {
-  FQAs.value = await getQuestion(50)
+  FQAs.value = await getQuestion(1000)
 })
 </script>
