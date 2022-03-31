@@ -1,26 +1,33 @@
 <template>
   <div class="container mx-auto">
-    <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
-      <router-link
-        v-bind:to="'/expert/' + expert._id"
-        custom
-        v-slot="{ navigate, href }"
-        :style="{ 'text-decoration': 'none' }"
+    <div class="px-8 py-4 bg-[#D1E0DB] text-center">
+      <el-card
+        :expert="expert"
+        :xs="24"
+        :sm="12"
+        :lg="8"
+        :style="{ 'background-color': ' #FFFFFF' }"
+        class="m-2 md:hover:scale-105 hover:duration-500 rounded-[15px] inline-block w-[80%]"
+        :key="$route.fullPath"
       >
-        <el-card
-          :xs="24"
-          :sm="12"
-          :lg="8"
-          v-for="expert in expertsArr"
-          :key="expert._id"
-          :style="{ 'background-color': ' #FFFFFF' }"
-          class="m-5 md:hover:scale-105 hover:duration-500 rounded-[15px]"
+        <router-link
+          v-bind:to="'/expert/' + expert._id"
+          custom
+          v-slot="{ navigate, href }"
+          :style="{ 'text-decoration': 'none' }"
         >
           <a type="primary" :href="href" @click="navigate" text-decoration="none">
             <el-col :span="9" class="text-center">
               <img
                 :src="expert?.img"
                 :alt="expert?.name + ' image'"
+                v-if="null"
+                class="inline-block w-60 h-60 mb-5 mt-5 cursor-pointer rounded-2xl"
+              />
+              <img
+                src="https://nhathauxaydung24h.com/wp-content/uploads/2021/12/avatar-cute-gau-trang.jpg"
+                :alt="expert?.name + ' image'"
+                v-else
                 class="inline-block w-60 h-60 mb-5 mt-5 cursor-pointer rounded-2xl"
               />
             </el-col>
@@ -35,9 +42,9 @@
                 </span></el-row
               >
             </el-col>
-          </a>
-        </el-card></router-link
-      >
+          </a></router-link
+        >
+      </el-card>
     </div>
   </div>
 </template>
@@ -51,15 +58,14 @@ import { Fields } from '~/models/Fields'
 import { getHomepage } from '~/api/Homepage'
 import { Homepage } from '~/models/Homepage'
 
-const expertsArr = ref<Expert[]>([])
+let expertsArr = {}
 const fieldsArr = ref<Fields[]>([])
 const homepage = ref<Homepage>()
 
 onMounted(async () => {
-  expertsArr.value = await getExperts()
   fieldsArr.value = await getFields()
-  homepage.value = await getHomepage()
-  expertArr.value = homepage.value.top_experts
+  expertsArr = await getExperts()
+  console.log('homepage-value', fieldsArr.value)
 })
 
 defineProps<{

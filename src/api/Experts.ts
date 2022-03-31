@@ -77,6 +77,25 @@ export const searchExperts = async (
     throw new Error('Failed to get experts')
   }
 }
+
+export const getExpertByField = async (
+  field: string,
+  limit = 10,
+  skip = 0
+): Promise<Experts[]> => {
+  try {
+    const res = await axios.get(`${apiUrl}/suggest`, {
+      params: {
+        field,
+        limit, 
+        skip
+      }
+    })
+    return res.data
+  } catch (error) {
+    throw new Error('Failed to get experts')
+  }
+}
 export const fieldsExperts = async (): Promise<FieldsType[]> => {
   try {
     const res = await axios.get(`${apiUrl}/field`)

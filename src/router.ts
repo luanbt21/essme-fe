@@ -80,7 +80,22 @@ const router = createRouter({
       name: 'fieldname',
       component: () => import('~/views/Fields.vue'),
       props: route => ({
-        name: route.params.name
+        field: route.query.field,
+        limit: route.query.limit ? parseInt(route.query.limit as string) : 20,
+        skip: route.query.skip ? parseInt(route.query.skip as string) : 0
+
+      })
+    },
+
+    {
+      path: '/fields',
+      name: 'fieldfilter',
+      component: () => import('~/views/Fields.vue'),
+      props: route => ({
+        field: route.query.field,
+        limit: route.query.limit ? parseInt(route.query.limit as string) : 20,
+        skip: route.query.skip ? parseInt(route.query.skip as string) : 0
+
       })
     },
 
