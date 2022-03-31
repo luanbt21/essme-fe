@@ -136,34 +136,5 @@ const router = createRouter({
     },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('~/views/NotFound.vue') }
   ],
-  // scrollBehavior(to, from, savedPosition) {
-  //   if (savedPosition) {
-  //     return savedPosition
-  //   }
-  //   if (from.path === '/events' && to.path === '/events') {
-  //     return new Promise((resolve, reject) => {
-  //       setTimeout(() => {
-  //         resolve({ el: '#map', top: 200, behavior: 'smooth' })
-  //       }, 400)
-  //     })
-
-  //   return { top: 0 }
-  // }
-
-  scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition
-    } else {
-      {
-        return new Promise((resolve, reject) => {
-          setTimeout(() => {
-            resolve({ el: '#map', top: 200, behavior: 'smooth' })
-          }, 400)
-        })
-
-        return { top: 0 }
-      }
-    }
-  }
 })
 export default router

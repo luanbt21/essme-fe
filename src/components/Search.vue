@@ -2,7 +2,7 @@
   <div class="bg-[#C8E3D9] py-4 mb-4 rounded-xl flex justify-center px-[50px]">
     <el-row align="bottom" :gutter="30" class="flex-1">
       <el-col :xs="24" :md="10" class="flex-auto w-64">
-        <label for="what">
+        <label for="what" class="text-2xl">
           {{ label }}
         </label>
         <el-autocomplete
