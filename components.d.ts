@@ -39,6 +39,7 @@ declare module 'vue' {
     ElRow: typeof import('element-plus/es')['ElRow']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSelect: typeof import('element-plus/es')['ElSelect']
+    ElSelectV2: typeof import('element-plus/es')['ElSelectV2']
     ElTag: typeof import('element-plus/es')['ElTag']
     EventItem: typeof import('./src/components/EventItem.vue')['default']
     EventPageBody: typeof import('./src/components/EventPageBody.vue')['default']
