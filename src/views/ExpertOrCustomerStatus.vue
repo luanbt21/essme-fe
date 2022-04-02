@@ -27,16 +27,23 @@
               <label class="label-form" for="">Full name:</label>
               <input type="text" v-model="fullname" id="" placeholder="TRINH KHANH HUYEN" />
             </div>
-            <div class="row-input">
-              <label class="label-form" for="">Gender:</label>
-              <el-select style="width: 100%" v-model="gender" placeholder="Select" size="large">
-                <el-option v-for="gender in GenderArr" :label="gender.label" :value="gender.value"> </el-option>
-              </el-select>
-            </div>
-            <div class="row-input">
-              <label class="label-form" for="">Birth:</label>
-              <input type="text" v-model="birth" id="" placeholder="28/08/2001" />
-            </div>
+            <el-row :gutter="100">
+              <el-col :span="12">
+                <div class="row-input">
+                  <label class="label-form" for="">Gender:</label>
+                  <el-select class="w-full" v-model="gender" placeholder="Select" size="large">
+                    <el-option v-for="gender in GenderArr" :label="gender.label" :value="gender.value"> </el-option>
+                  </el-select>
+                </div>
+              </el-col>
+              <el-col :span="12">
+                <div class="row-input">
+                  <label class="mr-2" for="">Birth:</label>
+                  <el-date-picker class="!w-full" format="DD/MM/YYYY" v-model="birth" id="" placeholder="28/08/2001" />
+                  <!-- <input type="text" v-model="birth" id="" placeholder="28/08/2001" /> -->
+                </div>
+              </el-col>
+            </el-row>
             <div class="row-input">
               <label class="label-form" for="">Phone:</label>
               <input type="text" v-model="phone" id="" placeholder="0987 332 991" />
@@ -365,9 +372,10 @@ onMounted(async () => {
 .row-input {
   // background-color: red;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .label-form {
-  margin-top: 4px;
   min-width: 115px;
   text-align: left;
 }

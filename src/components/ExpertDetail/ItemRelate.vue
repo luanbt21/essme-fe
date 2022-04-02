@@ -20,7 +20,7 @@
             </div>
           </div>
           <div class="basis-1/4">
-            <img :src="expert.img ? expert.img : avarta" alt="" />
+            <img :src="expert.img === '' || expert.img === null ? avarta : expert.img" alt="" />
           </div>
         </div>
       </a>

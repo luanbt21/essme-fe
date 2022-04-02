@@ -10,16 +10,6 @@
             </el-col>
           </el-row>
         </el-scrollbar>
-        <!-- <el-row :gutter="20" class="m-5" v-if="(seeMore = true)">
-          <el-col :span="8" v-for="expert in types.slice(0, 3)" :key="expert._id" :xs="24" :sm="12" :lg="8">
-            <ItemRelateVue :expert="expert" />
-          </el-col>
-        </el-row>
-        <el-row :gutter="20" class="m-5" v-if="(seeMore = false)">
-          <el-col :span="8" v-for="expert in types" :key="expert._id" :xs="24" :sm="12" :lg="8">
-            <ItemRelateVue :expert="expert" />
-          </el-col>
-        </el-row> -->
 
         <div v-if="expertRelate.length === 0" class="m-5 text-center">no result</div>
       </el-header>
