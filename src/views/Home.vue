@@ -15,8 +15,8 @@
     <HomeExpertnew />
     <HomeFields />
     <HomeFQAs />
-    <HomeNews />
-    <HomeEventsVue />
+    <HomeNews :newsArr="newsArr" />
+    <HomeEventsVue :eventsArr="eventsArr" />
 
     <br />
 
@@ -40,6 +40,13 @@ import { searchExperts, getExperts } from '~/api/Experts'
 import { useRouter } from 'vue-router'
 import { PageEntity } from '~/models/PageEntity'
 import { Experts } from '~/models/Experts'
+import { Homepage } from '~/models/Homepage'
+import { Event } from '~/models/Event'
+import { getHomepage } from '~/api/Homepage'
+import { News } from '~/models/News'
+import { getNewsHome } from '~/api/News'
+const homepage = ref<Homepage>()
+const eventsArr = ref<Event[]>([])
 
 const router = useRouter()
 
@@ -50,9 +57,13 @@ const props = defineProps<{
 }>()
 
 const expertsPage = ref<PageEntity<Experts>>()
-
+const newsArr = ref<News[]>([])
 onMounted(async () => {
   expertsPage.value = await searchExperts(props.what, props.where, props.page)
+  homepage.value = await getHomepage()
+  eventsArr.value = homepage.value.top_events
+  newsArr.value = await getNewsHome(9)
+  // console.log(newsArr.value)
 })
 const handleSearch = (what: string, where: string) => {
   router.push({
