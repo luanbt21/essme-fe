@@ -130,8 +130,7 @@ const expertsTopData = computed(() => (expertsTop.value ? expertsTop.value : [])
 const expertsData = computed(() => (expertsPage.value ? expertsPage.value.content : []))
 for (let item of expertsData.value) {
   for (let i of item.research_area) {
-    var fielditem = ''
-    fielditem === i
+    let fielditem = i
   }
 }
 const handlePageChange = (page: number) => {

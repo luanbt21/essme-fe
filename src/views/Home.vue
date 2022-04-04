@@ -4,7 +4,7 @@
       <Search
         label="Search Events?"
         placeholder="Expert title"
-        what-field="name"
+        what-field="research_area"
         :what-suggest="searchExperts"
         where-field="location"
         :where-suggest="getExperts"
