@@ -30,7 +30,7 @@
 import { Search } from '@element-plus/icons-vue'
 import { ArrowRight } from '@element-plus/icons-vue'
 import { computed, onMounted, onUpdated, ref } from 'vue'
-import { getExpertById, getExperts } from '~/api/Expert'
+
 import { Expert } from '~/models/Expert'
 
 import Mapbox from '~/components/Mapbox.vue'

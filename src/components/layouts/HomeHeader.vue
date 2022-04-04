@@ -60,7 +60,15 @@
             </li>
             
             <li class="nav_bar_res_li nav_bar_res_li-hover"><a class="sub_nav_res-list" href="">Order Expert</a></li>
-            <li class="nav_bar_res_li nav_bar_res_li-hover"><a class="sub_nav_res-list" href="">Expert Info</a></li>
+          
+            <li class="nav_bar_res_li nav_bar_res_li-hover">
+               <router-link to="/allexperts">
+              <div>
+              <a class="sub_nav_res-list" href="">Expert Info</a>
+            </div>
+            </router-link>
+              </li>
+              
           </ul>
         </li>
         <li class="nav_bar_res_li">

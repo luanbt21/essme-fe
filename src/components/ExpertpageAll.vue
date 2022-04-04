@@ -6,7 +6,7 @@
   <div class="mt-5 ml-11 w-[1300px] flex justify-center">
     <el-row :gutter="20" class="flex" viewClass="yf-content" wrapClass="yf-container">
       <div class="w-[900px] bg-[#D1E0DB] rounded-[15px]">
-        <div class="font-bold text-center p-5 text-2xl">Leading Experts</div>
+        <div class="font-bold text-center p-5 text-2xl">CHUYÊN GIA HÀNG ĐẦU</div>
         <div v-if="experts.length === 0">No result</div>
         <div v-else class="h-[500px]">
           <el-scrollbar responsive height="480px" :key="$route.fullPath">
@@ -18,7 +18,7 @@
       </div>
 
       <div class="bg-[#D1E0DB] rounded-[15px] mx-2 w-[350px]">
-        <div class="font-bold text-center p-5 mb-5 text-2xl">Fields</div>
+        <div class="font-bold text-center p-5 mb-5 text-2xl">LĨNH VỰC</div>
         <el-scrollbar height="460px">
           <!-- <div v-for="(address, index) in types" :key="index">
             <el-card
@@ -35,7 +35,7 @@
               <el-radio-group v-model="typesSelect" size="large" class="">
                 <div class="w-[50px]">
                   <div v-for="type in expertfield" :key="type._id" class="">
-                    <div class="w-[100px] flex flex-wrap">
+                    <div class="w-[100px] flex flex-wrap" :title="`${type._id} (${type.quantity})`">
                       <el-radio-button :label="type._id" class="w-10 m-2" @change="handleFieldChange">
                         {{ `${type._id} (${type.quantity})` }}
                       </el-radio-button>
