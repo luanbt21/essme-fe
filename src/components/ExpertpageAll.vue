@@ -35,7 +35,7 @@
               <el-radio-group v-model="typesSelect" size="large" class="">
                 <div class="w-[50px]">
                   <div v-for="type in expertfield" :key="type._id" class="">
-                    <div class="w-[100px] flex flex-wrap" :title="`${type._id} (${type.quantity})`">
+                    <div class="w-[100px] flex flex-wrap">
                       <el-radio-button :label="type._id" class="w-10 m-2" @change="handleFieldChange">
                         {{ `${type._id} (${type.quantity})` }}
                       </el-radio-button>
