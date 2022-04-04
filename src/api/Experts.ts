@@ -30,7 +30,7 @@ export const getExpertstop = async (size = 6, page = 0): Promise<Experts[]> => {
     throw new Error('Failed to get experts')
   }
 }
-export const getExperts = async (size = 10, page = 0): Promise<Experts[]> => {
+export const getExperts = async (size = 50, page = 0): Promise<Experts[]> => {
   try {
     const res = await axios.get(`${apiUrl}/top`, {
       params: {
@@ -77,6 +77,31 @@ export const searchExperts = async (
     throw new Error('Failed to get experts')
   }
 }
+
+export const searchExperts1 = async (
+  what?: string,
+  radius = 5,
+  page = 2,
+  size = 100,
+  asc = true
+
+): Promise<PageEntity<Experts>> => {
+  try {
+    const res = await axios.get(`${apiUrl}/search`, {
+      params: {
+        what,
+        radius,
+        page: page - 1,
+        size,
+        asc
+      }
+    })
+    return res.data
+  } catch (error) {
+    throw new Error('Failed to get experts')
+  }
+}
+
 export const fieldsExperts = async (): Promise<FieldsType[]> => {
   try {
     const res = await axios.get(`${apiUrl}/field`)

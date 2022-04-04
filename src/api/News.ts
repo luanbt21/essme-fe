@@ -27,6 +27,25 @@ export const searchNewss = async (
   }
 }
 
+export const searchNewss1 = async (
+  what?: string,
+  page = 0,
+  size = 20
+): Promise<PageEntity<News>> => {
+  try {
+    const res = await axios.get(`${apiUrl}/search`, {
+      params: {
+        what,
+        page: page,
+        size,
+      }
+    })
+    return res.data
+  } catch (error) {
+    throw new Error('Failed to get events')
+  }
+}
+
 export const getNewsTags = async (): Promise<string[]> => {
   try {
     const res = await axios.get(`${apiUrl}/tags`)

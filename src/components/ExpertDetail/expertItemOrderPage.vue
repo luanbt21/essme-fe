@@ -36,6 +36,11 @@
             </a>
           </span>
         </div>
+        <div>
+          <router-link :to="'/expert/' + expert._id"
+            ><div class="text-right italic text-sky-600 hover:text-sky-400 underline">details</div></router-link
+          >
+        </div>
       </div>
     </div>
   </div>

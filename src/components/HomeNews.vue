@@ -36,9 +36,13 @@ import { getNewsHome } from '~/api/News'
 import { News } from '~/models/News'
 import NewsItem from './NewsItem.vue'
 
-const newsArr = ref<News[]>([])
+// const newsArr = ref<News[]>([])
 
-onMounted(async () => {
-  newsArr.value = await getNewsHome(9)
-})
+// onMounted(async () => {
+//   newsArr.value = await getNewsHome(9)
+// })
+
+const props = defineProps<{
+  newsArr: News[]
+}>()
 </script>

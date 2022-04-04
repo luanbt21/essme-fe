@@ -11,6 +11,7 @@
     <el-container class="container">
       <el-aside width="200px" class="hidden md:block pt-5">
         <h3>By Fields</h3>
+
         <!-- <el-input type="text" placeholder="Fields Search" /> -->
         <el-checkbox-group v-model="typesSelect" :max="2">
           <div v-for="(type, index) in types" :key="index">
@@ -19,9 +20,10 @@
         </el-checkbox-group>
       </el-aside>
       <el-main>
-        <el-col v-for="FQA in FQAsFilter" :key="FQA._id">
-          <FQAitem :question="FQA" />
-        </el-col>
+        <div v-for="FQA in FQAsFilter"><FQAitem :question="FQA" /></div>
+        <!-- <el-row v-for="FQA in FQAs" :key="FQA._id">
+          <el-col :span="24"><FQAitem :question="FQA" /></el-col>
+        </el-row> -->
       </el-main>
     </el-container>
 
@@ -38,7 +40,7 @@ import FQAitem from '~/components/FQAitem.vue'
 import { computed, onMounted, ref } from 'vue'
 import { Question } from '~/models/Question'
 import { getQuestion } from '~/api/Question'
-import Search from '~/components/Search.vue'
+// import Search from '~/components/Search.vue'
 const FQAs = ref<Question[]>([])
 const types = computed(() => {
   const result = new Set<string>()
@@ -59,6 +61,6 @@ const FQAsFilter = computed(() => {
   }
 })
 onMounted(async () => {
-  FQAs.value = await getQuestion(50)
+  FQAs.value = await getQuestion(1000)
 })
 </script>

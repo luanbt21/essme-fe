@@ -146,8 +146,14 @@
         <router-link class="mb-[-15px]" to="/FQAs">
         <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>FQAs</p></div>
         </router-link>
+        <router-link class="mb-[-15px]" to="/questionSheet">
+        <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>Ask Question</p></div>
+        </router-link>
         <router-link class="mb-[-15px]" to="/OrderExpert">
         <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>Order Expert</p></div>
+        </router-link>
+        <router-link class="mb-[-15px]" to="/">
+        <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>Expert Profile</p></div>
         </router-link>
         <router-link class="mb-[-15px]" to="/allexperts">
         <div class="border-radius-up hover:cursor-pointer  leading-loose ml-[3px] mb-[15px]"><p>Expert Info</p></div>

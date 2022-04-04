@@ -1,6 +1,6 @@
 <template>
-  <div class="relative w-[97%] min-w-[800px] z-1 mt-[-100px] bg-slate-200 rounded-[40px] p-[50px] flex flex-col">
-    <div class="container px-5 py-6 mx-auto">
+  <div class="container -translate-y-24 bg-slate-200 rounded-[40px] p-[3%] flex flex-col">
+    <div>
       <Search
         label="Search Events?"
         placeholder="Event title"
@@ -36,9 +36,7 @@
       </el-container>
     </div>
   </div>
-  <div class="relative w-full min-w-[800px] mt-20">
-    <FooterVue />
-  </div>
+  <FooterVue />
 </template>
 
 <script setup lang="ts">

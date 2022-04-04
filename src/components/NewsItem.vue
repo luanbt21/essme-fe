@@ -1,7 +1,7 @@
 <template>
   <div>
     <a :href="news.url" target="_blank">
-      <router-link :to="`/news/${news._id}`">
+      <router-link @click="handlechange" :to="`/news/${news._id}`">
         <el-card class="h-[150px] mb-5 md:hover:scale-105 hover:duration-500" :body-style="{ padding: '10px' }">
           <h4 class="line-clamp-2 h-fit min-h-[3rem]">
             {{ news.title }}
@@ -25,6 +25,12 @@
 
 <script setup lang="ts">
 import { News } from '~/models/News'
+
+const handlechange = () => {
+  setTimeout(() => {
+    window.location.reload()
+  }, 100)
+}
 defineProps<{
   news: News
 }>()

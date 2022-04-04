@@ -1,5 +1,5 @@
 <template>
-  <div class="container m-auto mt-10">
+  <div class="container m-auto mt-10 mb-9">
     <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
       <h2 class="text-center text-2xl mb-2">Events</h2>
       <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
@@ -77,12 +77,16 @@ import { getHomepage } from '~/api/Homepage'
 import { Homepage } from '~/models/Homepage'
 import { Event } from '~/models/Event'
 const homepage = ref<Homepage>()
-const eventsArr = ref<Event[]>([])
+// const eventsArr = ref<Event[]>([])
 const img = 'https://th.bing.com/th/id/OIP.iSu2RcCcdm78xbxNDJMJSgHaEo?pid=ImgDet&rs=1'
 
-onMounted(async () => {
-  homepage.value = await getHomepage()
-  eventsArr.value = homepage.value.top_events
-  // console.log(expertArr.value)
-})
+// onMounted(async () => {
+//   homepage.value = await getHomepage()
+//   eventsArr.value = homepage.value.top_events
+//   // console.log(expertArr.value)
+// })
+
+const props = defineProps<{
+  eventsArr: Event[]
+}>()
 </script>

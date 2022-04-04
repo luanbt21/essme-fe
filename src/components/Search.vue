@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-[#C8E3D9] py-4 mb-4 rounded-xl flex justify-center px-[50px]">
+  <div class="bg-[#C8E3D9] py-3 mb-4 rounded-xl flex justify-center px-[50px]">
     <el-row align="bottom" :gutter="30" class="flex-1">
-      <el-col :xs="24" :md="10" class="flex-auto w-64">
-        <label for="what">
+      <el-col class="mb-4" :xs="24" :md="10">
+        <label for="what" class="text-2xl">
           {{ label }}
         </label>
         <el-autocomplete
@@ -13,7 +13,7 @@
           placeholder="Search by fields"
         />
       </el-col>
-      <el-col :xs="24" :md="10" class="flex-auto w-64">
+      <el-col class="mb-4" :xs="24" :md="10">
         <label for="where" class="text-2xl">Find Where?</label>
         <el-autocomplete
           id="where"
@@ -29,8 +29,8 @@
           </template>
         </el-autocomplete>
       </el-col>
-      <el-col :xs="24" :md="4" class="flex-initial w-64">
-        <el-button type="success" size="large" color="#3754" @click="emit('search', what, where)">
+      <el-col class="mb-4" :xs="24" :md="4">
+        <el-button type="success" class="w-full" size="large" color="#3754" @click="emit('search', what, where)">
           <el-icon><SearchIcon /></el-icon> Search
         </el-button>
       </el-col>

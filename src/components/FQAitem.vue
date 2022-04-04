@@ -13,7 +13,7 @@
       <div class="shrink-0 flex mb-[15px]">
         <img class="h-6 w-6 self-start" src="../assets/answer-icon.png" alt="Question Logo" />
         <div class="text-xl text-black">Answer:</div>
-        <span class="ml-[5px] line-clamp-3 mt-[4px]">{{ question.answers[0].answer }}</span>
+        <span class="ml-[5px] line-clamp-3 mt-[4px]">{{ question.answers[0]?.answer }}</span>
       </div>
       <el-tag class="float-right" v-for="(topic, index) in question.Topic" type="info" effect="dark">
         {{ topic }}

@@ -4,7 +4,7 @@
       <h2 class="text-center text-2xl mb-2">Fields</h2>
       <el-row :gutter="30" :key="$route.fullPath">
         <el-col class="text-center" :xs="24" :sm="12" :lg="8" v-for="fields in fieldsArr" :key="fields.name">
-          <router-link :to="`/fields/${fields.name}`" custom v-slot="{ navigate, href }">
+          <router-link :to="`/fields/${fields.name_vn}`" custom v-slot="{ navigate, href }">
             <el-link type="primary" :href="href" @click="navigate">
               <img
                 @change="handleFieldChange"
@@ -15,7 +15,7 @@
             </el-link>
           </router-link>
           <h3 class="text-center text-xl hover:text-emerald-600 cursor-pointer">
-            {{ fields.name }}
+            {{ fields.name_vn }}
           </h3>
         </el-col>
       </el-row>
@@ -27,6 +27,7 @@
 import { onMounted, ref } from 'vue'
 import { getFields } from '~/api/Fields'
 import { Fields } from '~/models/Fields'
+import router from '~/router'
 
 const fieldsArr = ref<Fields[]>([])
 
