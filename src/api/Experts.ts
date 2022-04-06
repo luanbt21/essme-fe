@@ -60,8 +60,8 @@ export const getExperts1 = async (limit = 100, sortBy = 'research_area', asc = t
 export const searchExperts = async (
   what?: string,
   where?: string,
-  page = 2,
-  size = 100
+  page = 1,
+  size = 1000
 ): Promise<PageEntity<Experts>> => {
   try {
     const res = await axios.get(`${apiUrl}/search`, {
