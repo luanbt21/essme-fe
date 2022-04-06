@@ -1,11 +1,7 @@
 <template>
-  <el-row :gutter="20" class="p-5 mb-4">
-    <el-col :span="4">
-      <img
-        :src="expert.img"
-        class="w-[210px] h-[300px] object-cover rounded-3xl"
-        style="height: 200px; border-radius: 10px"
-      />
+  <el-row :gutter="20" class="p-5 mb-4 text-center">
+    <el-col :span="6">
+      <img :src="expert.img" class="mt-3 w-60 object-cover rounded-2xl inline-block" />
       <!-- <el-image
               class="max-h-56 rounded-sm"
               style="width: auto; height: auto; border-radius: 30px"
@@ -13,8 +9,8 @@
               fit="cover"
             /> -->
     </el-col>
-    <el-col :span="16">
-      <div class="h-full flex flex-col justify-center">
+    <el-col :span="14">
+      <div class="h-full flex flex-col justify-center text-left">
         <div class="flex p-2">
           <div class="min-w-[130px]">Tên chuyên gia:</div>
           <div>{{ expert.name.toUpperCase() }}</div>
@@ -40,7 +36,7 @@
       </div>
     </el-col>
     <router-link :to="'/expert/' + expert._id">
-      <div class="mt-20"><el-button class="w-20" type="info" round>Chi tiết</el-button></div>
+      <div class="mt-20"><el-button class="w-20 rounded-lg" type="info">Chi tiết</el-button></div>
     </router-link>
   </el-row>
 </template>
