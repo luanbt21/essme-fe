@@ -1,7 +1,7 @@
 <template>
   <div class="container m-auto mt-10 mb-9">
     <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
-      <h2 class="text-center text-2xl mb-2">Events</h2>
+      <h2 class="text-center text-2xl mb-2">{{ $t('message.events', {}, { locale: $i18n.locale }) }}</h2>
       <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
         <el-carousel :interval="4000" type="card" height="450px" :autoplay="true">
           <el-carousel-item
@@ -64,7 +64,9 @@
       </div>
       <div class="text-center">
         <router-link to="/events" custom v-slot="{ navigate, href }">
-          <el-link type="primary" :href="href" @click="navigate">View all events</el-link>
+          <el-link type="primary" :href="href" @click="navigate">{{
+            $t('message.showmore', {}, { locale: $i18n.locale })
+          }}</el-link>
         </router-link>
       </div>
     </div>

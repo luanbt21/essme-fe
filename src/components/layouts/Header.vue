@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <router-link to="/">Home</router-link>
-    <router-link to="questions">Questions</router-link>
-    <el-button style="padding: 0" @click="$emit('toggle-lang')"><img class="svg" :src="flag" /></el-button>
+    <!-- <router-link to="/">Home</router-link> -->
+    <!-- <router-link to="questions">Questions</router-link> -->
+    <el-button style="padding: 0" @click="$emit('toggle-lang')"><img class="svg" :src="flag" />toggle</el-button>
     <el-button @click="login">Login</el-button>
     <el-button @click="logout">Logout</el-button>
   </div>

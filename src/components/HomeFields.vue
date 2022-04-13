@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-10 mb-10 mx-auto">
     <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
-      <h2 class="text-center text-2xl mb-2">Fields</h2>
+      <h2 class="text-center text-2xl mb-2">{{ $t('message.fields', {}, { locale: $i18n.locale }) }}</h2>
       <el-row :gutter="30" :key="$route.fullPath">
         <el-col class="text-center" :xs="24" :sm="12" :lg="8" v-for="fields in fieldsArr" :key="fields.name">
           <router-link :to="`/fields/${fields.name_vn}`" custom v-slot="{ navigate, href }">

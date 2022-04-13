@@ -25,7 +25,7 @@
           <div class="infor_necessary-right">
             <div class="row-input">
               <label class="label-form" for="">Full name:</label>
-              <input type="text" v-model="fullname" id="" placeholder="TRINH KHANH HUYEN" />
+              <input type="text" v-model="fullname" id="" placeholder="Your Full Name" />
             </div>
             <el-row :gutter="100">
               <el-col :span="12">
@@ -39,22 +39,28 @@
               <el-col :span="12">
                 <div class="row-input">
                   <label class="mr-2" for="">Birth:</label>
-                  <el-date-picker class="!w-full" format="DD/MM/YYYY" v-model="birth" id="" placeholder="28/08/2001" />
+                  <el-date-picker
+                    class="!w-full"
+                    format="DD/MM/YYYY"
+                    v-model="birth"
+                    id=""
+                    placeholder="Your BirthDay"
+                  />
                   <!-- <input type="text" v-model="birth" id="" placeholder="28/08/2001" /> -->
                 </div>
               </el-col>
             </el-row>
             <div class="row-input">
               <label class="label-form" for="">Phone:</label>
-              <input type="text" v-model="phone" id="" placeholder="0987 332 991" />
+              <input type="text" v-model="phone" id="" placeholder="Your Phone Number" />
             </div>
             <div class="row-input">
               <label class="label-form" for="">Address:</label>
-              <input type="text" v-model="address" id="" placeholder="NEU, 207 Giai Phong, Hai Ba Trung, Ha Hoi" />
+              <input type="text" v-model="address" id="" placeholder="Your Address" />
             </div>
             <div class="row-input">
               <label class="label-form" for="">Email:</label>
-              <input type="text" v-model="email" id="" placeholder="tkhuyen@gmail.com" />
+              <input type="text" v-model="email" id="" placeholder="Your Email" />
             </div>
             <div class="row-input">
               <label class="label-form" for="">Interest:</label>
