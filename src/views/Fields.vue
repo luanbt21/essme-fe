@@ -3,9 +3,9 @@
     <el-breadcrumb class="mb-4" :separator-icon="ArrowRight">
       <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
       <el-breadcrumb-item>field</el-breadcrumb-item>
-      <el-breadcrumb-item>{{ route.params.name }}</el-breadcrumb-item>
+      <el-breadcrumb-item>{{ route.params.name }} </el-breadcrumb-item>
     </el-breadcrumb>
-    <el-scrollbar class="bg-[rgb(209,224,219)] p-9 rounded-2xl" height="400px">
+    <el-scrollbar class="bg-[rgb(209,224,219)] p-9 rounded-2xl" height="800px">
       <div class="rounded-3xl bg-slate-50" v-for="expert in experts">
         <FieldExpert :expert="expert" />
       </div>
@@ -23,7 +23,7 @@
     <HomeEventsVue :eventsArr="eventsArr" />
     <HomeNews :newsArr="newssArr" />
   </div>
-  <div class="relative w-full min-w-[800px] mt-18">
+  <div class="relative w-full min-w-[800px] mt-16">
     <FooterVue />
   </div>
 </template>
@@ -87,6 +87,7 @@ onMounted(async () => {
 
   newsPage.value = await searchNewss1(`${route.params.name.toString().toLowerCase().split(' ').at(0)}`)
   newssArr.value = newsPage.value ? newsPage.value.content : []
+
   // console.log(expertsPage.value)
 })
 </script>
