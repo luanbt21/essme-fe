@@ -56,19 +56,19 @@
     </el-row>
   </div>
 
-  <!-- <div class="mt-5 w-[95%] mx-auto justify-center">
+  <div class="mt-5 w-[95%] mx-auto justify-center">
     <HomeFieldsVue />
   </div>
   <div class="mt-5 w-[95%] mx-auto justify-center">
-    <HomeNewsVue />
+    <HomeNews :newsArr="newsArr" />
   </div>
   <div class="mt-5 w-[95%] mx-auto justify-center">
-    <HomeEventsVue />
-  </div> -->
+    <HomeEventsVue :eventsArr="eventsArr" />
+  </div>
 </template>
 
 <script lang="ts" setup>
-import HomeNewsVue from './HomeNews.vue'
+import HomeNews from '~/components/HomeNews.vue'
 import HomeEventsVue from './HomeEvents.vue'
 import HomeFieldsVue from './HomeFields.vue'
 import { searchExperts, getExperts, getExpertstop, FieldsType, fieldsExperts } from '~/api/Experts'
@@ -83,13 +83,20 @@ import Mapbox from '~/components/Mapbox.vue'
 import { Feature } from '~/models/Geojson'
 import FooterVue from '~/components/tkhuyen/Footer.vue'
 import ExpertsItem from '~/components/ExpertsItem.vue'
-
+import { Experts } from '~/models/Experts'
+import { Homepage } from '~/models/Homepage'
+import { Event } from '~/models/Event'
+import { getHomepage } from '~/api/Homepage'
+import { News } from '~/models/News'
+import { getNewsHome } from '~/api/News'
+const eventsArr = ref<Event[]>([])
 const router = useRouter()
 const pageSize = 10
 const mapCenter = ref<number[]>()
 const expertfield = ref<FieldsType[]>([])
 const expertsTop = ref<ExpertModel[]>([])
 const expertsPage = ref<PageEntity<ExpertModel>>()
+const homepage = ref<Homepage>()
 const props = defineProps<{
   what?: string
   where?: string
@@ -156,10 +163,15 @@ const mapData = computed(
   //     } as Feature)
   // )
 )
+const newsArr = ref<News[]>([])
+
 onMounted(async () => {
   expertsPage.value = await searchExperts(props.what, props.where, props.page, pageSize)
   expertsTop.value = await getExpertstop(20, 1)
   expertfield.value = await fieldsExperts()
+  homepage.value = await getHomepage()
+  eventsArr.value = homepage.value.top_events
+  newsArr.value = await getNewsHome(9)
 })
 const handleSearch = (what: string, where: string) => {
   router.push({

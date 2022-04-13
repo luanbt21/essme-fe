@@ -4,7 +4,7 @@
       <h2 class="text-center text-2xl mb-2">Fields</h2>
       <el-row :gutter="30" :key="$route.fullPath">
         <el-col class="text-center" :xs="24" :sm="12" :lg="8" v-for="fields in fieldsArr" :key="fields.name">
-          <router-link :to="`/fields/${fields.name_vn}`" custom v-slot="{ navigate, href }">
+          <router-link v-bind:to="'/fields/' + fields.name_vn" custom v-slot="{ navigate, href }">
             <el-link type="primary" :href="href" @click="navigate">
               <img
                 @change="handleFieldChange"
@@ -54,7 +54,8 @@ const handleFieldChange = () => {
   router.push({
     name: 'fieldname',
     query: {
-      name: typesSelect.value.toString()
+      what: typesSelect.value.toString(),
+      page: 1
     }
   })
 }

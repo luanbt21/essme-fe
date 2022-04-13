@@ -73,12 +73,11 @@
         </el-scrollbar>
       </div>
       <div class="w-[68%]">
-        <div class="text-center">
+        <div class="grid justify-items-center text-center">
           <el-pagination
             layout="prev, pager, next"
-            :page-size="pageSize"
             :page-count="expertsPage?.totalPages"
-            v-model:current-page="props.page"
+            :current-page="props.page"
             @current-change="handlePageChange"
           />
         </div>
@@ -111,7 +110,7 @@ import { Feature } from '~/models/Geojson'
 import FooterVue from '~/components/tkhuyen/Footer.vue'
 import ExpertsItem from '~/components/ExpertsItem.vue'
 const router = useRouter()
-const pageSize = 1000
+const pageSize = 10
 const mapCenter = ref<number[]>()
 const expertfield = ref<FieldsType[]>([])
 const expertsTop = ref<ExpertModel[]>([])
@@ -121,11 +120,7 @@ const props = defineProps<{
   where?: string
   page?: number
 }>()
-// let id = ''
-// const callFunction = (e: any) => {
-//   id = e.target.value
-//   console.log(id)
-// }
+
 const expertsTopData = computed(() => (expertsTop.value ? expertsTop.value : []))
 const expertsData = computed(() => (expertsPage.value ? expertsPage.value.content : []))
 for (let item of expertsData.value) {

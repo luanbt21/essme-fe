@@ -7,7 +7,7 @@
         what-field="research_area"
         :what-suggest="searchExperts"
         where-field="location"
-        :where-suggest="getExperts"
+        :where-suggest="searchExperts"
         @search="handleSearch"
       />
     </div>
