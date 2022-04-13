@@ -14,8 +14,11 @@
               />
             </el-link>
           </router-link>
-          <h3 class="text-center text-xl hover:text-emerald-600 cursor-pointer">
+          <h3 v-if="$i18n.locale == 'vi'" class="text-center text-xl hover:text-emerald-600 cursor-pointer">
             {{ fields.name_vn }}
+          </h3>
+          <h3 v-else class="text-center text-xl hover:text-emerald-600 cursor-pointer">
+            {{ fields.name }}
           </h3>
         </el-col>
       </el-row>
