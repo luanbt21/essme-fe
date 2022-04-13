@@ -90,7 +90,7 @@ const whereSearch = async (queryString: string, cb: (arg: any) => void) => {
 
   cb(
     [...uniqueWhere].map(item => ({
-      value: item
+      value: item.pop()
     }))
   )
 }
