@@ -10,6 +10,16 @@
         <FieldExpert :expert="expert" />
       </div>
     </el-scrollbar>
+    <div class="w-[68%]">
+      <div class="grid justify-items-center text-center">
+        <el-pagination
+          layout="prev, pager, next"
+          :page-count="expertsPage?.totalPages"
+          :current-page="props.page"
+          @current-change="handlePageChange"
+        />
+      </div>
+    </div>
     <HomeEventsVue :eventsArr="eventsArr" />
     <HomeNews :newsArr="newssArr" />
   </div>
@@ -33,6 +43,7 @@ import { searchEvents } from '~/api/Events'
 import { News } from '~/models/News'
 import { searchNewss1 } from '~/api/News'
 import HomeNews from '~/components/HomeNews.vue'
+import { useRouter } from 'vue-router'
 
 const eventsArr = ref<Event[]>([])
 const eventsPage = ref<PageEntity<Event>>()
@@ -45,14 +56,29 @@ const newssArr = ref<News[]>([])
 const route = useRoute()
 
 const experts = computed(() => (expertsPage.value ? expertsPage.value.content : []))
+const props = defineProps<{
+  what?: string
 
+  page?: number
+}>()
+const router = useRouter()
+const handlePageChange = (page: number) => {
+  router.push({
+    name: '/fields/:name',
+    query: {
+      what: `${route.params.name.toString().toLowerCase().split(' ').at(0)}`,
+
+      page
+    }
+  })
+}
 onMounted(async () => {
   // const a= route.params.name.
   // console.log(route.params.name.toString().toLowerCase().split(' ').at(0))
   expertsPage.value = await searchExperts1(
     `${route.params.name.toString().toLowerCase().split(' ').at(0)}`,
     5,
-    1,
+    props.page,
     100,
     true
   )

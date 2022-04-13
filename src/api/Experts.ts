@@ -61,7 +61,7 @@ export const searchExperts = async (
   what?: string,
   where?: string,
   page = 1,
-  size = 1000
+  size = 100000
 ): Promise<PageEntity<Experts>> => {
   try {
     const res = await axios.get(`${apiUrl}/search`, {
@@ -101,7 +101,18 @@ export const searchExperts1 = async (
     throw new Error('Failed to get experts')
   }
 }
+export const suggestexpert = async (
+ 
+ 
 
+): Promise<PageEntity<Experts>> => {
+  try {
+    const res = await axios.get(`https://api.vietsearch.org/api/suggestions/what?lang=vi&size=1000`)
+    return res.data
+  } catch (error) {
+    throw new Error('Failed to get experts')
+  }
+}
 export const fieldsExperts = async (): Promise<FieldsType[]> => {
   try {
     const res = await axios.get(`${apiUrl}/field`)

@@ -74,7 +74,7 @@
         />
       </div>
       <div class="flex justify-center m-5 bg-[#d1e0db]">
-        <el-button class="w-24" type="text" @click="handlePost(), (centerDialogVisible = true)">Send</el-button>
+        <el-button class="w-24" type="primary" @click="handlePost(), (centerDialogVisible = true)">Send</el-button>
       </div>
       <!-- thông báo save thành công -->
       <el-dialog v-model="centerDialogVisible" title="Warning" width="30%" center>

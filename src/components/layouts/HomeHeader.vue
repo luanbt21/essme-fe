@@ -72,6 +72,7 @@
           </ul>
         </li>
         <li class="nav_bar_res_li">
+          <p>{{ $t("message.hello") }} aa</p>
           <li class="nav_bar_res_li nav_bar_res_li-hover"><a href="" class="nav_respon--link">Languages</a></li>
           <ul>
             <li class="nav_bar_res_li nav_bar_res_li-hover"><a class="sub_nav_res-list" href="">English</a></li>

@@ -80,7 +80,8 @@ const router = createRouter({
       name: 'fieldname',
       component: () => import('~/views/Fields.vue'),
       props: route => ({
-        name: route.params.name
+        name: route.params.name,
+        page: route.query.page ? parseInt(route.query.page as string) : 1
       })
     },
 
