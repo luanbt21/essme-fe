@@ -81,7 +81,7 @@ export const searchExperts = async (
 export const searchExperts1 = async (
   what?: string,
   radius = 5,
-  page = 2,
+  page = 1,
   size = 100,
   asc = true
 

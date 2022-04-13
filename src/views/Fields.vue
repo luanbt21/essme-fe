@@ -5,21 +5,8 @@
       <el-breadcrumb-item>field</el-breadcrumb-item>
       <el-breadcrumb-item>{{ route.params.name }} </el-breadcrumb-item>
     </el-breadcrumb>
-    <el-scrollbar class="bg-[rgb(209,224,219)] p-9 rounded-2xl" height="800px">
-      <div class="rounded-3xl bg-slate-50" v-for="expert in experts">
-        <FieldExpert :expert="expert" />
-      </div>
-    </el-scrollbar>
-    <div class="w-[68%]">
-      <div class="grid justify-items-center text-center">
-        <el-pagination
-          layout="prev, pager, next"
-          :page-count="expertsPage?.totalPages"
-          :current-page="props.page"
-          @current-change="handlePageChange"
-        />
-      </div>
-    </div>
+    <Fieldall :key="$route.fullPath" v-bind="props" />
+
     <HomeEventsVue :eventsArr="eventsArr" />
     <HomeNews :newsArr="newssArr" />
   </div>
@@ -29,6 +16,7 @@
 </template>
 
 <script lang="ts" setup>
+import Fieldall from '~/components/Fieldall.vue'
 import FooterVue from '~/components/tkhuyen/Footer.vue'
 import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
@@ -54,41 +42,47 @@ const newsPage = ref<PageEntity<News>>()
 const newssArr = ref<News[]>([])
 
 const route = useRoute()
+// const pageSize = 10
+// const experts = computed(() => (expertsPage.value ? expertsPage.value.content : []))
+// // interface Props {
+// //   name?: string
 
-const experts = computed(() => (expertsPage.value ? expertsPage.value.content : []))
+// //   page?: number
+// // }
+// // const props = defineProps<Props>()
 const props = defineProps<{
-  what?: string
+  name?: string
 
   page?: number
 }>()
-const router = useRouter()
-const handlePageChange = (page: number) => {
-  router.push({
-    name: '/fields/:name',
-    query: {
-      what: `${route.params.name.toString().toLowerCase().split(' ').at(0)}`,
-
-      page
-    }
-  })
-}
+// const router = useRouter()
+// const handlePageChange = (page: number) => {
+//   router.push({
+//     name: 'fieldname',
+//     query: {
+//       page
+//     }
+//   })
+// }
 onMounted(async () => {
-  // const a= route.params.name.
-  // console.log(route.params.name.toString().toLowerCase().split(' ').at(0))
-  expertsPage.value = await searchExperts1(
-    `${route.params.name.toString().toLowerCase().split(' ').at(0)}`,
-    5,
-    props.page,
-    100,
-    true
-  )
+  //   // const a= route.params.name.
+  //   // console.log(route.params.name.toString().toLowerCase().split(' ').at(0))
+  //   expertsPage.value = await searchExperts1(
+  //     `${route.params.name.toString().toLowerCase().split(' ').at(1)}`,
+  //     5,
+  //     props.page,
+  //     pageSize,
+  //     true
+  //   )
+  //   const field = route.params.name.toString().toLowerCase().split(' ').at(0)
   eventsPage.value = await searchEvents(`${route.params.name.toString().toLowerCase().split(' ').at(0)}`)
+  console.log(route.params.name)
   eventsArr.value = eventsPage.value ? eventsPage.value.content : []
 
   newsPage.value = await searchNewss1(`${route.params.name.toString().toLowerCase().split(' ').at(0)}`)
   newssArr.value = newsPage.value ? newsPage.value.content : []
 
-  // console.log(expertsPage.value)
+  //   console.log(experts.value)
 })
 </script>
 
