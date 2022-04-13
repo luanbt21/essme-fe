@@ -5,8 +5,8 @@
       placeholder="Expert title"
       what-field="research_area"
       :what-suggest="searchExperts"
-      where-field="location"
-      :where-suggest="getExperts"
+      where-field="address"
+      :where-suggest="searchExperts"
       @search="handleSearch"
     />
   </div>
@@ -170,7 +170,7 @@ const handleFieldChange = () => {
     name: 'expertfields',
     query: {
       what: typesSelect.value.toString(),
-      // where: props.where,
+      where: props.where,
       page: 1
     }
   })

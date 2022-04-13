@@ -5,6 +5,27 @@
       <el-breadcrumb-item>field</el-breadcrumb-item>
       <el-breadcrumb-item>{{ route.params.name }} </el-breadcrumb-item>
     </el-breadcrumb>
+    <el-select
+      v-model="blog.text"
+      placeholder="Select field"
+      class="ml-10 mt-2 h-[30px] w-[300px] bg-white scroll-smooth"
+    >
+      <!-- <el-option v-for="item in expertfield" :key="item._id" :label="item._id" :value="item._id">
+        <el-button @click="handleFieldChange" style="float: left">{{ `${item._id} (${item.quantity})` }}</el-button>
+      </el-option> -->
+      <!-- <el-option
+        v-for="item in expertfield"
+        :key="item._id"
+        :value="item._id"
+        :label="item._id"
+        @click="handleFieldChange"
+        class="w-[200px] font-serif text-base scroll-smooth"
+      >
+        <div class="w-[200px] font-serif scroll-smooth">
+          {{ `${item._id}` }}
+        </div>
+      </el-option> -->
+    </el-select>
     <Fieldall :key="$route.fullPath" v-bind="props" />
 
     <HomeEventsVue :eventsArr="eventsArr" />
@@ -32,7 +53,8 @@ import { News } from '~/models/News'
 import { searchNewss1 } from '~/api/News'
 import HomeNews from '~/components/HomeNews.vue'
 import { useRouter } from 'vue-router'
-
+import { searchField } from '~/api/Research-area'
+import { ResearchArea } from '~/models/Research-area'
 const eventsArr = ref<Event[]>([])
 const eventsPage = ref<PageEntity<Event>>()
 
@@ -64,6 +86,10 @@ const props = defineProps<{
 //     }
 //   })
 // }
+const blog = {
+  text: ''
+}
+const expertfield = ref<ResearchArea>()
 onMounted(async () => {
   //   // const a= route.params.name.
   //   // console.log(route.params.name.toString().toLowerCase().split(' ').at(0))
@@ -74,14 +100,15 @@ onMounted(async () => {
   //     pageSize,
   //     true
   //   )
-  //   const field = route.params.name.toString().toLowerCase().split(' ').at(0)
+  const field = route.params.name.toString().toLowerCase().split(' ').at(0)
   eventsPage.value = await searchEvents(`${route.params.name.toString().toLowerCase().split(' ').at(0)}`)
-  console.log(route.params.name)
+  console.log(typeof route.params.name.toString().toLowerCase().split(' ').at(0))
   eventsArr.value = eventsPage.value ? eventsPage.value.content : []
 
   newsPage.value = await searchNewss1(`${route.params.name.toString().toLowerCase().split(' ').at(0)}`)
   newssArr.value = newsPage.value ? newsPage.value.content : []
-
+  // expertfield.value = await searchField(`${route.params.name}`)
+  // console.log(route.params.name)
   //   console.log(experts.value)
 })
 </script>

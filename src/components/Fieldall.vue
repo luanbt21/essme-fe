@@ -3,6 +3,7 @@
     <div class="rounded-3xl bg-slate-50" v-for="expert in experts" :key="expert._id">
       <FieldExpert :key="$route.fullPath" :expert="expert" />
     </div>
+    <span class="p-10">Choose the field:</span>
   </el-scrollbar>
   <div class="w-[68%] flex justify-center text-center">
     <div class="">
@@ -33,7 +34,8 @@ import { News } from '~/models/News'
 import { searchNewss1 } from '~/api/News'
 import HomeNews from '~/components/HomeNews.vue'
 import { useRouter } from 'vue-router'
-
+import { searchField } from '~/api/Research-area'
+import { ResearchArea } from '~/models/Research-area'
 const props = defineProps<{
   name?: string
 
@@ -51,12 +53,19 @@ const handlePageChange = (page: number) => {
   })
 }
 const experts = computed(() => (expertsPage.value ? expertsPage.value.content : []))
-
+const blog = {
+  text: ''
+}
+const expertfield = ref<ResearchArea>()
+const fieldArr = ref<String[]>()
 const route = useRoute()
 onMounted(async () => {
-  // const a= route.params.name.
+  const field = route.params.name
   // console.log(route.params.name.toString().toLowerCase().split(' ').at(0))
-  expertsPage.value = await searchExperts1(props.name, 5, props.page, pageSize, true)
+  expertsPage.value = await searchExperts1(route.params.name.toString(), 5, props.page, pageSize, true)
+  // expertfield.value = await searchField(route.params.name.toString())
+  // fieldArr.value = expertfield.value.keys
+  // console.log(expertfield.value)
 })
 </script>
 
