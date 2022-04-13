@@ -9,12 +9,12 @@
       >
         <div class="shrink-0 flex mb-[15px]">
           <img class="h-6 w-6" src="../assets/question-mark.png" alt="Question Logo" />
-          <span class="ml-[15px] min-w-[65px]">{{ $t('message.answer', {}, { locale: $i18n.locale }) }}: </span>
+          <span class="ml-[15px] min-w-[65px]">{{ $t('message.question', {}, { locale: $i18n.locale }) }}: </span>
           <span class="ml-[10px] line-clamp-3">{{ question.Description }} </span>
         </div>
         <div class="shrink-0 flex mb-[15px]">
           <img class="h-6 w-6 self-start" src="../assets/answer-icon.png" alt="Question Logo" />
-          <div class="text-xl text-black">{{ $t('message.question', {}, { locale: $i18n.locale }) }}:</div>
+          <div class="text-xl text-black">{{ $t('message.answer', {}, { locale: $i18n.locale }) }}:</div>
           <span class="ml-[5px] line-clamp-3 mt-[4px]">{{ question.answers[0].answer }}</span>
         </div>
         <div class="text-center">
