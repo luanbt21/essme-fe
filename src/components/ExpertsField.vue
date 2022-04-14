@@ -6,7 +6,7 @@
       what-field="research_area"
       :what-suggest="searchExperts"
       where-field="address"
-      :where-suggest="searchExperts"
+      :where-suggest="suggestexpert"
       @search="handleSearch"
     />
   </div>
@@ -99,7 +99,7 @@
 // import HomeNewsVue from './HomeNews.vue'
 // import HomeEventsVue from './HomeEvents.vue'
 // import HomeFieldsVue from './HomeFields.vue'
-import { searchExperts, getExperts, getExpertstop, FieldsType, fieldsExperts } from '~/api/Experts'
+import { searchExperts, getExperts, getExpertstop, FieldsType, fieldsExperts, suggestexpert } from '~/api/Experts'
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Search from '~/components/SearchByField.vue'
