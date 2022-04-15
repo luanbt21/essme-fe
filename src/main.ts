@@ -5,7 +5,9 @@ import axios from 'axios'
 import 'element-plus/dist/index.css'
 import '~/styles/index.scss'
 import './index.css'
-// import Vue from 'vue'
+import { i18n } from "~/i18n/i18n";
+
+
 import router from './router'
 import { store, key, useStore } from './store'
 
@@ -22,11 +24,11 @@ import type { MessageSchema, NumberSchema } from './lang.schema.ts'
 type MessageSchema = typeof enMessage
 
 // const store1 = useStore()
-const i18n =createI18n({
-  locale:'vn',
-  messages:{
-      'vn':vnMessage,
-      'en':enMessage,
+const i18n = createI18n({
+  locale: 'vn',
+  messages: {
+    'vn': vnMessage,
+    'en': enMessage,
   },
   fallbackLocale: 'vn',
 })
@@ -44,7 +46,7 @@ const app = createApp(App);
 // app.use(ElementPlus)
 app.use(store, key)
 app.use(router)
-app.use(i18n )
+app.use(i18n)
 app.use(store);
 app.mount('#app')
 
