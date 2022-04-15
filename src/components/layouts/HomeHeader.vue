@@ -1,7 +1,9 @@
 <template>
   <!-- <img class="background" src="src\assets\carousel.png" /> -->
   <div class="navbar pr-[10px]">
-    <p class="logo">ESSME</p>
+    <router-link to="/">
+      <p class="logo hover:cursor">ESSME</p>
+    </router-link>
     <!-- responsive -->
     <label  for="nav-respon-input" class="nav__bars-btn nav__bars-responsive item ">
       <svg
@@ -72,15 +74,14 @@
           </ul>
         </li>
         <li class="nav_bar_res_li">
-          <p>{{ $t("message.hello") }} aa</p>
-          <li class="nav_bar_res_li nav_bar_res_li-hover"><a href="" class="nav_respon--link">Languages</a></li>
+          <li class="nav_bar_res_li nav_bar_res_li-hover"><a href="" class="nav_respon--link">{{ $t('message.language',{}, { locale: lang }) }}</a></li>
           <ul>
             <li class="nav_bar_res_li nav_bar_res_li-hover"><a class="sub_nav_res-list" href="">English</a></li>
             <li class="nav_bar_res_li nav_bar_res_li-hover"><a class="sub_nav_res-list" href="">Tiếng Việt</a></li>
           </ul>
         </li>
         <li class="nav_bar_res_li">
-          <li class="nav_bar_res_li nav_bar_res_li-hover"><a href="" class="nav_respon--link">Login</a></li>
+          <li class="nav_bar_res_li nav_bar_res_li-hover"><a href="" class="nav_respon--link">{{ $t('message.login',{}, { locale: lang }) }}</a></li>
 
         </li>
       </ul>
@@ -89,7 +90,7 @@
     <!-- none responsive -->
     <div v-if="!isLogin" class="nav-dropdown nav__bars-noneresponsive item">
     
-    <router-link to="/login"><button class="nav-dropbtn">Login</button></router-link>
+    <router-link to="/login"><button class="nav-dropbtn">{{ $t('message.login',{}, { locale: lang }) }}</button></router-link>
     </div>
 
     <div v-if="isLogin" class="nav-dropdown  nav__bars-noneresponsive item hover:cursor-pointer ">
@@ -105,74 +106,73 @@
       </div>
       <div class="nav-dropdown-content border-radius-up border-radius-down ">
         <router-link class="mb-[-15px]" to="/ExpertOrCustomerStatus">
-          <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>Profile Settings</p></div>
+          <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>{{ $t('message.profilesetting',{}, { locale: lang }) }}</p></div>
         </router-link>
         <router-link class="mb-[-15px]" to="/FQAs">
-          <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>History</p></div>
+          <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>{{ $t('message.history',{}, { locale: lang }) }}</p></div>
         </router-link>
         <router-link class="mb-[-15px]" to="/FQAs">
-          <div @click="handleClick" class="border-radius-up hover:cursor-pointer leading-loose ml-[3px] mb-[15px]"><p>Log out</p></div>
+          <div @click="handleClick" class="border-radius-up hover:cursor-pointer leading-loose ml-[3px] mb-[15px]"><p>{{ $t('message.logout',{}, { locale: lang }) }}</p></div>
         </router-link>
       </div>
     </div>
 
     
-    
 
     <div v-if="isLogin" class="z-[10000] hover:cursor-pointer" >
         <el-badge @click="showNotification= !showNotification"  is-dot class="item mt-3">
         <img src="../../assets/notification.png" 
-          class="h-[35px] " 
+          class="h-[35px] mr-3 ml-3" 
           alt=""
           >
         </el-badge>
     </div>
 
     <div class="nav-dropdown nav__bars-noneresponsive item">
-      <button class="nav-dropbtn">Languages</button>
+      <button class="nav-dropbtn">{{ $t('message.language',{}, { locale: lang }) }}</button>
       <div class="hover:cursor-pointer nav-dropdown-content border-radius-up border-radius-down">
-        <router-link class="mb-[-15px]" to="/expertfields">
-          <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>English</p></div>
+        <router-link class="mb-[-15px]" to="">
+          <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p @click="handleLangChange('en'); $i18n.locale='en'">English</p></div>
         </router-link>
-        <router-link class="mb-[-15px]" to="/FQAs">
-          <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px] mb-[15px]"><p>Tiếng Việt</p></div>
+        <router-link class="mb-[-15px]" to="">
+          <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px] mb-[15px]"><p  @click="handleLangChange('vi');$i18n.locale='vi'">Tiếng Việt</p></div>
         </router-link>
       </div>
     </div>
     <router-link to="/news">
         <div class="nav-dropdown nav__bars-noneresponsive item">
-          <button class="nav-dropbtn">News</button>
+          <button class="nav-dropbtn">{{ $t('message.news',{}, { locale: lang }) }}</button>
         </div>
     </router-link>
     <router-link to="/events">
         <div class="nav-dropdown nav__bars-noneresponsive item">
-          <button class="nav-dropbtn">Events</button>
+          <button class="nav-dropbtn">{{ $t('message.events',{}, { locale: lang }) }}</button>
         </div>
     </router-link>
     <div  class="nav-dropdown nav__bars-noneresponsive item">
-      <button class="nav-dropbtn">Expert</button>
+      <button class="nav-dropbtn">{{ $t('message.expert',{}, { locale: lang }) }}</button>
       <div class="nav-dropdown-content border-radius-up border-radius-down">
         <router-link class="mb-[-15px]" to="/FQAs">
-        <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>FQAs</p></div>
+        <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>{{ $t('message.fqas',{}, { locale: lang }) }}</p></div>
         </router-link>
         <router-link class="mb-[-15px]" to="/questionSheet">
-        <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>Ask Question</p></div>
+        <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>{{ $t('message.askquestion',{}, { locale: lang }) }}</p></div>
         </router-link>
         <router-link class="mb-[-15px]" to="/OrderExpert">
-        <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>Order Expert</p></div>
+        <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>{{ $t('message.orderexpert',{}, { locale: lang }) }}</p></div>
         </router-link>
         <router-link class="mb-[-15px]" to="/">
-        <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>Expert Profile</p></div>
+        <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>{{ $t('message.expertprofile',{}, { locale: lang }) }}</p></div>
         </router-link>
         <router-link class="mb-[-15px]" to="/allexperts">
-        <div class="border-radius-up hover:cursor-pointer  leading-loose ml-[3px] mb-[15px]"><p>Expert Info</p></div>
+        <div class="border-radius-up hover:cursor-pointer  leading-loose ml-[3px] mb-[15px]"><p>{{ $t('message.expertinfo',{}, { locale: lang }) }}</p></div>
         </router-link>
       </div>
     </div>
 
     <router-link to="/">
       <div class="nav-dropdown nav__bars-noneresponsive item">
-        <button class="nav-dropbtn">Home</button>
+        <button class="nav-dropbtn">{{ $t('message.home',{}, { locale: lang }) }}</button>
       </div>
     </router-link>
 
@@ -203,7 +203,7 @@ import axios from 'axios'
 import { __baseURL } from '~/constant'
 import QuestionNotifi from './QuestionNotifi.vue';
 import AnswerNotifi from './AnswerNotifi.vue';
-
+import { locale } from "~/i18n/i18n";
 
 const showNotification = ref(false)
 
@@ -214,7 +214,16 @@ const handleClick = () => {
 const isLogin = computed(() => store.state.auth.user)
 const photoURL = computed(()=>{store.state.auth.image})
 
-
+const lang = ref('en')
+const handleLangChange = (a: string) =>{
+  if(a=='en'){
+    lang.value= "en"
+  }if( a=="vi"){
+    lang.value="vi"
+  }
+  computed(()=> lang.value)
+  
+}
 onUpdated(async () => {
   if(isLogin.value){  const token = computed(() => store.state.auth.token )
   // console.log(token.value)
@@ -247,7 +256,7 @@ onUpdated(async () => {
   margin-right: 100px;
 }
 .is-dot{
-  margin-right: 7px;
+  margin-right: 17px;
   margin-top: 5px;
 }
 :root {

@@ -1,7 +1,7 @@
 <template>
   <div class="container m-auto min-w-[500px]">
     <div class="px-8 py-4 bg-[#D1E0DB] rounded-lg" style="padding-left: 5%; padding-right: 5%">
-      <h1 class="text-center text-2xl mb-10">Experts</h1>
+      <h1 class="text-center text-2xl mb-10">{{ $t('message.leadingexpert', {}, { locale: $i18n.locale }) }}</h1>
       <el-row class="row-bg mb-10">
         <el-col
           class="grid grid-content mb-10"
@@ -57,15 +57,15 @@
                       href="#"
                       class="block mt-1 text-lg leading-tight font-medium text-black word-break-keep-all text-left"
                     >
-                      Trình độ: {{ expert.degree }}
+                      {{ $t('message.degree', {}, { locale: $i18n.locale }) }}: {{ expert.degree }}
                     </h2>
                     <!-- v-for="(field, index) in expert._source.google_scholar_fields.fields" :key="index" -->
-                    <div class="flex">
-                      <div class="w-20 mt-[8px]">Lĩnh vực:</div>
+                    <div class="inline">
+                      <div class="mt-[8px]">{{ $t('message.researcharea', {}, { locale: $i18n.locale }) }}:</div>
                       <span>
                         <span
                           style="display: block; margin-right: -5px"
-                          class="mt-2 text-gray-500 overflow-hidden"
+                          class="mt-2 ml-2 text-gray-500 overflow-hidden"
                           v-for="(number, index) of expert?.research_area"
                           :key="index"
                         >
@@ -87,7 +87,9 @@
 
       <div class="text-center">
         <router-link to="/allexperts" custom v-slot="{ navigate, href }">
-          <el-link type="primary" :href="href" @click="navigate">View all Experts</el-link>
+          <el-link type="primary" :href="href" @click="navigate">{{
+            $t('message.viewallexperts', {}, { locale: $i18n.locale })
+          }}</el-link>
         </router-link>
       </div>
     </div>

@@ -15,7 +15,7 @@
     "firebaseui": "^6.0.1",
     "mapbox-gl": "^2.7.0",
     "vue": "^3.2.31",
-    "vue-i18n": "^9.1.9",
+    "vue-i18n": "^9.2.0-beta.35",
     "vue-router": "^4.0.13",
     "vuefire": "^2.2.5",
     "vuex": "^4.0.2"

@@ -11,7 +11,9 @@
         @search="handleSearch"
       />
     </div>
+    <!-- <p>{{ $t('message.language', { msg: 'hello' }, { locale: 'vi' }) }}</p> -->
     <!-- <DemoVue /> -->
+    <!-- <HeaderVue /> -->
     <HomeExpertnew />
     <HomeFields />
     <HomeFQAs />
@@ -45,9 +47,9 @@ import { Event } from '~/models/Event'
 import { getHomepage } from '~/api/Homepage'
 import { News } from '~/models/News'
 import { getNewsHome } from '~/api/News'
+import HeaderVue from '~/components/layouts/Header.vue'
 const homepage = ref<Homepage>()
 const eventsArr = ref<Event[]>([])
-
 const router = useRouter()
 
 const props = defineProps<{
