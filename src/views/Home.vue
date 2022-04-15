@@ -11,7 +11,7 @@
         @search="handleSearch"
       />
     </div>
-    <!-- <p>{{ $t('message.language', { msg: 'hello' }, { locale: 'vi' }) }}</p> -->
+    <!-- <p>{{ $t('message.language', { msg: 'hello' }, { :locale: 'vi' }) }}</p> -->
     <!-- <DemoVue /> -->
     <!-- <HeaderVue /> -->
     <HomeExpertnew />
