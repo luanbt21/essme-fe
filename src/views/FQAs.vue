@@ -1,9 +1,9 @@
 <template>
   <div class="relative w-[97%] min-w-[800px] z-1 mt-[-100px] bg-slate-200 rounded-[40px] p-[50px] flex flex-col">
     <div class="mb-[15px]">
-      <router-link to="/questionSheet"
-        ><el-button color="rgb(46, 109, 192)" size="large" plain>Ask your question</el-button></router-link
-      >
+      <router-link to="/questionSheet">
+        <el-button size="large" type="primary">Ask your question</el-button>
+      </router-link>
     </div>
 
     <!-- <Search /> -->
