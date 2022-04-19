@@ -5,27 +5,7 @@
       <el-breadcrumb-item>field</el-breadcrumb-item>
       <el-breadcrumb-item>{{ route.params.name }} </el-breadcrumb-item>
     </el-breadcrumb>
-    <el-select
-      v-model="blog.text"
-      placeholder="Select field"
-      class="ml-10 mt-2 h-[30px] w-[300px] bg-white scroll-smooth"
-    >
-      <!-- <el-option v-for="item in expertfield" :key="item._id" :label="item._id" :value="item._id">
-        <el-button @click="handleFieldChange" style="float: left">{{ `${item._id} (${item.quantity})` }}</el-button>
-      </el-option> -->
-      <!-- <el-option
-        v-for="item in expertfield"
-        :key="item._id"
-        :value="item._id"
-        :label="item._id"
-        @click="handleFieldChange"
-        class="w-[200px] font-serif text-base scroll-smooth"
-      >
-        <div class="w-[200px] font-serif scroll-smooth">
-          {{ `${item._id}` }}
-        </div>
-      </el-option> -->
-    </el-select>
+
     <Fieldall :key="$route.fullPath" v-bind="props" />
 
     <HomeEventsVue :eventsArr="eventsArr" />
@@ -57,39 +37,26 @@ import { searchField } from '~/api/Research-area'
 import { ResearchArea } from '~/models/Research-area'
 const eventsArr = ref<Event[]>([])
 const eventsPage = ref<PageEntity<Event>>()
-
+const router = useRouter()
 const expertsPage = ref<PageEntity<Experts>>()
 
 const newsPage = ref<PageEntity<News>>()
 const newssArr = ref<News[]>([])
 
 const route = useRoute()
-// const pageSize = 10
-// const experts = computed(() => (expertsPage.value ? expertsPage.value.content : []))
-// // interface Props {
-// //   name?: string
 
-// //   page?: number
-// // }
-// // const props = defineProps<Props>()
 const props = defineProps<{
   name?: string
-
+  what?: string
   page?: number
 }>()
-// const router = useRouter()
-// const handlePageChange = (page: number) => {
-//   router.push({
-//     name: 'fieldname',
-//     query: {
-//       page
-//     }
-//   })
-// }
+
 const blog = {
   text: ''
 }
+const value = ref('')
 const expertfield = ref<ResearchArea>()
+
 onMounted(async () => {
   //   // const a= route.params.name.
   //   // console.log(route.params.name.toString().toLowerCase().split(' ').at(0))
@@ -102,14 +69,15 @@ onMounted(async () => {
   //   )
   const field = route.params.name.toString().toLowerCase().split(' ').at(0)
   eventsPage.value = await searchEvents(`${route.params.name.toString().toLowerCase().split(' ').at(0)}`)
-  console.log(typeof route.params.name.toString().toLowerCase().split(' ').at(0))
+  // console.log(typeof route.params.name.toString().toLowerCase().split(' ').at(0))
   eventsArr.value = eventsPage.value ? eventsPage.value.content : []
 
   newsPage.value = await searchNewss1(`${route.params.name.toString().toLowerCase().split(' ').at(0)}`)
   newssArr.value = newsPage.value ? newsPage.value.content : []
-  // expertfield.value = await searchField(`${route.params.name}`)
-  // console.log(route.params.name)
-  //   console.log(experts.value)
+  console.log(route.params.name.toString())
+  expertfield.value = await searchField(route.params.name.toString())
+
+  // console.log(blog.text.toString())
 })
 </script>
 

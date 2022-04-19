@@ -4,14 +4,16 @@
       <Search
         label="Tìm kiếm chuyên gia?"
         placeholder="Expert title"
-        what-field="research_area"
-        :what-suggest="searchExperts"
-        where-field="location"
-        :where-suggest="searchExperts"
+        what-field="what"
+        :what-suggest="whatSuggest"
+        where-field="where"
+        :where-suggest="whereSuggest"
         @search="handleSearch"
       />
     </div>
+    <!-- <p>{{ $t('message.language', { msg: 'hello' }, { :locale: 'vi' }) }}</p> -->
     <!-- <DemoVue /> -->
+    <!-- <HeaderVue /> -->
     <HomeExpertnew />
     <HomeFields />
     <HomeFQAs />
@@ -36,7 +38,7 @@ import FooterVue from '~/components/tkhuyen/Footer.vue'
 import Search from '~/components/SearchByField.vue'
 import HomeExpertnew from '~/components/HomeExpertnew.vue'
 import { onMounted, ref } from 'vue'
-import { searchExperts, getExperts } from '~/api/Experts'
+import { searchExperts, getExperts, whatSuggest, whereSuggest } from '~/api/Experts'
 import { useRouter } from 'vue-router'
 import { PageEntity } from '~/models/PageEntity'
 import { Experts } from '~/models/Experts'
@@ -45,9 +47,9 @@ import { Event } from '~/models/Event'
 import { getHomepage } from '~/api/Homepage'
 import { News } from '~/models/News'
 import { getNewsHome } from '~/api/News'
+import HeaderVue from '~/components/layouts/Header.vue'
 const homepage = ref<Homepage>()
 const eventsArr = ref<Event[]>([])
-
 const router = useRouter()
 
 const props = defineProps<{
@@ -58,12 +60,14 @@ const props = defineProps<{
 
 const expertsPage = ref<PageEntity<Experts>>()
 const newsArr = ref<News[]>([])
+// const suggest = ref<>()
 onMounted(async () => {
   expertsPage.value = await searchExperts(props.what, props.where, props.page)
   homepage.value = await getHomepage()
   eventsArr.value = homepage.value.top_events
   newsArr.value = await getNewsHome(9)
-  // console.log(newsArr.value)
+  // suggest.value = await suggestexpert()
+  // console.log(suggest.value)
 })
 const handleSearch = (what: string, where: string) => {
   router.push({

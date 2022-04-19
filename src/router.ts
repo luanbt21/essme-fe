@@ -80,7 +80,9 @@ const router = createRouter({
       name: 'fieldname',
       component: () => import('~/views/Fields.vue'),
       props: route => ({
-        name: route.params.name.toString().toLowerCase().split(' ').at(0),
+        name: route.params.name.toString(),
+        what: route.query.what,
+
         page: route.query.page ? parseInt(route.query.page as string) : 1
       })
     },
@@ -137,5 +139,8 @@ const router = createRouter({
     },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('~/views/NotFound.vue') }
   ],
+  scrollBehavior(to, from, savedPosition) {
+    return { top: 0 }
+  }
 })
 export default router

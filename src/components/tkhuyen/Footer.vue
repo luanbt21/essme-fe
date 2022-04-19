@@ -5,28 +5,54 @@
       <el-row>
         <el-col :sm="12" :md="6" class="leading-10">
           <div class="pl-[40%]">
-            <h2 class="font-medium text-2xl">Feature</h2>
-            <a href=""><p class="text-lg leading-10 hover:text-emerald-600">Find an Expert</p></a>
-            <a href=""><p class="text-lg leading-10 hover:text-emerald-600">Find Events</p></a>
+            <h2 class="font-medium text-2xl">{{ $t('message.Feature', {}, { locale: $i18n.locale }) }}</h2>
+            <a href=""
+              ><p class="text-lg leading-10 hover:text-emerald-600">
+                {{ $t('message.FindanExpert', {}, { locale: $i18n.locale }) }}
+              </p></a
+            >
+            <a href=""
+              ><p class="text-lg leading-10 hover:text-emerald-600">
+                {{ $t('message.FindEvents', {}, { locale: $i18n.locale }) }}
+              </p></a
+            >
           </div>
         </el-col>
         <el-col :sm="12" :md="6" class="leading-10">
           <div class="pl-[40%]">
-            <h2 class="font-medium text-2xl">Discover</h2>
-            <a href=""><p class="text-lg leading-10 hover:text-emerald-600">Security</p></a>
-            <a href=""><p class="text-lg leading-10 hover:text-emerald-600">Sponsor</p></a>
+            <h2 class="font-medium text-2xl">{{ $t('message.Discover', {}, { locale: $i18n.locale }) }}</h2>
+            <a href=""
+              ><p class="text-lg leading-10 hover:text-emerald-600">
+                {{ $t('message.Security', {}, { locale: $i18n.locale }) }}
+              </p></a
+            >
+            <a href=""
+              ><p class="text-lg leading-10 hover:text-emerald-600">
+                {{ $t('message.Sponsor', {}, { locale: $i18n.locale }) }}
+              </p></a
+            >
           </div>
         </el-col>
         <el-col :sm="12" :md="6" class="leading-10">
           <div class="pl-[40%]">
-            <h2 class="font-medium text-2xl">Information</h2>
-            <a href=""><p class="text-lg leading-10 hover:text-emerald-600">Rules</p></a>
-            <a href=""><p class="text-lg leading-10 hover:text-emerald-600">About us</p></a>
+            <h2 class="font-medium text-2xl">
+              {{ $t('message.Information', {}, { locale: $i18n.locale }) }}
+            </h2>
+            <a href=""
+              ><p class="text-lg leading-10 hover:text-emerald-600">
+                {{ $t('message.Rules', {}, { locale: $i18n.locale }) }}
+              </p></a
+            >
+            <a href=""
+              ><p class="text-lg leading-10 hover:text-emerald-600">
+                {{ $t('message.Aboutus', {}, { locale: $i18n.locale }) }}
+              </p></a
+            >
           </div>
         </el-col>
         <el-col :sm="12" :md="6" class="leading-10">
           <div class="pl-[40%]">
-            <h2 class="font-medium text-2xl">Community</h2>
+            <h2 class="font-medium text-2xl">{{ $t('message.Community', {}, { locale: $i18n.locale }) }}</h2>
             <p>
               <i class="bi bi-facebook mr-2"></i
               ><a href="https://m.facebook.com"

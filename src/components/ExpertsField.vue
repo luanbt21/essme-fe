@@ -3,10 +3,10 @@
     <Search
       label="Tìm kiếm chuyên gia?"
       placeholder="Expert title"
-      what-field="research_area"
-      :what-suggest="searchExperts"
-      where-field="address"
-      :where-suggest="suggestexpert"
+      what-field="what"
+      :what-suggest="whatSuggest"
+      where-field="where"
+      :where-suggest="whereSuggest"
       @search="handleSearch"
     />
   </div>
@@ -99,7 +99,15 @@
 // import HomeNewsVue from './HomeNews.vue'
 // import HomeEventsVue from './HomeEvents.vue'
 // import HomeFieldsVue from './HomeFields.vue'
-import { searchExperts, getExperts, getExpertstop, FieldsType, fieldsExperts, suggestexpert } from '~/api/Experts'
+import {
+  searchExperts,
+  getExperts,
+  getExpertstop,
+  FieldsType,
+  fieldsExperts,
+  whatSuggest,
+  whereSuggest
+} from '~/api/Experts'
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Search from '~/components/SearchByField.vue'
@@ -175,10 +183,13 @@ const handleFieldChange = () => {
     }
   })
 }
+const suggest = ref<PageEntity<ExpertModel>>()
 onMounted(async () => {
   expertsPage.value = await searchExperts(props.what, props.where, props.page, pageSize)
   expertsTop.value = await getExpertstop(20, 1)
   expertfield.value = await fieldsExperts()
+
+  console.log(suggest)
 })
 const handleSearch = (what: string, where: string) => {
   router.push({

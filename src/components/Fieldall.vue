@@ -1,4 +1,19 @@
 <template>
+  <el-select
+    v-model="blog.text"
+    filterable
+    placeholder="Select"
+    class="ml-10 mt-2 h-[30px] w-[300px] bg-white scroll-smooth"
+  >
+    <el-option
+      v-for="(reason, key) in expertfield?.keys"
+      :key="key"
+      :value="reason"
+      :label="reason"
+      @click="handleFieldChange"
+      class="w-[200px] font-serif text-base scroll-smooth"
+    />
+  </el-select>
   <el-scrollbar :key="$route.fullPath" class="bg-[rgb(209,224,219)] p-9 rounded-2xl" height="800px">
     <div class="rounded-3xl bg-slate-50" v-for="expert in experts" :key="expert._id">
       <FieldExpert :key="$route.fullPath" :expert="expert" />
@@ -8,6 +23,14 @@
   <div class="w-[68%] flex justify-center text-center">
     <div class="">
       <el-pagination
+        v-if="props.what === undefined"
+        layout="prev, pager, next"
+        :page-count="expertsall?.totalPages"
+        :current-page="props.page"
+        @current-change="handlePageChange"
+      />
+      <el-pagination
+        v-else
         layout="prev, pager, next"
         :page-count="expertsPage?.totalPages"
         :current-page="props.page"
@@ -38,34 +61,57 @@ import { searchField } from '~/api/Research-area'
 import { ResearchArea } from '~/models/Research-area'
 const props = defineProps<{
   name?: string
-
+  what?: string
   page?: number
 }>()
+const expertsall = ref<PageEntity<Experts>>()
 const expertsPage = ref<PageEntity<Experts>>()
 const router = useRouter()
 const pageSize = 10
+const experts = computed(() => {
+  if (props.what === undefined) return expertsallData.value
+  else {
+    return expertsData.value
+  }
+})
 const handlePageChange = (page: number) => {
   router.push({
     name: 'fieldname',
     query: {
+      what: props.what,
       page
     }
   })
 }
-const experts = computed(() => (expertsPage.value ? expertsPage.value.content : []))
+const handleFieldChange = () => {
+  router.push({
+    name: 'fieldname',
+    query: {
+      what: blog.text.toString(),
+      // where: props.where,
+      page: 1
+    }
+  })
+}
+const expertsallData = computed(() => (expertsall.value ? expertsall.value.content : []))
+const expertsData = computed(() => (expertsPage.value ? expertsPage.value.content : []))
 const blog = {
   text: ''
 }
+
 const expertfield = ref<ResearchArea>()
 const fieldArr = ref<String[]>()
 const route = useRoute()
 onMounted(async () => {
   const field = route.params.name
   // console.log(route.params.name.toString().toLowerCase().split(' ').at(0))
-  expertsPage.value = await searchExperts1(route.params.name.toString(), 5, props.page, pageSize, true)
+  expertsPage.value = await searchExperts1(props.what, 5, props.page, pageSize, true)
+  expertsall.value = await searchExperts1(route.params.name.toString(), 5, props.page, pageSize, true)
+  expertfield.value = await searchField(route.params.name.toString())
+  // console.log(props.what)
   // expertfield.value = await searchField(route.params.name.toString())
   // fieldArr.value = expertfield.value.keys
-  // console.log(expertfield.value)
+  console.log(blog.text.toString())
 })
 </script>
 
