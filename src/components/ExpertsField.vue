@@ -178,7 +178,7 @@ const handleFieldChange = () => {
     name: 'expertfields',
     query: {
       what: typesSelect.value.toString(),
-      where: props.where,
+
       page: 1
     }
   })

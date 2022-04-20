@@ -1,26 +1,35 @@
 <template>
-  <el-select
-    v-model="blog.text"
-    filterable
-    placeholder="Select"
-    class="ml-10 mt-2 h-[30px] w-[300px] bg-white scroll-smooth"
-  >
-    <el-option
-      v-for="(reason, key) in expertfield?.keys"
-      :key="key"
-      :value="reason"
-      :label="reason"
-      @click="handleFieldChange"
-      class="w-[200px] font-serif text-base scroll-smooth"
-    />
-  </el-select>
-  <el-scrollbar :key="$route.fullPath" class="bg-[rgb(209,224,219)] p-9 rounded-2xl" height="800px">
-    <div class="rounded-3xl bg-slate-50" v-for="expert in experts" :key="expert._id">
-      <FieldExpert :key="$route.fullPath" :expert="expert" />
+  <div class="bg-[hsl(160,19%,85%)] p-9 rounded-2xl">
+    <h2 class="text-center text-2xl mb-2">{{ $t('message.fields', {}, { locale: $i18n.locale }) }}</h2>
+    <div class="mb-10">
+      <span class="p-10">Choose the field:</span>
+      <el-select
+        v-model="blog.text"
+        filterable
+        placeholder="Select"
+        class="ml-10 mt-2 h-[30px] w-[300px] bg-white scroll-smooth"
+      >
+        <el-option
+          v-for="(reason, key) in expertfield?.keys"
+          :key="key"
+          :value="reason"
+          :label="reason"
+          @click="handleFieldChange"
+          class="w-[300px] font-serif text-base scroll-smooth"
+        />
+      </el-select>
     </div>
-    <span class="p-10">Choose the field:</span>
-  </el-scrollbar>
-  <div class="w-[68%] flex justify-center text-center">
+    <el-scrollbar v-if="experts.length === 0" height="100px" class="text-center">
+      <div>No result</div>
+    </el-scrollbar>
+    <el-scrollbar v-else :key="$route.fullPath" height="800px">
+      <div class="rounded-3xl bg-slate-50" v-for="expert in experts" :key="expert._id">
+        <FieldExpert :key="$route.fullPath" :expert="expert" />
+      </div>
+    </el-scrollbar>
+  </div>
+  <div v-if="experts.length === 0"></div>
+  <div v-else class="w-[100%] mt-5 flex justify-center text-center">
     <div class="">
       <el-pagination
         v-if="props.what === undefined"
@@ -111,7 +120,7 @@ onMounted(async () => {
   // console.log(props.what)
   // expertfield.value = await searchField(route.params.name.toString())
   // fieldArr.value = expertfield.value.keys
-  console.log(blog.text.toString())
+  console.log(experts.value.length)
 })
 </script>
 

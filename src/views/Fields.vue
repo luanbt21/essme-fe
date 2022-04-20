@@ -68,16 +68,16 @@ onMounted(async () => {
   //     true
   //   )
   const field = route.params.name.toString().toLowerCase().split(' ').at(0)
-  eventsPage.value = await searchEvents(`${route.params.name.toString().toLowerCase().split(' ').at(0)}`)
+  eventsPage.value = await searchEvents(route.params.name.toString())
   // console.log(typeof route.params.name.toString().toLowerCase().split(' ').at(0))
   eventsArr.value = eventsPage.value ? eventsPage.value.content : []
 
-  newsPage.value = await searchNewss1(`${route.params.name.toString().toLowerCase().split(' ').at(0)}`)
+  newsPage.value = await searchNewss1(route.params.name.toString())
   newssArr.value = newsPage.value ? newsPage.value.content : []
   console.log(route.params.name.toString())
   expertfield.value = await searchField(route.params.name.toString())
 
-  // console.log(blog.text.toString())
+  console.log(eventsArr.value.length)
 })
 </script>
 

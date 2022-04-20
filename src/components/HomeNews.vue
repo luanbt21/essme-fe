@@ -2,7 +2,10 @@
   <div class="container m-auto">
     <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
       <h2 class="text-center text-2xl mb-2">{{ $t('message.news', {}, { locale: $i18n.locale }) }}</h2>
-      <el-row :gutter="30">
+      <div v-if="newsArr.length === 0" class="px-8 py-4 bg-[#D1E0DB] rounded-xl text-center">
+        <div>No result</div>
+      </div>
+      <el-row v-else :gutter="30">
         <el-col v-for="news in newsArr" :key="news._id" :xs="24" :sm="12" :lg="8">
           <router-link :to="`/news/${news._id}`">
             <el-card class="h-36 mb-5 md:hover:scale-105 hover:duration-500" :body-style="{ padding: '10px' }">
@@ -21,7 +24,9 @@
           </router-link>
         </el-col>
       </el-row>
-      <div class="text-center">
+
+      <div v-if="newsArr.length === 0" class="px-8 py-4 bg-[#D1E0DB] rounded-xl text-center"></div>
+      <div v-else class="text-center">
         <router-link to="/news" custom v-slot="{ navigate, href }">
           <el-link type="primary" :href="href" @click="navigate">{{
             $t('message.showmore', {}, { locale: $i18n.locale })
