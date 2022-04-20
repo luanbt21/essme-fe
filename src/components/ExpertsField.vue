@@ -65,11 +65,6 @@
               </el-radio-group>
             </div>
           </div>
-          <!-- <el-checkbox-group v-model="typesSelect">
-            <div v-for="(type, index) in types" :key="index">
-              <el-checkbox :label="type" style="white-space: pre-wrap" />
-            </div>
-          </el-checkbox-group> -->
         </el-scrollbar>
       </div>
       <div class="w-[68%]">
