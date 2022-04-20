@@ -34,6 +34,7 @@
           ><el-icon><SearchIcon /></el-icon> Tìm kiếm</el-button
         >
       </el-col>
+      <el-col class="mb-4" :xs="24" :md="4"> </el-col>
     </el-row>
   </div>
 </template>
@@ -47,7 +48,7 @@ const props = defineProps<{
   placeholder: string
   whatSuggest: Function
   whereSuggest: Function
-  whatField: any
+  whatField: string
   whereField: any
 }>()
 
@@ -63,13 +64,11 @@ const whereData = ref([])
 const whatSearch = async (queryString: string, cb: (arg: any) => void) => {
   if (queryString !== '') {
     const data = await props.whatSuggest(queryString)
-    whatData.value = data.content
-    console.log(whatData.value)
+    whatData.value = data.suggestions
   }
-  let result = new Array()
   cb(
     whatData.value.map((item: any) => ({
-      value: item[props.whatField].pop()
+      value: item[props.whatField]
     }))
   )
 }
@@ -80,17 +79,17 @@ function myFunction(item: any, index: any) {
 const whereSearch = async (queryString: string, cb: (arg: any) => void) => {
   if (queryString !== '') {
     const data = await props.whereSuggest(queryString)
-    whereData.value = data.content
+    whereData.value = data.suggestions
   }
 
-  const allWhere = whereData.value.map(item => item[props.whereField])
-  console.log(whereData.value)
-  console.log(allWhere)
-  const uniqueWhere = new Set(allWhere)
+  // const allWhere = whereData.value.map(item => item[props.whereField])
+  // console.log(whereData.value)
+  // console.log(allWhere)
+  // const uniqueWhere = new Set(allWhere)
 
   cb(
-    [...uniqueWhere].map(item => ({
-      value: item.pop()
+    whereData.value.map(item => ({
+      value: item[props.whereField]
     }))
   )
 }

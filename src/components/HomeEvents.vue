@@ -2,7 +2,10 @@
   <div class="container m-auto mt-10 mb-9">
     <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
       <h2 class="text-center text-2xl mb-2">{{ $t('message.events', {}, { locale: $i18n.locale }) }}</h2>
-      <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
+      <div v-if="eventsArr.length === 0" class="px-8 py-4 bg-[#D1E0DB] rounded-xl text-center">
+        <div>No result</div>
+      </div>
+      <div v-else class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
         <el-carousel :interval="4000" type="card" height="450px" :autoplay="true">
           <el-carousel-item
             class="text-center opacity-100"
@@ -62,7 +65,8 @@
           </el-carousel-item>
         </el-carousel>
       </div>
-      <div class="text-center">
+      <div v-if="eventsArr.length === 0" class="px-8 py-4 bg-[#D1E0DB] rounded-xl text-center"></div>
+      <div v-else class="text-center">
         <router-link to="/events" custom v-slot="{ navigate, href }">
           <el-link type="primary" :href="href" @click="navigate">{{
             $t('message.showmore', {}, { locale: $i18n.locale })
