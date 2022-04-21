@@ -20,7 +20,7 @@
                 filterable
                 :options="
                   fieldsArr.map(field => {
-                    return { value: field.name, label: field.name }
+                    return { value: field.name_vn, label: field.name_vn }
                   })
                 "
                 :placeholder="`${$t('message.Pleaseselectfields', {}, { locale: $i18n.locale })}`"
@@ -135,19 +135,15 @@
 <script lang="ts" setup>
 import FooterVue from '~/components/tkhuyen/Footer.vue'
 import { computed, onMounted, onUpdated, ref } from 'vue'
-import { Fields } from '~/models/Fields'
-import { getFields } from '~/api/Fields'
+import { ResearchArea } from '~/models/Research-area'
+import { getField } from '~/api/Research-area'
 import { Question } from '~/models/Question'
 import { getQuestion } from '~/api/Question'
-import FQAitem from '~/components/FQAitem.vue'
 import axios from 'axios'
 import { useStore } from '~/store/index'
 import { useRouter } from 'vue-router' // import router
-import { User } from '~/models/User'
 import { getCustomerbyUid } from '~/api/Customer'
 import { Customer } from '~/models/Customer'
-import { Experts } from '~/models/Experts'
-import { getExpertByUid } from '~/api/Experts'
 
 const router = useRouter()
 
@@ -203,24 +199,19 @@ const handlePost = async () => {
 }
 
 const FQAs = ref<Question[]>([])
-const fieldsArr = ref<Fields[]>([])
+const fieldsArr = ref<ResearchArea[]>([])
 const customerCu = ref<Customer>()
 
 const customerID = ref(`${store.state.auth.userid}`)
-let userid = store.state.auth.userid
 
 onMounted(async () => {
   try {
-    fieldsArr.value = await getFields()
+    fieldsArr.value = await getField()
     FQAs.value = await getQuestion(30)
   } catch (e) {
-    // customerEx.value = await getExpertByUid(store.state.auth.userid)
-    // customerID.value = customerEx.value._id
     console.log(e)
   }
 })
-
-onUpdated(async () => {})
 
 const contentQuestion = ref('')
 const field = ref<String[]>([])
