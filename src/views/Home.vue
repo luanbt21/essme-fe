@@ -13,11 +13,11 @@
     <!-- <p>{{ $t('message.language', { msg: 'hello' }, { :locale: 'vi' }) }}</p> -->
     <!-- <DemoVue /> -->
     <!-- <HeaderVue /> -->
-    <!-- <HomeExpertnew /> -->
+    <HomeExpertnew />
     <HomeFields />
-    <!-- <HomeFQAs /> -->
-    <!-- <HomeNews :newsArr="newsArr" /> -->
-    <!-- <HomeEventsVue :eventsArr="eventsArr" /> -->
+    <HomeFQAs />
+    <HomeNews :newsArr="newsArr" />
+    <HomeEventsVue :eventsArr="eventsArr" />
 
     <br />
 
