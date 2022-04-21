@@ -1,6 +1,6 @@
 <template>
   <div class="rounded-xl m-5 text-[21px] bg-[#d1e0db] h-[50px] w-[200px] lg:w-auto">
-    <span class="p-10">Choose the field:</span>
+    <span class="p-10">{{ $t('message.Choosethefield', {}, { locale: $i18n.locale }) }}:</span>
     <el-select
       v-model="blog.text"
       placeholder="Select field"

@@ -1,8 +1,8 @@
 <template>
   <div class="mt-5 w-[95%] mx-auto justify-center">
     <Search
-      label="Tìm kiếm chuyên gia?"
-      placeholder="Expert title"
+      :label="`${$t('message.FindanExpert', {}, { locale: $i18n.locale })}`"
+      :placeholder="`${$t('message.Experttitle', {}, { locale: $i18n.locale })}`"
       what-field="research_area"
       :what-suggest="searchExperts"
       where-field="address"
@@ -19,8 +19,10 @@
   <div class="mt-5 ml-11 w-[1400px] flex justify-center">
     <el-row :key="$route.fullPath" :gutter="20" class="flex" viewClass="yf-content">
       <div class="w-[1000px] bg-[#D1E0DB] rounded-[15px]">
-        <div class="font-bold text-center p-5 text-2xl">CHUYÊN GIA</div>
-        <div v-if="experts.length === 0">No result</div>
+        <div class="font-bold text-center p-5 text-2xl">
+          {{ $t('message.expert', {}, { locale: $i18n.locale }).toUpperCase() }}
+        </div>
+        <div v-if="experts.length === 0">{{ $t('message.noresult', {}, { locale: $i18n.locale }) }}</div>
         <div v-else class="h-[500px]">
           <el-scrollbar height="480px" :key="$route.fullPath" style="max-width: 1000px">
             <el-col :span="12" height="239px" v-for="expert in experts" :key="expert._id" style="max-width: 500px">
@@ -31,7 +33,9 @@
       </div>
 
       <div class="bg-[#D1E0DB] rounded-[15px] mx-2 w-[320px]">
-        <div class="font-bold text-center p-5 mb-5 text-2xl">LĨNH VỰC</div>
+        <div class="font-bold text-center p-5 mb-5 text-2xl">
+          {{ $t('message.fields', {}, { locale: $i18n.locale }).toUpperCase() }}
+        </div>
         <el-scrollbar height="460px " width="280px">
           <!-- <div v-for="(address, index) in types" :key="index">
             <el-card

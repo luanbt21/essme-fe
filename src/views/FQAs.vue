@@ -2,7 +2,9 @@
   <div class="relative w-[97%] min-w-[800px] z-1 mt-[-100px] bg-slate-200 rounded-[40px] p-[50px] flex flex-col">
     <div class="mb-[15px]">
       <router-link to="/questionSheet">
-        <el-button size="large" type="primary">Ask your question</el-button>
+        <el-button size="large" type="primary">{{
+          $t('message.Askyourquestion', {}, { locale: $i18n.locale })
+        }}</el-button>
       </router-link>
     </div>
 
@@ -10,7 +12,7 @@
 
     <el-container class="container">
       <el-aside width="200px" class="hidden md:block pt-5">
-        <h3>By Fields</h3>
+        <h3>{{ $t('message.ByFields', {}, { locale: $i18n.locale }) }}</h3>
 
         <!-- <el-input type="text" placeholder="Fields Search" /> -->
         <el-checkbox-group v-model="typesSelect" :max="2">
@@ -21,9 +23,6 @@
       </el-aside>
       <el-main>
         <div v-for="FQA in FQAsFilter"><FQAitem :question="FQA" /></div>
-        <!-- <el-row v-for="FQA in FQAs" :key="FQA._id">
-          <el-col :span="24"><FQAitem :question="FQA" /></el-col>
-        </el-row> -->
       </el-main>
     </el-container>
 

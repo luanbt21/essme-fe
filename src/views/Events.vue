@@ -13,9 +13,9 @@
       <el-container class="container">
         <el-aside width="200px" class="hidden md:block pt-5">
           <div class="text-center">
-            <el-button @click="filter">Filter</el-button>
+            <el-button @click="filter">{{ $t('message.Filter', {}, { locale: $i18n.locale }) }}</el-button>
           </div>
-          <div>By Tags</div>
+          <div>{{ $t('message.ByTags', {}, { locale: $i18n.locale }) }}</div>
           <el-checkbox-group v-model="tagsSelect">
             <div v-for="t in allTags" :key="t._id">
               <el-checkbox :label="t._id" style="white-space: pre-wrap">
@@ -23,7 +23,7 @@
               </el-checkbox>
             </div>
           </el-checkbox-group>
-          <div>By Types</div>
+          <div>{{ $t('message.ByTypes', {}, { locale: $i18n.locale }) }}</div>
           <el-checkbox-group v-model="typesSelect">
             <div v-for="t in allTypes" :key="t._id">
               <el-checkbox :label="t._id" style="white-space: pre-wrap">

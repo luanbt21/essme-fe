@@ -2,8 +2,8 @@
   <div class="relative w-[97%] min-w-[800px] z-1 mt-[-100px] bg-slate-200 rounded-[40px] p-[50px] flex flex-col">
     <div class="mt-5 w-[95%] mx-auto justify-center">
       <Search
-        label="Tìm kiếm chuyên gia?"
-        placeholder="Expert title"
+        :label="`${$t('message.FindanExpert', {}, { locale: $i18n.locale })}`"
+        :placeholder="`${$t('message.Experttitle', {}, { locale: $i18n.locale })}`"
         what-field="research_area"
         :what-suggest="searchExperts"
         where-field="location"
