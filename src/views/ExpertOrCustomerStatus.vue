@@ -18,9 +18,26 @@
       <!-- expertInfoForm -->
       <div class="expertInfoForm">
         <div class="infor_necessary mb-[10px]">
-          <div class="infor_necessary-left">
-            <img v-if="changeimg" :src="avatarImage" alt="" class="info_avatar" />
-            <img v-else :src="aavatarImage" alt="" class="info_avatar" />
+          <div class="infor_necessary-left flex">
+            <!--  -->
+            <img v-if="!img1" :src="avatarImage" alt="" class="info_avatar mb-4" />
+            <div v-if="img1">
+              <img class="info_avatar" :src="img1" />
+              <br />
+            </div>
+            <label class="bg-[#FFFFFF] ml-4 h-10 w-40 rounded-lg hover:cursor-pointer" for="files"
+              ><div class="mt-2 font-semibold">Upload Avatar</div></label
+            >
+            <input
+              id="files"
+              style="visibility: hidden"
+              @change="changeImgAva"
+              type="file"
+              class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
+            />
+            <!--  -->
+
+            <!-- <img v-else :src="aavatarImage" alt="" class="info_avatar" /> -->
           </div>
           <div class="infor_necessary-right">
             <div class="row-input">
@@ -66,11 +83,6 @@
               <label class="label-form" for="">Interest:</label>
               <input type="text" v-model="interest" id="" />
             </div>
-
-            <div class="row-input">
-              <label class="label-form" for="">Link avatar:</label>
-              <input @change="changeImgAvatar()" type="text" v-model="linkAvatar" id="" />
-            </div>
           </div>
         </div>
         <div v-if="exInfo" class="field-info mb-[10px]">
@@ -80,8 +92,13 @@
           </div>
           <div class="row-input mb-[10px]">
             <label class="label-form" for="">Research area:</label>
-            <el-select style="width: 100%" v-model="ResearchArea" placeholder="Select" size="large">
-              <el-option v-for="fields in fieldsArr" :key="fields.name" :label="fields.name" :value="fields.name">
+            <el-select style="width: 100%" v-model="researchArea" placeholder="Select" size="large">
+              <el-option
+                v-for="fields in fieldsArr"
+                :key="fields.name_vn"
+                :label="fields.name_vn"
+                :value="fields.name_vn"
+              >
               </el-option>
             </el-select>
             <!-- <input type="text" name="address" id="" placeholder="NEU, 207 Giai Phong, Hai Ba Trung, Ha Hoi" /> -->
@@ -125,11 +142,14 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, onMounted, onUpdated, ref } from 'vue'
-import { getFields } from '~/api/Fields'
-import { Fields } from '~/models/Fields'
+import { computed, onMounted, ref } from 'vue'
+import { getField } from '~/api/Research-area'
+import { ResearchArea } from '~/models/Research-area'
 import { useStore } from '~/store/index'
 import axios from 'axios'
+import { deleteExpert, getExpertByUid } from '~/api/Experts'
+import { deleteCustomer, getCustomerbyUid } from '~/api/Customer'
+import { getDownloadURL, getStorage, ref as reff, uploadBytes } from 'firebase/storage'
 let exInfo = ref(true)
 let centerDialogVisible = ref(false)
 let fullname = ref('')
@@ -140,7 +160,7 @@ let address = ref('')
 let email = ref('')
 let interest = ref('')
 let linkAvatar = ref('')
-const ResearchArea = ref([])
+const researchArea = ref([])
 const Degree = ref([])
 let Company = ref('')
 let LinkProfile = ref('')
@@ -158,6 +178,10 @@ const handlePost = async () => {
   }
   try {
     if (exInfo.value) {
+      let expert = await getExpertByUid(store.state.auth.userid)
+      if (expert) {
+        await deleteExpert(expert._id)
+      }
       await axios.post(
         '/experts',
         {
@@ -170,7 +194,7 @@ const handlePost = async () => {
           birth: birth.value,
           phone: phone.value,
           name: fullname.value,
-          research_area: [ResearchArea.value],
+          research_area: [researchArea.value],
           company: Company.value,
           location: {},
           email: email.value,
@@ -191,27 +215,35 @@ const handlePost = async () => {
         }
       )
     } else {
-      await axios.post(
-        '/customers',
-        {
-          uid: store.state.auth.userid,
-          gender: gender.value,
-          birth: birth.value,
-          phone: phone.value,
-          address: address.value,
-          email: email.value,
-          image: linkAvatar.value,
-          interest: interest.value,
-          website: '',
-          facebook: '',
-          linkedIn: 'string',
-          desc: Company.value,
-          role: 'CUSTOMER'
-        },
-        {
-          headers
-        }
-      )
+      let customer = await getCustomerbyUid(store.state.auth.userid)
+      if (customer) {
+        await deleteCustomer(customer._id)
+      }
+      await axios
+        .post(
+          '/customers',
+          {
+            uid: store.state.auth.userid,
+            gender: gender.value,
+            birth: birth.value,
+            phone: phone.value,
+            address: address.value,
+            email: email.value,
+            image: url.value,
+            interest: interest.value,
+            website: '',
+            facebook: '',
+            linkedIn: 'string',
+            desc: Company.value,
+            role: 'CUSTOMER'
+          },
+          {
+            headers
+          }
+        )
+        .then(dta => {
+          console.log(dta)
+        })
       await axios.put(
         `/users/${store.state.auth.userid}`,
         {
@@ -229,16 +261,9 @@ const handlePost = async () => {
 }
 let avatarImage =
   'https://st2.depositphotos.com/2777531/6506/v/450/depositphotos_65061729-stock-illustration-man-avatar-user-picture.jpg'
-let aavatarImage = computed(() => {
-  return linkAvatar.value
-})
-let changeimg = ref(true)
-const changeImgAvatar = () => {
-  changeimg.value = false
-  avatarImage = linkAvatar.value
-}
+
 const DegreeArr = ref<String[]>([])
-const fieldsArr = ref<Fields[]>([])
+const fieldsArr = ref<ResearchArea[]>([])
 const GenderArr = [
   {
     value: '0',
@@ -254,10 +279,34 @@ const GenderArr = [
   }
 ]
 onMounted(async () => {
-  fieldsArr.value = await getFields()
+  fieldsArr.value = await getField()
   DegreeArr.value = ['PGS', 'TS', 'ThS', 'Cử nhân']
-  // console.log(store.state.auth.token)
 })
+
+const url = ref('')
+const selectedImg = ref(null)
+let img1 = ref()
+async function changeImgAva(event: any) {
+  selectedImg.value = event.target.files[0]
+  let reader = new FileReader()
+  reader.readAsDataURL(event.target.files[0])
+
+  reader.onload = e => {
+    img1.value = e.target?.result
+    computed(() => {
+      img1.value
+    })
+  }
+
+  const storage = getStorage()
+  const storageRef = reff(storage, event.target.files[0].name)
+
+  await uploadBytes(storageRef, event.target.files[0])
+  await getDownloadURL(reff(storage, event.target.files[0].name)).then(urll => {
+    url.value = urll
+  })
+}
+function Upload() {}
 </script>
 <style lang="scss">
 * {
@@ -271,6 +320,7 @@ onMounted(async () => {
   --btn-color: #ffffff;
   --background-color: #ffffff;
 }
+
 .wrap {
   height: 100%;
   width: 100%;

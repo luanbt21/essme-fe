@@ -17,6 +17,15 @@ export const getExpertByUid = async (uid: string): Promise<Experts> => {
   }
 }
 
+export const deleteExpert = async (id: string): Promise<Experts> => {
+  try {
+    const res = await axios.delete(`${apiUrl}/uid/${id}`)
+    return res.data
+  } catch (error) {
+    throw new Error('Failed to delete Expert')
+  }
+}
+
 export const getExpertstop = async (size = 6, page = 0): Promise<Experts[]> => {
   try {
     const res = await axios.get(`${apiUrl}/top`, {
@@ -100,7 +109,7 @@ export const searchExperts1 = async (
     throw new Error('Failed to get experts')
   }
 }
-export const suggestexpert = async (what?: string, size = 10): Promise<{ what: string }> => {
+export const suggestexpert = async (): Promise<PageEntity<Experts>> => {
   try {
     const res = await axios.get(`https://api.vietsearch.org/api/suggestions/what`, {
       params: {

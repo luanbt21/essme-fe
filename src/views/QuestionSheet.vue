@@ -2,7 +2,7 @@
   <div class="relative w-[97%] min-w-[800px] z-1 mt-[-100px] bg-slate-200 rounded-[40px] p-[50px] flex flex-col">
     <div class="text-center">
       <button class="text-center w-96 h-14 text-2xl mb-[40px] bg-[#b9cec7] rounded-lg shadow-md">
-        Ask a public question
+        {{ $t('message.Askapublicquestion', {}, { locale: $i18n.locale }) }}
       </button>
     </div>
     <div class="bg-purple">
@@ -10,18 +10,20 @@
         <el-col :span="17"
           ><div style="border-radius: 15px" class="grid-content bg-[#b9cec7] p-[20px]">
             <div>
-              <label class="text-xl font-bold" for="field">Fields</label>
-              <p>Choose the field which you want to ask about</p>
+              <label class="text-xl font-bold" for="field">{{
+                $t('message.fields', {}, { locale: $i18n.locale })
+              }}</label>
+              <p>{{ $t('message.Choosethefieldwhichyouwanttoaskabout', {}, { locale: $i18n.locale }) }}</p>
 
               <el-select-v2
                 v-model="field"
                 filterable
                 :options="
                   fieldsArr.map(field => {
-                    return { value: field.name, label: field.name }
+                    return { value: field.name_vn, label: field.name_vn }
                   })
                 "
-                placeholder="Please select fields"
+                :placeholder="`${$t('message.Pleaseselectfields', {}, { locale: $i18n.locale })}`"
                 size="large"
                 style="width: 100%"
                 multiple
@@ -36,7 +38,9 @@
             </div>
 
             <div class="mt-[25px]">
-              <label class="text-xl font-bold mb-[100px]" for="title">Title</label>
+              <label class="text-xl font-bold mb-[100px]" for="title">{{
+                $t('message.Title', {}, { locale: $i18n.locale })
+              }}</label>
               <el-input
                 v-model="title"
                 :autosize="{ minRows: 2, maxRows: 5 }"
@@ -47,7 +51,9 @@
             </div>
 
             <div class="mt-[25px]">
-              <label class="text-xl font-bold mb-[100px]" for="field">Your Question</label>
+              <label class="text-xl font-bold mb-[100px]" for="field">{{
+                $t('message.YourQuestion', {}, { locale: $i18n.locale })
+              }}</label>
               <el-input
                 v-model="contentQuestion"
                 :autosize="{ minRows: 4, maxRows: 8 }"
@@ -62,17 +68,19 @@
           <div class="flex flex-col p-[20px]">
             <div class="mb-[10px] text-black">
               <el-button color="#b9cec7" class="w-[100%] text-black" type="primary"
-                ><span class="text-black">Find question</span></el-button
+                ><span class="text-black">{{
+                  $t('message.Findquestion', {}, { locale: $i18n.locale })
+                }}</span></el-button
               >
             </div>
             <div class="mb-[10px]">
               <el-button color="#b9cec7" class="w-[100%]" type="primary"
-                ><span class="text-black">Find expert</span></el-button
+                ><span class="text-black">{{ $t('message.Findexpert', {}, { locale: $i18n.locale }) }}</span></el-button
               >
             </div>
             <div class="mb-[10px]">
               <el-button color="#b9cec7" class="w-[100%]" type="primary"
-                ><span class="text-black">News</span></el-button
+                ><span class="text-black">{{ $t('message.news', {}, { locale: $i18n.locale }) }}</span></el-button
               >
             </div>
           </div>
@@ -80,21 +88,32 @@
       </el-row>
     </div>
     <div class="mt-[10px]">
-      <el-button @click="handlePost(), (centerDialogVisible = true)" color="#b9cec7" size="large" class="text-stone-800"
-        >Post your question</el-button
+      <el-button
+        @click="handlePost(), (centerDialogVisible = true)"
+        color="#b9cec7"
+        size="large"
+        class="text-stone-800"
+        >{{ $t('message.Postyourquestion', {}, { locale: $i18n.locale }) }}</el-button
       >
     </div>
 
     <!-- thông báo save thành công -->
     <el-dialog v-model="centerDialogVisible" title="Warning" width="30%" center>
-      <span v-if="!isLogin">Sign in to post question!</span>
-      <span v-if="shoeLog">Update your profile successfully!</span>
-      <span v-else>Fail to update your profile!</span>
+      <span v-if="!isLogin">{{ $t('message.Signintopostanswer', {}, { locale: $i18n.locale }) }}</span
+      ><br />
+      <span v-if="shoeLog">{{ $t('message.Postyouranswersuccessfully', {}, { locale: $i18n.locale }) }} </span>
+      <span v-else
+        >{{ $t('message.FailtoPostyouranswer', {}, { locale: $i18n.locale }) }} <br />{{
+          $t('message.Maybeyouhavenotupdatedyourprofile', {}, { locale: $i18n.locale })
+        }}<br />{{ $t('message.Youhavetobeexperttopostanswer', {}, { locale: $i18n.locale }) }}
+      </span>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="centerDialogVisible = false">Return</el-button>
-          <router-link to="/">
-            <el-button type="primary">Back to Homepage</el-button>
+          <el-button @click="centerDialogVisible = false">{{
+            $t('message.Return', {}, { locale: $i18n.locale })
+          }}</el-button>
+          <router-link :to="`/FQAs/${question?._id}`">
+            <el-button type="primary">{{ $t('message.BacktoHomepage', {}, { locale: $i18n.locale }) }}</el-button>
           </router-link>
         </span>
       </template>
@@ -116,19 +135,15 @@
 <script lang="ts" setup>
 import FooterVue from '~/components/tkhuyen/Footer.vue'
 import { computed, onMounted, onUpdated, ref } from 'vue'
-import { Fields } from '~/models/Fields'
-import { getFields } from '~/api/Fields'
+import { ResearchArea } from '~/models/Research-area'
+import { getField } from '~/api/Research-area'
 import { Question } from '~/models/Question'
 import { getQuestion } from '~/api/Question'
-import FQAitem from '~/components/FQAitem.vue'
 import axios from 'axios'
 import { useStore } from '~/store/index'
 import { useRouter } from 'vue-router' // import router
-import { User } from '~/models/User'
 import { getCustomerbyUid } from '~/api/Customer'
 import { Customer } from '~/models/Customer'
-import { Experts } from '~/models/Experts'
-import { getExpertByUid } from '~/api/Experts'
 
 const router = useRouter()
 
@@ -184,24 +199,19 @@ const handlePost = async () => {
 }
 
 const FQAs = ref<Question[]>([])
-const fieldsArr = ref<Fields[]>([])
+const fieldsArr = ref<ResearchArea[]>([])
 const customerCu = ref<Customer>()
 
 const customerID = ref(`${store.state.auth.userid}`)
-let userid = store.state.auth.userid
 
 onMounted(async () => {
   try {
-    fieldsArr.value = await getFields()
+    fieldsArr.value = await getField()
     FQAs.value = await getQuestion(30)
   } catch (e) {
-    // customerEx.value = await getExpertByUid(store.state.auth.userid)
-    // customerID.value = customerEx.value._id
     console.log(e)
   }
 })
-
-onUpdated(async () => {})
 
 const contentQuestion = ref('')
 const field = ref<String[]>([])

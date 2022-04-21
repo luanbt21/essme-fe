@@ -2,23 +2,22 @@
   <div class="relative w-[97%] min-w-[800px] z-1 mt-[-100px] bg-slate-200 rounded-[40px] p-[50px] flex flex-col">
     <div class="mt-5 w-[95%] mx-auto justify-center">
       <Search
-        label="Tìm kiếm chuyên gia?"
-        placeholder="Expert title"
         what-field="what"
         :what-suggest="whatSuggest"
         where-field="where"
         :where-suggest="whereSuggest"
-        @search="handleSearch"
+        :label="`${$t('message.FindanExpert', {}, { locale: $i18n.locale })}`"
+        :placeholder="`${$t('message.Experttitle', {}, { locale: $i18n.locale })}`"
       />
     </div>
     <!-- <p>{{ $t('message.language', { msg: 'hello' }, { :locale: 'vi' }) }}</p> -->
     <!-- <DemoVue /> -->
     <!-- <HeaderVue /> -->
-    <HomeExpertnew />
+    <!-- <HomeExpertnew /> -->
     <HomeFields />
-    <HomeFQAs />
-    <HomeNews :newsArr="newsArr" />
-    <HomeEventsVue :eventsArr="eventsArr" />
+    <!-- <HomeFQAs /> -->
+    <!-- <HomeNews :newsArr="newsArr" /> -->
+    <!-- <HomeEventsVue :eventsArr="eventsArr" /> -->
 
     <br />
 

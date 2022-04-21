@@ -1,22 +1,24 @@
 <template>
   <el-container class="w-[890px] h-auto">
     <el-main class="rounded-xl m-5 bg-[#d1e0db] h-auto">
-      <div class="my-3 ml-10 font-bold text-black text-2xl">INTRODUCTION</div>
+      <div class="my-3 ml-10 font-bold text-black text-2xl">
+        {{ $t('message.INTRODUCTION', {}, { locale: $i18n.locale }) }}
+      </div>
       <div class="ml-[70px] font-bold text-black lg:w-[700px]">
         <div class="flex my-5">
-          <div>APPELLATION:</div>
+          <div>{{ $t('message.APPELLATION', {}, { locale: $i18n.locale }) }}:</div>
           <div class="ml-[22px] font-normal">{{ expert?.name }}</div>
         </div>
         <div class="flex">
-          <div class="w-28">POSITION:</div>
+          <div class="w-28">{{ $t('message.POSITION', {}, { locale: $i18n.locale }) }}:</div>
           <div class="ml-5 font-normal">{{ expert?.degree }}</div>
         </div>
         <div class="flex my-5">
-          <div class="w-28">AFFILIATE:</div>
+          <div class="w-28">{{ $t('message.AFFILIATE', {}, { locale: $i18n.locale }) }}:</div>
           <div class="ml-5 font-normal">{{ expert?.company }}</div>
         </div>
         <div class="flex">
-          <div class="">EXPERTISE:</div>
+          <div class="">{{ $t('message.EXPERTISE', {}, { locale: $i18n.locale }) }}:</div>
           <div class="ml-[47px] font-normal">
             <span v-for="(number, index) of expert?.research_area" :key="index">
               {{ index < expert?.research_area.length - 1 && expert?.research_area.length > 1 ? number + ',' : number }}
@@ -24,7 +26,9 @@
           </div>
         </div>
       </div>
-      <div class="my-3 ml-10 font-bold text-black text-2xl">SOCIAL MEDIA</div>
+      <div class="my-3 ml-10 font-bold text-black text-2xl">
+        {{ $t('message.SOCIALMEDIA', {}, { locale: $i18n.locale }) }}
+      </div>
       <div class="ml-[70px] text-black text-lg h-auto">
         <div class="flex my-3 mt-5">
           <div class="mr-3 text-2xl"><i class="fas fa-globe-asia"></i></div>
@@ -51,41 +55,59 @@
       </div>
     </el-main>
     <el-footer class="rounded-xl my-5 mx-5 font-semibold bg-[#d1e0db] h-auto">
-      <div class="text-2xl my-5">ORDER EXPERT</div>
+      <div class="text-2xl my-5">{{ $t('message.ORDEREXPERT', {}, { locale: $i18n.locale }) }}</div>
       <div class="mt-[25px]">
         <div class="mb-[10px] text-xl">
-          <label class="font-bold mb-[100px]" for="title">Title</label>
+          <label class="font-bold mb-[100px]" for="title">{{
+            $t('message.Title', {}, { locale: $i18n.locale })
+          }}</label>
         </div>
 
-        <el-input v-model="title" :autosize="{ minRows: 2, maxRows: 5 }" type="textarea" placeholder="Please input">
+        <el-input
+          v-model="title"
+          :autosize="{ minRows: 2, maxRows: 5 }"
+          type="textarea"
+          :placeholder="`${$t('message.PleaseInput', {}, { locale: $i18n.locale })}`"
+        >
         </el-input>
       </div>
 
       <div class="mt-[25px]">
         <div class="mb-[10px]">
-          <label class="text-xl font-bold mb-[100px]" for="title">Your requirement</label>
+          <label class="text-xl font-bold mb-[100px]" for="title">{{
+            $t('message.Yourrequirement', {}, { locale: $i18n.locale })
+          }}</label>
         </div>
         <el-input
           class="w-auto text-xl"
           v-model="content"
           :rows="7"
           type="textarea"
-          placeholder="Enter your requirement"
+          :placeholder="`${$t('message.Enteryourrequirement', {}, { locale: $i18n.locale })}`"
         />
       </div>
       <div class="flex justify-center m-5 bg-[#d1e0db]">
-        <el-button class="w-24" type="primary" @click="handlePost(), (centerDialogVisible = true)">Send</el-button>
+        <el-button class="w-24" type="primary" @click="handlePost(), (centerDialogVisible = true)">{{
+          $t('message.Send', {}, { locale: $i18n.locale })
+        }}</el-button>
       </div>
       <!-- thông báo save thành công -->
       <el-dialog v-model="centerDialogVisible" title="Warning" width="30%" center>
-        <span v-if="!isLogin">Sign in to post answer!</span><br />
-        <span v-if="shoeLog">Post your answer successfully!</span>
-        <span v-else>Fail to Post your answer! <br />Maybe you have not updated your profile</span>
+        <span v-if="!isLogin">{{ $t('message.Signintopostanswer', {}, { locale: $i18n.locale }) }}</span
+        ><br />
+        <span v-if="shoeLog">{{ $t('message.Postyouranswersuccessfully', {}, { locale: $i18n.locale }) }} </span>
+        <span v-else
+          >{{ $t('message.FailtoPostyouranswer', {}, { locale: $i18n.locale }) }} <br />{{
+            $t('message.Maybeyouhavenotupdatedyourprofile', {}, { locale: $i18n.locale })
+          }}<br />{{ $t('message.Youhavetobecustomertosendrequest', {}, { locale: $i18n.locale }) }}
+        </span>
         <template #footer>
           <span class="dialog-footer">
-            <el-button @click="centerDialogVisible = false">Return</el-button>
-            <router-link :to="`/requests`">
-              <el-button type="primary">Back to Homepage</el-button>
+            <el-button @click="centerDialogVisible = false">{{
+              $t('message.Return', {}, { locale: $i18n.locale })
+            }}</el-button>
+            <router-link :to="`/`">
+              <el-button type="primary">{{ $t('message.BacktoHomepage', {}, { locale: $i18n.locale }) }}</el-button>
             </router-link>
           </span>
         </template>
@@ -125,10 +147,13 @@ const customer = ref<Customer>()
 const shoeLog = ref(false)
 const handlePost = async () => {
   customer.value = await getCustomerbyUid(store.state.auth.userid)
+  console.log(customer.value)
 
   const headers = {
     Authorization: `Bearer ${store.state.auth.token}`
   }
+  console.log(headers)
+
   try {
     console.log(customer.value._id)
     if (customer.value._id == '') {
