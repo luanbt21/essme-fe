@@ -7,12 +7,12 @@
       </div>
       <div class="shrink-0 flex mb-[15px]">
         <img class="h-6 w-6" src="../assets/question-mark.png" alt="Question Logo" />
-        <span class="ml-[15px] min-w-[65px]">Question: </span>
+        <span class="ml-[15px] min-w-[65px]">{{ $t('message.Question', {}, { locale: $i18n.locale }) }}: </span>
         <span class="ml-[10px] line-clamp-3">{{ question.Description }} </span>
       </div>
       <div class="shrink-0 flex mb-[15px]">
         <img class="h-6 w-6 self-start" src="../assets/answer-icon.png" alt="Question Logo" />
-        <div class="text-xl text-black">Answer:</div>
+        <div class="text-xl text-black">{{ $t('message.Answer', {}, { locale: $i18n.locale }) }}:</div>
         <span class="ml-[5px] line-clamp-3 mt-[4px]">{{ question.answers[0]?.answer }}</span>
       </div>
       <el-tag class="float-right" v-for="(topic, index) in question.Topic" type="info" effect="dark">
@@ -20,7 +20,7 @@
       </el-tag>
       <div class="text-center">
         <router-link :to="`/FQAs/${question._id}`">
-          <el-link type="primary">See more answers</el-link>
+          <el-link type="primary">{{ $t('message.seemoreanswers', {}, { locale: $i18n.locale }) }}</el-link>
         </router-link>
       </div>
     </div>

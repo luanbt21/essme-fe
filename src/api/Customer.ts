@@ -11,3 +11,12 @@ export const getCustomerbyUid = async (uid: string): Promise<Customer> => {
         throw new Error('Failed to get user')
     }
 }
+
+export const deleteCustomer = async (id: string): Promise<Customer> => {
+    try {
+        const res = await axios.get(`${apiUrl}/uid/${id}`)
+        return res.data
+    } catch (error) {
+        throw new Error('Failed delete get customer')
+    }
+}

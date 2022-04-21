@@ -1,6 +1,12 @@
 <template>
   <div class="relative w-[97%] min-w-[800px] z-1 mt-[-100px] bg-slate-200 rounded-[40px] p-[50px] flex flex-col">
-    <div class="relative bottom-[20px]"><span>Home/News</span></div>
+    <div class="relative bottom-[20px]">
+      <span
+        >{{ $t('message.home', {}, { locale: $i18n.locale }) }}/{{
+          $t('message.news', {}, { locale: $i18n.locale })
+        }}</span
+      >
+    </div>
 
     <div class="common-layout" v-if="newsById?.img">
       <el-container>
@@ -31,7 +37,9 @@
             </div>
           </div>
           <a :href="newsById?.url" target="_blank"
-            ><h6 class="text-sm text-cyan-700 hover:text-lime-600 text-right mr-[50px] mt-[10px]">Read more</h6></a
+            ><h6 class="text-sm text-cyan-700 hover:text-lime-600 text-right mr-[50px] mt-[10px]">
+              {{ $t('message.Readmore', {}, { locale: $i18n.locale }) }}
+            </h6></a
           >
         </el-main>
       </el-container>

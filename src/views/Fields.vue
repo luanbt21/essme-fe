@@ -1,8 +1,10 @@
 <template>
   <div class="relative w-[97%] min-w-[800px] z-1 mt-[-100px] bg-slate-200 rounded-[40px] p-[50px] flex flex-col">
     <el-breadcrumb class="mb-4" :separator-icon="ArrowRight">
-      <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
-      <el-breadcrumb-item>field</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/' }">{{
+        $t('message.home', {}, { locale: $i18n.locale })
+      }}</el-breadcrumb-item>
+      <el-breadcrumb-item>{{ $t('message.field', {}, { locale: $i18n.locale }) }}</el-breadcrumb-item>
       <el-breadcrumb-item>{{ route.params.name }} </el-breadcrumb-item>
     </el-breadcrumb>
 

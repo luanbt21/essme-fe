@@ -9,8 +9,12 @@
         <el-col :span="17"
           ><div style="border-radius: 15px" class="grid-content bg-[#b9cec7] p-[20px] mb-[40px]">
             <div class="mb-[15px]">
-              <label class="text-xl font-bold" for="field">Fields</label>
-              <p>Choose the field which you want to ask about</p>
+              <label class="text-xl font-bold" for="field">{{
+                $t('message.fields', {}, { locale: $i18n.locale })
+              }}</label>
+              <p>
+                {{ $t('message.Choosethefieldwhichyouwanttoaskabout', {}, { locale: $i18n.locale }) }}
+              </p>
               <el-select style="width: 100%" v-model="typesSelect" placeholder="Select" size="large">
                 <el-option v-for="fields in fieldsArr" :key="fields.name" :label="fields.name" :value="fields.name_vn">
                 </el-option>
@@ -18,7 +22,9 @@
             </div>
 
             <div class="">
-              <label class="text-xl font-bold mb-[100px]" for="field">Title</label>
+              <label class="text-xl font-bold mb-[100px]" for="field">{{
+                $t('message.Title', {}, { locale: $i18n.locale })
+              }}</label>
               <el-input
                 v-model="Title"
                 :autosize="{ minRows: 2, maxRows: 3 }"
@@ -29,8 +35,12 @@
             </div>
 
             <div class="mt-5">
-              <label class="text-xl font-bold" for="field">Related Experts</label>
-              <div v-if="expertFilter" class="text-center relative top-10 italic">not found</div>
+              <label class="text-xl font-bold" for="field">{{
+                $t('message.RelatedExperts', {}, { locale: $i18n.locale })
+              }}</label>
+              <div v-if="expertFilter" class="text-center relative top-10 italic">
+                {{ $t('message.notfound', {}, { locale: $i18n.locale }) }}
+              </div>
               <el-carousel indicator-position="none" :interval="4000" type="card" height="200px" :autoplay="true">
                 <el-carousel-item v-if="typesSelect" v-for="expert in expertFilter" :key="expert._id">
                   <ExpertItemOrderPage :expert="expert" />
@@ -44,12 +54,14 @@
             </div>
 
             <div class="">
-              <label class="text-xl font-bold mb-[100px]" for="field">Your Requirement</label>
+              <label class="text-xl font-bold mb-[100px]" for="field">{{
+                $t('message.Yourrequirement', {}, { locale: $i18n.locale })
+              }}</label>
               <el-input
                 v-model="content"
                 :autosize="{ minRows: 4, maxRows: 8 }"
                 type="textarea"
-                placeholder="Please input"
+                :placeholder="`${$t('message.PleaseInput', {}, { locale: $i18n.locale })}}}`"
               >
               </el-input>
             </div>
@@ -59,16 +71,22 @@
           <div class="flex flex-col p-[20px]">
             <div class="mb-[10px]">
               <router-link to="/fields">
-                <el-button class="w-[100%]" type="primary">Find the Fields</el-button>
+                <el-button class="w-[100%]" type="primary">{{
+                  $t('message.FindtheFields', {}, { locale: $i18n.locale })
+                }}</el-button>
               </router-link>
             </div>
             <div class="mb-[10px]">
               <router-link to="/allexperts">
-                <el-button class="w-[100%]" type="primary">Find more experts</el-button>
+                <el-button class="w-[100%]" type="primary">{{
+                  $t('message.Findmoreexperts', {}, { locale: $i18n.locale })
+                }}</el-button>
               </router-link>
             </div>
             <div class="mb-[10px]">
-              <el-button class="w-[100%]" type="primary">News</el-button>
+              <el-button class="w-[100%]" type="primary">{{
+                $t('message.news', {}, { locale: $i18n.locale })
+              }}</el-button>
             </div>
           </div>
         </el-col>
@@ -76,22 +94,33 @@
     </div>
 
     <div class="">
-      <el-button @click="handlePost(), (centerDialogVisible = true)" color="#626aef" size="large" style="color: white"
-        >Post your Order</el-button
+      <el-button
+        @click="handlePost(), (centerDialogVisible = true)"
+        color="#626aef"
+        size="large"
+        style="color: white"
+        >{{ $t('message.ByTags', {}, { locale: $i18n.locale }) }}</el-button
       >
     </div>
     <br />
     <hr />
     <!-- thông báo save thành công -->
     <el-dialog v-model="centerDialogVisible" title="Warning" width="30%" center>
-      <span v-if="!isLogin">Sign in to post answer!</span><br />
-      <span v-if="shoeLog">Post your answer successfully!</span>
-      <span v-else>Fail to Post your answer! <br />Maybe you have not updated your profile</span>
+      <span v-if="!isLogin">{{ $t('message.Signintopostanswer', {}, { locale: $i18n.locale }) }}</span
+      ><br />
+      <span v-if="shoeLog">{{ $t('message.Postyouranswersuccessfully', {}, { locale: $i18n.locale }) }} </span>
+      <span v-else
+        >{{ $t('message.FailtoPostyouranswer', {}, { locale: $i18n.locale }) }} <br />{{
+          $t('message.Maybeyouhavenotupdatedyourprofile', {}, { locale: $i18n.locale })
+        }}<br />{{ $t('message.Youhavetobeexperttopostanswer', {}, { locale: $i18n.locale }) }}
+      </span>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="centerDialogVisible = false">Return</el-button>
-          <router-link :to="`/`">
-            <el-button type="primary">Back to Homepage</el-button>
+          <el-button @click="centerDialogVisible = false">{{
+            $t('message.Return', {}, { locale: $i18n.locale })
+          }}</el-button>
+          <router-link to="/">
+            <el-button type="primary">{{ $t('message.BacktoHomepage', {}, { locale: $i18n.locale }) }}</el-button>
           </router-link>
         </span>
       </template>

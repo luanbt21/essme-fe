@@ -44,7 +44,7 @@
       </div>
 
       <div class="bg-[#ECF4F1] px-12 py-6 text-2xl rounded-lg mb-12">
-        <span class="ml-4"> Chi Tiết </span>
+        <span class="ml-4">{{ $t('message.seemoreanswers', {}, { locale: $i18n.locale }) }} </span>
         <hr />
         <p>
           {{ event.desc }}

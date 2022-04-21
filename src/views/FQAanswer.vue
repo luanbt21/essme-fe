@@ -5,7 +5,9 @@
       <el-col :span="16" class="pl-3">
         <router-link to="/questionSheet">
           <div class="mb-[15px] items-right">
-            <el-button color="#4e6d74" size="large" plain>Ask your question</el-button>
+            <el-button size="large" type="primary">{{
+              $t('message.Askyourquestion', {}, { locale: $i18n.locale })
+            }}</el-button>
           </div>
         </router-link>
         <div v-if="user" class="flex mb-[15px] items-center">
@@ -15,12 +17,14 @@
         <div class="ml-[30px]">
           <div class="shrink-0 flex mb-[15px]">
             <img class="h-6 w-6" src="../assets/question-mark.png" alt="Question Logo" />
-            <span class="ml-[15px] min-w-[65px]">Question: </span>
+            <span class="ml-[15px] min-w-[65px]">{{ $t('message.Question', {}, { locale: $i18n.locale }) }}: </span>
             <span class="ml-[10px] line-clamp-3">{{ question?.Description }} </span>
           </div>
           <div class="shrink-0 flex mb-[15px]">
             <img class="h-6 w-6 self-start" src="../assets/answer-icon.png" alt="Question Logo" />
-            <div class="text-xl text-black">Answer: ({{ question?.answers.length }})</div>
+            <div class="text-xl text-black">
+              {{ $t('message.Answer', {}, { locale: $i18n.locale }) }}: ({{ question?.answers.length }})
+            </div>
           </div>
           <div v-for="answer in question?.answers">
             <AnswerItem :answer="answer" />
@@ -30,7 +34,7 @@
             v-model="answerExpert"
             :autosize="{ minRows: 2, maxRows: 4 }"
             type="textarea"
-            placeholder="Please type your answer for this question"
+            :placeholder="`${$t('message.Pleasetypeyouranswerforthisquestion', {}, { locale: $i18n.locale })}`"
           />
           <el-button
             @click="handlePost(), (centerDialogVisible = true)"
@@ -38,7 +42,7 @@
             type="primary"
             :icon="Edit"
             round
-            >Send</el-button
+            >{{ $t('message.Send', {}, { locale: $i18n.locale }) }}</el-button
           >
         </div>
       </el-col>
@@ -46,14 +50,21 @@
     </el-row>
     <!-- thông báo save thành công -->
     <el-dialog v-model="centerDialogVisible" title="Warning" width="30%" center>
-      <span v-if="!isLogin">Sign in to post answer!</span><br />
-      <span v-if="shoeLog">Post your answer successfully!</span>
-      <span v-else>Fail to Post your answer! <br />Maybe you have not updated your profile</span>
+      <span v-if="!isLogin">{{ $t('message.Signintopostanswer', {}, { locale: $i18n.locale }) }}</span
+      ><br />
+      <span v-if="shoeLog">{{ $t('message.Postyouranswersuccessfully', {}, { locale: $i18n.locale }) }} </span>
+      <span v-else
+        >{{ $t('message.FailtoPostyouranswer', {}, { locale: $i18n.locale }) }} <br />{{
+          $t('message.Maybeyouhavenotupdatedyourprofile', {}, { locale: $i18n.locale })
+        }}<br />{{ $t('message.Youhavetobeexperttopostanswer', {}, { locale: $i18n.locale }) }}
+      </span>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="centerDialogVisible = false">Return</el-button>
+          <el-button @click="centerDialogVisible = false">{{
+            $t('message.Return', {}, { locale: $i18n.locale })
+          }}</el-button>
           <router-link :to="`/FQAs/${question?._id}`">
-            <el-button type="primary">Back to Homepage</el-button>
+            <el-button type="primary">{{ $t('message.BacktoHomepage', {}, { locale: $i18n.locale }) }}</el-button>
           </router-link>
         </span>
       </template>
@@ -102,6 +113,7 @@ const customerID = ref('')
 const handlePost = async () => {
   customerEx.value = await getExpertByUid(store.state.auth.userid)
   customerID.value = customerEx.value._id
+  console.log(customerID.value)
 
   const headers = {
     Authorization: `Bearer ${store.state.auth.token}`
