@@ -92,8 +92,13 @@
           </div>
           <div class="row-input mb-[10px]">
             <label class="label-form" for="">Research area:</label>
-            <el-select style="width: 100%" v-model="ResearchArea" placeholder="Select" size="large">
-              <el-option v-for="fields in fieldsArr" :key="fields.name" :label="fields.name" :value="fields.name">
+            <el-select style="width: 100%" v-model="researchArea" placeholder="Select" size="large">
+              <el-option
+                v-for="fields in fieldsArr"
+                :key="fields.name_vn"
+                :label="fields.name_vn"
+                :value="fields.name_vn"
+              >
               </el-option>
             </el-select>
             <!-- <input type="text" name="address" id="" placeholder="NEU, 207 Giai Phong, Hai Ba Trung, Ha Hoi" /> -->
@@ -137,15 +142,14 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, onMounted, onUpdated, ref } from 'vue'
-import { getFields } from '~/api/Fields'
-import { Fields } from '~/models/Fields'
+import { computed, onMounted, ref } from 'vue'
+import { getField } from '~/api/Research-area'
+import { ResearchArea } from '~/models/Research-area'
 import { useStore } from '~/store/index'
 import axios from 'axios'
 import { deleteExpert, getExpertByUid } from '~/api/Experts'
 import { deleteCustomer, getCustomerbyUid } from '~/api/Customer'
 import { getDownloadURL, getStorage, ref as reff, uploadBytes } from 'firebase/storage'
-import { async } from '@firebase/util'
 let exInfo = ref(true)
 let centerDialogVisible = ref(false)
 let fullname = ref('')
@@ -156,7 +160,7 @@ let address = ref('')
 let email = ref('')
 let interest = ref('')
 let linkAvatar = ref('')
-const ResearchArea = ref([])
+const researchArea = ref([])
 const Degree = ref([])
 let Company = ref('')
 let LinkProfile = ref('')
@@ -190,7 +194,7 @@ const handlePost = async () => {
           birth: birth.value,
           phone: phone.value,
           name: fullname.value,
-          research_area: [ResearchArea.value],
+          research_area: [researchArea.value],
           company: Company.value,
           location: {},
           email: email.value,
@@ -259,7 +263,7 @@ let avatarImage =
   'https://st2.depositphotos.com/2777531/6506/v/450/depositphotos_65061729-stock-illustration-man-avatar-user-picture.jpg'
 
 const DegreeArr = ref<String[]>([])
-const fieldsArr = ref<Fields[]>([])
+const fieldsArr = ref<ResearchArea[]>([])
 const GenderArr = [
   {
     value: '0',
@@ -275,7 +279,7 @@ const GenderArr = [
   }
 ]
 onMounted(async () => {
-  fieldsArr.value = await getFields()
+  fieldsArr.value = await getField()
   DegreeArr.value = ['PGS', 'TS', 'ThS', 'Cử nhân']
 })
 

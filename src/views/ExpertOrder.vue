@@ -16,7 +16,7 @@
                 {{ $t('message.Choosethefieldwhichyouwanttoaskabout', {}, { locale: $i18n.locale }) }}
               </p>
               <el-select style="width: 100%" v-model="typesSelect" placeholder="Select" size="large">
-                <el-option v-for="fields in fieldsArr" :key="fields.name" :label="fields.name" :value="fields.name_vn">
+                <el-option v-for="fields in fieldsArr" :key="fields._id" :label="fields.name_vn" :value="fields.name_vn">
                 </el-option>
               </el-select>
             </div>
@@ -134,12 +134,11 @@
 <script lang="ts" setup>
 import FooterVue from '~/components/tkhuyen/Footer.vue'
 import { computed, onMounted, ref } from 'vue'
-import { getFields } from '~/api/Fields'
+import { getField } from '~/api/Research-area'
 import { Experts } from '~/models/Experts'
-import { getExpertByUid, getExperts1 } from '~/api/Experts'
-import { Fields } from '~/models/Fields'
+import { getExperts1 } from '~/api/Experts'
+import { ResearchArea } from '~/models/Research-area'
 import ExpertItemOrderPage from '~/components/ExpertDetail/expertItemOrderPage.vue'
-import { useRouter } from 'vue-router'
 import axios from 'axios'
 import { useStore } from '~/store/index'
 import router from '~/router'
@@ -202,7 +201,7 @@ const handlePost = async () => {
 
 const content = ref('')
 const Title = ref('')
-const fieldsArr = ref<Fields[]>([])
+const fieldsArr = ref<ResearchArea[]>([])
 
 const expertArr = ref<Experts[]>([])
 
@@ -218,7 +217,7 @@ const expertFilter = computed(() => {
   }
 })
 onMounted(async () => {
-  fieldsArr.value = await getFields()
+  fieldsArr.value = await getField()
   expertArr.value = await getExperts1(10)
 })
 </script>
