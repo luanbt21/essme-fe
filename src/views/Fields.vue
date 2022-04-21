@@ -4,6 +4,7 @@
       <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
       <el-breadcrumb-item>field</el-breadcrumb-item>
       <el-breadcrumb-item>{{ route.params.name }} </el-breadcrumb-item>
+      <el-breadcrumb-item>{{ props.what }} </el-breadcrumb-item>
     </el-breadcrumb>
 
     <Fieldall :key="$route.fullPath" v-bind="props" />
