@@ -1,5 +1,8 @@
 <template>
-  <el-card :style="{ 'background-color': ' #FFFFFF' }" class="m-5 md:hover:scale-105 hover:duration-500 rounded-[15px]">
+  <el-card
+    :style="{ 'background-color': ' #FFFFFF' }"
+    class="m-5 md:hover:scale-105 hover:duration-500 rounded-[15px] w-[250px] md:w-[330px] lg:w-[220px] xl:w-[320px] 2xl:w-[450px]"
+  >
     <router-link
       v-bind:to="'/expert/' + expert._id"
       custom

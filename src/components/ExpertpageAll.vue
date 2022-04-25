@@ -1,21 +1,23 @@
 <template>
   <div class="mt-5 w-[100%] mx-auto justify-center"></div>
 
-  <div class="mt-5 w-[98%] flex justify-center">
+  <div class="mt-5 w-[100%] flex justify-center">
     <el-row :gutter="20" class="flex" viewClass="yf-content" wrapClass="yf-container">
-      <div class="w-full xl:w-[72%] ml-5 my-5 bg-[#D1E0DB] rounded-[15px]">
+      <div
+        class="w-[300px] md:w-[380px] lg:w-[600px] xl:w-[800px] 2xl:w-[1000px] ml-5 my-5 bg-[#D1E0DB] rounded-[15px]"
+      >
         <div class="font-bold text-center p-5 text-2xl">CHUYÊN GIA HÀNG ĐẦU</div>
         <div v-if="experts.length === 0">No result</div>
         <div v-else class="h-[500px] flex flex-wrap">
-          <el-scrollbar responsive height="480px" :key="$route.fullPath">
-            <el-col :span="12" height="239px" v-for="expert in experts" :key="expert._id" class="flex flex-wrap">
+          <el-scrollbar height="480px" :key="$route.fullPath">
+            <el-col :span="12" height="239px" v-for="expert in experts" :key="expert._id" style="max-width: 500px">
               <ExpertsItem :expert="expert" />
             </el-col>
           </el-scrollbar>
         </div>
       </div>
 
-      <div class="bg-[#D1E0DB] rounded-[15px] w-full my-5 ml-3 xl:w-[25%]">
+      <div class="bg-[#D1E0DB] rounded-[15px] my-5 ml-3 w-[290px] lg:w-[260px] xl:w-[300px]">
         <div class="font-bold text-center p-5 mb-5 text-2xl">LĨNH VỰC</div>
         <el-scrollbar height="460px">
           <!-- <div v-for="(address, index) in types" :key="index">
