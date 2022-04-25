@@ -4,8 +4,9 @@
       <el-breadcrumb-item :to="{ path: '/' }">{{
         $t('message.home', {}, { locale: $i18n.locale })
       }}</el-breadcrumb-item>
-      <el-breadcrumb-item>{{ $t('message.field', {}, { locale: $i18n.locale }) }}</el-breadcrumb-item>
+      <el-breadcrumb-item>{{ $t('message.fields', {}, { locale: $i18n.locale }) }}</el-breadcrumb-item>
       <el-breadcrumb-item>{{ route.params.name }} </el-breadcrumb-item>
+      <el-breadcrumb-item v-if="props.what !== ''">{{ props.what }} </el-breadcrumb-item>
     </el-breadcrumb>
 
     <Fieldall :key="$route.fullPath" v-bind="props" />

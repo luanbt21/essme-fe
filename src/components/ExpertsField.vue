@@ -11,9 +11,6 @@
   </div>
 
   <div class="mt-5 w-[100%] m-auto justify-center"></div>
-  <div>
-    <Mapbox :key="$route.fullPath" :data="mapData" />
-  </div>
 
   <div class="mt-5 ml-11 w-[1400px] flex justify-center">
     <el-row :key="$route.fullPath" :gutter="20" class="flex" viewClass="yf-content">
@@ -82,7 +79,9 @@
       </div>
     </el-row>
   </div>
-
+  <div>
+    <Mapbox :key="$route.fullPath" :data="mapData" />
+  </div>
   <!-- <div class="mt-5 w-[95%] mx-auto justify-center">
     <HomeFieldsVue />
   </div>

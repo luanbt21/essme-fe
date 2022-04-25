@@ -1,8 +1,6 @@
 <template>
   <div class="mt-5 w-[100%] mx-auto justify-center"></div>
-  <div>
-    <Mapbox :data="mapData" />
-  </div>
+
   <div class="mt-5 ml-11 w-[1300px] flex justify-center">
     <el-row :gutter="20" class="flex" viewClass="yf-content" wrapClass="yf-container">
       <div class="w-[900px] bg-[#D1E0DB] rounded-[15px]">
@@ -55,7 +53,9 @@
       </div>
     </el-row>
   </div>
-
+  <div class="mt-14">
+    <Mapbox :data="mapData" />
+  </div>
   <div class="mt-5 w-[95%] mx-auto justify-center">
     <HomeFieldsVue />
   </div>
