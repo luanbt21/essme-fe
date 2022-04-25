@@ -7,42 +7,42 @@
       :where-suggest="whereSuggest"
       :label="`${$t('message.FindanExpert', {}, { locale: $i18n.locale })}`"
       :placeholder="`${$t('message.Experttitle', {}, { locale: $i18n.locale })}`"
+      @search="handleSearch"
     />
   </div>
-
-  <div class="mt-5 w-[100%] m-auto justify-center"></div>
-
-  <div class="mt-5 w-[100%] flex justify-center">
-    <el-row :key="$route.fullPath" :gutter="20" class="flex justify-center" viewClass="yf-content">
-      <div class="w-full xl:w-[70%] bg-[#D1E0DB] rounded-[15px] my-5 mr-5">
+  <div v-if="props.what === '' && props.where !== undefined" class="mt-5 ml-11 w-[100%] m-auto justify-center text-lg">
+    Kết quả tìm kiếm: <span class="font-bold">"{{ props.where }}"</span>
+  </div>
+  <div v-if="props.where === undefined && props.what !== ''" class="mt-5 ml-11 w-[100%] m-auto justify-center text-lg">
+    Kết quả tìm kiếm: <span class="font-bold">"{{ props.what }}"</span>
+  </div>
+  <div
+    v-if="props.what !== undefined && props.where !== undefined && props.what !== ''"
+    class="mt-5 ml-11 w-[100%] m-auto justify-center text-lg"
+  >
+    Kết quả tìm kiếm: <span class="font-bold">"{{ props.what }} & {{ props.where }}"</span>
+  </div>
+  <div class="mt-5 ml-11 w-[100%] flex justify-center">
+    <el-row :key="$route.fullPath" :gutter="20" class="flex" viewClass="yf-content">
+      <div class="w-[300px] md:w-[400px] lg:w-[600px] xl:w-[800px] 2xl:w-[1000px] bg-[#D1E0DB] rounded-[15px]">
         <div class="font-bold text-center p-5 text-2xl">
           {{ $t('message.expert', {}, { locale: $i18n.locale }).toUpperCase() }}
         </div>
         <div v-if="experts.length === 0">{{ $t('message.noresult', {}, { locale: $i18n.locale }) }}</div>
-        <div v-else class="h-[500px] mx-auto">
+        <div v-else class="h-[500px]">
           <el-scrollbar height="480px" :key="$route.fullPath">
-            <el-col :span="12" height="239px" v-for="expert in experts" :key="expert._id">
+            <el-col :span="12" height="239px" v-for="expert in experts" :key="expert._id" style="max-width: 500px">
               <ExpertsItem :expert="expert" />
             </el-col>
           </el-scrollbar>
         </div>
-        <div class="w-[98%]">
-          <div class="grid justify-items-center text-center">
-            <el-pagination
-              layout="prev, pager, next"
-              :page-count="expertsPage?.totalPages"
-              :current-page="props.page"
-              @current-change="handlePageChange"
-            />
-          </div>
-        </div>
       </div>
 
-      <div class="bg-[#D1E0DB] rounded-[15px] w-full my-5 lg:w-[25%]">
+      <div class="bg-[#D1E0DB] rounded-[15px] mx-2 w-[290px] lg:w-[250px] xl:w-[300px]">
         <div class="font-bold text-center p-5 mb-5 text-2xl">
           {{ $t('message.fields', {}, { locale: $i18n.locale }).toUpperCase() }}
         </div>
-        <el-scrollbar height="460px " width="280px">
+        <el-scrollbar height="460px " width="200px">
           <!-- <div v-for="(address, index) in types" :key="index">
             <el-card
               :style="{ 'background-color': ' #FFFFFF' }"
@@ -60,10 +60,13 @@
                   <div v-for="type in expertfield" :key="type._id" class="rounded-sm">
                     <el-radio-button
                       :label="type._id"
-                      class="w-[200px] m-2 flex flex-wrap flex-row"
+                      class="w-[100px] m-2 flex flex-wrap flex-row"
                       @change="handleFieldChange"
                     >
-                      <div class="w-[220px] h-[20px]" :title="`${type._id} (${type.quantity})`">
+                      <div
+                        class="w-[170px] md:w-[180px] lg:w-[160px] xl:w-[200px] h-[20px]"
+                        :title="`${type._id} (${type.quantity})`"
+                      >
                         <div class="truncate h-[20px] text-left">
                           {{ `${type._id} (${type.quantity})` }}
                         </div>
@@ -77,12 +80,22 @@
           </div>
         </el-scrollbar>
       </div>
+      <div class="w-[68%]">
+        <div class="grid justify-items-center text-center">
+          <el-pagination
+            layout="prev, pager, next"
+            :page-count="expertsPage?.totalPages"
+            :current-page="props.page"
+            @current-change="handlePageChange"
+          />
+        </div>
+      </div>
     </el-row>
   </div>
-  <div class="w-full">
+  <div>
     <Mapbox :key="$route.fullPath" :data="mapData" />
   </div>
-  <!-- <div class="mt-5 w-[95%] mx-auto justify-center">
+  <div class="mt-5 w-[95%] mx-auto justify-center">
     <HomeFieldsVue />
   </div>
   <div class="mt-5 w-[95%] mx-auto justify-center">
@@ -90,7 +103,7 @@
   </div>
   <div class="mt-5 w-[95%] mx-auto justify-center">
     <HomeEventsVue />
-  </div> -->
+  </div>
 </template>
 <script lang="ts" setup>
 // import HomeNewsVue from './HomeNews.vue'
@@ -125,7 +138,6 @@ const props = defineProps<{
   where?: string
   page?: number
 }>()
-
 const expertsTopData = computed(() => (expertsTop.value ? expertsTop.value : []))
 const expertsData = computed(() => (expertsPage.value ? expertsPage.value.content : []))
 for (let item of expertsData.value) {
@@ -152,7 +164,6 @@ const types = computed(() => {
   }
   return result
 })
-
 const typesSelect = ref('')
 const experts = computed(() => {
   return expertsData.value
@@ -175,7 +186,6 @@ const handleFieldChange = () => {
     name: 'expertfields',
     query: {
       what: typesSelect.value.toString(),
-
       page: 1
     }
   })
@@ -185,8 +195,8 @@ onMounted(async () => {
   expertsPage.value = await searchExperts(props.what, props.where, props.page, pageSize)
   expertsTop.value = await getExpertstop(20, 1)
   expertfield.value = await fieldsExperts()
-
-  console.log(suggest)
+  console.log(props.what)
+  console.log(props.where)
 })
 const handleSearch = (what: string, where: string) => {
   router.push({

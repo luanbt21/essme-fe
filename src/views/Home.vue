@@ -8,6 +8,7 @@
         :where-suggest="whereSuggest"
         :label="`${$t('message.FindanExpert', {}, { locale: $i18n.locale })}`"
         :placeholder="`${$t('message.Experttitle', {}, { locale: $i18n.locale })}`"
+        @search="handleSearch"
       />
     </div>
     <!-- <p>{{ $t('message.language', { msg: 'hello' }, { :locale: 'vi' }) }}</p> -->

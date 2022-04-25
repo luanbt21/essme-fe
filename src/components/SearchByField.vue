@@ -30,7 +30,7 @@
         </el-autocomplete>
       </el-col>
       <el-col class="mb-4" :xs="24" :md="4">
-        <el-button type="info" class="w-full" size="large" color="#3754" @click="emit('search', what, where)"
+        <el-button type="success" class="w-full" size="large" color="#3754" @click="emit('search', what, where)"
           ><el-icon><SearchIcon /></el-icon> Tìm kiếm</el-button
         >
       </el-col>
