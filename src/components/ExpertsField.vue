@@ -13,11 +13,14 @@
   <div v-if="props.what === '' && props.where !== undefined" class="mt-5 ml-11 w-[100%] m-auto justify-center text-lg">
     Kết quả tìm kiếm: <span class="font-bold">"{{ props.where }}"</span>
   </div>
-  <div v-if="props.where === undefined && props.what !== ''" class="mt-5 ml-11 w-[100%] m-auto justify-center text-lg">
+  <div v-if="props.where === undefined" class="mt-5 ml-11 w-[100%] m-auto justify-center text-lg">
+    Kết quả tìm kiếm: <span class="font-bold">"{{ props.what }}"</span>
+  </div>
+  <div v-if="props.what !== undefined && props.where === ''" class="mt-5 ml-11 w-[100%] m-auto justify-center text-lg">
     Kết quả tìm kiếm: <span class="font-bold">"{{ props.what }}"</span>
   </div>
   <div
-    v-if="props.what !== undefined && props.where !== undefined && props.what !== ''"
+    v-if="props.what !== undefined && props.where !== undefined && props.what !== '' && props.where !== ''"
     class="mt-5 ml-11 w-[100%] m-auto justify-center text-lg"
   >
     Kết quả tìm kiếm: <span class="font-bold">"{{ props.what }} & {{ props.where }}"</span>
