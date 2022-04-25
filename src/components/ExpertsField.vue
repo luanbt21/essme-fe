@@ -12,23 +12,33 @@
 
   <div class="mt-5 w-[100%] m-auto justify-center"></div>
 
-  <div class="mt-5 ml-11 w-[1400px] flex justify-center">
-    <el-row :key="$route.fullPath" :gutter="20" class="flex" viewClass="yf-content">
-      <div class="w-[1000px] bg-[#D1E0DB] rounded-[15px]">
+  <div class="mt-5 w-[100%] flex justify-center">
+    <el-row :key="$route.fullPath" :gutter="20" class="flex justify-center" viewClass="yf-content">
+      <div class="w-full xl:w-[70%] bg-[#D1E0DB] rounded-[15px] my-5 mr-5">
         <div class="font-bold text-center p-5 text-2xl">
           {{ $t('message.expert', {}, { locale: $i18n.locale }).toUpperCase() }}
         </div>
         <div v-if="experts.length === 0">{{ $t('message.noresult', {}, { locale: $i18n.locale }) }}</div>
-        <div v-else class="h-[500px]">
-          <el-scrollbar height="480px" :key="$route.fullPath" style="max-width: 1000px">
-            <el-col :span="12" height="239px" v-for="expert in experts" :key="expert._id" style="max-width: 500px">
-              <ExpertsItem :expert="expert" class="max-w-[500px]" />
+        <div v-else class="h-[500px] mx-auto">
+          <el-scrollbar height="480px" :key="$route.fullPath">
+            <el-col :span="12" height="239px" v-for="expert in experts" :key="expert._id">
+              <ExpertsItem :expert="expert" />
             </el-col>
           </el-scrollbar>
         </div>
+        <div class="w-[98%]">
+          <div class="grid justify-items-center text-center">
+            <el-pagination
+              layout="prev, pager, next"
+              :page-count="expertsPage?.totalPages"
+              :current-page="props.page"
+              @current-change="handlePageChange"
+            />
+          </div>
+        </div>
       </div>
 
-      <div class="bg-[#D1E0DB] rounded-[15px] mx-2 w-[320px]">
+      <div class="bg-[#D1E0DB] rounded-[15px] w-full my-5 lg:w-[25%]">
         <div class="font-bold text-center p-5 mb-5 text-2xl">
           {{ $t('message.fields', {}, { locale: $i18n.locale }).toUpperCase() }}
         </div>
@@ -67,19 +77,9 @@
           </div>
         </el-scrollbar>
       </div>
-      <div class="w-[68%]">
-        <div class="grid justify-items-center text-center">
-          <el-pagination
-            layout="prev, pager, next"
-            :page-count="expertsPage?.totalPages"
-            :current-page="props.page"
-            @current-change="handlePageChange"
-          />
-        </div>
-      </div>
     </el-row>
   </div>
-  <div>
+  <div class="w-full">
     <Mapbox :key="$route.fullPath" :data="mapData" />
   </div>
   <!-- <div class="mt-5 w-[95%] mx-auto justify-center">
