@@ -1,10 +1,10 @@
 <template>
-  <div class="rounded-xl m-5 text-[21px] bg-[#d1e0db] h-[50px] w-[200px] lg:w-auto">
+  <div class="rounded-xl m-5 text-[21px] bg-[#d1e0db] h-[50px] w-[97%]">
     <span class="p-10">{{ $t('message.Choosethefield', {}, { locale: $i18n.locale }) }}:</span>
     <el-select
       v-model="blog.text"
       placeholder="Select field"
-      class="ml-10 mt-2 h-[30px] w-[300px] bg-white scroll-smooth"
+      class="ml-2 mt-2 h-[30px] w-[50%] lg:w-[40%] bg-white scroll-smooth"
     >
       <!-- <el-option v-for="item in expertfield" :key="item._id" :label="item._id" :value="item._id">
         <el-button @click="handleFieldChange" style="float: left">{{ `${item._id} (${item.quantity})` }}</el-button>
@@ -17,7 +17,7 @@
         @click="handleFieldChange"
         class="w-[200px] font-serif text-base scroll-smooth"
       >
-        <div class="w-[200px] font-serif scroll-smooth">
+        <div class="w-[300px] font-serif scroll-smooth">
           {{ `${item._id}` }}
         </div>
       </el-option>

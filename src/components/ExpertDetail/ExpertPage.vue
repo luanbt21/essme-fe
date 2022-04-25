@@ -10,9 +10,7 @@
 
       <!-- <input type="number" v-model="lat" />
       <input type="number" v-model="lon" /> -->
-      <div class="h-[500px]">
-        <Mapbox :key="$route.fullPath" :center="mapCenter" :data="mapData" :icon-zoom="0.05" />
-      </div>
+
       <div>
         <FilterFieldVue />
       </div>
@@ -22,6 +20,9 @@
           <MainFooterVue :key="$route.fullPath" />
         </el-container>
       </el-container>
+      <div class="h-[500px]">
+        <Mapbox :key="$route.fullPath" :center="mapCenter" :data="mapData" :icon-zoom="0.05" />
+      </div>
       <RelateExpertVue :key="$route.fullPath" />
     </div>
   </div>
