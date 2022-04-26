@@ -109,26 +109,18 @@ export const searchExperts1 = async (
     throw new Error('Failed to get experts')
   }
 }
-export const suggestexpert = async (): Promise<PageEntity<Experts>> => {
-  try {
-    const res = await axios.get(`https://api.vietsearch.org/api/suggestions/what`, {
-      params: {
-        what,
-        size
-      }
-    })
-    return res.data
-  } catch (error) {
-    throw new Error('Failed to get experts')
-  }
-}
 
-export const whatSuggest = async (what?: string, size = 10): Promise<{ suggestion: { what: string } }> => {
+export const whatSuggesten = async (
+  what?: string,
+  size = 10,
+  lang = 'en'
+): Promise<{ suggestion: { what: string } }> => {
   try {
     const res = await axios.get('https://api.vietsearch.org/api/suggestions/what', {
       params: {
         what,
-        size
+        size,
+        lang
       }
     })
     return res.data
@@ -137,12 +129,35 @@ export const whatSuggest = async (what?: string, size = 10): Promise<{ suggestio
   }
 }
 
-export const whereSuggest = async (where?: string, size = 10): Promise<{ suggestion: { where: string } }> => {
+export const whereSuggesten = async (
+  where?: string,
+  size = 10,
+  lang = 'en'
+): Promise<{ suggestion: { where: string } }> => {
   try {
     const res = await axios.get('https://api.vietsearch.org/api/suggestions/where', {
       params: {
         where,
-        size
+        size,
+        lang
+      }
+    })
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}
+export const whatSuggestvi = async (
+  what?: string,
+  size = 10,
+  lang = 'vi'
+): Promise<{ suggestion: { what: string } }> => {
+  try {
+    const res = await axios.get('https://api.vietsearch.org/api/suggestions/what', {
+      params: {
+        what,
+        size,
+        lang
       }
     })
     return res.data
@@ -151,9 +166,43 @@ export const whereSuggest = async (where?: string, size = 10): Promise<{ suggest
   }
 }
 
-export const fieldsExperts = async (): Promise<FieldsType[]> => {
+export const whereSuggestvi = async (
+  where?: string,
+  size = 10,
+  lang = 'vi'
+): Promise<{ suggestion: { where: string } }> => {
   try {
-    const res = await axios.get(`${apiUrl}/field`)
+    const res = await axios.get('https://api.vietsearch.org/api/suggestions/where', {
+      params: {
+        where,
+        size,
+        lang
+      }
+    })
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}
+export const fieldsExpertsen = async (lang = 'en'): Promise<FieldsType[]> => {
+  try {
+    const res = await axios.get(`${apiUrl}/field`, {
+      params: {
+        lang
+      }
+    })
+    return res.data
+  } catch (error) {
+    throw new Error()
+  }
+}
+export const fieldsExpertsvi = async (lang = 'vi'): Promise<FieldsType[]> => {
+  try {
+    const res = await axios.get(`${apiUrl}/field`, {
+      params: {
+        lang
+      }
+    })
     return res.data
   } catch (error) {
     throw new Error()

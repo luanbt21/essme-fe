@@ -10,17 +10,17 @@
           v-model="what"
           :fetch-suggestions="whatSearch"
           class="w-full"
-          placeholder="Tìm kiếm theo lĩnh vực"
+          :placeholder="`${$t('message.placeholderfield', {}, { locale: $i18n.locale })}`"
         />
       </el-col>
       <el-col class="mb-4" :xs="24" :md="10">
-        <label for="where" class="text-2xl">Địa điểm?</label>
+        <label for="where" class="text-2xl">{{ $t('message.labellocation', {}, { locale: $i18n.locale }) }}</label>
         <el-autocomplete
           id="where"
           v-model="where"
           :fetch-suggestions="whereSearch"
           class="w-full"
-          placeholder="Đất nước,thành phố..."
+          :placeholder="`${$t('message.placeholderlocation', {}, { locale: $i18n.locale })}`"
         >
           <template #prefix>
             <span>
@@ -31,8 +31,9 @@
       </el-col>
       <el-col class="mb-4" :xs="24" :md="4">
         <el-button type="success" class="w-full" size="large" color="#3754" @click="emit('search', what, where)"
-          ><el-icon><SearchIcon /></el-icon> Tìm kiếm</el-button
-        >
+          ><el-icon><SearchIcon /></el-icon>
+          {{ $t('message.searchbutton', {}, { locale: $i18n.locale }) }}
+        </el-button>
       </el-col>
       <el-col class="mb-4" :xs="24" :md="4"> </el-col>
     </el-row>

@@ -1,29 +1,44 @@
 <template>
-  <div class="mt-5 w-[95%] mx-auto justify-center">
+  <div
+    v-if="$t('message.searchresult', {}, { locale: $i18n.locale }) === 'Kết quả tìm kiếm'"
+    class="mt-5 w-[95%] mx-auto justify-center"
+  >
     <Search
       what-field="what"
-      :what-suggest="whatSuggest"
+      :what-suggest="whatSuggestvi"
       where-field="where"
-      :where-suggest="whereSuggest"
+      :where-suggest="whereSuggestvi"
+      :label="`${$t('message.FindanExpert', {}, { locale: $i18n.locale })}`"
+      :placeholder="`${$t('message.Experttitle', {}, { locale: $i18n.locale })}`"
+      @search="handleSearch"
+    />
+  </div>
+  <div v-else class="mt-5 w-[95%] mx-auto justify-center">
+    <Search
+      what-field="what"
+      :what-suggest="whatSuggesten"
+      where-field="where"
+      :where-suggest="whereSuggesten"
       :label="`${$t('message.FindanExpert', {}, { locale: $i18n.locale })}`"
       :placeholder="`${$t('message.Experttitle', {}, { locale: $i18n.locale })}`"
       @search="handleSearch"
     />
   </div>
   <div v-if="props.what === '' && props.where !== undefined" class="mt-5 ml-11 w-[100%] m-auto justify-center text-lg">
-    Kết quả tìm kiếm: <span class="font-bold">"{{ props.where }}"</span>
+    {{ $t('message.searchresult', {}, { locale: $i18n.locale }) }}:<span class="font-bold">"{{ props.where }}"</span>
   </div>
   <div v-if="props.where === undefined" class="mt-5 ml-11 w-[100%] m-auto justify-center text-lg">
-    Kết quả tìm kiếm: <span class="font-bold">"{{ props.what }}"</span>
+    {{ $t('message.searchresult', {}, { locale: $i18n.locale }) }}: <span class="font-bold">"{{ props.what }}"</span>
   </div>
   <div v-if="props.what !== undefined && props.where === ''" class="mt-5 ml-11 w-[100%] m-auto justify-center text-lg">
-    Kết quả tìm kiếm: <span class="font-bold">"{{ props.what }}"</span>
+    {{ $t('message.searchresult', {}, { locale: $i18n.locale }) }}: <span class="font-bold">"{{ props.what }}"</span>
   </div>
   <div
     v-if="props.what !== undefined && props.where !== undefined && props.what !== '' && props.where !== ''"
     class="mt-5 ml-11 w-[100%] m-auto justify-center text-lg"
   >
-    Kết quả tìm kiếm: <span class="font-bold">"{{ props.what }} & {{ props.where }}"</span>
+    {{ $t('message.searchresult', {}, { locale: $i18n.locale }) }}:
+    <span class="font-bold">"{{ props.what }} & {{ props.where }}"</span>
   </div>
   <div class="mt-5 ml-11 w-[100%] flex justify-center">
     <el-row :key="$route.fullPath" :gutter="20" class="flex" viewClass="yf-content">
@@ -31,7 +46,9 @@
         <div class="font-bold text-center p-5 text-2xl">
           {{ $t('message.expert', {}, { locale: $i18n.locale }).toUpperCase() }}
         </div>
-        <div v-if="experts.length === 0">{{ $t('message.noresult', {}, { locale: $i18n.locale }) }}</div>
+        <div class="text-center" v-if="experts.length === 0">
+          {{ $t('message.noresult', {}, { locale: $i18n.locale }) }}
+        </div>
         <div v-else class="h-[500px]">
           <el-scrollbar height="480px" :key="$route.fullPath">
             <el-col :span="12" height="239px" v-for="expert in experts" :key="expert._id" style="max-width: 500px">
@@ -56,11 +73,36 @@
               </button>
             </el-card>
           </div> -->
-          <div class="ml-5">
+          <div v-if="$t('message.searchresult', {}, { locale: $i18n.locale }) === 'Kết quả tìm kiếm'" class="ml-5">
             <div>
               <el-radio-group v-model="typesSelect" size="large" class="rounded-sm">
                 <div>
-                  <div v-for="type in expertfield" :key="type._id" class="rounded-sm">
+                  <div v-for="type in expertfieldvi" :key="type._id" class="rounded-sm">
+                    <el-radio-button
+                      :label="type._id"
+                      class="w-[100px] m-2 flex flex-wrap flex-row"
+                      @change="handleFieldChange"
+                    >
+                      <div
+                        class="w-[170px] md:w-[180px] lg:w-[160px] xl:w-[200px] h-[20px]"
+                        :title="`${type._id} (${type.quantity})`"
+                      >
+                        <div class="truncate h-[20px] text-left">
+                          {{ `${type._id} (${type.quantity})` }}
+                        </div>
+                      </div>
+                    </el-radio-button>
+                  </div>
+                  <br />
+                </div>
+              </el-radio-group>
+            </div>
+          </div>
+          <div v-else class="ml-5">
+            <div>
+              <el-radio-group v-model="typesSelect" size="large" class="rounded-sm">
+                <div>
+                  <div v-for="type in expertfielden" :key="type._id" class="rounded-sm">
                     <el-radio-button
                       :label="type._id"
                       class="w-[100px] m-2 flex flex-wrap flex-row"
@@ -95,7 +137,7 @@
       </div>
     </el-row>
   </div>
-  <div>
+  <div class="mt-10">
     <Mapbox :key="$route.fullPath" :data="mapData" />
   </div>
   <div class="mt-5 w-[95%] mx-auto justify-center">
@@ -117,9 +159,12 @@ import {
   getExperts,
   getExpertstop,
   FieldsType,
-  fieldsExperts,
-  whatSuggest,
-  whereSuggest
+  fieldsExpertsvi,
+  fieldsExpertsen,
+  whatSuggesten,
+  whereSuggesten,
+  whatSuggestvi,
+  whereSuggestvi
 } from '~/api/Experts'
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -133,7 +178,8 @@ import ExpertsItem from '~/components/ExpertsItem.vue'
 const router = useRouter()
 const pageSize = 10
 const mapCenter = ref<number[]>()
-const expertfield = ref<FieldsType[]>([])
+const expertfieldvi = ref<FieldsType[]>([])
+const expertfielden = ref<FieldsType[]>([])
 const expertsTop = ref<ExpertModel[]>([])
 const expertsPage = ref<PageEntity<ExpertModel>>()
 const props = defineProps<{
@@ -197,9 +243,8 @@ const suggest = ref<PageEntity<ExpertModel>>()
 onMounted(async () => {
   expertsPage.value = await searchExperts(props.what, props.where, props.page, pageSize)
   expertsTop.value = await getExpertstop(20, 1)
-  expertfield.value = await fieldsExperts()
-  console.log(props.what)
-  console.log(props.where)
+  expertfieldvi.value = await fieldsExpertsvi()
+  expertfielden.value = await fieldsExpertsen()
 })
 const handleSearch = (what: string, where: string) => {
   router.push({

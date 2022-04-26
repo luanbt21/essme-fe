@@ -32,7 +32,7 @@ import { Search } from '@element-plus/icons-vue'
 import { ArrowRight } from '@element-plus/icons-vue'
 import { computed, onMounted, onUpdated, ref } from 'vue'
 
-import { Expert } from '~/models/Expert'
+import { Experts } from '~/models/Experts'
 
 import Mapbox from '~/components/Mapbox.vue'
 import avatar from '/avatar_expert_detail.png'
@@ -43,14 +43,15 @@ import { Feature } from '~/models/Geojson'
 import { useRoute } from 'vue-router'
 import expert_id from '~/store/modules/expert_id'
 import FilterFieldVue from './FilterField.vue'
-const expertArr = ref<Expert[]>([])
-const expert = ref<Expert>()
+import { getExpertsById } from '~/api/Experts'
+const expertArr = ref<Experts[]>([])
+const expert = ref<Experts>()
 const route = useRoute()
 
 onMounted(async () => {
   const id = route.params.id
 
-  expert.value = await getExpertById(id as string)
+  expert.value = await getExpertsById(id as string)
 })
 const mapCenter = expert.value?.location.features[0].geometry.coordinates
 const lat = ref<number>(105)
