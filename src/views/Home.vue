@@ -1,11 +1,25 @@
 <template>
   <div class="relative w-[97%] min-w-[800px] z-1 mt-[-100px] bg-slate-200 rounded-[40px] p-[50px] flex flex-col">
-    <div class="mt-5 w-[95%] mx-auto justify-center">
+    <div
+      v-if="$t('message.searchresult', {}, { locale: $i18n.locale }) === 'Kết quả tìm kiếm'"
+      class="mt-5 w-[95%] mx-auto justify-center"
+    >
       <Search
         what-field="what"
-        :what-suggest="whatSuggest"
+        :what-suggest="whatSuggestvi"
         where-field="where"
-        :where-suggest="whereSuggest"
+        :where-suggest="whereSuggestvi"
+        :label="`${$t('message.FindanExpert', {}, { locale: $i18n.locale })}`"
+        :placeholder="`${$t('message.Experttitle', {}, { locale: $i18n.locale })}`"
+        @search="handleSearch"
+      />
+    </div>
+    <div v-else class="mt-5 w-[95%] mx-auto justify-center">
+      <Search
+        what-field="what"
+        :what-suggest="whatSuggesten"
+        where-field="where"
+        :where-suggest="whereSuggesten"
         :label="`${$t('message.FindanExpert', {}, { locale: $i18n.locale })}`"
         :placeholder="`${$t('message.Experttitle', {}, { locale: $i18n.locale })}`"
         @search="handleSearch"
@@ -38,7 +52,7 @@ import FooterVue from '~/components/tkhuyen/Footer.vue'
 import Search from '~/components/SearchByField.vue'
 import HomeExpertnew from '~/components/HomeExpertnew.vue'
 import { onMounted, ref } from 'vue'
-import { searchExperts, getExperts, whatSuggest, whereSuggest } from '~/api/Experts'
+import { searchExperts, getExperts, whatSuggestvi, whereSuggestvi, whatSuggesten, whereSuggesten } from '~/api/Experts'
 import { useRouter } from 'vue-router'
 import { PageEntity } from '~/models/PageEntity'
 import { Experts } from '~/models/Experts'
@@ -66,8 +80,6 @@ onMounted(async () => {
   homepage.value = await getHomepage()
   eventsArr.value = homepage.value.top_events
   newsArr.value = await getNewsHome(9)
-  // suggest.value = await suggestexpert()
-  // console.log(suggest.value)
 })
 const handleSearch = (what: string, where: string) => {
   router.push({

@@ -6,7 +6,9 @@
       <div
         class="w-[300px] md:w-[380px] lg:w-[600px] xl:w-[800px] 2xl:w-[1000px] ml-5 my-5 bg-[#D1E0DB] rounded-[15px]"
       >
-        <div class="font-bold text-center p-5 text-2xl">CHUYÊN GIA HÀNG ĐẦU</div>
+        <div class="font-bold text-center p-5 text-2xl">
+          {{ $t('message.leaderexpert', {}, { locale: $i18n.locale }) }}
+        </div>
         <div v-if="experts.length === 0">No result</div>
         <div v-else class="h-[500px] flex flex-wrap">
           <el-scrollbar height="480px" :key="$route.fullPath">
@@ -18,7 +20,9 @@
       </div>
 
       <div class="bg-[#D1E0DB] rounded-[15px] my-5 ml-3 w-[290px] lg:w-[260px] xl:w-[300px]">
-        <div class="font-bold text-center p-5 mb-5 text-2xl">LĨNH VỰC</div>
+        <div class="font-bold text-center p-5 mb-5 text-2xl">
+          {{ $t('message.fields', {}, { locale: $i18n.locale }) }}
+        </div>
         <el-scrollbar height="460px">
           <!-- <div v-for="(address, index) in types" :key="index">
             <el-card
@@ -30,18 +34,52 @@
               </button>
             </el-card>
           </div> -->
-          <div class="ml-5">
+          <div v-if="$t('message.searchresult', {}, { locale: $i18n.locale }) === 'Kết quả tìm kiếm'" class="ml-5">
             <div>
-              <el-radio-group v-model="typesSelect" size="large" class="">
-                <div class="w-[50px]">
-                  <div v-for="type in expertfield" :key="type._id" class="">
-                    <div class="w-[100px] flex flex-wrap">
-                      <el-radio-button :label="type._id" class="w-10 m-2" @change="handleFieldChange">
-                        {{ `${type._id} (${type.quantity})` }}
-                      </el-radio-button>
-                    </div>
-                    <br />
+              <el-radio-group v-model="typesSelect" size="large" class="rounded-sm">
+                <div>
+                  <div v-for="type in expertfieldvi" :key="type._id" class="rounded-sm">
+                    <el-radio-button
+                      :label="type._id"
+                      class="w-[100px] m-2 flex flex-wrap flex-row"
+                      @change="handleFieldChange"
+                    >
+                      <div
+                        class="w-[170px] md:w-[180px] lg:w-[160px] xl:w-[200px] h-[20px]"
+                        :title="`${type._id} (${type.quantity})`"
+                      >
+                        <div class="truncate h-[20px] text-left">
+                          {{ `${type._id} (${type.quantity})` }}
+                        </div>
+                      </div>
+                    </el-radio-button>
                   </div>
+                  <br />
+                </div>
+              </el-radio-group>
+            </div>
+          </div>
+          <div v-else class="ml-5">
+            <div>
+              <el-radio-group v-model="typesSelect" size="large" class="rounded-sm">
+                <div>
+                  <div v-for="type in expertfielden" :key="type._id" class="rounded-sm">
+                    <el-radio-button
+                      :label="type._id"
+                      class="w-[100px] m-2 flex flex-wrap flex-row"
+                      @change="handleFieldChange"
+                    >
+                      <div
+                        class="w-[170px] md:w-[180px] lg:w-[160px] xl:w-[200px] h-[20px]"
+                        :title="`${type._id} (${type.quantity})`"
+                      >
+                        <div class="truncate h-[20px] text-left">
+                          {{ `${type._id} (${type.quantity})` }}
+                        </div>
+                      </div>
+                    </el-radio-button>
+                  </div>
+                  <br />
                 </div>
               </el-radio-group>
             </div>
@@ -73,7 +111,7 @@
 import HomeNews from '~/components/HomeNews.vue'
 import HomeEventsVue from './HomeEvents.vue'
 import HomeFieldsVue from './HomeFields.vue'
-import { searchExperts, getExperts, getExpertstop, FieldsType, fieldsExperts } from '~/api/Experts'
+import { searchExperts, getExperts, getExpertstop, FieldsType, fieldsExpertsen, fieldsExpertsvi } from '~/api/Experts'
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -95,7 +133,8 @@ const eventsArr = ref<Event[]>([])
 const router = useRouter()
 const pageSize = 10
 const mapCenter = ref<number[]>()
-const expertfield = ref<FieldsType[]>([])
+const expertfieldvi = ref<FieldsType[]>([])
+const expertfielden = ref<FieldsType[]>([])
 const expertsTop = ref<ExpertModel[]>([])
 const expertsPage = ref<PageEntity<ExpertModel>>()
 const homepage = ref<Homepage>()
@@ -170,7 +209,8 @@ const newsArr = ref<News[]>([])
 onMounted(async () => {
   expertsPage.value = await searchExperts(props.what, props.where, props.page, pageSize)
   expertsTop.value = await getExpertstop(20, 1)
-  expertfield.value = await fieldsExperts()
+  expertfieldvi.value = await fieldsExpertsvi()
+  expertfielden.value = await fieldsExpertsen()
   homepage.value = await getHomepage()
   eventsArr.value = homepage.value.top_events
   newsArr.value = await getNewsHome(9)
