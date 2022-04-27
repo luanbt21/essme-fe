@@ -1,7 +1,25 @@
 <template>
   <div class="bg-[hsl(160,19%,85%)] p-9 rounded-2xl">
     <h2 class="text-center text-2xl mb-2">{{ $t('message.fields', {}, { locale: $i18n.locale }) }}</h2>
-    <div class="mb-10">
+    <div v-if="$t('message.fields', {}, { locale: $i18n.locale }) === 'FIELDS'" class="mb-10">
+      <span class="p-10">{{ $t('message.Choosethefield', {}, { locale: $i18n.locale }) }}:</span>
+      <el-select
+        v-model="blog.text"
+        filterable
+        :placeholder="`${$t('message.placeholderselect', {}, { locale: $i18n.locale })}`"
+        class="ml-10 mt-2 h-[30px] w-[300px] bg-white scroll-smooth"
+      >
+        <el-option
+          v-for="(reason, key) in expertfield?.key_en"
+          :key="key"
+          :value="reason"
+          :label="reason"
+          @click="handleFieldChange"
+          class="w-[300px] font-serif text-base scroll-smooth"
+        />
+      </el-select>
+    </div>
+    <div v-else class="mb-10">
       <span class="p-10">{{ $t('message.Choosethefield', {}, { locale: $i18n.locale }) }}:</span>
       <el-select
         v-model="blog.text"
