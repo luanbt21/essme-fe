@@ -16,8 +16,8 @@ export const i18n = createI18n({
         fqas: 'FQAs',
         askquestion: 'Ask Question',
         orderexpert: 'Order Expert',
-        expertprofile: 'Expert Profile',
-        expertinfo: 'Expert Info',
+        AllExpert: 'All Expert',
+        expertinfo: 'Update expert profile',
         events: 'Events',
         news: 'News',
         profilesetting: 'Profile Setting',
@@ -28,7 +28,7 @@ export const i18n = createI18n({
         leadingexpert: 'Leading Experts',
         degree: 'Degree',
         researcharea: 'Research Area',
-        viewallexperts: 'View all experts',
+        viewallexperts: 'View leading experts',
         fields: 'FIELDS',
         showmore: 'Show more',
         seemoreanswers: 'See more answers',
@@ -54,6 +54,7 @@ export const i18n = createI18n({
         Signintopostanswer: 'Sign in to post answer!',
         Postyouranswersuccessfully: 'Post your answer successfully!',
         FailtoPostyouranswer: 'Fail to Post your answer! ',
+        FailtoPostyourRequest: 'Fail to Post your Request',
         Maybeyouhavenotupdatedyourprofile: 'Maybe you have not updated your profile',
         Youhavetobeexperttopostanswer: 'You have to be expert to post answer',
         Return: 'Return',
@@ -106,7 +107,11 @@ export const i18n = createI18n({
         Pleaseselectfields: 'Please select fields',
         Findquestion: 'Find question',
         Findexpert: 'Find expert',
-        Postyourquestion: 'Post your question'
+        Postyourquestion: 'Post your question',
+        Request: 'Request',
+        Pleasetypeyouranswerforthisrequest: 'Please type your answer for this request'
+
+
       }
     },
     vi: {
@@ -117,8 +122,8 @@ export const i18n = createI18n({
         fqas: 'Câu hỏi',
         askquestion: 'Hỏi đáp',
         orderexpert: 'Đặt hàng',
-        expertprofile: 'Chuyên gia',
-        expertinfo: 'Thông tin chuyên gia',
+        AllExpert: 'Chuyên gia',
+        expertinfo: 'Cập nhật chuyên gia',
         events: 'Sự kiện',
         news: 'Tin tức',
         profilesetting: 'Thay đổi thông tin',
@@ -127,7 +132,7 @@ export const i18n = createI18n({
         login: 'Đăng nhập',
         // home
         leadingexpert: 'Chuyên gia đầu ngành',
-        viewallexperts: 'Tất cả chuyên gia',
+        viewallexperts: 'Chuyên gia đầu ngành',
         fields: 'Lĩnh vực',
         showmore: 'Xem thêm',
         degree: 'Trình độ',
@@ -155,6 +160,7 @@ export const i18n = createI18n({
         Signintopostanswer: 'Đăng nhập để gửi câu trả lời',
         Postyouranswersuccessfully: 'Gửi câu trả lời thành công',
         FailtoPostyouranswer: 'Không thể gửi câu trả lời',
+        FailtoPostyourRequest: 'Không thể gửi yêu cầu',
         Maybeyouhavenotupdatedyourprofile: 'Cập nhật thông tin cá nhân để thực hiện chức năng này!',
         Youhavetobeexperttopostanswer: 'Bạn phải là chuyên gia mới thực hiện được phần này',
         Return: 'Trở lại',
@@ -207,7 +213,9 @@ export const i18n = createI18n({
         Pleaseselectfields: 'Chọn lĩnh vực',
         Findquestion: 'Tìm kiếm câu hỏi',
         Findexpert: 'Tìm kiếm chuyên gia',
-        Postyourquestion: 'Gửi câu hỏi'
+        Postyourquestion: 'Gửi câu hỏi',
+        Request: 'Yêu cầu',
+        Pleasetypeyouranswerforthisrequest: 'Nhập câu trả lời'
       }
     }
   }

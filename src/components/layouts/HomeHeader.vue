@@ -161,11 +161,11 @@
         <router-link class="mb-[-15px]" to="/OrderExpert">
         <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>{{ $t('message.orderexpert',{}, { locale: lang }) }}</p></div>
         </router-link>
-        <router-link class="mb-[-15px]" to="/">
-        <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>{{ $t('message.expertprofile',{}, { locale: lang }) }}</p></div>
+        <router-link class="mb-[-15px]" to="/ExpertOrCustomerStatus">
+        <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>{{ $t('message.expertinfo',{}, { locale: lang }) }}</p></div>
         </router-link>
         <router-link class="mb-[-15px]" to="/allexperts">
-        <div class="border-radius-up hover:cursor-pointer  leading-loose ml-[3px] mb-[15px]"><p>{{ $t('message.expertinfo',{}, { locale: lang }) }}</p></div>
+        <div class="border-radius-up hover:cursor-pointer  leading-loose ml-[3px] mb-[15px]"><p>{{ $t('message.AllExpert',{}, { locale: lang }) }}</p></div>
         </router-link>
       </div>
     </div>

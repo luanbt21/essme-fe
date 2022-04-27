@@ -178,7 +178,12 @@ const handlePost = async () => {
   }
   try {
     if (exInfo.value) {
-      let expert = await getExpertByUid(store.state.auth.userid)
+      let expert = null
+      try {
+        expert = await getExpertByUid(store.state.auth.userid)
+      } catch (error) {
+        console.log(error)
+      }
       if (expert) {
         await deleteExpert(expert._id)
       }
@@ -215,44 +220,58 @@ const handlePost = async () => {
         }
       )
     } else {
-      let customer = await getCustomerbyUid(store.state.auth.userid)
-      if (customer) {
-        await deleteCustomer(customer._id)
+      let customer = null
+      try {
+        customer = await getCustomerbyUid(store.state.auth.userid)
+      } catch (error) {
+        console.log(error)
       }
-      await axios
-        .post(
-          '/customers',
+      if (customer) {
+        try {
+          await deleteCustomer(customer._id)
+        } catch (error) {
+          console.log(error)
+        }
+      }
+
+      try {
+        await axios
+          .post(
+            '/customers',
+            {
+              uid: store.state.auth.userid,
+              gender: gender.value,
+              birth: birth.value,
+              phone: phone.value,
+              address: address.value,
+              email: email.value,
+              image: url.value,
+              interest: interest.value,
+              website: '',
+              facebook: '',
+              linkedIn: 'string',
+              desc: Company.value,
+              role: 'CUSTOMER'
+            },
+            {
+              headers
+            }
+          )
+          .then(dta => {
+            console.log(dta)
+          })
+        await axios.put(
+          `/users/${store.state.auth.userid}`,
           {
-            uid: store.state.auth.userid,
-            gender: gender.value,
-            birth: birth.value,
-            phone: phone.value,
-            address: address.value,
-            email: email.value,
-            image: url.value,
-            interest: interest.value,
-            website: '',
-            facebook: '',
-            linkedIn: 'string',
-            desc: Company.value,
             role: 'CUSTOMER'
           },
           {
             headers
           }
         )
-        .then(dta => {
-          console.log(dta)
-        })
-      await axios.put(
-        `/users/${store.state.auth.userid}`,
-        {
-          role: 'CUSTOMER'
-        },
-        {
-          headers
-        }
-      )
+      } catch (error) {
+        console.log(error)
+      }
     }
   } catch (error) {
     failLog.value = true
