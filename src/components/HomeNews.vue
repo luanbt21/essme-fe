@@ -3,7 +3,7 @@
     <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
       <h2 class="text-center text-2xl mb-2">{{ $t('message.news', {}, { locale: $i18n.locale }) }}</h2>
       <div v-if="newsArr.length === 0" class="px-8 py-4 bg-[#D1E0DB] rounded-xl text-center">
-        <div>No result</div>
+        <div>{{ $t('message.noresult', {}, { locale: $i18n.locale }) }}</div>
       </div>
       <el-row v-else :gutter="30">
         <el-col v-for="news in newsArr" :key="news._id" :xs="24" :sm="12" :lg="8">

@@ -21,7 +21,13 @@
         </el-container>
       </el-container>
       <div class="h-[500px]">
-        <Mapbox :key="$route.fullPath" :center="mapCenter" :data="mapData" :icon-zoom="0.05" />
+        <Mapbox
+          :key="$route.fullPath"
+          :center="expert?.location.features[0].geometry.coordinates"
+          :zoom="6"
+          :data="mapData"
+          :icon-zoom="0.05"
+        />
       </div>
       <RelateExpertVue :key="$route.fullPath" />
     </div>

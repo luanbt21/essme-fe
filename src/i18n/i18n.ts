@@ -81,7 +81,7 @@ export const i18n = createI18n({
         Enteryourrequirement: 'Enter your requirement',
         noresult: 'No result',
         RELATEDEXPERTS: 'RELATED EXPERTS',
-
+        placeholderselect: 'Select field',
         // expert order
         Choosethefieldwhichyouwanttoaskabout: 'Choose the field which you want to ask about',
         RelatedExperts: 'Related Experts',
@@ -168,7 +168,7 @@ export const i18n = createI18n({
         Filter: 'Lọc',
         ByTypes: 'Theo thể loại',
         // expertpage
-        Choosethefield: 'Lĩnh vực',
+        Choosethefield: 'Chọn lĩnh vực',
         INTRODUCTION: 'GIỚI THIỆU',
         APPELLATION: 'DANH HIỆU',
         POSITION: 'CHỨC VỤ',
@@ -182,6 +182,7 @@ export const i18n = createI18n({
         Enteryourrequirement: 'Nhập yêu cầu của bạn',
         noresult: 'Không có kết quả trả về',
         RELATEDEXPERTS: 'CHUYÊN GIA NỔI BẬT',
+        placeholderselect: 'Chọn lĩnh vực',
         // expert order
         Choosethefieldwhichyouwanttoaskabout: 'Chọn lĩnh vực mà bạn muốn đặt câu hỏi',
         RelatedExperts: 'Chuyên gia nổi bật',

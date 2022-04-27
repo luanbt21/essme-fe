@@ -38,7 +38,11 @@
             <HomeFilled />
           </el-icon>
           <el-link style="font-size: 24px" :href="event.web" target="_blank">
-            {{ event.web }}
+            <div class="w-[400px] md:w-[580px] lg:w-[800px] xl:w-[1100px] h-[20px]" :title="event.web">
+              <div class="truncate h-[30px] text-left">
+                {{ event.web }}
+              </div>
+            </div>
           </el-link>
         </p>
       </div>

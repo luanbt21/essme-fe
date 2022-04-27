@@ -6,7 +6,7 @@
     <span class="p-10">{{ $t('message.Choosethefield', {}, { locale: $i18n.locale }) }}:</span>
     <el-select
       v-model="blog.text"
-      placeholder="Select field"
+      :placeholder="`${$t('message.placeholderselect', {}, { locale: $i18n.locale })}`"
       class="ml-2 mt-2 h-[30px] w-[50%] lg:w-[40%] bg-white scroll-smooth"
     >
       <!-- <el-option v-for="item in expertfield" :key="item._id" :label="item._id" :value="item._id">
@@ -18,7 +18,7 @@
         :value="item._id"
         :label="item._id"
         @click="handleFieldChange"
-        class="w-[200px] font-serif text-base scroll-smooth"
+        class="w-[500px] font-serif text-base scroll-smooth"
       >
         <div class="w-[300px] font-serif scroll-smooth">
           {{ `${item._id}` }}
@@ -30,7 +30,7 @@
     <span class="p-10">{{ $t('message.Choosethefield', {}, { locale: $i18n.locale }) }}:</span>
     <el-select
       v-model="blog.text"
-      placeholder="Select field"
+      :placeholder="`${$t('message.placeholderselect', {}, { locale: $i18n.locale })}`"
       class="ml-2 mt-2 h-[30px] w-[50%] lg:w-[40%] bg-white scroll-smooth"
     >
       <!-- <el-option v-for="item in expertfield" :key="item._id" :label="item._id" :value="item._id">

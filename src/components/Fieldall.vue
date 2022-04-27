@@ -2,11 +2,11 @@
   <div class="bg-[hsl(160,19%,85%)] p-9 rounded-2xl">
     <h2 class="text-center text-2xl mb-2">{{ $t('message.fields', {}, { locale: $i18n.locale }) }}</h2>
     <div class="mb-10">
-      <span class="p-10">Choose the field:</span>
+      <span class="p-10">{{ $t('message.Choosethefield', {}, { locale: $i18n.locale }) }}:</span>
       <el-select
         v-model="blog.text"
         filterable
-        placeholder="Select"
+        :placeholder="`${$t('message.placeholderselect', {}, { locale: $i18n.locale })}`"
         class="ml-10 mt-2 h-[30px] w-[300px] bg-white scroll-smooth"
       >
         <el-option
