@@ -3,7 +3,7 @@
     <div class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
       <h2 class="text-center text-2xl mb-2">{{ $t('message.events', {}, { locale: $i18n.locale }) }}</h2>
       <div v-if="eventsArr.length === 0" class="px-8 py-4 bg-[#D1E0DB] rounded-xl text-center">
-        <div>No result</div>
+        <div>{{ $t('message.noresult', {}, { locale: $i18n.locale }) }}</div>
       </div>
       <div v-else class="px-8 py-4 bg-[#D1E0DB] rounded-xl">
         <el-carousel :interval="4000" type="card" height="450px" :autoplay="true">

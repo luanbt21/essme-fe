@@ -45,7 +45,7 @@
                 v-model="title"
                 :autosize="{ minRows: 2, maxRows: 5 }"
                 type="textarea"
-                placeholder="Please input"
+                :placeholder="`${$t('message.PleaseInput', {}, { locale: $i18n.locale })}`"
               >
               </el-input>
             </div>
@@ -58,7 +58,7 @@
                 v-model="contentQuestion"
                 :autosize="{ minRows: 4, maxRows: 8 }"
                 type="textarea"
-                placeholder="Please input"
+                :placeholder="`${$t('message.Enteryourrequirement', {}, { locale: $i18n.locale })}`"
               >
               </el-input>
             </div>
@@ -120,9 +120,7 @@
     </el-dialog>
     <br />
     <hr />
-    <div class="mt-[50px] mb-[20px] w-fit border-solid border-2 border-sky-300 px-8 py-2 rounded-3xl shadow-lg">
-      <div class="text-xl text-black">Recent questions related to your field</div>
-    </div>
+
     <!-- <div v-for="FQA in FQAs" :key="FQA._id">
       <FQAitem :question="FQA" />
     </div> -->
