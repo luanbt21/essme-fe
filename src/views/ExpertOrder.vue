@@ -16,7 +16,12 @@
                 {{ $t('message.Choosethefieldwhichyouwanttoaskabout', {}, { locale: $i18n.locale }) }}
               </p>
               <el-select style="width: 100%" v-model="typesSelect" placeholder="Select" size="large">
-                <el-option v-for="fields in fieldsArr" :key="fields._id" :label="fields.name_vn" :value="fields.name_vn">
+                <el-option
+                  v-for="fields in fieldsArr"
+                  :key="fields._id"
+                  :label="fields.name_vn"
+                  :value="fields.name_vn"
+                >
                 </el-option>
               </el-select>
             </div>
@@ -29,7 +34,7 @@
                 v-model="Title"
                 :autosize="{ minRows: 2, maxRows: 3 }"
                 type="textarea"
-                placeholder="Please input"
+                :placeholder="$t('message.PleaseInput', {}, { locale: $i18n.locale })"
               >
               </el-input>
             </div>
@@ -61,7 +66,7 @@
                 v-model="content"
                 :autosize="{ minRows: 4, maxRows: 8 }"
                 type="textarea"
-                :placeholder="`${$t('message.PleaseInput', {}, { locale: $i18n.locale })}}}`"
+                :placeholder="`${$t('message.PleaseInput', {}, { locale: $i18n.locale })}`"
               >
               </el-input>
             </div>
@@ -99,7 +104,7 @@
         color="#626aef"
         size="large"
         style="color: white"
-        >{{ $t('message.ByTags', {}, { locale: $i18n.locale }) }}</el-button
+        >{{ $t('message.PostyourOrder', {}, { locale: $i18n.locale }) }}</el-button
       >
     </div>
     <br />
@@ -112,7 +117,7 @@
       <span v-else
         >{{ $t('message.FailtoPostyouranswer', {}, { locale: $i18n.locale }) }} <br />{{
           $t('message.Maybeyouhavenotupdatedyourprofile', {}, { locale: $i18n.locale })
-        }}<br />{{ $t('message.Youhavetobeexperttopostanswer', {}, { locale: $i18n.locale }) }}
+        }}
       </span>
       <template #footer>
         <span class="dialog-footer">

@@ -105,7 +105,7 @@
       <span v-else
         >{{ $t('message.FailtoPostyouranswer', {}, { locale: $i18n.locale }) }} <br />{{
           $t('message.Maybeyouhavenotupdatedyourprofile', {}, { locale: $i18n.locale })
-        }}<br />{{ $t('message.Youhavetobeexperttopostanswer', {}, { locale: $i18n.locale }) }}
+        }}<br />{{ $t('message.Youhavetobecustomertosendrequest', {}, { locale: $i18n.locale }) }}
       </span>
       <template #footer>
         <span class="dialog-footer">

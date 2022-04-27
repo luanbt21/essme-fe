@@ -5,7 +5,7 @@
       <el-col :span="16" class="pl-3">
         <router-link to="/OrderExpert">
           <div class="mb-[15px] items-right">
-            <el-button color="#4e6d74" size="large" plain>{{
+            <el-button style="background-color: #4e8d74" color="#4e6d74" size="large" plain>{{
               $t('message.orderexpert', {}, { locale: $i18n.locale })
             }}</el-button>
           </div>
@@ -17,7 +17,7 @@
         <div class="ml-[30px]">
           <div class="shrink-0 flex mb-[15px]">
             <img class="h-6 w-6" src="../assets/question-mark.png" alt="Question Logo" />
-            <span class="ml-[15px] min-w-[65px]">{{ $t('message.question', {}, { locale: $i18n.locale }) }}: </span>
+            <span class="ml-[15px] min-w-[65px]">{{ $t('message.Request', {}, { locale: $i18n.locale }) }}: </span>
             <span class="ml-[10px] line-clamp-3">{{ request?.content }} </span>
           </div>
           <div class="shrink-0 flex mb-[15px]">
@@ -34,7 +34,7 @@
             v-model="ResponseExpert"
             :autosize="{ minRows: 2, maxRows: 4 }"
             type="textarea"
-            placeholder="Please type your answer for this question"
+            :placeholder="$t('message.Pleasetypeyouranswerforthisrequest', {}, { locale: $i18n.locale })"
           />
           <el-button
             @click="handlePost(), (centerDialogVisible = true)"
