@@ -73,6 +73,7 @@ const handleSubmit = async () => {
     } else if (userSignIn.role == 'EXPERT') {
       router.push('/')
     } else {
+      router.push('/')
     }
   } catch (err) {
     error.value = 'oop! có lỗi xảy ra'

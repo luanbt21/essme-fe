@@ -163,13 +163,12 @@ const handlePost = async () => {
         .post(
           `/requests/direct`,
           {
-            last_updated_at: '2022-03-30T20:18:45.760Z',
-            topic: expert.value?.research_area,
-            title: title.value,
             content: content.value,
-            responses: [],
+            title: title.value,
             expert_id: route.params.id,
-            customer_id: customer.value._id
+            expert_email: expert.value?.email,
+            customer_id: customer.value._id,
+            topic: expert.value?.research_area
           },
           {
             headers
@@ -178,9 +177,6 @@ const handlePost = async () => {
         .then(data => {
           shoeLog.value = true
           window.location.reload()
-        })
-        .catch(error => {
-          console.log(error)
         })
     } else {
     }
