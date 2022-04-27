@@ -1,5 +1,29 @@
 <template>
-  <div class="mt-5 w-[100%] mx-auto justify-center"></div>
+  <div
+    v-if="$t('message.searchresult', {}, { locale: $i18n.locale }) === 'Kết quả tìm kiếm'"
+    class="mt-5 w-[95%] mx-auto justify-center"
+  >
+    <Search
+      what-field="what"
+      :what-suggest="whatSuggestvi"
+      where-field="where"
+      :where-suggest="whereSuggestvi"
+      :label="`${$t('message.FindanExpert', {}, { locale: $i18n.locale })}`"
+      :placeholder="`${$t('message.Experttitle', {}, { locale: $i18n.locale })}`"
+      @search="handleSearch"
+    />
+  </div>
+  <div v-else class="mt-5 w-[95%] mx-auto justify-center">
+    <Search
+      what-field="what"
+      :what-suggest="whatSuggesten"
+      where-field="where"
+      :where-suggest="whereSuggesten"
+      :label="`${$t('message.FindanExpert', {}, { locale: $i18n.locale })}`"
+      :placeholder="`${$t('message.Experttitle', {}, { locale: $i18n.locale })}`"
+      @search="handleSearch"
+    />
+  </div>
 
   <div class="mt-5 w-[100%] flex justify-center">
     <el-row :gutter="20" class="flex" viewClass="yf-content" wrapClass="yf-container">
@@ -111,11 +135,23 @@
 import HomeNews from '~/components/HomeNews.vue'
 import HomeEventsVue from './HomeEvents.vue'
 import HomeFieldsVue from './HomeFields.vue'
-import { searchExperts, getExperts, getExpertstop, FieldsType, fieldsExpertsen, fieldsExpertsvi } from '~/api/Experts'
+
+import {
+  searchExperts,
+  getExperts,
+  getExpertstop,
+  FieldsType,
+  fieldsExpertsen,
+  fieldsExpertsvi,
+  whatSuggesten,
+  whereSuggesten,
+  whatSuggestvi,
+  whereSuggestvi
+} from '~/api/Experts'
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import Search from '~/components/Search.vue'
+import Search from '~/components/SearchByField.vue'
 import { PageEntity } from '~/models/PageEntity'
 import { Experts as ExpertModel } from '~/models/Experts'
 
@@ -217,7 +253,7 @@ onMounted(async () => {
 })
 const handleSearch = (what: string, where: string) => {
   router.push({
-    name: 'allexperts',
+    name: 'expertfields',
     query: {
       what,
       where,

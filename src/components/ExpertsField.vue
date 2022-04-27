@@ -151,9 +151,6 @@
   </div>
 </template>
 <script lang="ts" setup>
-// import HomeNewsVue from './HomeNews.vue'
-// import HomeEventsVue from './HomeEvents.vue'
-// import HomeFieldsVue from './HomeFields.vue'
 import {
   searchExperts,
   getExperts,
