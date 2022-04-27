@@ -109,7 +109,9 @@ export const i18n = createI18n({
         Findexpert: 'Find expert',
         Postyourquestion: 'Post your question',
         Request: 'Request',
-        Pleasetypeyouranswerforthisrequest: 'Please type your answer for this request'
+        Pleasetypeyouranswerforthisrequest: 'Please type your answer for this request',
+        MailwassenttoExpert: "Mail was sent to Expert",
+        MailwasnotsenttoExpert: "Mail was not sent to Expert"
 
 
       }
@@ -215,7 +217,9 @@ export const i18n = createI18n({
         Findexpert: 'Tìm kiếm chuyên gia',
         Postyourquestion: 'Gửi câu hỏi',
         Request: 'Yêu cầu',
-        Pleasetypeyouranswerforthisrequest: 'Nhập câu trả lời'
+        Pleasetypeyouranswerforthisrequest: 'Nhập câu trả lời',
+        MailwassenttoExpert: "Đã gửi mail cho chuyên gia",
+        MailwasnotsenttoExpert: "Gửi mail cho chuyên gia thất bại"
       }
     }
   }
