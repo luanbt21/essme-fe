@@ -123,6 +123,14 @@ const router = createRouter({
       component: () => import('~/views/FQAs.vue')
     },
     {
+      path: '/requestPage',
+      name: 'RequestPage',
+      component: () => import('~/views/RequestPage.vue'),
+      props: route => ({
+        page: route.query.page ? parseInt(route.query.page as string) : 1,
+      })
+    },
+    {
       path: '/OrderExpert',
       name: 'OrderExpert',
       component: () => import('~/views/ExpertOrder.vue')
