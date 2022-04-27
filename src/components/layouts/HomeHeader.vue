@@ -161,6 +161,9 @@
         <router-link class="mb-[-15px]" to="/OrderExpert">
         <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>{{ $t('message.orderexpert',{}, { locale: lang }) }}</p></div>
         </router-link>
+        <router-link class="mb-[-15px]" to="/requestPage">
+        <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>{{ $t('message.Request',{}, { locale: lang }) }}</p></div>
+        </router-link>
         <router-link class="mb-[-15px]" to="/ExpertOrCustomerStatus">
         <div class="border-radius-up hover:cursor-pointer leading-loose ml-[3px]"><p>{{ $t('message.expertinfo',{}, { locale: lang }) }}</p></div>
         </router-link>
