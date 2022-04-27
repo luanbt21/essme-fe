@@ -169,8 +169,7 @@ const handlePost = async () => {
             content: content.value,
             responses: [],
             expert_id: route.params.id,
-            customer_id: customer.value._id,
-            status: 'ACCEPTED'
+            customer_id: customer.value._id
           },
           {
             headers
