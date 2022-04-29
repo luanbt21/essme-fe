@@ -113,19 +113,32 @@
     <el-dialog v-model="centerDialogVisible" title="Warning" width="30%" center>
       <span v-if="!isLogin">{{ $t('message.Signintopostanswer', {}, { locale: $i18n.locale }) }}</span
       ><br />
-      <span v-if="shoeLog">{{ $t('message.Postyouranswersuccessfully', {}, { locale: $i18n.locale }) }} </span>
-      <span v-else
-        >{{ $t('message.FailtoPostyouranswer', {}, { locale: $i18n.locale }) }} <br />{{
-          $t('message.Maybeyouhavenotupdatedyourprofile', {}, { locale: $i18n.locale })
-        }}
+      <span v-if="isLogin && shoeLog"
+        >{{ $t('message.Postyouranswersuccessfully', {}, { locale: $i18n.locale }) }}
       </span>
+      <span v-if="isLogin && !shoeLog"
+        >{{ $t('message.FailtoPostyouranswer', {}, { locale: $i18n.locale }) }} <br />
+      </span>
+      <span v-if="isLogin && !shoeLog && shoeLog1">{{
+        $t('message.Maybeyouhavenotupdatedyourprofile', {}, { locale: $i18n.locale })
+      }}</span>
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="centerDialogVisible = false">{{
             $t('message.Return', {}, { locale: $i18n.locale })
           }}</el-button>
+          <router-link to="/login">
+            <el-button v-if="!isLogin" type="primary">Login</el-button>
+          </router-link>
           <router-link to="/">
-            <el-button type="primary">{{ $t('message.BacktoHomepage', {}, { locale: $i18n.locale }) }}</el-button>
+            <el-button v-if="isLogin && !shoeLog1" type="primary">{{
+              $t('message.BacktoHomepage', {}, { locale: $i18n.locale })
+            }}</el-button>
+          </router-link>
+          <router-link to="/ExpertOrCustomerStatus">
+            <el-button v-if="isLogin && shoeLog1" type="primary">{{
+              $t('message.UpdateProfile', {}, { locale: $i18n.locale })
+            }}</el-button>
           </router-link>
         </span>
       </template>
@@ -149,14 +162,16 @@ import { useStore } from '~/store/index'
 import router from '~/router'
 import { getCustomerbyUid } from '~/api/Customer'
 import { Customer } from '~/models/Customer'
-let centerDialogVisible = ref(false)
+const centerDialogVisible = ref(false)
 const failLog = ref(false)
 
 const store = useStore()
 const isLogin = computed(() => store.state.auth.user)
 const shoeLog = ref(false)
+const shoeLog1 = ref(false)
 const customerEx = ref<Customer>()
 const customerID = ref('')
+
 const handlePost = async () => {
   customerEx.value = await getCustomerbyUid(store.state.auth.userid)
   // console.log(customerEx.value)
@@ -196,11 +211,13 @@ const handlePost = async () => {
         })
         .catch(error => {
           console.log(error)
+          alert(error)
         })
     } else {
     }
   } catch (error) {
     failLog.value = true
+    alert(error)
   }
 }
 
@@ -224,5 +241,15 @@ const expertFilter = computed(() => {
 onMounted(async () => {
   fieldsArr.value = await getField()
   expertArr.value = await getExperts1(10)
+  // alert(!isLogin.value)
+  if (!isLogin.value) centerDialogVisible.value = true
+  try {
+    await getCustomerbyUid(store.state.auth.userid)
+    shoeLog1.value = false
+  } catch (error) {
+    centerDialogVisible.value = true
+    shoeLog1.value = true
+  }
+  console.log(store.state.auth.userid)
 })
 </script>

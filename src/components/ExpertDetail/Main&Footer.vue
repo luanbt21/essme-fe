@@ -92,7 +92,7 @@
         }}</el-button>
       </div>
       <!-- thông báo save thành công -->
-      <el-dialog v-model="centerDialogVisible" title="Warning" width="30%" center>
+      <!-- <el-dialog v-model="centerDialogVisible" title="Warning" width="30%" center>
         <span v-if="!isLogin">{{ $t('message.Signintopostanswer', {}, { locale: $i18n.locale }) }}</span
         ><br />
         <span v-if="!shoeLog1">{{ $t('message.MailwassenttoExpert', {}, { locale: $i18n.locale }) }} <br /></span>
@@ -113,7 +113,7 @@
             </router-link>
           </span>
         </template>
-      </el-dialog>
+      </el-dialog> -->
     </el-footer>
   </el-container>
 </template>
@@ -123,11 +123,8 @@ import { computed, onMounted, onUpdated, ref } from 'vue'
 import { getExperts, getExpertsById } from '~/api/Experts'
 import { Experts } from '~/models/Experts'
 import { useStore } from '~/store/index'
-import Mapbox from '~/components/Mapbox.vue'
-import avatar from '/avatar_expert_detail.png'
 import { useRoute } from 'vue-router'
 import { Feature } from '~/models/Geojson'
-import expert_id from '~/store/modules/expert_id'
 
 import axios from 'axios'
 import { __baseURL } from '~/constant'

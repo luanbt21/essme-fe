@@ -111,8 +111,8 @@ export const i18n = createI18n({
         Request: 'Request',
         Pleasetypeyouranswerforthisrequest: 'Please type your answer for this request',
         MailwassenttoExpert: "Mail was sent to Expert",
-        MailwasnotsenttoExpert: "Mail was not sent to Expert"
-
+        MailwasnotsenttoExpert: "Mail was not sent to Expert",
+        UpdateProfile: "Update Profile",
 
       }
     },
@@ -219,7 +219,8 @@ export const i18n = createI18n({
         Request: 'Yêu cầu',
         Pleasetypeyouranswerforthisrequest: 'Nhập câu trả lời',
         MailwassenttoExpert: "Đã gửi mail cho chuyên gia",
-        MailwasnotsenttoExpert: "Gửi mail cho chuyên gia thất bại"
+        MailwasnotsenttoExpert: "Gửi mail cho chuyên gia thất bại",
+        UpdateProfile: "Cập nhật thông tin"
       }
     }
   }
