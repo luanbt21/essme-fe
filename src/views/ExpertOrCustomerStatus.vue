@@ -172,6 +172,7 @@ const handlePost = async () => {
   // console.log(store.state.auth.token)
   // console.log(birth.value)
   // console.log(exInfo.value)
+  console.log(store.state.auth.userid)
 
   const headers = {
     Authorization: `Bearer ${store.state.auth.token}`
@@ -228,7 +229,7 @@ const handlePost = async () => {
       }
       if (customer) {
         try {
-          await deleteCustomer(customer._id)
+          await axios.delete(`/customers/${customer._id}`, { headers })
         } catch (error) {
           console.log(error)
         }

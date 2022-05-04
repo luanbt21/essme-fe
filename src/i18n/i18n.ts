@@ -15,8 +15,8 @@ export const i18n = createI18n({
         expert: 'Expert',
         fqas: 'FQAs',
         askquestion: 'Ask Question',
-        orderexpert: 'Order Expert',
-        AllExpert: 'All Expert',
+        orderexpert: 'Book an Expert',
+        AlorderexpertlExpert: 'All Expert',
         expertinfo: 'Update expert profile',
         events: 'Events',
         news: 'News',
@@ -75,7 +75,7 @@ export const i18n = createI18n({
         AFFILIATE: 'AFFILIATE',
         EXPERTISE: 'EXPERTISE',
         SOCIALMEDIA: 'SOCIAL MEDIA',
-        ORDEREXPERT: 'ORDER EXPERT',
+        ORDEREXPERT: 'BOOK AN EXPERT',
         Title: 'Title',
         Yourrequirement: 'Your requirement',
         PleaseInput: 'Please Input',
@@ -110,7 +110,11 @@ export const i18n = createI18n({
         Findexpert: 'Find expert',
         Postyourquestion: 'Post your question',
         Request: 'Request',
-        Pleasetypeyouranswerforthisrequest: 'Please type your answer for this request'
+        Pleasetypeyouranswerforthisrequest: 'Please type your answer for this request',
+        MailwassenttoExpert: 'Mail was sent to Expert',
+        MailwasnotsenttoExpert: 'Mail was not sent to Expert',
+        UpdateProfile: 'Update Profile',
+        AllExpert: 'All Expert'
       }
     },
     vi: {
@@ -215,7 +219,10 @@ export const i18n = createI18n({
         Findexpert: 'Tìm kiếm chuyên gia',
         Postyourquestion: 'Gửi câu hỏi',
         Request: 'Yêu cầu',
-        Pleasetypeyouranswerforthisrequest: 'Nhập câu trả lời'
+        Pleasetypeyouranswerforthisrequest: 'Nhập câu trả lời',
+        MailwassenttoExpert: 'Đã gửi mail cho chuyên gia',
+        MailwasnotsenttoExpert: 'Gửi mail cho chuyên gia thất bại',
+        UpdateProfile: 'Cập nhật thông tin'
       }
     }
   }

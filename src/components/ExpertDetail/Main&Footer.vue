@@ -80,7 +80,9 @@
       <el-dialog v-model="centerDialogVisible" title="Warning" width="30%" center>
         <span v-if="!isLogin">{{ $t('message.Signintopostanswer', {}, { locale: $i18n.locale }) }}</span
         ><br />
-        <span v-if="shoeLog">{{ $t('message.Postyouranswersuccessfully', {}, { locale: $i18n.locale }) }} </span>
+        <span v-if="!shoeLog1">{{ $t('message.MailwassenttoExpert', {}, { locale: $i18n.locale }) }} <br /></span>
+        <span v-else>{{ $t('message.MailwasnotsenttoExpert', {}, { locale: $i18n.locale }) }} <br /></span>
+        <span v-if="shoeLog">{{ $t('message.Postyouranswersuccessfully', {}, { locale: $i18n.locale }) }} <br /></span>
         <span v-else
           >{{ $t('message.FailtoPostyouranswer', {}, { locale: $i18n.locale }) }} <br />{{
             $t('message.Maybeyouhavenotupdatedyourprofile', {}, { locale: $i18n.locale })
@@ -97,6 +99,7 @@
           </span>
         </template>
       </el-dialog>
+      -->
     </el-footer>
   </el-container>
 </template>
@@ -106,16 +109,14 @@ import { computed, onMounted, onUpdated, ref } from 'vue'
 import { getExperts, getExpertsById } from '~/api/Experts'
 import { Experts } from '~/models/Experts'
 import { useStore } from '~/store/index'
-import Mapbox from '~/components/Mapbox.vue'
-import avatar from '/avatar_expert_detail.png'
 import { useRoute } from 'vue-router'
 import { Feature } from '~/models/Geojson'
-import expert_id from '~/store/modules/expert_id'
 
 import axios from 'axios'
 import { __baseURL } from '~/constant'
 import { Customer } from '~/models/Customer'
 import { getCustomerbyUid } from '~/api/Customer'
+import { sendMail } from '~/api/Email'
 
 const failLog = ref(false)
 const store = useStore()
@@ -130,6 +131,7 @@ const centerDialogVisible = ref(false)
 const content = ref('')
 const customer = ref<Customer>()
 const shoeLog = ref(false)
+const shoeLog1 = ref(false)
 const handlePost = async () => {
   customer.value = await getCustomerbyUid(store.state.auth.userid)
   console.log(customer.value)
@@ -159,9 +161,21 @@ const handlePost = async () => {
             headers
           }
         )
-        .then(data => {
+        .then(async data => {
+          console.log(data)
           shoeLog.value = true
-          window.location.reload()
+          if (expert.value?.email) {
+            try {
+              await sendMail(expert.value?.email).then(dta => {
+                alert(dta)
+                console.log(dta)
+              })
+            } catch (error) {
+              alert('Fail to send mail!')
+            }
+          } else {
+            shoeLog1.value = true
+          }
         })
     } else {
     }

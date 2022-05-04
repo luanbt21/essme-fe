@@ -1,13 +1,15 @@
 import axios from 'axios'
 import { Request } from '~/models/Request'
+import { PageEntity } from '~/models/PageEntity'
+
 
 const apiUrl = 'requests'
 
-export const getRequest = async (page = 3, size = 20, sort = 'createdAt', desc = false): Promise<Request[]> => {
+export const getRequest = async (page = 1, size = 6, sort = 'createdAt', desc = false): Promise<PageEntity<Request>> => {
     try {
         const res = await axios.get(apiUrl, {
             params: {
-                page,
+                page: page - 1,
                 size,
                 sort,
                 desc
