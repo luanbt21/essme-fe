@@ -63,16 +63,6 @@
           {{ $t('message.fields', {}, { locale: $i18n.locale }).toUpperCase() }}
         </div>
         <el-scrollbar height="460px " width="200px">
-          <!-- <div v-for="(address, index) in types" :key="index">
-            <el-card
-              :style="{ 'background-color': ' #FFFFFF' }"
-              class="m-5 md:hover:scale-105 hover:duration-500 rounded-[15px] text-center"
-            >
-              <button v-on:click="callFunction" data-id="{{address}}">
-                {{ address }}
-              </button>
-            </el-card>
-          </div> -->
           <div v-if="$t('message.searchresult', {}, { locale: $i18n.locale }) === 'Kết quả tìm kiếm'" class="ml-5">
             <div>
               <el-radio-group v-model="typesSelect" size="large" class="rounded-sm">

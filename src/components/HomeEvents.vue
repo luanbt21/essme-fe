@@ -83,14 +83,8 @@ import { getHomepage } from '~/api/Homepage'
 import { Homepage } from '~/models/Homepage'
 import { Event } from '~/models/Event'
 const homepage = ref<Homepage>()
-// const eventsArr = ref<Event[]>([])
-const img = 'https://th.bing.com/th/id/OIP.iSu2RcCcdm78xbxNDJMJSgHaEo?pid=ImgDet&rs=1'
 
-// onMounted(async () => {
-//   homepage.value = await getHomepage()
-//   eventsArr.value = homepage.value.top_events
-//   // console.log(expertArr.value)
-// })
+const img = 'https://th.bing.com/th/id/OIP.iSu2RcCcdm78xbxNDJMJSgHaEo?pid=ImgDet&rs=1'
 
 const props = defineProps<{
   eventsArr: Event[]

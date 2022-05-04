@@ -34,7 +34,6 @@ const route = useRoute()
 onMounted(async () => {
   const id = route.params.id
   expertRelate.value = await getRelatedExperts(id as string)
-  // console.log(types.value)
 })
 </script>
 

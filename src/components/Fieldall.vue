@@ -115,7 +115,7 @@ const handleFieldChange = () => {
     name: 'fieldname',
     query: {
       what: blog.text.toString(),
-      // where: props.where,
+
       page: 1
     }
   })
@@ -131,13 +131,10 @@ const fieldArr = ref<String[]>()
 const route = useRoute()
 onMounted(async () => {
   const field = route.params.name
-  // console.log(route.params.name.toString().toLowerCase().split(' ').at(0))
   expertsPage.value = await searchExperts1(props.what, 5, props.page, pageSize, true)
   expertsall.value = await searchExperts1(route.params.name.toString(), 5, props.page, pageSize, true)
   expertfield.value = await searchField(route.params.name.toString())
-  // console.log(props.what)
-  // expertfield.value = await searchField(route.params.name.toString())
-  // fieldArr.value = expertfield.value.keys
+
   console.log(experts.value.length)
 })
 </script>

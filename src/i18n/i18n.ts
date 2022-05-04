@@ -90,6 +90,7 @@ export const i18n = createI18n({
         FindtheFields: 'Find the Fields',
         Findmoreexperts: 'Find more experts',
         PostyourOrder: 'Post your Order',
+        ordertitle: 'Order Expert',
 
         // expert field
         Experttitle: 'Expert title',
@@ -110,8 +111,6 @@ export const i18n = createI18n({
         Postyourquestion: 'Post your question',
         Request: 'Request',
         Pleasetypeyouranswerforthisrequest: 'Please type your answer for this request'
-
-
       }
     },
     vi: {
@@ -196,6 +195,7 @@ export const i18n = createI18n({
         FindtheFields: 'Tìm kiếm theo lĩnh vực',
         Findmoreexperts: 'Tìm kiếm chuyên gia',
         PostyourOrder: 'Gửi yêu cầu',
+        ordertitle: 'Đặt hàng chyên gia',
         // expert field
         Experttitle: 'Chuyên gia',
         Readmore: 'Đọc thêm',

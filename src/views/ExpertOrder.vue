@@ -1,7 +1,9 @@
 <template>
   <div class="relative w-[97%] min-w-[800px] z-1 mt-[-100px] bg-slate-100 rounded-[40px] p-[50px] flex flex-col">
     <div class="text-center">
-      <button class="text-center w-96 h-14 text-2xl mb-[40px] bg-[#b9cec7] rounded-lg shadow-md">Order Expert</button>
+      <button class="text-center w-96 h-14 text-2xl mb-[40px] bg-[#b9cec7] rounded-lg shadow-md">
+        {{ $t('message.ordertitle', {}, { locale: $i18n.locale }) }}
+      </button>
     </div>
 
     <div class="bg-purple">

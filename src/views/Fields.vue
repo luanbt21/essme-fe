@@ -61,18 +61,8 @@ const value = ref('')
 const expertfield = ref<ResearchArea>()
 
 onMounted(async () => {
-  //   // const a= route.params.name.
-  //   // console.log(route.params.name.toString().toLowerCase().split(' ').at(0))
-  //   expertsPage.value = await searchExperts1(
-  //     `${route.params.name.toString().toLowerCase().split(' ').at(1)}`,
-  //     5,
-  //     props.page,
-  //     pageSize,
-  //     true
-  //   )
   const field = route.params.name.toString().toLowerCase().split(' ').at(0)
   eventsPage.value = await searchEvents(route.params.name.toString())
-  // console.log(typeof route.params.name.toString().toLowerCase().split(' ').at(0))
   eventsArr.value = eventsPage.value ? eventsPage.value.content : []
 
   newsPage.value = await searchNewss1(route.params.name.toString())

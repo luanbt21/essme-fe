@@ -23,11 +23,9 @@
         <p class="uppercase tracking-wide text-sm text-indigo-500 font-semibold line-clamp-2">
           {{ expert.name }}
         </p>
-        <!-- mt-1 text-lg leading-tight font-medium text-black line-clamp-2 -->
         <h2 href="#" class="block mt-1 text-lg leading-tight font-medium text-black word-break-keep-all text-left">
           Trình độ: {{ expert.degree }}
         </h2>
-        <!-- v-for="(field, index) in expert._source.google_scholar_fields.fields" :key="index" -->
         <div class="flex">
           <div class="w-24">Lĩnh vực:</div>
           <span>
