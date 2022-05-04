@@ -8,9 +8,6 @@
         crossorigin="anonymous"
       />
 
-      <!-- <input type="number" v-model="lat" />
-      <input type="number" v-model="lon" /> -->
-
       <div>
         <FilterFieldVue />
       </div>

@@ -83,11 +83,6 @@ const whereSearch = async (queryString: string, cb: (arg: any) => void) => {
     whereData.value = data.suggestions
   }
 
-  // const allWhere = whereData.value.map(item => item[props.whereField])
-  // console.log(whereData.value)
-  // console.log(allWhere)
-  // const uniqueWhere = new Set(allWhere)
-
   cb(
     whereData.value.map(item => ({
       value: item[props.whereField]

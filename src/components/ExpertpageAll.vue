@@ -48,16 +48,6 @@
           {{ $t('message.fields', {}, { locale: $i18n.locale }) }}
         </div>
         <el-scrollbar height="460px">
-          <!-- <div v-for="(address, index) in types" :key="index">
-            <el-card
-              :style="{ 'background-color': ' #FFFFFF' }"
-              class="m-5 md:hover:scale-105 hover:duration-500 rounded-[15px] text-center"
-            >
-              <button v-on:click="callFunction" data-id="{{address}}">
-                {{ address }}
-              </button>
-            </el-card>
-          </div> -->
           <div v-if="$t('message.searchresult', {}, { locale: $i18n.locale }) === 'Kết quả tìm kiếm'" class="ml-5">
             <div>
               <el-radio-group v-model="typesSelect" size="large" class="rounded-sm">
@@ -108,11 +98,6 @@
               </el-radio-group>
             </div>
           </div>
-          <!-- <el-checkbox-group v-model="typesSelect">
-            <div v-for="(type, index) in types" :key="index">
-              <el-checkbox :label="type" style="white-space: pre-wrap" />
-            </div>
-          </el-checkbox-group> -->
         </el-scrollbar>
       </div>
     </el-row>
@@ -214,31 +199,18 @@ const experts = computed(() => {
   return expertsTopData.value
 })
 
-const mapData = computed(
-  (): Feature[] =>
-    experts.value.map(
-      expert =>
-        ({
-          type: 'Feature',
-          geometry: expert.location.features[0].geometry,
-          properties: {
-            label: expert.name,
-            html: `<span>${expert.name}</span>`
-          }
-        } as Feature)
-    )
-
-  // experts.value.map(
-  //   expert =>
-  //     ({
-  //       type: 'Feature',
-  //       geometry: expert.location.features[0].geometry,
-  //       properties: {
-  //         label: expert.name,
-  //         html: `<span>${expert.name}</span>`
-  //       }
-  //     } as Feature)
-  // )
+const mapData = computed((): Feature[] =>
+  experts.value.map(
+    expert =>
+      ({
+        type: 'Feature',
+        geometry: expert.location.features[0].geometry,
+        properties: {
+          label: expert.name,
+          html: `<span>${expert.name}</span>`
+        }
+      } as Feature)
+  )
 )
 const newsArr = ref<News[]>([])
 

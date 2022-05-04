@@ -33,9 +33,6 @@
       :placeholder="`${$t('message.placeholderselect', {}, { locale: $i18n.locale })}`"
       class="ml-2 mt-2 h-[30px] w-[50%] lg:w-[40%] bg-white scroll-smooth"
     >
-      <!-- <el-option v-for="item in expertfield" :key="item._id" :label="item._id" :value="item._id">
-        <el-button @click="handleFieldChange" style="float: left">{{ `${item._id} (${item.quantity})` }}</el-button>
-      </el-option> -->
       <el-option
         v-for="item in expertfieldvi"
         :key="item._id"
@@ -70,7 +67,7 @@ const handleFieldChange = () => {
     name: 'expertfields',
     query: {
       what: blog.text.toString(),
-      // where: props.where,
+
       page: 1
     }
   })

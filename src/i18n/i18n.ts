@@ -90,6 +90,7 @@ export const i18n = createI18n({
         FindtheFields: 'Find the Fields',
         Findmoreexperts: 'Find more experts',
         PostyourOrder: 'Post your Order',
+        ordertitle: 'Order Expert',
 
         // expert field
         Experttitle: 'Expert title',
@@ -110,11 +111,10 @@ export const i18n = createI18n({
         Postyourquestion: 'Post your question',
         Request: 'Request',
         Pleasetypeyouranswerforthisrequest: 'Please type your answer for this request',
-        MailwassenttoExpert: "Mail was sent to Expert",
-        MailwasnotsenttoExpert: "Mail was not sent to Expert",
-        UpdateProfile: "Update Profile",
-        AllExpert: 'All Expert',
-
+        MailwassenttoExpert: 'Mail was sent to Expert',
+        MailwasnotsenttoExpert: 'Mail was not sent to Expert',
+        UpdateProfile: 'Update Profile',
+        AllExpert: 'All Expert'
       }
     },
     vi: {
@@ -199,6 +199,7 @@ export const i18n = createI18n({
         FindtheFields: 'Tìm kiếm theo lĩnh vực',
         Findmoreexperts: 'Tìm kiếm chuyên gia',
         PostyourOrder: 'Gửi yêu cầu',
+        ordertitle: 'Đặt hàng chyên gia',
         // expert field
         Experttitle: 'Chuyên gia',
         Readmore: 'Đọc thêm',
@@ -219,9 +220,9 @@ export const i18n = createI18n({
         Postyourquestion: 'Gửi câu hỏi',
         Request: 'Yêu cầu',
         Pleasetypeyouranswerforthisrequest: 'Nhập câu trả lời',
-        MailwassenttoExpert: "Đã gửi mail cho chuyên gia",
-        MailwasnotsenttoExpert: "Gửi mail cho chuyên gia thất bại",
-        UpdateProfile: "Cập nhật thông tin"
+        MailwassenttoExpert: 'Đã gửi mail cho chuyên gia',
+        MailwasnotsenttoExpert: 'Gửi mail cho chuyên gia thất bại',
+        UpdateProfile: 'Cập nhật thông tin'
       }
     }
   }

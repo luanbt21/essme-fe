@@ -37,21 +37,6 @@
             <a :href="expert?.link_profile">{{ expert?.link_profile }}</a>
           </div>
         </div>
-        <!-- <div class="flex my-3">
-              <i class="fab fa-facebook"></i>
-              <div class="mr-3 text-2xl"></div>
-              <span>https://www.facebook.com/</span>
-            </div> -->
-        <!-- <div class="flex my-3">
-              <i class="fab fa-twitter"></i>
-              <div class="mr-3 text-2xl"></div>
-              https://twitter.com/
-            </div>
-            <div class="flex my-3">
-              <i class="fab fa-linkedin-in"></i>
-              <div class="mr-3 text-2xl"></div>
-              https://www.linkedin.com/
-            </div> -->
       </div>
     </el-main>
     <el-footer class="rounded-xl my-5 mx-5 font-semibold bg-[#d1e0db] h-auto">
@@ -91,8 +76,8 @@
           $t('message.Send', {}, { locale: $i18n.locale })
         }}</el-button>
       </div>
-      <!-- thông báo save thành công -->
-      <!-- <el-dialog v-model="centerDialogVisible" title="Warning" width="30%" center>
+
+      <el-dialog v-model="centerDialogVisible" title="Warning" width="30%" center>
         <span v-if="!isLogin">{{ $t('message.Signintopostanswer', {}, { locale: $i18n.locale }) }}</span
         ><br />
         <span v-if="!shoeLog1">{{ $t('message.MailwassenttoExpert', {}, { locale: $i18n.locale }) }} <br /></span>
@@ -113,7 +98,8 @@
             </router-link>
           </span>
         </template>
-      </el-dialog> -->
+      </el-dialog>
+      -->
     </el-footer>
   </el-container>
 </template>

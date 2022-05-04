@@ -46,9 +46,7 @@ const c = 0
 
 onMounted(async () => {
   const id = route.params.id
-  // console.log(id)
   expert.value = await getExpertsById(id as string)
-  // console.log(expert.value)
 })
 
 const textarea = ref('')
