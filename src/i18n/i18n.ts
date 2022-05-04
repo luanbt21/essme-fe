@@ -113,6 +113,7 @@ export const i18n = createI18n({
         MailwassenttoExpert: "Mail was sent to Expert",
         MailwasnotsenttoExpert: "Mail was not sent to Expert",
         UpdateProfile: "Update Profile",
+        AllExpert: 'All Expert',
 
       }
     },
