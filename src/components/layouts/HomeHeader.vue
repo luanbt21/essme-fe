@@ -227,25 +227,6 @@ const handleLangChange = (a: string) =>{
   computed(()=> lang.value)
   
 }
-onUpdated(async () => {
-  if(isLogin.value){  const token = computed(() => store.state.auth.token )
-  // console.log(token.value)
-  const headers = { 
-    "Authorization": `Bearer ${token.value}`,
-  };
-  await axios.post("/news", {
-  img: "string",
-  tag: "string",
-  title: "string",
-  url: "string",
-  content: "string",
-  status: "string"
-  }, {
-    headers
-  })}
-
-})
-// console.log(axios.defaults.headers )
 
 </script>
 
