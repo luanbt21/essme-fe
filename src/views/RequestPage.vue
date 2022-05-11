@@ -59,6 +59,9 @@ const handlePageChange = async (page: number) => {
       page
     }
   })
+  setTimeout(() => {
+    window.location.reload()
+  }, 10)
 }
 
 const requestPage = ref<PageEntity<RequestModel>>()

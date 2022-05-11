@@ -139,6 +139,41 @@
         </span>
       </template>
     </el-dialog>
+
+    <!-- thông báo save thành công -->
+    <el-dialog v-model="centerDialogVisible" title="Warning" width="30%" center>
+      <span v-if="!isLogin">{{ $t('message.Signintopostanswer', {}, { locale: $i18n.locale }) }}</span
+      ><br />
+      <span v-if="isLogin && shoeLog"
+        >{{ $t('message.Postyouranswersuccessfully', {}, { locale: $i18n.locale }) }}
+      </span>
+      <span v-if="isLogin && !shoeLog"
+        >{{ $t('message.FailtoPostyouranswer', {}, { locale: $i18n.locale }) }} <br />
+      </span>
+      <span v-if="isLogin && !shoeLog && shoeLog1">{{
+        $t('message.Maybeyouhavenotupdatedyourprofile', {}, { locale: $i18n.locale })
+      }}</span>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="centerDialogVisible = false">{{
+            $t('message.Return', {}, { locale: $i18n.locale })
+          }}</el-button>
+          <router-link to="/login">
+            <el-button v-if="!isLogin" type="primary">Login</el-button>
+          </router-link>
+          <router-link to="/">
+            <el-button v-if="isLogin && !shoeLog1" type="primary">{{
+              $t('message.BacktoHomepage', {}, { locale: $i18n.locale })
+            }}</el-button>
+          </router-link>
+          <router-link to="/ExpertOrCustomerStatus">
+            <el-button v-if="isLogin && shoeLog1" type="primary">{{
+              $t('message.UpdateProfile', {}, { locale: $i18n.locale })
+            }}</el-button>
+          </router-link>
+        </span>
+      </template>
+    </el-dialog>
   </div>
 </template>
 <script setup lang="ts">
@@ -150,6 +185,11 @@ import axios from 'axios'
 import { deleteExpert, getExpertByUid } from '~/api/Experts'
 import { deleteCustomer, getCustomerbyUid } from '~/api/Customer'
 import { getDownloadURL, getStorage, ref as reff, uploadBytes } from 'firebase/storage'
+
+const isLogin = computed(() => store.state.auth.user)
+const shoeLog = ref(false)
+const shoeLog1 = ref(false)
+
 let exInfo = ref(true)
 let centerDialogVisible = ref(false)
 let fullname = ref('')

@@ -5,14 +5,12 @@ import { PageEntity } from '~/models/PageEntity'
 
 const apiUrl = 'requests'
 
-export const getRequest = async (page = 1, size = 6, sort = 'createdAt', desc = false): Promise<PageEntity<Request>> => {
+export const getRequest = async (page = 1, size = 10): Promise<PageEntity<Request>> => {
     try {
         const res = await axios.get(apiUrl, {
             params: {
                 page: page - 1,
-                size,
-                sort,
-                desc
+                size
             }
         })
         return res.data

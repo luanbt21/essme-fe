@@ -36,6 +36,10 @@ const props = defineProps<{
   request: Request
 }>()
 onMounted(async () => {
-  user.value = await getUserById(props.request.uid)
+  try {
+    user.value = await getUserById(props.request.uid)
+  } catch (error) {
+    console.log(error)
+  }
 })
 </script>
