@@ -118,7 +118,7 @@
       <span v-if="isLogin && shoeLog"
         >{{ $t('message.Postyouranswersuccessfully', {}, { locale: $i18n.locale }) }}
       </span>
-      <span v-if="isLogin && !shoeLog"
+      <span v-if="isLogin && !shoeLog && !shoeLog1"
         >{{ $t('message.FailtoPostyouranswer', {}, { locale: $i18n.locale }) }} <br />
       </span>
       <span v-if="isLogin && !shoeLog && shoeLog1">{{
