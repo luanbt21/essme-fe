@@ -1,18 +1,23 @@
-name: client
+name: CI
+
 on:
   push:
-    branches:
-      - main
+    branches: ['main']
+
 jobs:
   deploy:
-    runs-on: self-hosted
+    name: Deploy
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: executing remote ssh commands
+        uses: appleboy/ssh-action@master
         with:
-          submodules: true
-
-      - name: Install Dependencies
-        run: pnpm install
-
-      - name: Build
-        run: pnpm run build:host
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          script: |
+            git clone https://github.com/luanbt21/essme-fe.git
+            cd essme-fe
+            git pull origin main
+            pnpm install
+            pnpm run build:host
