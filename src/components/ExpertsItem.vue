@@ -23,6 +23,12 @@
               :src="expert.img == '' || expert.img == null ? avarta : expert.img"
               alt=""
               class="h-[140px] w-[100px]"
+              @error="
+                e => {
+                  const target = e.target as HTMLImageElement
+                  target.src = userImg
+                }
+              "
             />
           </div>
         </div>
@@ -34,6 +40,7 @@
 <script setup lang="ts">
 import { Experts } from '~/models/Experts'
 import avarta from '~/assets/anhexpert.jpg'
+import userImg from '~/assets/user.png'
 defineProps<{
   expert: Experts
 }>()

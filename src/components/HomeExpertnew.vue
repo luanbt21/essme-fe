@@ -23,6 +23,12 @@
                           :src="expert.img"
                           class="w-[210px] h-[300px] object-cover rounded-3xl"
                           style="height: 300px; border-radius: 10px"
+                          @error="
+                            e => {
+                              const target = e.target as HTMLImageElement
+                              target.src = userImg
+                            }
+                          "
                         />
                       </div>
                     </el-link>
@@ -34,18 +40,16 @@
                 <div class="md:flex">
                   <div class="md:shrink-0">
                     <img
-                      v-if="expert.img"
                       class="h-48 w-full object-cover md:h-full md:w-48"
                       alt="avatar"
                       style="height: 200px"
                       :src="expert.img"
-                    />
-
-                    <img
-                      v-else
-                      class="h-48 w-full object-cover md:h-full md:w-48"
-                      src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg"
-                      alt="avatar"
+                      @error="
+                        e => {
+                          //@ts-ignore
+                          e.target.src = userImg
+                        }
+                      "
                     />
                   </div>
                   <div class="p-8">
@@ -97,6 +101,7 @@
 </template>
 
 <script setup lang="ts">
+import userImg from '~/assets/user.png'
 import { onMounted, ref } from 'vue'
 import { useStore } from '~/store/index'
 import { getHomepage } from '~/api/Homepage'

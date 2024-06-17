@@ -10,6 +10,11 @@
                 :src="fields.img"
                 alt=""
                 class="inline-block w-64 h-48 lg:w-72 cover m-10 md:hover:scale-105 hover:duration-500 cursor-pointer rounded-2xl"
+                @error="
+                e => {
+                  const target = e.target as HTMLImageElement
+                  target.src = questionMark
+                }"
               />
             </el-link>
           </router-link>
@@ -31,6 +36,11 @@
                 :src="fields.img"
                 alt=""
                 class="inline-block w-64 h-48 lg:w-72 cover m-10 md:hover:scale-105 hover:duration-500 cursor-pointer rounded-2xl"
+                @error="
+                e => {
+                  const target = e.target as HTMLImageElement
+                  target.src = questionMark
+                }"
               />
             </el-link>
           </router-link>
@@ -47,6 +57,7 @@
 import { onMounted, ref } from 'vue'
 import { getField } from '~/api/Research-area'
 import { ResearchArea } from '~/models/Research-area'
+import questionMark from '~/assets/question-mark.png'
 
 const fieldsArr = ref<ResearchArea[]>()
 
